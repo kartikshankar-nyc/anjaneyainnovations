@@ -1,0 +1,15 @@
+[site]
+bucket = "./dist"
+entry-point = "."
+
+[env.production]
+workers_dev = false
+route = "anjaneyainnovations.com/*"
+zone_id = "your_zone_id_here"
+
+[env.production.build]
+command = "npm run build"
+upload.format = "service-worker"
+
+[site.upload]
+format = "service-worker" 
