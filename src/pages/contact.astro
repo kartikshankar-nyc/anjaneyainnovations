@@ -140,17 +140,51 @@ import MainLayout from '../layouts/MainLayout.astro';
     color: white;
     padding: 7rem 5% 5rem;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('/images/pattern-overlay.svg') repeat;
+    opacity: 0.1;
+    z-index: 1;
+  }
+  
+  .page-header::after {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 60%;
+    height: 140%;
+    background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
+    opacity: 0.2;
+    z-index: 0;
+  }
+
+  .page-header .container {
+    position: relative;
+    z-index: 2;
   }
 
   .page-header h1 {
-    font-size: 3rem;
+    font-size: 3.2rem;
     margin-bottom: 1rem;
+    font-weight: 800;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
 
   .page-header p {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     max-width: 700px;
     margin: 0 auto;
+    font-weight: 300;
   }
 
   /* Container */
@@ -215,26 +249,48 @@ import MainLayout from '../layouts/MainLayout.astro';
     box-shadow: 0 0 0 2px rgba(58, 134, 255, 0.2);
   }
 
+  /* Button Styles - Updated */
   .btn {
     display: inline-block;
-    padding: 0.8rem 1.8rem;
-    border-radius: 4px;
+    padding: 1rem 2.2rem;
+    border-radius: 50px;
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
     cursor: pointer;
     border: none;
     font-size: 1rem;
   }
 
+  .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    z-index: -1;
+  }
+
+  .btn:hover::before {
+    width: 100%;
+  }
+
   .btn-primary {
     background-color: var(--primary-color);
     color: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   }
 
   .btn-primary:hover {
     background-color: var(--secondary-color);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
   }
 
   /* Contact Info */

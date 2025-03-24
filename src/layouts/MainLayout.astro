@@ -9,6 +9,9 @@ const { title = 'Anjaneya Innovations LLC', description = 'Professional consulti
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content={description}>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <title>{title}</title>
 </head>
 <body>
@@ -53,11 +56,14 @@ const { title = 'Anjaneya Innovations LLC', description = 'Professional consulti
 <style>
   /* Base styles */
   :root {
-    --primary-color: #3a86ff;
-    --secondary-color: #8338ec;
-    --text-color: #333;
-    --background-color: #fff;
-    --accent-color: #ff006e;
+    --primary-color: #FF7A00; /* Vibrant orange */
+    --secondary-color: #FF5500; /* Deeper orange */
+    --accent-color: #FFA64D; /* Lighter orange */
+    --dark-accent: #CC5200; /* Dark orange for some elements */
+    --text-color: #333333;
+    --light-text: #666666;
+    --background-color: #ffffff;
+    --light-bg: #f9f5f0; /* Light orange tinted background */
   }
 
   * {
@@ -67,10 +73,15 @@ const { title = 'Anjaneya Innovations LLC', description = 'Professional consulti
   }
 
   body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Poppins', sans-serif;
     color: var(--text-color);
     background-color: var(--background-color);
     line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
   }
 
   /* Header & Navigation */
@@ -93,10 +104,36 @@ const { title = 'Anjaneya Innovations LLC', description = 'Professional consulti
   }
 
   .logo a {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.8rem;
+    font-weight: 800;
+    font-family: 'Montserrat', sans-serif;
     color: var(--primary-color);
     text-decoration: none;
+    letter-spacing: 0.5px;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+
+  .logo a:hover {
+    color: var(--secondary-color);
+  }
+
+  .logo a:after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+
+  .logo a:hover:after {
+    transform: scaleX(1);
+    transform-origin: left;
   }
 
   .menu {
@@ -109,10 +146,30 @@ const { title = 'Anjaneya Innovations LLC', description = 'Professional consulti
     color: var(--text-color);
     font-weight: 500;
     transition: color 0.3s ease;
+    position: relative;
+    padding: 0.5rem 0;
   }
 
   .menu a:hover {
     color: var(--primary-color);
+  }
+
+  .menu a:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-color);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+
+  .menu a:hover:after {
+    transform: scaleX(1);
+    transform-origin: left;
   }
 
   /* Main Content */
@@ -123,7 +180,7 @@ const { title = 'Anjaneya Innovations LLC', description = 'Professional consulti
 
   /* Footer */
   footer {
-    background-color: #f8f9fa;
+    background-color: var(--light-bg);
     padding: 2rem 5%;
     margin-top: 2rem;
   }
@@ -144,6 +201,7 @@ const { title = 'Anjaneya Innovations LLC', description = 'Professional consulti
   .footer-section h3 {
     color: var(--primary-color);
     margin-bottom: 1rem;
+    font-weight: 700;
   }
 
   .copyright {
@@ -152,6 +210,7 @@ const { title = 'Anjaneya Innovations LLC', description = 'Professional consulti
     padding-top: 1rem;
     border-top: 1px solid #ddd;
     font-size: 0.9rem;
+    color: var(--light-text);
   }
 
   /* Responsive */
