@@ -40,6 +40,31 @@
       color: #f59e0b;
       background-color: rgba(245, 158, 11, 0.1);
     }
+
+    /* Basic fade-in animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-content {
+      animation: fadeIn 1s ease-out forwards;
+    }
+
+    .hero-logo {
+      animation: logoEntrance 1.5s ease-out forwards;
+    }
+
+    @keyframes logoEntrance {
+      0% {
+        opacity: 0;
+        transform: translateY(-30px) rotate(-10deg);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) rotate(0);
+      }
+    }
     
     @media (max-width: 768px) {
       .menu {
