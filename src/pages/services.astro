@@ -1,0 +1,340 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+
+<MainLayout title="Our Services - Anjaneya Innovations LLC">
+  <section class="page-header">
+    <div class="container">
+      <h1>Our Services</h1>
+      <p>Comprehensive consulting solutions to drive your business forward</p>
+    </div>
+  </section>
+
+  <section class="services-detail">
+    <div class="container">
+      <div class="service-item animate-on-scroll">
+        <div class="service-content">
+          <h2>Business Consulting</h2>
+          <p>Our business consulting services provide strategic guidance to optimize your operations and increase profitability. We work closely with your team to identify opportunities and implement effective solutions.</p>
+          <ul class="service-features">
+            <li>Strategic business planning</li>
+            <li>Operational efficiency analysis</li>
+            <li>Growth strategy development</li>
+            <li>Performance optimization</li>
+            <li>Risk management</li>
+          </ul>
+        </div>
+        <div class="service-image">
+          <div class="image-placeholder"></div>
+        </div>
+      </div>
+
+      <div class="service-item animate-on-scroll">
+        <div class="service-content">
+          <h2>Technology Solutions</h2>
+          <p>Leverage cutting-edge technology to streamline your business processes and stay ahead of the competition. Our technology solutions are tailored to your specific needs and goals.</p>
+          <ul class="service-features">
+            <li>Digital transformation strategy</li>
+            <li>IT infrastructure optimization</li>
+            <li>Software integration solutions</li>
+            <li>Cloud migration services</li>
+            <li>Cybersecurity implementation</li>
+          </ul>
+        </div>
+        <div class="service-image">
+          <div class="image-placeholder"></div>
+        </div>
+      </div>
+
+      <div class="service-item animate-on-scroll">
+        <div class="service-content">
+          <h2>Data Analytics</h2>
+          <p>Make informed business decisions with our comprehensive data analytics services. We help you gather, analyze, and interpret data to uncover valuable insights and drive strategic initiatives.</p>
+          <ul class="service-features">
+            <li>Business intelligence implementation</li>
+            <li>Data visualization and reporting</li>
+            <li>Predictive analytics</li>
+            <li>Customer behavior analysis</li>
+            <li>Market trend forecasting</li>
+          </ul>
+        </div>
+        <div class="service-image">
+          <div class="image-placeholder"></div>
+        </div>
+      </div>
+
+      <div class="service-item animate-on-scroll">
+        <div class="service-content">
+          <h2>Financial Advisory</h2>
+          <p>Optimize your financial performance with our expert advisory services. We provide guidance on financial planning, investment strategies, and risk management to ensure long-term financial stability.</p>
+          <ul class="service-features">
+            <li>Financial performance analysis</li>
+            <li>Budget planning and forecasting</li>
+            <li>Cost optimization strategies</li>
+            <li>Investment opportunity assessment</li>
+            <li>Financial risk management</li>
+          </ul>
+        </div>
+        <div class="service-image">
+          <div class="image-placeholder"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="process animate-on-scroll">
+    <div class="container">
+      <h2 class="section-title">Our Approach</h2>
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="step-number">1</div>
+          <h3>Discovery</h3>
+          <p>We begin by understanding your business goals, challenges, and unique requirements.</p>
+        </div>
+        
+        <div class="process-step">
+          <div class="step-number">2</div>
+          <h3>Analysis</h3>
+          <p>Our team analyzes your current situation and identifies opportunities for improvement.</p>
+        </div>
+        
+        <div class="process-step">
+          <div class="step-number">3</div>
+          <h3>Strategy</h3>
+          <p>We develop a tailored strategy aligned with your business objectives and market conditions.</p>
+        </div>
+        
+        <div class="process-step">
+          <div class="step-number">4</div>
+          <h3>Implementation</h3>
+          <p>Our experts work with you to implement solutions effectively and efficiently.</p>
+        </div>
+        
+        <div class="process-step">
+          <div class="step-number">5</div>
+          <h3>Evaluation</h3>
+          <p>We measure results and make adjustments to ensure optimal performance and outcomes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section animate-on-scroll">
+    <div class="container">
+      <h2>Ready to Transform Your Business?</h2>
+      <p>Schedule a consultation to learn how our services can help you achieve your business goals.</p>
+      <a href="/contact" class="btn btn-primary">Contact Us Today</a>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  /* Page Header */
+  .page-header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    padding: 7rem 5% 5rem;
+    text-align: center;
+  }
+
+  .page-header h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .page-header p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* Container */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 5%;
+  }
+
+  /* Services Detail */
+  .service-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 5rem;
+    align-items: center;
+  }
+
+  .service-item:nth-child(even) {
+    direction: rtl;
+  }
+
+  .service-item:nth-child(even) .service-content {
+    direction: ltr;
+  }
+
+  .service-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+  }
+
+  .service-content p {
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+  }
+
+  .service-features {
+    padding-left: 1.5rem;
+  }
+
+  .service-features li {
+    margin-bottom: 0.8rem;
+    position: relative;
+  }
+
+  .service-features li::before {
+    content: "•";
+    color: var(--primary-color);
+    font-weight: bold;
+    display: inline-block;
+    width: 1rem;
+    margin-left: -1rem;
+  }
+
+  .image-placeholder {
+    width: 100%;
+    padding-bottom: 75%;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+  }
+
+  /* Process Section */
+  .process {
+    background-color: #f8f9fa;
+  }
+
+  .section-title {
+    font-size: 2.2rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    color: var(--text-color);
+  }
+
+  .process-steps {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin: 0 auto;
+    max-width: 1000px;
+  }
+
+  .process-steps::before {
+    content: "";
+    position: absolute;
+    top: 40px;
+    left: 50px;
+    right: 50px;
+    height: 2px;
+    background-color: var(--primary-color);
+    z-index: 1;
+  }
+
+  .process-step {
+    text-align: center;
+    padding: 0 1rem;
+    position: relative;
+    z-index: 2;
+    flex: 1;
+  }
+
+  .step-number {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .process-step h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    text-align: center;
+  }
+
+  .cta-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-section p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.8rem 1.8rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary {
+    background-color: white;
+    color: var(--primary-color);
+  }
+
+  .btn-primary:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+  }
+
+  /* Responsive Styles */
+  @media (max-width: 992px) {
+    .process-steps {
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .process-steps::before {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .page-header h1 {
+      font-size: 2.2rem;
+    }
+
+    .service-item {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .service-item:nth-child(even) {
+      direction: ltr;
+    }
+
+    .container {
+      padding: 3rem 5%;
+    }
+
+    .service-image {
+      order: -1;
+    }
+  }
+</style> 

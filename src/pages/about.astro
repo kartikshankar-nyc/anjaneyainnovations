@@ -1,0 +1,329 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+
+<MainLayout title="About Us - Anjaneya Innovations LLC">
+  <section class="page-header">
+    <div class="container">
+      <h1>About Us</h1>
+      <p>Learn more about Anjaneya Innovations LLC and our mission</p>
+    </div>
+  </section>
+
+  <section class="about-intro animate-on-scroll">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-content">
+          <h2>Our Story</h2>
+          <p>Anjaneya Innovations LLC was founded with a vision to provide exceptional consulting services that help businesses navigate the complexities of today's market landscape.</p>
+          <p>Named after the Hindu deity Anjaneya (also known as Hanuman), who symbolizes strength, wisdom, and unwavering dedication, our company embodies these values in every service we provide.</p>
+          <p>With a team of experienced professionals and a client-centered approach, we have established ourselves as a trusted partner for businesses seeking innovative solutions to drive growth and achieve their objectives.</p>
+        </div>
+        <div class="about-image">
+          <div class="image-placeholder"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mission-vision animate-on-scroll">
+    <div class="container">
+      <div class="mission-vision-grid">
+        <div class="mission">
+          <h2>Our Mission</h2>
+          <p>To empower businesses with innovative strategies and solutions that drive sustainable growth and exceptional performance.</p>
+        </div>
+        <div class="vision">
+          <h2>Our Vision</h2>
+          <p>To be recognized as the leading consulting firm that transforms businesses through innovation, expertise, and unwavering commitment to client success.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="values animate-on-scroll">
+    <div class="container">
+      <h2 class="section-title">Our Core Values</h2>
+      <div class="values-grid">
+        <div class="value-card">
+          <h3>Innovation</h3>
+          <p>We constantly seek creative solutions and stay ahead of industry trends to provide cutting-edge strategies for our clients.</p>
+        </div>
+        
+        <div class="value-card">
+          <h3>Integrity</h3>
+          <p>We uphold the highest ethical standards in all our business interactions, building trust and credibility with our clients.</p>
+        </div>
+        
+        <div class="value-card">
+          <h3>Excellence</h3>
+          <p>We are committed to delivering exceptional quality in every aspect of our services, exceeding client expectations.</p>
+        </div>
+        
+        <div class="value-card">
+          <h3>Collaboration</h3>
+          <p>We work closely with our clients, fostering partnerships that lead to shared success and sustainable results.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="team animate-on-scroll">
+    <div class="container">
+      <h2 class="section-title">Our Leadership Team</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <div class="member-image">
+            <div class="image-placeholder"></div>
+          </div>
+          <h3>John Doe</h3>
+          <p class="position">Founder & CEO</p>
+          <p class="bio">With over 15 years of experience in business consulting, John leads our team with vision and expertise.</p>
+        </div>
+        
+        <div class="team-member">
+          <div class="member-image">
+            <div class="image-placeholder"></div>
+          </div>
+          <h3>Jane Smith</h3>
+          <p class="position">Chief Strategy Officer</p>
+          <p class="bio">Jane brings extensive knowledge in strategic planning and business development to our clients.</p>
+        </div>
+        
+        <div class="team-member">
+          <div class="member-image">
+            <div class="image-placeholder"></div>
+          </div>
+          <h3>Michael Johnson</h3>
+          <p class="position">Technology Director</p>
+          <p class="bio">Michael's expertise in technology solutions helps businesses implement innovative digital strategies.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section animate-on-scroll">
+    <div class="container">
+      <h2>Ready to Work With Us?</h2>
+      <p>Contact our team today to discuss how we can help your business succeed.</p>
+      <a href="/contact" class="btn btn-primary">Get in Touch</a>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  /* Page Header */
+  .page-header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    padding: 7rem 5% 5rem;
+    text-align: center;
+  }
+
+  .page-header h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .page-header p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* Container */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 5%;
+  }
+
+  /* About Intro */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .about-content h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+  }
+
+  .about-content p {
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+  }
+
+  .image-placeholder {
+    width: 100%;
+    padding-bottom: 75%;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+  }
+
+  /* Mission Vision */
+  .mission-vision {
+    background-color: #f8f9fa;
+  }
+
+  .mission-vision-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+
+  .mission h2, .vision h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+  }
+
+  .mission p, .vision p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+  }
+
+  /* Values */
+  .section-title {
+    font-size: 2.2rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    color: var(--text-color);
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .value-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+  }
+
+  .value-card:hover {
+    transform: translateY(-10px);
+  }
+
+  .value-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+  }
+
+  /* Team */
+  .team {
+    background-color: #f8f9fa;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+  }
+
+  .team-member {
+    text-align: center;
+  }
+
+  .member-image {
+    margin-bottom: 1.5rem;
+  }
+
+  .member-image .image-placeholder {
+    padding-bottom: 100%;
+    border-radius: 50%;
+  }
+
+  .team-member h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .team-member .position {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .team-member .bio {
+    line-height: 1.6;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    text-align: center;
+  }
+
+  .cta-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-section p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.8rem 1.8rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary {
+    background-color: white;
+    color: var(--primary-color);
+  }
+
+  .btn-primary:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+  }
+
+  /* Responsive Styles */
+  @media (max-width: 992px) {
+    .mission-vision-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .mission, .vision {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .page-header h1 {
+      font-size: 2.2rem;
+    }
+
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .container {
+      padding: 3rem 5%;
+    }
+
+    .about-image {
+      order: -1;
+    }
+  }
+</style> 

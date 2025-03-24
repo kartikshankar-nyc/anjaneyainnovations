@@ -1,0 +1,337 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+
+<MainLayout title="Anjaneya Innovations LLC - Professional Consulting Services">
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Innovative Solutions for Your Business</h1>
+      <p>Anjaneya Innovations LLC provides expert consulting services to help your business thrive in today's competitive market.</p>
+      <div class="cta-buttons">
+        <a href="/services" class="btn btn-primary">Our Services</a>
+        <a href="/contact" class="btn btn-secondary">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="services animate-on-scroll">
+    <div class="container">
+      <h2 class="section-title">Our Services</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">
+            <img src="/images/consulting-icon.svg" alt="Consulting Services" />
+          </div>
+          <h3>Business Consulting</h3>
+          <p>Strategic guidance to optimize your business operations and increase profitability.</p>
+        </div>
+        
+        <div class="service-card">
+          <div class="service-icon">
+            <img src="/images/tech-icon.svg" alt="Technology Services" />
+          </div>
+          <h3>Technology Solutions</h3>
+          <p>Cutting-edge technology implementation to streamline your business processes.</p>
+        </div>
+        
+        <div class="service-card">
+          <div class="service-icon">
+            <img src="/images/analytics-icon.svg" alt="Analytics Services" />
+          </div>
+          <h3>Data Analytics</h3>
+          <p>Comprehensive data analysis to drive informed business decisions.</p>
+        </div>
+      </div>
+      <div class="services-cta">
+        <a href="/services" class="btn btn-outline">View All Services</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-preview animate-on-scroll">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-content">
+          <h2 class="section-title">Who We Are</h2>
+          <p>Anjaneya Innovations LLC is a forward-thinking consulting firm dedicated to helping businesses achieve their full potential through innovative solutions and strategic guidance.</p>
+          <p>Our team of experts brings years of industry experience to deliver tailored services that address your unique business needs.</p>
+          <a href="/about" class="btn btn-text">Learn More About Us <span class="arrow">→</span></a>
+        </div>
+        <div class="about-image">
+          <!-- Placeholder for an image -->
+          <div class="image-placeholder"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials animate-on-scroll">
+    <div class="container">
+      <h2 class="section-title">What Our Clients Say</h2>
+      <div class="testimonial-slider">
+        <div class="testimonial">
+          <div class="testimonial-content">
+            <p>"Anjaneya Innovations transformed our business operations, resulting in a 30% increase in efficiency."</p>
+          </div>
+          <div class="testimonial-author">
+            <p class="name">Jane Smith</p>
+            <p class="position">CEO, Example Company</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section animate-on-scroll">
+    <div class="container">
+      <h2>Ready to Transform Your Business?</h2>
+      <p>Contact us today to discuss how Anjaneya Innovations can help you achieve your business goals.</p>
+      <a href="/contact" class="btn btn-primary">Get Started</a>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  /* Hero Section */
+  .hero {
+    height: 80vh;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    padding: 0 5%;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  /* Button Styles */
+  .btn {
+    display: inline-block;
+    padding: 0.8rem 1.8rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary {
+    background-color: white;
+    color: var(--primary-color);
+  }
+
+  .btn-primary:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+  }
+
+  .btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    background-color: transparent;
+  }
+
+  .btn-outline:hover {
+    background-color: var(--primary-color);
+    color: white;
+  }
+
+  .btn-text {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-text .arrow {
+    transition: transform 0.3s ease;
+  }
+
+  .btn-text:hover .arrow {
+    transform: translateX(5px);
+  }
+
+  /* Section Styles */
+  .section-title {
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: var(--text-color);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 5%;
+  }
+
+  /* Services Section */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .service-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  }
+
+  .service-icon {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(58, 134, 255, 0.1);
+    border-radius: 50%;
+  }
+
+  .service-icon img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .service-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+  }
+
+  .services-cta {
+    text-align: center;
+  }
+
+  /* About Preview Section */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .about-content p {
+    margin-bottom: 1.5rem;
+  }
+
+  .image-placeholder {
+    width: 100%;
+    padding-bottom: 75%;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+  }
+
+  /* Testimonials Section */
+  .testimonials {
+    background-color: #f8f9fa;
+  }
+
+  .testimonial {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .testimonial-content {
+    font-size: 1.2rem;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+  }
+
+  .testimonial-author .name {
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  .testimonial-author .position {
+    color: #666;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    text-align: center;
+  }
+
+  .cta-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-section p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+  }
+
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 2.2rem;
+    }
+
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .about-image {
+      order: -1;
+    }
+
+    .container {
+      padding: 3rem 5%;
+    }
+  }
+</style> 
