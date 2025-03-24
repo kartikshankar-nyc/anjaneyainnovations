@@ -1,78 +1,75 @@
 # Anjaneya Innovations LLC Website
 
-This is the official website for Anjaneya Innovations LLC, built with Astro and GSAP for smooth animations.
+This repository contains the code for the Anjaneya Innovations LLC corporate website.
 
-## Prerequisites
+## Features
 
-Before you can run this website locally, you'll need to have Node.js installed on your computer. Visit [https://nodejs.org/](https://nodejs.org/) to download and install the latest LTS version.
+- Modern, responsive design
+- Optimized for performance
+- SEO-friendly structure 
+- Stealth mode for development phase
+- Integration with Cloudflare CDN
+- Custom logo and branding
+- Favicon and icon integration
 
-## Setup Instructions
+## Tech Stack
 
-1. Clone this repository to your local machine:
-   ```
-   git clone https://github.com/yourusername/anjaneyainnovations.git
-   ```
+- [Astro](https://astro.build/) - A modern static site builder
+- HTML/CSS/JavaScript
+- SVG for logos and icons
+- Cloudflare CDN for global distribution
 
-2. Navigate to the project directory:
-   ```
-   cd anjaneyainnovations
-   ```
+## Development
 
-3. Install the dependencies:
-   ```
-   npm install
-   ```
+### Prerequisites
 
-4. Start the development server:
-   ```
-   npm run dev
-   ```
+- Node.js 16.x or higher
+- npm 7.x or higher
 
-5. Open your browser and visit `http://localhost:3000` to view the website.
+### Setup
 
-## Build for Production
+1. Clone the repository
+2. Install dependencies:
 
-To build the site for production:
-
+```bash
+npm install
 ```
+
+3. Start the development server:
+
+```bash
+npm run dev
+```
+
+4. Visit `http://localhost:4321` to view the site
+
+### Building
+
+To create a production build:
+
+```bash
 npm run build
 ```
 
-The built files will be in the `dist` directory, ready to be deployed to your hosting provider.
+To preview the production build:
 
-## Project Structure
+```bash
+npm run preview
+```
 
-- `src/` - Contains the source code for the website
-  - `pages/` - Astro pages for each route
-  - `layouts/` - Layout components
-  - `components/` - Reusable UI components
-  - `styles/` - Global styles
-  - `scripts/` - JavaScript files including GSAP animations
-- `public/` - Static assets that will be copied to the build directory
-  - `images/` - Images used throughout the site
+## Branding
 
-## Customization
+The website includes custom branding with:
 
-- Color scheme can be adjusted in the CSS variables in `src/layouts/MainLayout.astro`
-- Services, team members, and other content can be edited in their respective page files
+- SVG logo with the "AI" symbol representing Anjaneya Innovations
+- Custom color scheme using navy (#222832) and gold/bronze (#C69C6D) 
+- Animated logo elements across the site
+- Favicon integration for browsers and devices
 
 ## Deployment
 
-This site is configured for static site generation. The built files can be deployed to any static site hosting provider such as Netlify, Vercel, GitHub Pages, or any traditional web hosting.
-
-## Need to Install Node.js?
-
-If you need to install Node.js:
-
-1. Visit [https://nodejs.org/](https://nodejs.org/)
-2. Download the LTS version for your operating system
-3. Follow the installation instructions
-4. Verify installation by opening a terminal/command prompt and typing:
-   ```
-   node -v
-   npm -v
-   ```
+The site is configured to work with Cloudflare CDN for optimal global performance. See the Cloudflare Worker configuration in the `cloudflare` directory.
 
 ## License
 
-All rights reserved by Anjaneya Innovations LLC. 
+Copyright © 2025 Anjaneya Innovations LLC. All rights reserved. 

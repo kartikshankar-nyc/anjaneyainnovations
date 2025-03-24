@@ -12,6 +12,9 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   <section class="hero">
     <div class="hero-content">
+      <div class="hero-logo-container">
+        <img src="/images/ai-logo.svg" alt="Anjaneya Innovations" class="hero-logo" />
+      </div>
       <div class="stealth-subtitle">We're building something special</div>
       <h1>Innovative Solutions for Your Business</h1>
       <p>Anjaneya Innovations LLC provides expert consulting services to help your business thrive in today's competitive market.</p>
@@ -66,8 +69,9 @@ import MainLayout from '../layouts/MainLayout.astro';
           <a href="/about" class="btn btn-text">Learn More About Us <span class="arrow">→</span></a>
         </div>
         <div class="about-image">
-          <!-- Placeholder for an image -->
-          <div class="image-placeholder"></div>
+          <div class="watermark-container">
+            <img src="/images/ai-logo.svg" alt="Anjaneya Innovations" class="watermark-logo" />
+          </div>
         </div>
       </div>
     </div>
@@ -189,15 +193,79 @@ import MainLayout from '../layouts/MainLayout.astro';
     }
   }
 
+  /* Hero Logo Styling */
+  .hero-logo-container {
+    position: relative;
+    margin: 0 auto 2rem;
+    width: 150px;
+    height: 150px;
+    animation: logoEntrance 1.5s ease-out forwards;
+  }
+
+  .hero-logo {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 15px rgba(255, 122, 0, 0.5));
+    animation: logoFloat 4s ease-in-out infinite;
+  }
+
+  @keyframes logoEntrance {
+    from {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes logoFloat {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+  }
+
+  /* Watermark Logo */
+  .watermark-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .watermark-logo {
+    position: absolute;
+    right: -50px;
+    bottom: -50px;
+    width: 300px;
+    height: 300px;
+    opacity: 0.05;
+    transform: rotate(15deg);
+    z-index: 1;
+    animation: logoRotate 30s infinite linear;
+  }
+
+  @keyframes logoRotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
   /* Hero Section */
   .hero {
-    height: 80vh;
-    min-height: 500px;
-    display: flex;
-    align-items: center;
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     color: white;
-    padding: 0 5%;
+    padding: 6rem 2rem;
+    text-align: center;
     position: relative;
     overflow: hidden;
   }
@@ -235,20 +303,17 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
 
   .hero h1 {
-    font-size: 3.2rem;
-    margin-bottom: 1.5rem;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-family: var(--font-heading);
     font-weight: 800;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    line-height: 1.2;
   }
 
   .hero p {
-    font-size: 1.3rem;
-    margin-bottom: 2.5rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    font-weight: 300;
+    font-size: 1.25rem;
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    opacity: 0.9;
   }
 
   .cta-buttons {
@@ -501,4 +566,19 @@ import MainLayout from '../layouts/MainLayout.astro';
       padding: 3rem 5%;
     }
   }
-</style> 
+</style>
+
+<script>
+  // Add GSAP animation for the logo if GSAP is available
+  document.addEventListener('DOMContentLoaded', () => {
+    if (typeof gsap !== 'undefined') {
+      gsap.from('.hero-logo', {
+        duration: 1.5,
+        opacity: 0,
+        y: -50,
+        rotation: -10,
+        ease: 'elastic.out(1, 0.5)'
+      });
+    }
+  });
+</script> 

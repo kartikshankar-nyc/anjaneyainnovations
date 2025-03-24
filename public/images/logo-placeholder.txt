@@ -1,0 +1,9 @@
+AI logo PNG files would be here in various sizes:
+- logo.png (200x200)
+- logo-small.png (48x48)
+- logo-large.png (400x400)
+- android-chrome-192x192.png
+- android-chrome-512x512.png
+- apple-touch-icon.png
+
+In production, these would be exported from the SVG we created. 

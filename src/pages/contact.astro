@@ -5,6 +5,9 @@ import MainLayout from '../layouts/MainLayout.astro';
 <MainLayout title="Contact Us - Anjaneya Innovations LLC">
   <section class="page-header">
     <div class="container">
+      <div class="header-logo">
+        <img src="/images/ai-logo.svg" alt="Anjaneya Innovations" class="header-logo-image" />
+      </div>
       <h1>Contact Us</h1>
       <p>Get in touch with our team to discuss your business needs</p>
     </div>
@@ -138,10 +141,8 @@ import MainLayout from '../layouts/MainLayout.astro';
   .page-header {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     color: white;
-    padding: 7rem 5% 5rem;
+    padding: 6rem 2rem;
     text-align: center;
-    position: relative;
-    overflow: hidden;
   }
   
   .page-header::before {
@@ -174,17 +175,17 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
 
   .page-header h1 {
-    font-size: 3.2rem;
+    font-size: 3rem;
     margin-bottom: 1rem;
+    font-family: var(--font-heading);
     font-weight: 800;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
 
   .page-header p {
-    font-size: 1.3rem;
-    max-width: 700px;
+    font-size: 1.25rem;
+    max-width: 800px;
     margin: 0 auto;
-    font-weight: 300;
+    opacity: 0.9;
   }
 
   /* Container */
@@ -206,7 +207,7 @@ import MainLayout from '../layouts/MainLayout.astro';
   .contact-info h2 {
     font-size: 2rem;
     margin-bottom: 1.5rem;
-    color: var(--text-color);
+    color: var(--primary-color);
   }
 
   .contact-form {
@@ -246,39 +247,19 @@ import MainLayout from '../layouts/MainLayout.astro';
   textarea:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px rgba(58, 134, 255, 0.2);
+    box-shadow: 0 0 0 2px rgba(255, 122, 0, 0.2);
   }
 
-  /* Button Styles - Updated */
+  /* Button */
   .btn {
     display: inline-block;
-    padding: 1rem 2.2rem;
-    border-radius: 50px;
-    text-decoration: none;
+    padding: 12px 24px;
     font-weight: 600;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    cursor: pointer;
+    text-align: center;
     border: none;
-    font-size: 1rem;
-  }
-
-  .btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.1);
+    border-radius: 4px;
+    cursor: pointer;
     transition: all 0.3s ease;
-    z-index: -1;
-  }
-
-  .btn:hover::before {
-    width: 100%;
   }
 
   .btn-primary {
@@ -311,13 +292,13 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
 
   .info-item a {
-    color: var(--text-color);
+    color: var(--color-text);
     text-decoration: none;
     transition: color 0.3s ease;
   }
 
   .info-item a:hover {
-    color: var(--primary-color);
+    color: var(--color-secondary);
   }
 
   /* Social Links */
@@ -345,7 +326,7 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
 
   .social-icon:hover {
-    background-color: var(--primary-color);
+    background-color: var(--color-secondary);
     color: white;
   }
 
@@ -374,7 +355,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     font-size: 2.2rem;
     margin-bottom: 3rem;
     text-align: center;
-    color: var(--text-color);
+    color: var(--primary-color);
   }
 
   .faq-list {
@@ -391,7 +372,7 @@ import MainLayout from '../layouts/MainLayout.astro';
   .faq-question {
     font-size: 1.3rem;
     margin-bottom: 1rem;
-    color: var(--text-color);
+    color: var(--color-text);
     cursor: pointer;
     position: relative;
     padding-right: 30px;
@@ -437,6 +418,28 @@ import MainLayout from '../layouts/MainLayout.astro';
 
     .container {
       padding: 3rem 5%;
+    }
+  }
+
+  .header-logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+
+  .header-logo-image {
+    width: 100px;
+    height: 100px;
+    filter: drop-shadow(0 0 15px rgba(255, 122, 0, 0.5));
+    animation: logoFloat 4s ease-in-out infinite;
+  }
+
+  @keyframes logoFloat {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
     }
   }
 </style>
