@@ -8,6 +8,8 @@ const { title = 'Anjaneya Innovations LLC', description = 'Professional consulti
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content={description}>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="launch-status" content="stealth-mode">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,6 +40,15 @@ const { title = 'Anjaneya Innovations LLC', description = 'Professional consulti
       <div class="footer-section">
         <h3>Anjaneya Innovations LLC</h3>
         <p>Your trusted consulting partner</p>
+        <div class="stealth-note">
+          <span class="lock-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+          </span>
+          <span>Currently in stealth mode. Full services launching soon.</span>
+        </div>
       </div>
       <div class="footer-section">
         <h3>Contact</h3>
@@ -202,6 +213,26 @@ const { title = 'Anjaneya Innovations LLC', description = 'Professional consulti
     color: var(--primary-color);
     margin-bottom: 1rem;
     font-weight: 700;
+  }
+
+  .stealth-note {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--secondary-color);
+    font-weight: 500;
+    padding: 8px 12px;
+    background-color: rgba(255, 122, 0, 0.1);
+    border-radius: 4px;
+    max-width: 260px;
+  }
+
+  .lock-icon {
+    color: var(--secondary-color);
+    display: flex;
+    align-items: center;
   }
 
   .copyright {

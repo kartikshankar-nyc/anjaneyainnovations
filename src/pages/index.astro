@@ -3,8 +3,16 @@ import MainLayout from '../layouts/MainLayout.astro';
 ---
 
 <MainLayout title="Anjaneya Innovations LLC - Professional Consulting Services">
+  <div class="stealth-indicator">
+    <div class="stealth-badge">
+      <span class="stealth-pulse"></span>
+      <span>STEALTH MODE</span>
+    </div>
+  </div>
+
   <section class="hero">
     <div class="hero-content">
+      <div class="stealth-subtitle">We're building something special</div>
       <h1>Innovative Solutions for Your Business</h1>
       <p>Anjaneya Innovations LLC provides expert consulting services to help your business thrive in today's competitive market.</p>
       <div class="cta-buttons">
@@ -92,6 +100,95 @@ import MainLayout from '../layouts/MainLayout.astro';
 </MainLayout>
 
 <style>
+  /* Stealth Mode Styling */
+  .stealth-indicator {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 100;
+  }
+
+  .stealth-badge {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 8px 15px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .stealth-pulse {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+  }
+
+  .stealth-pulse::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  .stealth-subtitle {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.9;
+    position: relative;
+    display: inline-block;
+  }
+
+  .stealth-subtitle::before, 
+  .stealth-subtitle::after {
+    content: '';
+    position: absolute;
+    height: 1px;
+    background-color: var(--accent-color);
+    opacity: 0.6;
+    top: 50%;
+    width: 30px;
+  }
+
+  .stealth-subtitle::before {
+    right: 100%;
+    margin-right: 15px;
+  }
+
+  .stealth-subtitle::after {
+    left: 100%;
+    margin-left: 15px;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(3);
+      opacity: 0;
+    }
+  }
+
   /* Hero Section */
   .hero {
     height: 80vh;
