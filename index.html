@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-astro-cid-ouamjn2i>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,11 +17,163 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <!-- Cloudflare CDN integration -->
   <meta name="cf-2fa-verify" content="anjaneya-innovations">
-  <!-- CSS files -->
-  <link rel="stylesheet" href="assets/css/about.CXk0da6B.css">
-  <link rel="stylesheet" href="assets/css/index.Bc9aZhl6.css">
-  <!-- Navigation menu enhancements -->
+  <title>Anjaneya Innovations LLC - Professional Consulting Services</title>
   <style>
+    :root {
+      --primary-color: #f59e0b;
+      --primary-dark: #d97706;
+      --secondary-color: #34d399;
+      --accent-color: #4a6fdc;
+      --text-color: #333;
+      --text-light: #666;
+      --background-color: #f9fafb;
+      --white: #ffffff;
+      --black: #000000;
+      --border-radius: 8px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
+    /* Base styles */
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: var(--text-color);
+      background-color: var(--background-color);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Montserrat', sans-serif;
+      margin-top: 0;
+      font-weight: 700;
+    }
+
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-dark);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      color: var(--white);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--primary-color);
+      color: var(--white);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--primary-color);
+      color: var(--white);
+    }
+
+    .btn-text {
+      background-color: transparent;
+      color: var(--primary-color);
+      padding: 0;
+      font-weight: 600;
+      position: relative;
+    }
+
+    .btn-text:hover {
+      color: var(--primary-dark);
+    }
+
+    .arrow {
+      display: inline-block;
+      margin-left: 4px;
+      transition: transform 0.3s ease;
+    }
+
+    .btn-text:hover .arrow {
+      transform: translateX(4px);
+    }
+
+    /* Header styles */
+    header {
+      background-color: var(--white);
+      padding: 16px 0;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo a {
+      display: flex;
+      align-items: center;
+      color: var(--text-color);
+      font-weight: 700;
+    }
+
+    .logo-image {
+      height: 40px;
+      width: auto;
+      margin-right: 12px;
+    }
+
+    .logo-text {
+      font-size: 1.4rem;
+      font-weight: 700;
+      font-family: 'Montserrat', sans-serif;
+    }
+
     .menu {
       display: flex;
       gap: 24px;
@@ -41,17 +193,203 @@
       background-color: rgba(245, 158, 11, 0.1);
     }
 
-    /* Basic fade-in animation */
+    /* Footer styles */
+    footer {
+      background-color: #1f2937;
+      color: var(--white);
+      padding: 60px 0 20px;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      gap: 40px;
+    }
+
+    .footer-section {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .footer-section h3 {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .footer-section h3::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 40px;
+      height: 2px;
+      background-color: var(--primary-color);
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .footer-logo img {
+      margin-right: 12px;
+    }
+
+    .footer-logo h3 {
+      margin: 0;
+    }
+
+    .footer-logo h3::after {
+      display: none;
+    }
+
+    .stealth-note {
+      display: flex;
+      align-items: center;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 8px 12px;
+      border-radius: var(--border-radius);
+      margin-top: 16px;
+      font-size: 0.85rem;
+    }
+
+    .lock-icon {
+      margin-right: 8px;
+      opacity: 0.7;
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.85rem;
+      opacity: 0.7;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    /* Hero section */
+    .hero {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: var(--white);
+      padding: 80px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2;
+      animation: fadeIn 1s ease-out forwards;
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .hero-content {
-      animation: fadeIn 1s ease-out forwards;
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      opacity: 0.9;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .stealth-subtitle {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .stealth-indicator {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 10;
+    }
+
+    .stealth-badge {
+      display: flex;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.2);
+      padding: 8px 12px;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .stealth-pulse {
+      width: 8px;
+      height: 8px;
+      background-color: var(--secondary-color);
+      border-radius: 50%;
+      margin-right: 8px;
+      position: relative;
+    }
+
+    .stealth-pulse::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background-color: var(--secondary-color);
+      animation: pulse 2s infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 0.8;
+      }
+      70% {
+        transform: scale(2);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 0;
+      }
+    }
+
+    /* Hero logo */
+    .hero-logo-container {
+      margin-bottom: 20px;
     }
 
     .hero-logo {
+      width: 120px;
+      height: auto;
       animation: logoEntrance 1.5s ease-out forwards;
     }
 
@@ -65,8 +403,245 @@
         transform: translateY(0) rotate(0);
       }
     }
-    
+
+    /* Services section */
+    .services {
+      padding: 80px 0;
+      background-color: var(--white);
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 60px;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 3px;
+      background-color: var(--primary-color);
+      bottom: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .service-card {
+      background-color: var(--white);
+      border-radius: var(--border-radius);
+      padding: 30px;
+      box-shadow: var(--box-shadow);
+      transition: var(--transition);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+      border-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .service-icon {
+      background-color: rgba(245, 158, 11, 0.1);
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .service-icon img {
+      width: 35px;
+      height: 35px;
+    }
+
+    .service-card h3 {
+      margin-bottom: 16px;
+      font-size: 1.4rem;
+    }
+
+    .services-cta {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    /* About preview section */
+    .about-preview {
+      padding: 80px 0;
+      background-color: var(--background-color);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 6fr 4fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .about-content h2 {
+      text-align: left;
+      margin-bottom: 30px;
+    }
+
+    .about-content h2::after {
+      left: 0;
+      transform: none;
+    }
+
+    .about-content p {
+      margin-bottom: 20px;
+    }
+
+    .about-image {
+      position: relative;
+      height: 100%;
+      min-height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .watermark-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .watermark-logo {
+      width: 200px;
+      height: 200px;
+      opacity: 0.2;
+      animation: logoRotate 20s linear infinite;
+    }
+
+    @keyframes logoRotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Testimonials section */
+    .testimonials {
+      padding: 80px 0;
+      background-color: var(--white);
+    }
+
+    .testimonial-slider {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .testimonial {
+      padding: 40px;
+      background-color: rgba(245, 158, 11, 0.05);
+      border-radius: var(--border-radius);
+      margin: 0 auto;
+    }
+
+    .testimonial-content {
+      font-size: 1.1rem;
+      font-style: italic;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .testimonial-content::before {
+      content: '"';
+      font-size: 3rem;
+      position: absolute;
+      top: -20px;
+      left: -10px;
+      color: rgba(245, 158, 11, 0.2);
+      font-family: Georgia, serif;
+    }
+
+    .testimonial-author {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .testimonial-author .name {
+      font-weight: 600;
+      margin-bottom: 0;
+    }
+
+    .testimonial-author .position {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-top: 0;
+    }
+
+    /* CTA section */
+    .cta-section {
+      padding: 80px 0;
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: var(--white);
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+    }
+
+    .cta-section p {
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Responsive design */
     @media (max-width: 768px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .about-image {
+        order: -1;
+        min-height: 200px;
+      }
+      
+      .watermark-logo {
+        width: 160px;
+        height: 160px;
+      }
+      
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      
+      .footer-content {
+        flex-direction: column;
+        gap: 30px;
+      }
+      
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .testimonial {
+        padding: 30px 20px;
+      }
+      
       .menu {
         gap: 12px;
       }
@@ -76,185 +651,171 @@
         font-size: 1rem;
       }
     }
+
+    @media (max-width: 480px) {
+      .logo-text {
+        font-size: 1.2rem;
+      }
+      
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      
+      .hero p {
+        font-size: 1rem;
+      }
+      
+      .section-title {
+        font-size: 1.8rem;
+      }
+      
+      .cta-buttons {
+        flex-direction: column;
+        gap: 12px;
+      }
+      
+      .cta-buttons .btn {
+        width: 100%;
+      }
+    }
   </style>
-  <title>Anjaneya Innovations LLC - Professional Consulting Services</title>
 </head>
-<body data-astro-cid-ouamjn2i>
-  <header data-astro-cid-ouamjn2i>
-    <nav data-astro-cid-ouamjn2i>
-      <div class="logo" data-astro-cid-ouamjn2i>
-        <a href="." data-astro-cid-ouamjn2i>
-          <img src="images/ai-logo.svg" alt="Anjaneya Innovations" class="logo-image" data-astro-cid-ouamjn2i>
-          <span class="logo-text" data-astro-cid-ouamjn2i>Anjaneya Innovations</span>
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+        <a href=".">
+          <img src="images/ai-logo.svg" alt="Anjaneya Innovations" class="logo-image">
+          <span class="logo-text">Anjaneya Innovations</span>
         </a>
       </div>
-      <div class="menu" data-astro-cid-ouamjn2i>
-        <a href="." data-astro-cid-ouamjn2i>Home</a>
-        <a href="services" data-astro-cid-ouamjn2i>Services</a>
-        <a href="about" data-astro-cid-ouamjn2i>About</a>
-        <a href="contact" data-astro-cid-ouamjn2i>Contact</a>
+      <div class="menu">
+        <a href=".">Home</a>
+        <a href="services">Services</a>
+        <a href="about">About</a>
+        <a href="contact">Contact</a>
       </div>
     </nav>
   </header>
-  <main data-astro-cid-ouamjn2i>
-    <div class="stealth-indicator" data-astro-cid-j7pv25f6>
-      <div class="stealth-badge" data-astro-cid-j7pv25f6>
-        <span class="stealth-pulse" data-astro-cid-j7pv25f6></span>
-        <span data-astro-cid-j7pv25f6>STEALTH MODE</span>
+  <main>
+    <div class="stealth-indicator">
+      <div class="stealth-badge">
+        <span class="stealth-pulse"></span>
+        <span>STEALTH MODE</span>
       </div>
     </div>
-    <section class="hero" data-astro-cid-j7pv25f6>
-      <div class="hero-content" data-astro-cid-j7pv25f6>
-        <div class="hero-logo-container" data-astro-cid-j7pv25f6>
-          <img src="images/ai-logo.svg" alt="Anjaneya Innovations" class="hero-logo" data-astro-cid-j7pv25f6>
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-logo-container">
+          <img src="images/ai-logo.svg" alt="Anjaneya Innovations" class="hero-logo">
         </div>
-        <div class="stealth-subtitle" data-astro-cid-j7pv25f6>We're building something special</div>
-        <h1 data-astro-cid-j7pv25f6>Innovative Solutions for Your Business</h1>
-        <p data-astro-cid-j7pv25f6>Anjaneya Innovations LLC provides expert consulting services to help your business thrive in today's competitive market.</p>
-        <div class="cta-buttons" data-astro-cid-j7pv25f6>
-          <a href="services" class="btn btn-primary" data-astro-cid-j7pv25f6>Our Services</a>
-          <a href="contact" class="btn btn-secondary" data-astro-cid-j7pv25f6>Contact Us</a>
-        </div>
-      </div>
-    </section>
-    <section class="services animate-on-scroll" data-astro-cid-j7pv25f6>
-      <div class="container" data-astro-cid-j7pv25f6>
-        <h2 class="section-title" data-astro-cid-j7pv25f6>Our Services</h2>
-        <div class="services-grid" data-astro-cid-j7pv25f6>
-          <div class="service-card" data-astro-cid-j7pv25f6>
-            <div class="service-icon" data-astro-cid-j7pv25f6>
-              <img src="images/consulting-icon.svg" alt="Consulting Services" data-astro-cid-j7pv25f6>
-            </div>
-            <h3 data-astro-cid-j7pv25f6>Business Consulting</h3>
-            <p data-astro-cid-j7pv25f6>Strategic guidance to optimize your business operations and increase profitability.</p>
-          </div>
-          <div class="service-card" data-astro-cid-j7pv25f6>
-            <div class="service-icon" data-astro-cid-j7pv25f6>
-              <img src="images/tech-icon.svg" alt="Technology Services" data-astro-cid-j7pv25f6>
-            </div>
-            <h3 data-astro-cid-j7pv25f6>Technology Solutions</h3>
-            <p data-astro-cid-j7pv25f6>Cutting-edge technology implementation to streamline your business processes.</p>
-          </div>
-          <div class="service-card" data-astro-cid-j7pv25f6>
-            <div class="service-icon" data-astro-cid-j7pv25f6>
-              <img src="images/analytics-icon.svg" alt="Analytics Services" data-astro-cid-j7pv25f6>
-            </div>
-            <h3 data-astro-cid-j7pv25f6>Data Analytics</h3>
-            <p data-astro-cid-j7pv25f6>Comprehensive data analysis to drive informed business decisions.</p>
-          </div>
-        </div>
-        <div class="services-cta" data-astro-cid-j7pv25f6>
-          <a href="services" class="btn btn-outline" data-astro-cid-j7pv25f6>View All Services</a>
+        <div class="stealth-subtitle">We're building something special</div>
+        <h1>Innovative Solutions for Your Business</h1>
+        <p>Anjaneya Innovations LLC provides expert consulting services to help your business thrive in today's competitive market.</p>
+        <div class="cta-buttons">
+          <a href="services" class="btn btn-primary">Our Services</a>
+          <a href="contact" class="btn btn-secondary">Contact Us</a>
         </div>
       </div>
     </section>
-    <section class="about-preview animate-on-scroll" data-astro-cid-j7pv25f6>
-      <div class="container" data-astro-cid-j7pv25f6>
-        <div class="about-grid" data-astro-cid-j7pv25f6>
-          <div class="about-content" data-astro-cid-j7pv25f6>
-            <h2 class="section-title" data-astro-cid-j7pv25f6>Who We Are</h2>
-            <p data-astro-cid-j7pv25f6>Anjaneya Innovations LLC is a forward-thinking consulting firm dedicated to helping businesses achieve their full potential through innovative solutions and strategic guidance.</p>
-            <p data-astro-cid-j7pv25f6>Our team of experts brings years of industry experience to deliver tailored services that address your unique business needs.</p>
-            <a href="about" class="btn btn-text" data-astro-cid-j7pv25f6>Learn More About Us <span class="arrow" data-astro-cid-j7pv25f6>→</span></a>
-          </div>
-          <div class="about-image" data-astro-cid-j7pv25f6>
-            <div class="watermark-container" data-astro-cid-j7pv25f6>
-              <img src="images/ai-logo.svg" alt="Anjaneya Innovations" class="watermark-logo" data-astro-cid-j7pv25f6>
+    <section class="services">
+      <div class="container">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon">
+              <img src="images/consulting-icon.svg" alt="Consulting Services">
             </div>
+            <h3>Business Consulting</h3>
+            <p>Strategic guidance to optimize your business operations and increase profitability.</p>
           </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <img src="images/tech-icon.svg" alt="Technology Services">
+            </div>
+            <h3>Technology Solutions</h3>
+            <p>Cutting-edge technology implementation to streamline your business processes.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <img src="images/analytics-icon.svg" alt="Analytics Services">
+            </div>
+            <h3>Data Analytics</h3>
+            <p>Comprehensive data analysis to drive informed business decisions.</p>
+          </div>
+        </div>
+        <div class="services-cta">
+          <a href="services" class="btn btn-outline">View All Services</a>
         </div>
       </div>
     </section>
-    <section class="testimonials animate-on-scroll" data-astro-cid-j7pv25f6>
-      <div class="container" data-astro-cid-j7pv25f6>
-        <h2 class="section-title" data-astro-cid-j7pv25f6>What Our Clients Say</h2>
-        <div class="testimonial-slider" data-astro-cid-j7pv25f6>
-          <div class="testimonial" data-astro-cid-j7pv25f6>
-            <div class="testimonial-content" data-astro-cid-j7pv25f6>
-              <p data-astro-cid-j7pv25f6>"Anjaneya Innovations transformed our business operations, resulting in a 30% increase in efficiency."</p>
-            </div>
-            <div class="testimonial-author" data-astro-cid-j7pv25f6>
-              <p class="name" data-astro-cid-j7pv25f6>Jane Smith</p>
-              <p class="position" data-astro-cid-j7pv25f6>CEO, Example Company</p>
+    <section class="about-preview">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-content">
+            <h2 class="section-title">Who We Are</h2>
+            <p>Anjaneya Innovations LLC is a forward-thinking consulting firm dedicated to helping businesses achieve their full potential through innovative solutions and strategic guidance.</p>
+            <p>Our team of experts brings years of industry experience to deliver tailored services that address your unique business needs.</p>
+            <a href="about" class="btn btn-text">Learn More About Us <span class="arrow">→</span></a>
+          </div>
+          <div class="about-image">
+            <div class="watermark-container">
+              <img src="images/ai-logo.svg" alt="Anjaneya Innovations" class="watermark-logo">
             </div>
           </div>
         </div>
       </div>
     </section>
-    <section class="cta-section animate-on-scroll" data-astro-cid-j7pv25f6>
-      <div class="container" data-astro-cid-j7pv25f6>
-        <h2 data-astro-cid-j7pv25f6>Ready to Transform Your Business?</h2>
-        <p data-astro-cid-j7pv25f6>Contact us today to discuss how Anjaneya Innovations can help you achieve your business goals.</p>
-        <a href="contact" class="btn btn-primary" data-astro-cid-j7pv25f6>Get Started</a>
+    <section class="testimonials">
+      <div class="container">
+        <h2 class="section-title">What Our Clients Say</h2>
+        <div class="testimonial-slider">
+          <div class="testimonial">
+            <div class="testimonial-content">
+              <p>"Anjaneya Innovations transformed our business operations, resulting in a 30% increase in efficiency."</p>
+            </div>
+            <div class="testimonial-author">
+              <p class="name">Jane Smith</p>
+              <p class="position">CEO, Example Company</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="cta-section">
+      <div class="container">
+        <h2>Ready to Transform Your Business?</h2>
+        <p>Contact us today to discuss how Anjaneya Innovations can help you achieve your business goals.</p>
+        <a href="contact" class="btn btn-primary">Get Started</a>
       </div>
     </section>
   </main>
-  <footer data-astro-cid-ouamjn2i>
-    <div class="footer-content" data-astro-cid-ouamjn2i>
-      <div class="footer-section" data-astro-cid-ouamjn2i>
-        <div class="footer-logo" data-astro-cid-ouamjn2i>
-          <img src="images/ai-logo.svg" alt="Anjaneya Innovations" width="40" height="40" data-astro-cid-ouamjn2i>
-          <h3 data-astro-cid-ouamjn2i>Anjaneya Innovations LLC</h3>
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <div class="footer-logo">
+          <img src="images/ai-logo.svg" alt="Anjaneya Innovations" width="40" height="40">
+          <h3>Anjaneya Innovations LLC</h3>
         </div>
-        <p data-astro-cid-ouamjn2i>Your trusted consulting partner</p>
-        <div class="stealth-note" data-astro-cid-ouamjn2i>
-          <span class="lock-icon" data-astro-cid-ouamjn2i>
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-ouamjn2i>
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" data-astro-cid-ouamjn2i></rect>
-              <path d="M7 11V7a5 5 0 0 1 10 0v4" data-astro-cid-ouamjn2i></path>
+        <p>Your trusted consulting partner</p>
+        <div class="stealth-note">
+          <span class="lock-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
             </svg>
           </span>
-          <span data-astro-cid-ouamjn2i>Currently in stealth mode. Full services launching soon.</span>
+          <span>Currently in stealth mode. Full services launching soon.</span>
         </div>
       </div>
-      <div class="footer-section" data-astro-cid-ouamjn2i>
-        <h3 data-astro-cid-ouamjn2i>Contact</h3>
-        <p data-astro-cid-ouamjn2i>Email: info@anjaneyainnovations.com</p>
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <p>Email: info@anjaneyainnovations.com</p>
       </div>
     </div>
-    <div class="copyright" data-astro-cid-ouamjn2i>
+    <div class="copyright">
       &copy; 2025 Anjaneya Innovations LLC. All rights reserved.
     </div>
   </footer>
-  
-  <!-- Scripts -->
-  <script src="scripts/favicon.js"></script>
-  <script type="module">
-    document.addEventListener("DOMContentLoaded", (() => {
-      if (typeof gsap !== "undefined") {
-        gsap.registerPlugin(ScrollTrigger);
-        gsap.from("header", {y: -100, opacity: 0, duration: 1, ease: "power3.out"});
-        gsap.from(".hero-content", {opacity: 0, y: 50, duration: 1, delay: 0.5, ease: "power2.out"});
-        gsap.utils.toArray(".animate-on-scroll").forEach((o) => {
-          gsap.from(o, {
-            scrollTrigger: {trigger: o, start: "top 80%", toggleActions: "play none none none"},
-            opacity: 0,
-            y: 50,
-            duration: 1,
-            ease: "power2.out"
-          });
-        });
-        gsap.utils.toArray(".service-card").forEach((o, e) => {
-          gsap.from(o, {
-            scrollTrigger: {trigger: o, start: "top 85%"},
-            opacity: 0,
-            y: 30,
-            duration: 0.8,
-            delay: 0.2 * e,
-            ease: "power1.out"
-          });
-        });
-        
-        // Logo animation
-        gsap.from(".hero-logo", {
-          duration: 1.5,
-          opacity: 0,
-          y: -50,
-          rotation: -10,
-          ease: "elastic.out(1, 0.5)"
-        });
-      }
-    }));
-  </script>
 </body>
 </html>
