@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <!-- AI logo for Anjaneya Innovations -->
+  <g fill="none" fill-rule="evenodd">
+    <!-- A part (gold/bronze) -->
+    <path d="M35,100 C35,85 40,70 60,55 C75,45 85,50 90,55 C100,65 105,80 110,100 C115,120 120,140 130,155 C140,170 155,170 165,155 C140,180 115,180 100,160 C85,140 80,120 75,100 C70,80 65,65 55,65 C45,65 40,75 35,100 Z" fill="#C69C6D" />
+    
+    <!-- I part (dark navy) -->
+    <path d="M150,45 C160,45 170,55 170,65 L170,150 C170,165 160,175 150,175 C140,175 130,165 130,150 L130,65 C130,55 140,45 150,45 Z" fill="#222832" />
+    
+    <!-- A to I connection part (dark navy) -->
+    <path d="M90,55 C95,50 100,45 110,45 C120,45 130,50 130,65 L130,100 C125,85 120,70 110,55 C105,50 95,50 90,55 Z" fill="#222832" />
+    
+    <!-- Dot above I (dark navy) -->
+    <circle cx="150" cy="25" r="15" fill="#222832" />
+  </g>
+</svg> 
