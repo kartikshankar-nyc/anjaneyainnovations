@@ -4,376 +4,198 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Professional consulting services by Anjaneya Innovations LLC">
-  <meta name="robots" content="index, follow">
-  <meta name="launch-status" content="stealth-mode">
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <link rel="manifest" href="site.webmanifest">
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Cloudflare CDN integration -->
-  <meta name="cf-2fa-verify" content="anjaneya-innovations">
-  <title>Anjaneya Innovations LLC - Professional Consulting Services</title>
+  <title>Anjaneya Innovations LLC</title>
   <style>
+    /* Simple, reliable CSS with minimal complexity */
     :root {
-      --primary-color: #f59e0b;
+      --primary: #f59e0b;
       --primary-dark: #d97706;
-      --secondary-color: #34d399;
-      --accent-color: #4a6fdc;
-      --text-color: #333;
-      --text-light: #666;
-      --background-color: #f9fafb;
-      --white: #ffffff;
-      --black: #000000;
-      --border-radius: 8px;
-      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      --transition: all 0.3s ease;
+      --secondary: #34d399;
+      --dark: #1f2937;
+      --light: #f9fafb;
+      --text: #333333;
     }
-
-    /* Base styles */
-    body {
-      font-family: 'Poppins', sans-serif;
+    
+    * {
       margin: 0;
       padding: 0;
-      color: var(--text-color);
-      background-color: var(--background-color);
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       line-height: 1.6;
+      color: var(--text);
+      background: var(--light);
     }
-
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'Montserrat', sans-serif;
-      margin-top: 0;
-      font-weight: 700;
-    }
-
-    a {
-      color: var(--primary-color);
-      text-decoration: none;
-      transition: var(--transition);
-    }
-
-    a:hover {
-      color: var(--primary-dark);
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 12px 24px;
-      border-radius: var(--border-radius);
-      font-weight: 600;
-      text-align: center;
-      cursor: pointer;
-      transition: var(--transition);
-      border: none;
-    }
-
-    .btn-primary {
-      background-color: var(--primary-color);
-      color: var(--white);
-    }
-
-    .btn-primary:hover {
-      background-color: var(--primary-dark);
-      color: var(--white);
-    }
-
-    .btn-secondary {
-      background-color: transparent;
-      color: var(--primary-color);
-      border: 2px solid var(--primary-color);
-    }
-
-    .btn-secondary:hover {
-      background-color: var(--primary-color);
-      color: var(--white);
-    }
-
-    .btn-outline {
-      background-color: transparent;
-      color: var(--primary-color);
-      border: 2px solid var(--primary-color);
-    }
-
-    .btn-outline:hover {
-      background-color: var(--primary-color);
-      color: var(--white);
-    }
-
-    .btn-text {
-      background-color: transparent;
-      color: var(--primary-color);
-      padding: 0;
-      font-weight: 600;
-      position: relative;
-    }
-
-    .btn-text:hover {
-      color: var(--primary-dark);
-    }
-
-    .arrow {
-      display: inline-block;
-      margin-left: 4px;
-      transition: transform 0.3s ease;
-    }
-
-    .btn-text:hover .arrow {
-      transform: translateX(4px);
-    }
-
-    /* Header styles */
+    
     header {
-      background-color: var(--white);
-      padding: 16px 0;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      background: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 1rem;
       position: sticky;
       top: 0;
       z-index: 100;
     }
-
+    
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 20px;
     }
-
+    
     .logo {
       display: flex;
       align-items: center;
+      font-weight: bold;
+      font-size: 1.25rem;
+      color: var(--text);
+      text-decoration: none;
     }
-
-    .logo a {
-      display: flex;
-      align-items: center;
-      color: var(--text-color);
-      font-weight: 700;
-    }
-
+    
     .logo-image {
       height: 40px;
-      width: auto;
-      margin-right: 12px;
+      margin-right: 0.75rem;
     }
-
-    .logo-text {
-      font-size: 1.4rem;
-      font-weight: 700;
-      font-family: 'Montserrat', sans-serif;
-    }
-
+    
     .menu {
       display: flex;
-      gap: 24px;
-      font-size: 1.1rem;
-      font-weight: 600;
+      gap: 1.5rem;
     }
     
     .menu a {
-      color: #333;
-      padding: 8px 12px;
-      border-radius: 6px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 0.75rem;
+      border-radius: 4px;
       transition: all 0.3s ease;
     }
     
     .menu a:hover {
-      color: #f59e0b;
-      background-color: rgba(245, 158, 11, 0.1);
+      background: rgba(245, 158, 11, 0.1);
+      color: var(--primary);
     }
-
-    /* Footer styles */
-    footer {
-      background-color: #1f2937;
-      color: var(--white);
-      padding: 60px 0 20px;
+    
+    section {
+      padding: 4rem 1rem;
     }
-
-    .footer-content {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
+    
+    .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 20px;
-      gap: 40px;
     }
-
-    .footer-section {
-      flex: 1;
-      min-width: 250px;
+    
+    h1, h2, h3 {
+      margin-bottom: 1rem;
+      line-height: 1.2;
     }
-
-    .footer-section h3 {
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-      position: relative;
+    
+    p {
+      margin-bottom: 1.5rem;
     }
-
-    .footer-section h3::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: -8px;
-      width: 40px;
-      height: 2px;
-      background-color: var(--primary-color);
+    
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 600;
+      transition: all 0.3s ease;
     }
-
-    .footer-logo {
-      display: flex;
-      align-items: center;
-      margin-bottom: 16px;
+    
+    .btn:hover {
+      background: var(--primary-dark);
     }
-
-    .footer-logo img {
-      margin-right: 12px;
+    
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
     }
-
-    .footer-logo h3 {
-      margin: 0;
+    
+    .btn-outline:hover {
+      background: var(--primary);
+      color: white;
     }
-
-    .footer-logo h3::after {
-      display: none;
-    }
-
-    .stealth-note {
-      display: flex;
-      align-items: center;
-      background-color: rgba(255, 255, 255, 0.1);
-      padding: 8px 12px;
-      border-radius: var(--border-radius);
-      margin-top: 16px;
-      font-size: 0.85rem;
-    }
-
-    .lock-icon {
-      margin-right: 8px;
-      opacity: 0.7;
-    }
-
-    .copyright {
-      text-align: center;
-      margin-top: 40px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      font-size: 0.85rem;
-      opacity: 0.7;
-      max-width: 1200px;
-      margin-left: auto;
-      margin-right: auto;
-      padding-left: 20px;
-      padding-right: 20px;
-    }
-
+    
     /* Hero section */
     .hero {
-      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-      color: var(--white);
-      padding: 80px 0;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
       text-align: center;
       position: relative;
-      overflow: hidden;
     }
-
+    
     .hero-content {
       max-width: 800px;
       margin: 0 auto;
-      padding: 0 20px;
-      position: relative;
-      z-index: 2;
-      animation: fadeIn 1s ease-out forwards;
+      padding: 2rem 1rem;
     }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
+    
     .hero h1 {
-      font-size: 2.8rem;
-      margin-bottom: 20px;
-      line-height: 1.2;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
     }
-
+    
     .hero p {
       font-size: 1.2rem;
-      margin-bottom: 40px;
+      margin-bottom: 2rem;
       opacity: 0.9;
     }
-
+    
     .cta-buttons {
       display: flex;
-      gap: 16px;
+      gap: 1rem;
       justify-content: center;
       flex-wrap: wrap;
     }
-
-    .stealth-subtitle {
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: 0.9rem;
-      margin-bottom: 16px;
-      color: rgba(255, 255, 255, 0.8);
-    }
-
+    
     .stealth-indicator {
       position: absolute;
-      top: 20px;
-      right: 20px;
-      z-index: 10;
-    }
-
-    .stealth-badge {
-      display: flex;
-      align-items: center;
-      background-color: rgba(0, 0, 0, 0.2);
-      padding: 8px 12px;
-      border-radius: 30px;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(0,0,0,0.2);
+      border-radius: 2rem;
+      padding: 0.5rem 0.75rem;
       font-size: 0.75rem;
       font-weight: 600;
       letter-spacing: 1px;
+      display: flex;
+      align-items: center;
     }
-
+    
     .stealth-pulse {
       width: 8px;
       height: 8px;
-      background-color: var(--secondary-color);
+      background: var(--secondary);
       border-radius: 50%;
       margin-right: 8px;
       position: relative;
     }
-
-    .stealth-pulse::before {
+    
+    .stealth-pulse::after {
       content: '';
       position: absolute;
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      background-color: var(--secondary-color);
+      background: var(--secondary);
       animation: pulse 2s infinite;
       opacity: 0.8;
     }
-
+    
     @keyframes pulse {
       0% {
         transform: scale(1);
         opacity: 0.8;
       }
       70% {
-        transform: scale(2);
+        transform: scale(2.5);
         opacity: 0;
       }
       100% {
@@ -381,301 +203,204 @@
         opacity: 0;
       }
     }
-
-    /* Hero logo */
-    .hero-logo-container {
-      margin-bottom: 20px;
-    }
-
+    
     .hero-logo {
       width: 120px;
       height: auto;
-      animation: logoEntrance 1.5s ease-out forwards;
+      margin-bottom: 1.5rem;
+      animation: fadeIn 1.5s ease forwards;
     }
-
-    @keyframes logoEntrance {
-      0% {
-        opacity: 0;
-        transform: translateY(-30px) rotate(-10deg);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) rotate(0);
-      }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-
+    
     /* Services section */
     .services {
-      padding: 80px 0;
-      background-color: var(--white);
+      background: white;
     }
-
+    
     .section-title {
       text-align: center;
-      font-size: 2.2rem;
-      margin-bottom: 60px;
+      font-size: 2rem;
+      margin-bottom: 3rem;
       position: relative;
     }
-
+    
     .section-title::after {
       content: '';
       position: absolute;
-      width: 80px;
       height: 3px;
-      background-color: var(--primary-color);
-      bottom: -16px;
+      width: 60px;
+      background: var(--primary);
+      bottom: -1rem;
       left: 50%;
       transform: translateX(-50%);
     }
-
+    
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      margin-bottom: 40px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
     }
-
+    
     .service-card {
-      background-color: var(--white);
-      border-radius: var(--border-radius);
-      padding: 30px;
-      box-shadow: var(--box-shadow);
-      transition: var(--transition);
-      border: 1px solid rgba(0, 0, 0, 0.05);
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
     }
-
+    
     .service-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-      border-color: rgba(0, 0, 0, 0.1);
+      box-shadow: 0 10px 15px rgba(0,0,0,0.1);
     }
-
+    
     .service-icon {
-      background-color: rgba(245, 158, 11, 0.1);
-      width: 70px;
-      height: 70px;
+      background: rgba(245, 158, 11, 0.1);
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 1.5rem;
     }
-
-    .service-icon img {
-      width: 35px;
-      height: 35px;
-    }
-
-    .service-card h3 {
-      margin-bottom: 16px;
-      font-size: 1.4rem;
-    }
-
-    .services-cta {
-      text-align: center;
-      margin-top: 40px;
-    }
-
-    /* About preview section */
+    
     .about-preview {
-      padding: 80px 0;
-      background-color: var(--background-color);
+      background: var(--light);
     }
-
+    
     .about-grid {
       display: grid;
-      grid-template-columns: 6fr 4fr;
-      gap: 40px;
+      grid-template-columns: 3fr 2fr;
+      gap: 2rem;
       align-items: center;
     }
-
-    .about-content h2 {
+    
+    .about-content .section-title {
       text-align: left;
-      margin-bottom: 30px;
     }
-
-    .about-content h2::after {
+    
+    .about-content .section-title::after {
       left: 0;
       transform: none;
     }
-
-    .about-content p {
-      margin-bottom: 20px;
-    }
-
-    .about-image {
-      position: relative;
-      height: 100%;
-      min-height: 300px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .watermark-container {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .watermark-logo {
-      width: 200px;
-      height: 200px;
-      opacity: 0.2;
-      animation: logoRotate 20s linear infinite;
-    }
-
-    @keyframes logoRotate {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-
-    /* Testimonials section */
+    
+    /* Testimonials */
     .testimonials {
-      padding: 80px 0;
-      background-color: var(--white);
+      background: white;
     }
-
-    .testimonial-slider {
+    
+    .testimonial {
       max-width: 800px;
       margin: 0 auto;
+      padding: 2rem;
+      background: rgba(245, 158, 11, 0.05);
+      border-radius: 8px;
     }
-
-    .testimonial {
-      padding: 40px;
-      background-color: rgba(245, 158, 11, 0.05);
-      border-radius: var(--border-radius);
-      margin: 0 auto;
-    }
-
+    
     .testimonial-content {
-      font-size: 1.1rem;
       font-style: italic;
-      margin-bottom: 20px;
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
       position: relative;
     }
-
-    .testimonial-content::before {
-      content: '"';
-      font-size: 3rem;
-      position: absolute;
-      top: -20px;
-      left: -10px;
-      color: rgba(245, 158, 11, 0.2);
-      font-family: Georgia, serif;
-    }
-
+    
     .testimonial-author {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
     }
-
-    .testimonial-author .name {
+    
+    .name {
       font-weight: 600;
-      margin-bottom: 0;
     }
-
-    .testimonial-author .position {
-      color: var(--text-light);
+    
+    .position {
+      color: #666;
       font-size: 0.9rem;
-      margin-top: 0;
     }
-
+    
     /* CTA section */
     .cta-section {
-      padding: 80px 0;
-      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-      color: var(--white);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
       text-align: center;
+      color: white;
     }
-
-    .cta-section h2 {
-      font-size: 2.2rem;
-      margin-bottom: 20px;
+    
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 3rem 1rem 1rem;
     }
-
-    .cta-section p {
-      margin-bottom: 40px;
-      max-width: 600px;
+    
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 2rem;
+    }
+    
+    .footer-section {
+      flex: 1;
+      min-width: 250px;
+    }
+    
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    
+    .footer-logo img {
+      margin-right: 0.75rem;
+    }
+    
+    .stealth-note {
+      background: rgba(255,255,255,0.1);
+      padding: 0.5rem 0.75rem;
+      border-radius: 4px;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .lock-icon {
+      margin-right: 0.5rem;
+    }
+    
+    .copyright {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.85rem;
+      opacity: 0.7;
+      max-width: 1200px;
       margin-left: auto;
       margin-right: auto;
     }
-
+    
     /* Responsive design */
     @media (max-width: 768px) {
       .about-grid {
         grid-template-columns: 1fr;
       }
       
-      .about-image {
-        order: -1;
-        min-height: 200px;
-      }
-      
-      .watermark-logo {
-        width: 160px;
-        height: 160px;
-      }
-      
-      .hero h1 {
-        font-size: 2.2rem;
-      }
-      
-      .footer-content {
-        flex-direction: column;
-        gap: 30px;
-      }
-      
-      .services-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .testimonial {
-        padding: 30px 20px;
-      }
-      
-      .menu {
-        gap: 12px;
-      }
-      
-      .menu a {
-        padding: 6px 10px;
-        font-size: 1rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .logo-text {
-        font-size: 1.2rem;
-      }
-      
-      .hero h1 {
-        font-size: 1.8rem;
-      }
-      
-      .hero p {
-        font-size: 1rem;
-      }
-      
-      .section-title {
-        font-size: 1.8rem;
-      }
-      
       .cta-buttons {
         flex-direction: column;
-        gap: 12px;
       }
       
-      .cta-buttons .btn {
-        width: 100%;
+      .hero h1 {
+        font-size: 2rem;
       }
     }
   </style>
@@ -683,72 +408,73 @@
 <body>
   <header>
     <nav>
-      <div class="logo">
-        <a href=".">
-          <img src="images/ai-logo.svg" alt="Anjaneya Innovations" class="logo-image">
-          <span class="logo-text">Anjaneya Innovations</span>
-        </a>
-      </div>
+      <a href="." class="logo">
+        <img src="images/ai-logo.svg" alt="Anjaneya Innovations Logo" class="logo-image">
+        <span>Anjaneya Innovations</span>
+      </a>
       <div class="menu">
         <a href=".">Home</a>
-        <a href="services">Services</a>
-        <a href="about">About</a>
-        <a href="contact">Contact</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
       </div>
     </nav>
   </header>
+  
   <main>
-    <div class="stealth-indicator">
-      <div class="stealth-badge">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="stealth-indicator">
         <span class="stealth-pulse"></span>
         <span>STEALTH MODE</span>
       </div>
-    </div>
-    <section class="hero">
+      
       <div class="hero-content">
-        <div class="hero-logo-container">
-          <img src="images/ai-logo.svg" alt="Anjaneya Innovations" class="hero-logo">
-        </div>
-        <div class="stealth-subtitle">We're building something special</div>
+        <img src="images/ai-logo.svg" alt="Anjaneya Innovations" class="hero-logo">
+        <p style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 1rem;">We're building something special</p>
         <h1>Innovative Solutions for Your Business</h1>
         <p>Anjaneya Innovations LLC provides expert consulting services to help your business thrive in today's competitive market.</p>
         <div class="cta-buttons">
-          <a href="services" class="btn btn-primary">Our Services</a>
-          <a href="contact" class="btn btn-secondary">Contact Us</a>
+          <a href="services.html" class="btn">Our Services</a>
+          <a href="contact.html" class="btn btn-outline">Contact Us</a>
         </div>
       </div>
     </section>
+    
+    <!-- Services Section -->
     <section class="services">
       <div class="container">
         <h2 class="section-title">Our Services</h2>
         <div class="services-grid">
           <div class="service-card">
             <div class="service-icon">
-              <img src="images/consulting-icon.svg" alt="Consulting Services">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
             </div>
             <h3>Business Consulting</h3>
             <p>Strategic guidance to optimize your business operations and increase profitability.</p>
           </div>
           <div class="service-card">
             <div class="service-icon">
-              <img src="images/tech-icon.svg" alt="Technology Services">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
             </div>
             <h3>Technology Solutions</h3>
             <p>Cutting-edge technology implementation to streamline your business processes.</p>
           </div>
           <div class="service-card">
             <div class="service-icon">
-              <img src="images/analytics-icon.svg" alt="Analytics Services">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
             </div>
             <h3>Data Analytics</h3>
             <p>Comprehensive data analysis to drive informed business decisions.</p>
           </div>
         </div>
-        <div class="services-cta">
-          <a href="services" class="btn btn-outline">View All Services</a>
+        <div style="text-align: center; margin-top: 2rem;">
+          <a href="services.html" class="btn btn-outline">View All Services</a>
         </div>
       </div>
     </section>
+    
+    <!-- About Preview Section -->
     <section class="about-preview">
       <div class="container">
         <div class="about-grid">
@@ -756,40 +482,41 @@
             <h2 class="section-title">Who We Are</h2>
             <p>Anjaneya Innovations LLC is a forward-thinking consulting firm dedicated to helping businesses achieve their full potential through innovative solutions and strategic guidance.</p>
             <p>Our team of experts brings years of industry experience to deliver tailored services that address your unique business needs.</p>
-            <a href="about" class="btn btn-text">Learn More About Us <span class="arrow">→</span></a>
+            <a href="about.html" style="color: var(--primary); font-weight: 600; text-decoration: none;">Learn More About Us →</a>
           </div>
-          <div class="about-image">
-            <div class="watermark-container">
-              <img src="images/ai-logo.svg" alt="Anjaneya Innovations" class="watermark-logo">
-            </div>
+          <div style="display: flex; justify-content: center; align-items: center;">
+            <img src="images/ai-logo.svg" alt="Anjaneya Innovations" style="width: 180px; height: auto; opacity: 0.2;">
           </div>
         </div>
       </div>
     </section>
+    
+    <!-- Testimonials Section -->
     <section class="testimonials">
       <div class="container">
         <h2 class="section-title">What Our Clients Say</h2>
-        <div class="testimonial-slider">
-          <div class="testimonial">
-            <div class="testimonial-content">
-              <p>"Anjaneya Innovations transformed our business operations, resulting in a 30% increase in efficiency."</p>
-            </div>
-            <div class="testimonial-author">
-              <p class="name">Jane Smith</p>
-              <p class="position">CEO, Example Company</p>
-            </div>
+        <div class="testimonial">
+          <div class="testimonial-content">
+            <p>"Anjaneya Innovations transformed our business operations, resulting in a 30% increase in efficiency."</p>
+          </div>
+          <div class="testimonial-author">
+            <p class="name">Jane Smith</p>
+            <p class="position">CEO, Example Company</p>
           </div>
         </div>
       </div>
     </section>
+    
+    <!-- CTA Section -->
     <section class="cta-section">
       <div class="container">
         <h2>Ready to Transform Your Business?</h2>
-        <p>Contact us today to discuss how Anjaneya Innovations can help you achieve your business goals.</p>
-        <a href="contact" class="btn btn-primary">Get Started</a>
+        <p style="max-width: 600px; margin: 0 auto 2rem;">Contact us today to discuss how Anjaneya Innovations can help you achieve your business goals.</p>
+        <a href="contact.html" class="btn">Get Started</a>
       </div>
     </section>
   </main>
+  
   <footer>
     <div class="footer-content">
       <div class="footer-section">
