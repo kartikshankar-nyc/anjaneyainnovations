@@ -141,11 +141,15 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
 
   .page-header h1 {
-    font-size: clamp(2.8rem, 5.5vw, 4rem); /* Match global H1 */
+    font-size: clamp(2.8rem, 5.5vw, 4rem); 
     margin-bottom: 0.5rem;
     font-weight: 800;
     color: var(--primary-color);
-    text-shadow: none; /* Remove shadow */
+    text-shadow: none; 
+    /* Add underline */
+    border-bottom: 2px solid var(--accent-color);
+    display: inline-block; /* Center alignment is default */
+    padding-bottom: var(--space-xs);
   }
 
   .page-header p {
@@ -188,9 +192,13 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
 
   .about-content h2 {
-    font-size: clamp(1.8rem, 4vw, 2.2rem); /* Smaller H2 */
-    margin-bottom: var(--space-lg);
-    color: var(--primary-color); /* Light text */
+    font-size: clamp(1.8rem, 4vw, 2.2rem); 
+    margin-bottom: var(--space-lg); 
+    color: var(--primary-color); 
+    /* Add underline */
+    border-bottom: 2px solid var(--accent-color);
+    display: inline-block;
+    padding-bottom: var(--space-xs);
   }
 
   .about-content p {
@@ -275,11 +283,12 @@ import MainLayout from '../layouts/MainLayout.astro';
   .mission h2, .vision h2, 
   .purpose-content h2 {
     font-size: clamp(1.6rem, 3.5vw, 2rem); 
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-md); 
     color: var(--primary-color);
+    /* Ensure underline */
     border-bottom: 2px solid var(--accent-color); 
     display: inline-block; 
-    padding-bottom: var(--space-sm);
+    padding-bottom: var(--space-xs); 
   }
 
   .mission p, .vision p,
@@ -298,14 +307,14 @@ import MainLayout from '../layouts/MainLayout.astro';
   /* Use global section title */
   .section-title {
     font-size: clamp(2.2rem, 5vw, 3rem); 
-    padding-bottom: var(--space-sm); 
-    margin-bottom: calc(var(--space-2xl) - var(--space-sm) - 2px);
+    padding-bottom: var(--space-xs); 
+    margin-bottom: calc(var(--space-2xl) - var(--space-xs) - 2px); 
     text-align: center;
-    color: var(--primary-color); /* Light Text */
+    color: var(--primary-color); 
     font-weight: 800;
-    /* Add underline */
+    /* Ensure underline */
     border-bottom: 2px solid var(--accent-color);
-    display: inline-block; /* Fit underline */
+    display: inline-block; 
   }
 
   .values-grid {
