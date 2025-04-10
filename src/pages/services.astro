@@ -395,7 +395,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     content: "→"; /* Use arrow */
     color: var(--accent-color); /* Cyan arrow */
     font-weight: bold;
-    display: inline-block; 
+    display: inline-block;
     /* Increase width for more space */
     width: 1.5em;
     /* Adjust margin to compensate for width */
@@ -416,7 +416,7 @@ import MainLayout from '../layouts/MainLayout.astro';
   /* Inherit section title from index.astro if possible, or redefine */
   .section-title {
     font-size: clamp(2.2rem, 5vw, 3rem); 
-    margin-bottom: 3rem; 
+    margin-bottom: 3rem;
     text-align: center;
     color: var(--primary-color); /* Light Text */
     font-weight: 800;
@@ -488,7 +488,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     /* Adjust padding */
     padding: var(--space-3xl) var(--space-xl); 
   }
-
+  
   .cta-section::before {
      display: none;
   }
@@ -507,7 +507,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     margin: 0 auto var(--space-xl); 
     color: var(--secondary-color); 
   }
-  
+
   /* Responsive Styles */
   @media (max-width: 768px) {
     /* Collapse to single column on mobile */
@@ -517,7 +517,7 @@ import MainLayout from '../layouts/MainLayout.astro';
             display: none; /* Hide central line */
         }
     }
-    
+
     .service-item {
       grid-template-columns: 1fr; /* Single column */
       margin-bottom: var(--space-xl);
@@ -602,8 +602,8 @@ import MainLayout from '../layouts/MainLayout.astro';
   .section-intro {
       font-size: 1.1rem;
       color: var(--secondary-color);
-      text-align: center;
-      max-width: 800px;
+    text-align: center;
+    max-width: 800px;
       margin: 0 auto var(--space-2xl) auto;
   }
 
