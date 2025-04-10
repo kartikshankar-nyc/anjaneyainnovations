@@ -484,20 +484,21 @@ const currentPath = Astro.url.pathname;
        /* All mobile styles should be within this block */
        nav {
          flex-wrap: wrap; 
-         justify-content: center; 
+         /* Change justification to spread items */
+         justify-content: space-between; 
          gap: var(--space-sm); 
          padding: 0 var(--space-lg);
       }
       
       .menu {
-         order: 3; 
+         /* order: 3; Remove explicit order */
          width: 100%;
          justify-content: center;
          gap: var(--space-md); 
          margin-top: var(--space-sm); 
          /* --- START: Rules previously outside media query --- */
          display: none; /* Hide menu by default on mobile */
-         order: 5; /* Below breadcrumbs if they exist */
+         /* order: 5; Remove explicit order */
          flex-direction: column;
          align-items: center;
          position: absolute; /* Or fixed */
@@ -528,7 +529,7 @@ const currentPath = Astro.url.pathname;
       }
 
       .header-status {
-          order: 2; 
+          /* order: 2; Remove explicit order */
           font-size: 0.8rem;
           padding: 3px 8px;
       }
@@ -541,7 +542,7 @@ const currentPath = Astro.url.pathname;
       /* Show toggle button */
       .mobile-menu-toggle {
           display: block;
-          order: 3; 
+          /* order: 3; Remove explicit order */
           color: var(--accent-color);
       }
       
