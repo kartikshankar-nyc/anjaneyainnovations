@@ -18,6 +18,7 @@ import MainLayout from '../layouts/MainLayout.astro';
       <div class="contact-grid">
         <div class="contact-form-container animate-on-scroll">
           <h2>Send Us a Message</h2>
+          <p class="form-guidance">Reach out to discuss your challenges and explore potential partnerships. Please provide a brief overview of your needs.</p>
           <form class="contact-form" id="contactForm">
             <div class="form-group">
               <label for="name">Your Name</label>
@@ -266,6 +267,12 @@ import MainLayout from '../layouts/MainLayout.astro';
     outline: none;
     border-color: var(--accent-color); /* Cyan focus */
     box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.3); /* Cyan glow */
+  }
+
+  .form-guidance {
+      font-size: 0.95rem;
+      color: var(--secondary-color);
+      margin-bottom: 1.5rem;
   }
 
   /* Define button styles locally */

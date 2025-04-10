@@ -5,8 +5,8 @@ import MainLayout from '../layouts/MainLayout.astro';
 <MainLayout title="About Us - Anjaneya Innovations">
   <section class="page-header">
     <div class="container">
-      <h1>About Us</h1>
-      <p>Learn more about Anjaneya Innovations and our mission</p>
+      <h1>About Anjaneya Innovations</h1>
+      <p>Defining the next generation of technology partnership.</p>
     </div>
   </section>
 
@@ -14,10 +14,9 @@ import MainLayout from '../layouts/MainLayout.astro';
     <div class="container">
       <div class="about-grid">
         <div class="about-content">
-          <h2>Our Story</h2>
-          <p>Anjaneya Innovations was founded with a vision to provide exceptional consulting services that help businesses navigate the complexities of today's market landscape.</p>
-          <p>Named after the Hindu deity Anjaneya (also known as Hanuman), who symbolizes strength, wisdom, and unwavering dedication, our company embodies these values in every service we provide.</p>
-          <p>With a team of experienced professionals and a client-centered approach, we have established ourselves as a trusted partner for businesses seeking innovative solutions to drive growth and achieve their objectives.</p>
+          <h2>Our Approach</h2>
+          <p>Anjaneya Innovations was conceived to redefine technology consulting. We operate as a deeply integrated partner, embedding strategic expertise and elite engineering talent directly within our clients' organizations.</p>
+          <p>Our remote-first model ensures agility and access to global expertise, while our commitment to radical transparency builds trust and alignment. We believe in achieving exceptional outcomes through a principled, client-centric approach.</p>
         </div>
         <div class="about-image">
           <div class="image-placeholder"></div>
@@ -28,15 +27,10 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   <section class="mission-vision animate-on-scroll">
     <div class="container">
-      <div class="mission-vision-grid">
-        <div class="mission">
-          <h2>Our Mission</h2>
-          <p>To empower businesses with innovative strategies and solutions that drive sustainable growth and exceptional performance.</p>
-        </div>
-        <div class="vision">
-          <h2>Our Vision</h2>
-          <p>To be recognized as the leading consulting firm that transforms businesses through innovation, expertise, and unwavering commitment to client success.</p>
-        </div>
+      <div class="purpose-content">
+        <h2>Our Purpose</h2>
+        <p><strong>Mission:</strong> To accelerate our clients' success through transformative technology solutions, delivered with uncompromising quality, speed, and integrity.</p>
+        <p><strong>Vision:</strong> To be the most trusted and impactful technology partner for businesses navigating critical change and pursuing ambitious goals.</p>
       </div>
     </div>
   </section>
@@ -46,23 +40,23 @@ import MainLayout from '../layouts/MainLayout.astro';
       <h2 class="section-title">Our Core Values</h2>
       <div class="values-grid">
         <div class="value-card">
-          <h3>Innovation</h3>
-          <p>We constantly seek creative solutions and stay ahead of industry trends to provide cutting-edge strategies for our clients.</p>
-        </div>
-        
-        <div class="value-card">
           <h3>Integrity</h3>
-          <p>We uphold the highest ethical standards in all our business interactions, building trust and credibility with our clients.</p>
+          <p>Upholding the highest ethical standards. Radical honesty and transparency in every interaction with clients and partners.</p>
         </div>
         
         <div class="value-card">
           <h3>Excellence</h3>
-          <p>We are committed to delivering exceptional quality in every aspect of our services, exceeding client expectations.</p>
+          <p>Commitment to best-in-class engineering, strategic thinking, and delivering exceptional, measurable results.</p>
         </div>
         
         <div class="value-card">
-          <h3>Collaboration</h3>
-          <p>We work closely with our clients, fostering partnerships that lead to shared success and sustainable results.</p>
+          <h3>Partnership</h3>
+          <p>Operating as true partners, fostering collaboration, shared ownership, and mutual success with clients and our internal team.</p>
+        </div>
+        
+        <div class="value-card">
+          <h3>Agility</h3>
+          <p>Embracing a nimble, adaptive approach. Responding quickly to client needs and evolving market dynamics.</p>
         </div>
       </div>
     </div>
@@ -104,8 +98,8 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   <section class="cta-section animate-on-scroll">
     <div class="container">
-      <h2>Ready to Work With Us?</h2>
-      <p>Contact our team today to discuss how we can help your business succeed.</p>
+      <h2>Let's Build the Future Together.</h2>
+      <p>Discover how a partnership with Anjaneya Innovations can transform your business.</p>
       <a href="/contact" class="btn btn-primary">Get in Touch</a>
     </div>
   </section>
@@ -230,25 +224,31 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
 
   .mission-vision-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive */
-    gap: 3rem;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
   }
 
-  .mission h2, .vision h2 {
-    font-size: clamp(1.6rem, 3.5vw, 2rem); /* Smaller H2 */
+  .mission h2, .vision h2, 
+  .purpose-content h2 {
+    font-size: clamp(1.6rem, 3.5vw, 2rem); 
     margin-bottom: 1rem;
     color: var(--primary-color);
-    /* Remove underline - use standard H2 style */
-    /* border-bottom: 2px solid var(--accent-color); */
-    /* display: inline-block; */ 
-    /* padding-bottom: 0.3em; */
+    border-bottom: 2px solid var(--accent-color); 
+    display: inline-block; 
+    padding-bottom: 0.3em;
   }
 
-  .mission p, .vision p {
+  .mission p, .vision p,
+  .purpose-content p {
     font-size: 1rem;
     line-height: 1.7;
     color: var(--secondary-color);
+    margin-bottom: 1rem;
+  }
+  .purpose-content p strong {
+      color: var(--primary-color);
+      font-weight: 700;
   }
 
   /* Values - Dark Mode */
