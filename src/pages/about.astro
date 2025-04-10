@@ -1,5 +1,16 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
+import { getCollection } from 'astro:content';
+
+// Fetch values, sorted by order
+const values = (await getCollection('values')).sort(
+  (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99)
+);
+
+// Fetch team members, sorted by order
+const teamMembers = (await getCollection('team')).sort(
+  (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99)
+);
 ---
 
 <MainLayout title="About Us - Anjaneya Innovations">

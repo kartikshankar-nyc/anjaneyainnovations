@@ -1,21 +1,46 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
+import { getCollection } from 'astro:content';
+
+// Get all insights, sort by newest first
+const insights = (await getCollection('insights')).sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+);
 ---
 
 <MainLayout title="Insights - Anjaneya Innovations">
   <section class="page-header">
     <div class="container">
       <h1>Insights</h1>
-      <p>Perspectives on technology, strategy, leadership, and innovation. Coming soon.</p>
+      <p>Perspectives on technology, strategy, leadership, and innovation.</p>
     </div>
   </section>
 
-  <section class="content-placeholder-section">
+  <section class="insights-list">
     <div class="container">
-        <h2>Building in Stealth</h2>
-        <p>Our team is currently focused on foundational work and key client engagements. We look forward to sharing our insights and expertise publicly in the near future.</p>
-        <p>Stay tuned for articles, case studies, and perspectives on leveraging AI-driven technology for transformative business outcomes.</p>
-        <a href="/contact" class="btn btn-primary">Contact Us</a>
+      {insights.length === 0 ? (
+        <div class="placeholder-message">
+          <h2>Building in Stealth</h2>
+          <p>Our team is currently focused on foundational work and key client engagements. We look forward to sharing our insights and expertise publicly soon.</p>
+          <p>Stay tuned for articles, case studies, and perspectives.</p>
+          <a href="/contact" class="btn btn-primary">Contact Us</a>
+        </div>
+      ) : (
+        <ul class="article-list">
+          {insights.map(insight => (
+            <li class="article-item">
+              <a href={`/insights/${insight.slug}/`} class="article-link">
+                <h2 class="article-title">{insight.data.title}</h2>
+                <p class="article-description">{insight.data.description}</p>
+                <p class="article-meta">
+                  Published on {insight.data.publishDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                  {insight.data.author && <span> by {insight.data.author}</span>}
+                </p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   </section>
 </MainLayout>
@@ -23,7 +48,8 @@ import MainLayout from '../layouts/MainLayout.astro';
 <style>
   /* Use styles consistent with other pages */
   .page-header {
-    background: var(--card-bg-color);
+    /* Remove opaque background */
+    /* background: var(--card-bg-color); */
     color: var(--primary-color);
     padding: var(--space-3xl) var(--space-xl) var(--space-2xl); 
     text-align: center;
@@ -54,13 +80,17 @@ import MainLayout from '../layouts/MainLayout.astro';
     padding: var(--space-3xl) var(--space-xl); 
   }
   
-  .content-placeholder-section {
+  .insights-list {
       background-color: var(--background-color);
-      text-align: center;
-      padding: var(--space-4xl) var(--space-xl);
+      padding: var(--space-2xl) 0; /* Adjust padding */
   }
   
-  .content-placeholder-section h2 {
+  .placeholder-message {
+      text-align: center;
+      padding: var(--space-2xl) 0;
+  }
+  
+  .placeholder-message h2 {
       color: var(--primary-color);
       margin-bottom: var(--space-lg);
       font-size: clamp(1.8rem, 4vw, 2.2rem);
@@ -69,7 +99,7 @@ import MainLayout from '../layouts/MainLayout.astro';
       padding-bottom: var(--space-xs);
   }
   
-  .content-placeholder-section p {
+  .placeholder-message p {
       color: var(--secondary-color);
       max-width: 65ch;
       margin-left: auto;
@@ -77,11 +107,68 @@ import MainLayout from '../layouts/MainLayout.astro';
       margin-bottom: var(--space-lg);
   }
   
-  .content-placeholder-section .btn {
+  .placeholder-message .btn {
       margin-top: var(--space-lg);
   }
   
-  /* Define button styles locally for this page */
+  /* Styles for the article list */
+  .article-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: var(--space-2xl);
+  }
+  
+  .article-item {
+      /* Add styling for list items if needed */
+  }
+  
+  .article-link {
+      display: block;
+      background: var(--card-bg-color);
+      padding: var(--space-xl);
+      border-radius: var(--radius-default);
+      border: 1px solid var(--border-color);
+      text-decoration: none;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  
+  .article-link:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-color);
+      /* Reset inherited text decoration */
+      text-decoration: none; 
+  }
+  
+  .article-title {
+      color: var(--primary-color);
+      font-size: clamp(1.4rem, 3vw, 1.8rem);
+      margin-bottom: var(--space-sm);
+      border-bottom: none; /* No underline for article titles here */
+      font-weight: 700; /* Slightly less bold than main section titles */
+      transition: color 0.2s ease;
+  }
+  
+  .article-link:hover .article-title {
+      color: var(--accent-color);
+  }
+  
+  .article-description {
+      color: var(--secondary-color);
+      margin-bottom: var(--space-md);
+      font-size: 1rem;
+      line-height: 1.6;
+  }
+  
+  .article-meta {
+      font-size: 0.85rem;
+      color: var(--secondary-color);
+      opacity: 0.8;
+      margin-bottom: 0;
+  }
+  
+  /* Define button styles locally for placeholder */
   .btn {
     display: inline-block;
     padding: 0.9rem 2.2rem; 
@@ -121,8 +208,8 @@ import MainLayout from '../layouts/MainLayout.astro';
       .container {
           padding: var(--space-2xl) var(--space-md);
       }
-      .content-placeholder-section {
-          padding: var(--space-3xl) var(--space-xl);
+      .insights-list {
+          padding: var(--space-lg) 0;
       }
   }
   

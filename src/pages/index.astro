@@ -1,5 +1,11 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
+import { getCollection } from 'astro:content';
+
+// Fetch testimonials, sorted by order
+const testimonials = (await getCollection('testimonials')).sort(
+  (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99)
+);
 ---
 
 <MainLayout title="Anjaneya Innovations - Professional Consulting Services">
@@ -65,95 +71,20 @@ import MainLayout from '../layouts/MainLayout.astro';
       <!-- Swiper Container -->
       <div class="swiper testimonial-swiper">
         <div class="swiper-wrapper">
-          <!-- Testimonials as Swiper Slides -->
-          <div class="swiper-slide">
-            <div class="testimonial">
-              <div class="testimonial-content">
-                <p>"Anjaneya Innovations' expertise in AI and cloud architecture was instrumental in modernizing our platform, significantly improving performance and scalability."</p>
-              </div>
-              <div class="testimonial-author">
-                <p class="name">Alex Chen</p>
-                <p class="position">CTO, TechForward Solutions</p>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="testimonial">
-              <div class="testimonial-content">
-                <p>"Their strategic insights and agile approach helped us navigate a complex digital transformation smoothly and under budget. True partners."</p>
-              </div>
-              <div class="testimonial-author">
-                <p class="name">Samantha Bee</p>
-                <p class="position">CEO, Growth Dynamics</p>
+          <!-- Loop through testimonials collection -->
+          {testimonials.map(testimonial => (
+            <div class="swiper-slide">
+              <div class="testimonial">
+                <div class="testimonial-content">
+                  <p>"{testimonial.data.quote}"</p>
+                </div>
+                <div class="testimonial-author">
+                  <p class="name">{testimonial.data.name}</p>
+                  <p class="position">{testimonial.data.position}</p>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="testimonial">
-              <div class="testimonial-content">
-                <p>"The custom software delivered exceeded our expectations, streamlining critical workflows and boosting our team's productivity immensely."</p>
-              </div>
-              <div class="testimonial-author">
-                <p class="name">Raj Patel</p>
-                <p class="position">VP Operations, Global Logistics Inc.</p>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="testimonial">
-              <div class="testimonial-content">
-                <p>"From UX consulting to final UI design, Anjaneya's team demonstrated exceptional skill and a deep understanding of user needs."</p>
-              </div>
-              <div class="testimonial-author">
-                <p class="name">Maria Garcia</p>
-                <p class="position">Head of Product, InnovateApp</p>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="testimonial">
-              <div class="testimonial-content">
-                <p>"Their fractional CTO service provided invaluable leadership during a critical growth phase. Highly recommended for tech strategy."</p>
-              </div>
-              <div class="testimonial-author">
-                <p class="name">David Lee</p>
-                <p class="position">Founder, ScaleUp Ventures</p>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="testimonial">
-              <div class="testimonial-content">
-                <p>"Anjaneya helped us optimize our Salesforce implementation, unlocking data insights we didn't know we had. Measurable ROI."</p>
-              </div>
-              <div class="testimonial-author">
-                <p class="name">Fatima Khan</p>
-                <p class="position">Director of Sales Ops, ConnectSphere</p>
-              </div>
-            </div>
-          </div>
-           <div class="swiper-slide">
-             <div class="testimonial">
-              <div class="testimonial-content">
-                <p>"The AI-driven analytics platform they built gives us a significant competitive edge. Their technical depth is impressive."</p>
-              </div>
-              <div class="testimonial-author">
-                <p class="name">Kenji Tanaka</p>
-                <p class="position">Chief Data Officer, Insightful Corp.</p>
-              </div>
-            </div>
-          </div>
-           <div class="swiper-slide">
-             <div class="testimonial">
-              <div class="testimonial-content">
-                <p>"Navigating our cloud migration seemed daunting, but Anjaneya's team made it seamless and efficient. Fantastic execution."</p>
-              </div>
-              <div class="testimonial-author">
-                <p class="name">Chloe Dubois</p>
-                <p class="position">IT Director, SecureNet Solutions</p>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
         <!-- Add Swiper Navigation Buttons -->
         <div class="swiper-button-prev"></div>

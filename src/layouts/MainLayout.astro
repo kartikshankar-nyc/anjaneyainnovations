@@ -155,20 +155,18 @@ const currentPath = Astro.url.pathname;
   body {
       font-family: var(--font-sans); /* Use Inter */
       color: var(--primary-color); /* Light primary text */
-      /* Make body background transparent */
-      background-color: transparent; 
-      
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+      background-color: transparent; /* Body is transparent, HTML has the dark bg */
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
       line-height: 1.7; /* Increased line height for readability */
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-    /* Prevent horizontal scroll */
-    overflow-x: hidden;
-  }
+      /* Prevent horizontal scroll */
+      overflow-x: hidden;
+    }
 
   h1, h2, h3, h4, h5, h6 {
       font-family: var(--font-sans); /* Use Inter */
@@ -211,21 +209,21 @@ const currentPath = Astro.url.pathname;
     /* Header & Navigation - Dark Mode */
   header {
       background-color: transparent; 
-    position: sticky;
+    position: sticky; /* Keep header visible */
     top: 0;
       z-index: 1000; 
       border-bottom: 1px solid var(--border-color); 
       /* Increase padding slightly */
       padding: 0.9rem 0; 
-      backdrop-filter: blur(8px); 
-      background-color: rgba(17, 24, 39, 0.8); 
+      backdrop-filter: blur(8px); /* Blur content scrolling under */
+      background-color: rgba(17, 24, 39, 0.8); /* Semi-transparent fallback */
 
   }
 
   nav {
     display: flex;
     justify-content: space-between;
-      align-items: baseline;
+      align-items: baseline; /* Align logo text and menu items by baseline */
       /* Adjust horizontal padding */
       padding: 0 var(--space-xl); 
     max-width: var(--max-width);
@@ -244,8 +242,7 @@ const currentPath = Astro.url.pathname;
     }
     
     .logo a {
-      /* Remove positioning context */
-      /* position: relative; */ 
+      position: relative; /* Context for superscript */
       display: inline-block; 
       text-decoration: none;
       /* Ensure link also uses baseline alignment */
@@ -282,17 +279,18 @@ const currentPath = Astro.url.pathname;
       font-size: 0.95rem; 
       padding: 0.5rem 0; 
       transition: color 0.2s ease, transform 0.2s ease;
-      position: relative;
+      position: relative; /* Context for underline pseudo-element */
       letter-spacing: 0.5px;
       display: inline-block; /* Ensure transform works */
     }
     
+    /* Underline pseudo-element */
     .menu a::after {
       content: '';
       position: absolute;
-      width: 0; /* Underline hidden by default */
+      width: 0; /* Hidden by default, width animates on hover/active */
       height: 3px;
-      bottom: -2px; /* Position slightly below text */
+      bottom: -2px; /* Position below text */
       left: 0;
       background-color: var(--accent-color);
       transition: width 0.3s ease; 
@@ -334,10 +332,9 @@ const currentPath = Astro.url.pathname;
        gap: var(--space-sm); 
     }
     
-    /* Add pulsing dot */
+    /* Pulsing dot for status beacon */
     .header-status::before {
         content: '';
-        /* Increase size */
         width: 9px;
         height: 9px;
     background-color: var(--accent-color);
@@ -347,7 +344,7 @@ const currentPath = Astro.url.pathname;
         animation: pulse-beacon 2s infinite cubic-bezier(0.45, 0.05, 0.55, 0.95);
     }
 
-    /* Define the pulse animation */
+    /* Pulse animation definition */
     @keyframes pulse-beacon {
       0% {
         /* Adjust scale/opacity */
@@ -486,28 +483,22 @@ const currentPath = Astro.url.pathname;
 
   /* Responsive */
   @media (max-width: 768px) {
-       /* All mobile styles should be within this block */
+       /* Styles specific to mobile layout */
        nav {
          flex-wrap: wrap; 
-         /* Change justification to spread items */
-         justify-content: space-between; 
+         justify-content: space-between; /* Logo left, Toggle right */
          gap: var(--space-sm); 
          padding: 0 var(--space-lg);
       }
       
     .menu {
-         /* order: 3; Remove explicit order */
-         width: 100%;
-         justify-content: center;
-         gap: var(--space-md); 
-         margin-top: var(--space-sm); 
-         /* --- START: Rules previously outside media query --- */
-         display: none; /* Hide menu by default on mobile */
-         /* order: 5; Remove explicit order */
+         /* Initially hidden on mobile */
+         display: none; 
+         order: 5; /* Display order for flex-wrap */
          flex-direction: column;
          align-items: center;
-         position: absolute; /* Or fixed */
-         top: 100%; /* Position below header */
+         position: absolute; /* Full width dropdown */
+         top: 100%; 
          left: 0;
          width: 100%;
          background-color: var(--background-color); /* Dark bg */
@@ -515,7 +506,6 @@ const currentPath = Astro.url.pathname;
          border-top: 1px solid var(--border-color);
          box-shadow: var(--shadow-medium);
          margin-top: 0;
-         /* --- END: Rules previously outside media query --- */
       }
       
       .menu a {
@@ -544,10 +534,10 @@ const currentPath = Astro.url.pathname;
           text-align: center;
       }
       
-      /* Show toggle button */
+      /* Show toggle button on mobile */
       .mobile-menu-toggle {
           display: block;
-          /* order: 3; Remove explicit order */
+          order: 3; /* Position between status and hidden menu */
           color: var(--accent-color);
       }
       
@@ -564,20 +554,19 @@ const currentPath = Astro.url.pathname;
       font-family: var(--font-sans); 
       font-weight: 700; 
       font-size: 0.85em; /* Keep relative size */
-      position: relative;
-      /* Adjust top position slightly */
-      top: -0.4em; 
-      margin-left: -0.1em; 
+      position: relative; /* Allows fine-tuning with 'top' */
+      top: -0.4em; /* Adjust vertical position */
+      margin-left: -0.1em; /* Pull slightly closer */
     }
 
     /* End Global Button Styles */
 
     /* Scroll Animation Base Styles */
     .animate-on-scroll {
-        opacity: 0;
+        opacity: 0; /* Start hidden */
         /* Only apply transform and transition if motion is okay */
         @media (prefers-reduced-motion: no-preference) {
-            transform: translateY(20px);
+            transform: translateY(20px); /* Start slightly lower */
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
         /* Fallback transition for reduced motion (fade only) */
@@ -585,9 +574,9 @@ const currentPath = Astro.url.pathname;
     }
     
     .animate-on-scroll.is-visible {
-        opacity: 1;
+        opacity: 1; /* Fade in */
         @media (prefers-reduced-motion: no-preference) {
-            transform: translateY(0);
+            transform: translateY(0); /* Move to final position */
         }
     }
 
@@ -669,7 +658,7 @@ const currentPath = Astro.url.pathname;
       height: 100%;
       top: 0;
       left: 0;
-      z-index: -1; /* Place behind all content */
+      z-index: -1; /* Place behind all body content */
   }
 
   /* Set HTML background for iOS overscroll */

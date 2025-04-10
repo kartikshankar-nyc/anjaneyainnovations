@@ -1,5 +1,11 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
+import { getCollection } from 'astro:content';
+
+// Fetch FAQs, sorted by order
+const faqs = (await getCollection('faq')).sort(
+  (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99)
+);
 ---
 
 <MainLayout title="Contact Us - Anjaneya Innovations">
@@ -112,26 +118,15 @@ import MainLayout from '../layouts/MainLayout.astro';
     <div class="container">
       <h2 class="section-title">Frequently Asked Questions</h2>
       <div class="faq-list">
-        <div class="faq-item">
-          <h3 class="faq-question">How do I schedule a consultation?</h3>
-          <div class="faq-answer">
-            <p>You can schedule a consultation by filling out the contact form on this page, emailing us directly, or calling our office during business hours.</p>
-          </div>
-        </div>
-        
-        <div class="faq-item">
-          <h3 class="faq-question">What areas do you serve?</h3>
-          <div class="faq-answer">
-            <p>We provide consulting services both remotely and in-person across the United States. For international clients, we offer virtual consultations.</p>
-          </div>
-        </div>
-        
-        <div class="faq-item">
-          <h3 class="faq-question">How quickly can you start on a new project?</h3>
-          <div class="faq-answer">
-            <p>Our typical onboarding process takes 1-2 weeks from initial consultation to project kickoff, depending on the scope and complexity of your needs.</p>
-          </div>
-        </div>
+        <!-- Loop through faq collection -->
+        {faqs.map(faq => (
+            <div class="faq-item">
+                <h3 class="faq-question">{faq.data.question}</h3>
+                <div class="faq-answer">
+                    <p>{faq.data.answer}</p>
+                </div>
+            </div>
+        ))}
       </div>
     </div>
   </section>

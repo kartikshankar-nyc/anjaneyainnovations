@@ -1,5 +1,11 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
+import { getCollection } from 'astro:content';
+
+// Get all entries from the 'services' collection, sorted by order field
+const services = (await getCollection('services')).sort(
+  (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99)
+);
 ---
 
 <MainLayout title="Our Capabilities - Anjaneya Innovations">
@@ -22,108 +28,21 @@ import MainLayout from '../layouts/MainLayout.astro';
     <div class="container">
       <p class="section-intro">We deliver end-to-end technology solutions, integrating AI and modern engineering practices across core business functions and specialized domains.</p>
       
-      <!-- Service 1: Strategic Transformation -->
-      <div class="service-item animate-on-scroll">
-        <div class="service-content">
-          <h2>Strategic Transformation</h2>
-          <p>We partner with leadership to architect and execute complex organizational turnarounds, drive impactful digital transformation, and foster sustainable growth through optimized structures, processes, and SDLC modernization.</p>
-          <ul class="service-features">
-            <li>Organizational Turnaround</li>
-            <li>Digital Transformation Strategy</li>
-            <li>Change Management</li>
-            <li>Cost Optimization</li>
-            <li>Scaling Results</li>
-            <li>SDLC Transformation</li>
-          </ul>
+      <!-- Loop through services collection -->
+      {services.map(service => (
+        <div class="service-item animate-on-scroll">
+          <div class="service-content">
+            <h2>{service.data.title}</h2>
+            <p>{service.data.description}</p>
+            {service.data.features && service.data.features.length > 0 && (
+              <ul class="service-features">
+                {service.data.features.map(feature => <li>{feature}</li>)}
+              </ul>
+            )}
+          </div>
         </div>
-      </div>
-
-      <!-- Service 2: Technology Leadership & Execution -->
-      <div class="service-item animate-on-scroll">
-        <div class="service-content">
-          <h2>Technology Leadership & Execution</h2>
-          <p>Expert fractional leadership (CTO, CDO, CISO, Chief Architect) and end-to-end custom software development. We modernize legacy systems, design compelling user experiences, architect robust multi-cloud solutions (AWS, Azure, GCP), and implement elite engineering practices—from API strategy to DevSecOps, SRE, and test engineering transformation.</p>
-          <ul class="service-features">
-            <li>Fractional C-Suite Leadership</li>
-            <li>Custom Software Development</li>
-            <li>Cloud Native Architecture (AWS, Azure, GCP)</li>
-            <li>Legacy System Modernization</li>
-            <li>Mobile App Development (iOS & Android)</li>
-            <li>Rapid Prototyping</li>
-            <li>UX Consulting & Strategy</li>
-            <li>End-to-End UI Design</li>
-            <li>API Strategy & Development</li>
-            <li>DevSecOps & SRE Practices</li>
-            <li>Test Engineering Transformation</li>
-            <li>Cybersecurity Strategy & Implementation</li>
-            <li>Rapid Prototyping</li>
-            <li>UX Consulting & Strategy</li>
-            <li>End-to-End UI Design</li>
-            <li>Developer Experience (DevEx / DX) Enhancement</li>
-            <li>Engineering Productivity Improvement</li>
-            <li>Software Intelligence Platform Implementation</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Service 3: Data & AI Solutions -->
-      <div class="service-item animate-on-scroll">
-        <div class="service-content">
-          <h2>Data & AI Solutions</h2>
-          <p>Unlock the power of your data ecosystem. We design and build modern data platforms, implement advanced analytics and business intelligence, and integrate AI/ML to create predictive insights and durable competitive advantages.</p>
-          <ul class="service-features">
-            <li>Data Engineering & Platform Builds</li>
-            <li>Business Intelligence & Analytics</li>
-            <li>Data Visualization & Reporting</li>
-            <li>AI/ML Implementation & Integration</li>
-            <li>Customer & Market Insights</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Service 4: Financial Services Technology -->
-      <div class="service-item animate-on-scroll">
-        <div class="service-content">
-          <h2>Financial Services Technology</h2>
-          <p>Deep domain expertise in architecting and implementing mission-critical technology for the financial sector. We leverage AI for enhanced client intelligence, operational efficiency, and robust solutions across Investment Banking, Wealth Management, and Global Capital Markets.</p>
-          <ul class="service-features">
-            <li>Investment Banking Platforms</li>
-            <li>Wealth Management Technology</li>
-            <li>Global Capital Markets Systems</li>
-            <li>CRM & Client Intelligence (AI-Enhanced)</li>
-            <li>Compliance & Regulatory Tech</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Service 5: Salesforce Implementation & Optimization -->
-      <div class="service-item animate-on-scroll">
-        <div class="service-content">
-          <h2>Salesforce Implementation & Optimization</h2>
-          <p>Maximize CRM effectiveness with end-to-end custom Salesforce implementations. We streamline workflows, integrate enterprise systems, and leverage AI-powered insights to provide actionable client intelligence tailored to your business.</p>
-          <ul class="service-features">
-            <li>Custom Salesforce Development (Apex, LWC)</li>
-            <li>Sales Cloud, Service Cloud, Experience Cloud</li>
-            <li>Integration with Enterprise Systems</li>
-            <li>AI-Powered Insights (Einstein Analytics)</li>
-            <li>Org Optimization & Health Checks</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Service 6: Talent & Team Augmentation -->
-      <div class="service-item animate-on-scroll">
-        <div class="service-content">
-          <h2>Talent & Team Augmentation</h2>
-          <p>Building high-performing technology teams is critical. We assist with strategic hiring, effective team building, and providing specialized engineering talent to augment your capabilities and accelerate critical delivery roadmaps.</p>
-          <ul class="service-features">
-            <li>Strategic Hiring Support</li>
-            <li>Team Building & Development</li>
-            <li>On-Demand Engineering Talent</li>
-            <li>ODC/GCC Setup Guidance</li>
-          </ul>
-        </div>
-      </div>
+      ))}
+      <!-- End loop -->
     </div>
   </section>
 
