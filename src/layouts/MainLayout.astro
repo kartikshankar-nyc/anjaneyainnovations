@@ -459,12 +459,11 @@ const currentPath = Astro.url.pathname;
 
     /* Responsive */
     @media (max-width: 768px) {
-      nav {
+       /* All mobile styles should be within this block */
+       nav {
          flex-wrap: wrap; 
          justify-content: center; 
-         /* Reduce mobile gap further */
          gap: var(--space-sm); 
-         /* Reduce horizontal padding slightly */
          padding: 0 var(--space-lg);
       }
       
@@ -472,41 +471,63 @@ const currentPath = Astro.url.pathname;
          order: 3; 
          width: 100%;
          justify-content: center;
-         /* Reduce mobile menu gap */
          gap: var(--space-md); 
          margin-top: var(--space-sm); 
+         /* --- START: Rules previously outside media query --- */
+         display: none; /* Hide menu by default on mobile */
+         order: 5; /* Below breadcrumbs if they exist */
+         flex-direction: column;
+         align-items: center;
+         position: absolute; /* Or fixed */
+         top: 100%; /* Position below header */
+         left: 0;
+         width: 100%;
+         background-color: var(--background-color); /* Dark bg */
+         padding: var(--space-lg) 0;
+         border-top: 1px solid var(--border-color);
+         box-shadow: var(--shadow-medium);
+         margin-top: 0;
+         /* --- END: Rules previously outside media query --- */
       }
       
       .menu a {
           padding: 0.5rem;
-          /* Ensure default mobile link color */
           color: var(--primary-color);
-          font-weight: 600; // Match default non-active state
+          font-weight: 600; 
       }
       
-      /* Explicitly define active styles for mobile */
       .menu a.is-active {
-          color: var(--accent-color); /* Cyan */
-          font-weight: 700; /* Bolder */
+          color: var(--accent-color); 
+          font-weight: 700; 
       }
 
-      /* Increase mobile logo text size */
       .logo-text {
           font-size: 1.4rem;
       }
-      /* Adjust sup size relative to new logo text size */
-      /* The sup size uses 'em', so it should adjust automatically */
 
       .header-status {
-          order: 2; /* Status after logo */
+          order: 2; 
           font-size: 0.8rem;
           padding: 3px 8px;
       }
 
       .footer-content {
-          grid-template-columns: 1fr; /* Stack footer sections */
+          grid-template-columns: 1fr; 
           text-align: center;
       }
+      
+      /* Show toggle button */
+      .mobile-menu-toggle {
+          display: block;
+          order: 3; 
+          color: var(--accent-color);
+      }
+      
+      /* Style for open mobile menu */
+      .menu.is-open {
+          display: flex;
+      }
+      /* Closing brace for the media query */
     }
 
     /* Style the sup AI */
@@ -605,9 +626,9 @@ const currentPath = Astro.url.pathname;
         box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.3); /* Optional glow */
     }
 
-    /* Mobile Menu Styles */
+    /* Mobile Menu Styles (Base - Hidden) */
     .mobile-menu-toggle {
-        display: none; /* Hidden by default */
+        display: none; /* Hidden by default on desktop */
         background: none;
         border: none;
         padding: var(--space-sm);
@@ -626,54 +647,6 @@ const currentPath = Astro.url.pathname;
     }
     .mobile-menu-toggle[aria-expanded="true"] .icon-close {
         display: block;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-        gap: var(--space-md); 
-    }
-    
-    /* Show toggle button, hide desktop menu initially */
-    .mobile-menu-toggle {
-        display: block;
-        order: 3; /* Place after status */
-        /* Use accent color for better visibility */
-        color: var(--accent-color);
-    }
-    
-    .menu {
-       display: none; /* Hide menu by default on mobile */
-       order: 5; /* Below breadcrumbs if they exist */
-       flex-direction: column;
-       align-items: center;
-       position: absolute; /* Or fixed */
-       top: 100%; /* Position below header */
-       left: 0;
-       width: 100%;
-       background-color: var(--background-color); /* Dark bg */
-       padding: var(--space-lg) 0;
-       border-top: 1px solid var(--border-color);
-       box-shadow: var(--shadow-medium);
-       /* Reset some desktop styles */
-       margin-top: 0;
-    }
-    
-    /* Style for open mobile menu */
-    .menu.is-open {
-        display: flex;
-    }
-    
-    .menu a {
-        padding: 0.5rem;
-        /* Ensure default mobile link color */
-        color: var(--primary-color);
-        font-weight: 600; // Match default non-active state
-    }
-    
-    /* Explicitly define active styles for mobile */
-    .menu a.is-active {
-        color: var(--accent-color); /* Cyan */
-        font-weight: 700; /* Bolder */
     }
   </style> 
 
