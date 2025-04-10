@@ -49,9 +49,12 @@ import MainLayout from '../layouts/MainLayout.astro';
           <p>Our team of experts brings years of industry experience to deliver tailored services that address your unique business needs.</p>
           <a href="/about" class="btn btn-text">Learn More About Us <span class="arrow">→</span></a>
         </div>
+        <!-- Remove about-image div -->
+        <!-- 
         <div class="about-image">
           <div class="image-placeholder-graphic"></div>
         </div>
+         -->
       </div>
     </div>
   </section>
@@ -59,16 +62,87 @@ import MainLayout from '../layouts/MainLayout.astro';
   <section class="testimonials animate-on-scroll">
     <div class="container">
       <h2 class="section-title">What Our Clients Say</h2>
-      <div class="testimonial-slider">
-        <div class="testimonial">
-          <div class="testimonial-content">
-            <p>"Anjaneya Innovations transformed our business operations, resulting in a 30% increase in efficiency."</p>
+      <!-- Add container and controls -->
+      <div class="testimonial-slider-container">
+        <div class="testimonial-slider">
+          <!-- Original Testimonial -->
+          <div class="testimonial" data-index="0">
+            <div class="testimonial-content">
+              <p>"Anjaneya Innovations' expertise in AI and cloud architecture was instrumental in modernizing our platform, significantly improving performance and scalability."</p>
+            </div>
+            <div class="testimonial-author">
+              <p class="name">Alex Chen</p>
+              <p class="position">CTO, TechForward Solutions</p>
+            </div>
           </div>
-          <div class="testimonial-author">
-            <p class="name">Jane Smith</p>
-            <p class="position">CEO, Example Company</p>
+          <!-- Draft Testimonials -->
+          <div class="testimonial" data-index="1">
+            <div class="testimonial-content">
+              <p>"Their strategic insights and agile approach helped us navigate a complex digital transformation smoothly and under budget. True partners."</p>
+            </div>
+            <div class="testimonial-author">
+              <p class="name">Samantha Bee</p>
+              <p class="position">CEO, Growth Dynamics</p>
+            </div>
+          </div>
+          <div class="testimonial" data-index="2">
+            <div class="testimonial-content">
+              <p>"The custom software delivered exceeded our expectations, streamlining critical workflows and boosting our team's productivity immensely."</p>
+            </div>
+            <div class="testimonial-author">
+              <p class="name">Raj Patel</p>
+              <p class="position">VP Operations, Global Logistics Inc.</p>
+            </div>
+          </div>
+          <div class="testimonial" data-index="3">
+            <div class="testimonial-content">
+              <p>"From UX consulting to final UI design, Anjaneya's team demonstrated exceptional skill and a deep understanding of user needs."</p>
+            </div>
+            <div class="testimonial-author">
+              <p class="name">Maria Garcia</p>
+              <p class="position">Head of Product, InnovateApp</p>
+            </div>
+          </div>
+          <div class="testimonial" data-index="4">
+            <div class="testimonial-content">
+              <p>"Their fractional CTO service provided invaluable leadership during a critical growth phase. Highly recommended for tech strategy."</p>
+            </div>
+            <div class="testimonial-author">
+              <p class="name">David Lee</p>
+              <p class="position">Founder, ScaleUp Ventures</p>
+            </div>
+          </div>
+          <div class="testimonial" data-index="5">
+            <div class="testimonial-content">
+              <p>"Anjaneya helped us optimize our Salesforce implementation, unlocking data insights we didn't know we had. Measurable ROI."</p>
+            </div>
+            <div class="testimonial-author">
+              <p class="name">Fatima Khan</p>
+              <p class="position">Director of Sales Ops, ConnectSphere</p>
+            </div>
+          </div>
+           <div class="testimonial" data-index="6">
+            <div class="testimonial-content">
+              <p>"The AI-driven analytics platform they built gives us a significant competitive edge. Their technical depth is impressive."</p>
+            </div>
+            <div class="testimonial-author">
+              <p class="name">Kenji Tanaka</p>
+              <p class="position">Chief Data Officer, Insightful Corp.</p>
+            </div>
+          </div>
+           <div class="testimonial" data-index="7">
+            <div class="testimonial-content">
+              <p>"Navigating our cloud migration seemed daunting, but Anjaneya's team made it seamless and efficient. Fantastic execution."</p>
+            </div>
+            <div class="testimonial-author">
+              <p class="name">Chloe Dubois</p>
+              <p class="position">IT Director, SecureNet Solutions</p>
+            </div>
           </div>
         </div>
+        <!-- Add Buttons -->
+        <button class="slider-btn prev" aria-label="Previous Testimonial">&lt;</button>
+        <button class="slider-btn next" aria-label="Next Testimonial">&gt;</button>
       </div>
     </div>
   </section>
@@ -270,14 +344,16 @@ import MainLayout from '../layouts/MainLayout.astro';
     font-size: clamp(2.2rem, 5vw, 3rem); 
     padding-bottom: var(--space-sm); 
     margin-bottom: calc(var(--space-2xl) - var(--space-sm) - 2px); 
-    text-align: center;
-    color: var(--primary-color); /* Light Text */
+    /* --- Ensure Left Alignment --- */
+    text-align: left; 
+    color: var(--primary-color); 
     font-weight: 800;
-    /* Add underline */
     border-bottom: 2px solid var(--accent-color);
-    display: inline-block; /* Fit underline */
-    padding-bottom: 0.3em;
-    margin-bottom: calc(3rem - 0.3em - 2px); /* Adjust margin */
+    display: block; /* Default, but explicit */
+    /* --- Remove Conflicting Alignment Styles --- */
+    /* width: fit-content; */
+    /* margin-left: 0; */ 
+    /* margin-right: auto; */ 
   }
 
   .container {
@@ -353,8 +429,9 @@ import MainLayout from '../layouts/MainLayout.astro';
   
   .about-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-    gap: var(--space-2xl); 
+    /* Change to single column */
+    grid-template-columns: 1fr; 
+    gap: 0; /* Remove gap */
     align-items: center;
   }
 
@@ -364,46 +441,25 @@ import MainLayout from '../layouts/MainLayout.astro';
     font-size: 1rem;
   }
   
+  /* Remove specific override - ensure commented out */
+  /* 
   .about-content .section-title {
      text-align: left; 
      padding-bottom: var(--space-sm);
      margin-bottom: calc(var(--space-lg) - var(--space-sm) - 2px);
      border-bottom: 2px solid var(--accent-color);
-     display: inline-block; /* Fit underline */
-     padding-bottom: 0.3em;
-     margin-bottom: calc(1.5rem - 0.3em - 2px); /* Adjust margin */
+     display: block; 
+     width: fit-content; 
+     margin-left: 0; 
   }
-  
-  .about-image {
-      /* Use card bg for placeholder area */
-      background-color: var(--card-bg-color); 
-      border-radius: var(--radius-default);
-      min-height: 300px; 
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      border: 1px solid var(--border-color);
-  }
-  
-  /* Style the placeholder */
-  .image-placeholder-graphic {
-     width: 100px;
-     height: 100px;
-     border: 2px dashed var(--border-color);
-     border-radius: 50%;
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     color: var(--border-color);
-     font-size: 2rem;
-     font-weight: bold;
-     opacity: 0.5; /* Make placeholder more subtle */
-  }
-  .image-placeholder-graphic::after {
-     content: '+'; /* Simple placeholder symbol */
-  }
+  */
+
+  /* Remove about-image and placeholder styles */
+  /*
+  .about-image { ... }
+  .image-placeholder-graphic { ... }
+  .image-placeholder-graphic::after { ... }
+  */
 
   /* Testimonials Section - Dark Mode */
   .testimonials {
@@ -418,14 +474,12 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
 
   .testimonial {
-    background: var(--card-bg-color); /* Use gradient */
+    background: var(--card-bg-color); 
     padding: var(--space-xl) var(--space-2xl); 
     border-radius: var(--radius-default);
     border: 1px solid var(--border-color); 
-    margin: 0 auto;
     position: relative; 
-    box-shadow: none; /* Remove shadow */
-    /* Add transition */
+    box-shadow: none; 
     transition: transform 0.3s ease, border-color 0.3s ease;
   }
   
@@ -452,10 +506,87 @@ import MainLayout from '../layouts/MainLayout.astro';
     font-size: 0.9rem;
   }
   
-  /* Testimonial Slider Styles (If applicable) */
-  .testimonial-slider {
-     /* Add styles for slider controls if implemented */
+  /* Testimonial Slider Styles */
+  .testimonial-slider-container {
+      position: relative;
+      /* Remove horizontal padding */
+      /* padding: 0 var(--space-3xl); */ 
+      padding: 0; /* Set padding to 0 */
   }
+
+  .testimonial-slider {
+      position: relative;
+      /* overflow: hidden; Remove this to prevent border clipping */
+      width: 100%;
+      /* Height is set dynamically by JS */
+  }
+  
+  /* Style the active testimonial */
+  .testimonial {
+      background: var(--card-bg-color); 
+      padding: var(--space-xl) var(--space-2xl); 
+      border-radius: var(--radius-default);
+      border: 1px solid var(--border-color); 
+      position: relative; 
+      box-shadow: none; 
+      transition: opacity 0.5s ease-in-out; /* Fade transition */
+      opacity: 1;
+      display: block; /* Ensure block display */
+  }
+  
+  .testimonial[style*="display: none"] {
+      opacity: 0; /* Start faded out */
+      position: absolute; /* Allow stacking */
+      top: 0;
+      left: 0;
+      width: 100%;
+      pointer-events: none; /* Prevent interaction when hidden */
+  }
+  
+  /* Slider Buttons */
+  .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(31, 41, 55, 0.6); /* Semi-transparent card bg */
+      color: var(--primary-color);
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      z-index: 10;
+  }
+  
+  .slider-btn:hover {
+      background-color: var(--accent-color);
+      color: var(--text-on-light);
+      border-color: var(--accent-color);
+  }
+  
+  .slider-btn.prev {
+      /* Adjust positioning */
+      left: -15px; 
+  }
+  
+  .slider-btn.next {
+      /* Adjust positioning */
+      right: -15px;
+  }
+
+  /* Remove specific override - ensure commented out */
+  /* 
+  section.testimonials .container > h2.section-title {
+    text-align: left;
+    display: block; 
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: var(--space-sm);
+    margin-bottom: calc(var(--space-2xl) - var(--space-sm) - 2px);
+  }
+  */
 
   /* CTA Section - Dark Mode */
   .cta-section {
@@ -506,11 +637,21 @@ import MainLayout from '../layouts/MainLayout.astro';
 
 
   /* Responsive Styles */
-  @media (max-width: 992px) { /* Add breakpoint for tablets */
-      .hero h1 { font-size: 2.5rem; }
-      .hero p { font-size: 1.1rem; max-width: 90%; }
-      .section-title { font-size: 1.8rem; }
-      .container { padding: var(--space-2xl) var(--space-lg); } /* Adjust tablet padding */
+  @media (max-width: 992px) {
+    .hero h1 { font-size: 2.5rem; }
+    .hero p { font-size: 1.1rem; max-width: 90%; }
+    .section-title { font-size: 1.8rem; }
+    .container { padding: var(--space-2xl) var(--space-lg); } /* Adjust tablet padding */
+    /* Adjust slider container padding for tablet */
+    .testimonial-slider-container {
+        padding: 0 var(--space-xl); /* Less padding for buttons */
+    }
+    .slider-btn.prev {
+        left: -10px; 
+    }
+    .slider-btn.next {
+        right: -10px;
+    }
   }
   
   
@@ -568,6 +709,22 @@ import MainLayout from '../layouts/MainLayout.astro';
     
     .cta-section p {
         font-size: 1rem;
+    }
+    /* Adjust slider container padding for mobile */
+    .testimonial-slider-container {
+        padding: 0 var(--space-lg); /* Even less padding */
+    }
+    .slider-btn {
+        /* Make buttons smaller on mobile */
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
+    }
+    .slider-btn.prev {
+        left: -5px; 
+    }
+    .slider-btn.next {
+        right: -5px;
     }
   }
 </style>

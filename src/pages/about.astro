@@ -19,11 +19,13 @@ import MainLayout from '../layouts/MainLayout.astro';
           <p><strong>While in stealth, we are dedicated to refining our unique methodologies and establishing foundational client partnerships.</strong></p>
           <p>Our remote-first model ensures agility and global expertise, while radical transparency builds trust and alignment. We achieve exceptional, data-driven outcomes through a principled, client-centric approach.</p>
         </div>
+        <!-- Remove about-image div -->
+        <!-- 
         <div class="about-image">
           <div class="image-placeholder">
-            <!-- Remove leftover SVG icon -->
           </div>
         </div>
+         -->
       </div>
     </div>
   </section>
@@ -177,8 +179,9 @@ import MainLayout from '../layouts/MainLayout.astro';
   /* About Intro - Dark Mode */
   .about-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive */
-    gap: var(--space-2xl);
+    /* Change to single column */
+    grid-template-columns: 1fr;
+    gap: 0; /* Remove gap */
     align-items: center;
   }
 

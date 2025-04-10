@@ -80,6 +80,115 @@ document.addEventListener('DOMContentLoaded', () => {
   // Call setup functions that depend on DOM being ready, but can run after load
   setupMobileMenu();
 
+  // --- Testimonial Carousel Logic --- 
+  const sliderContainer = document.querySelector('.testimonial-slider-container');
+  if (sliderContainer) {
+    const testimonials = sliderContainer.querySelectorAll('.testimonial');
+    const prevBtn = sliderContainer.querySelector('.slider-btn.prev');
+    const nextBtn = sliderContainer.querySelector('.slider-btn.next');
+    const slider = sliderContainer.querySelector('.testimonial-slider'); // Get slider element
+    let currentIndex = 0;
+    let intervalId = null;
+    const totalTestimonials = testimonials.length;
+    const slideInterval = 7000; // Time in ms for auto-slide
+
+    function showTestimonial(index) {
+      testimonials.forEach((testimonial, i) => {
+        // Ensure the element exists and has style property
+        if (testimonial && testimonial.style) {
+            if (i === index) {
+                testimonial.style.position = ''; // Let it occupy space
+                testimonial.style.opacity = '1';
+                testimonial.style.pointerEvents = 'auto';
+            } else {
+                testimonial.style.opacity = '0';
+                testimonial.style.position = 'absolute'; // Stack hidden ones
+                testimonial.style.pointerEvents = 'none';
+                // REMOVE setting display: none
+                // testimonial.style.display = 'none'; 
+            }
+        } else {
+            console.error('Testimonial element or style property not found for index:', i);
+        }
+      });
+    }
+
+    // Function to set slider height based on tallest item
+    function setSliderHeight() {
+        let maxHeight = 0;
+        testimonials.forEach(testimonial => {
+            // Temporarily display to measure height accurately
+            const originalDisplay = testimonial.style.display;
+            testimonial.style.position = 'absolute'; // Avoid affecting flow
+            testimonial.style.visibility = 'hidden';
+            testimonial.style.display = 'block';
+            
+            maxHeight = Math.max(maxHeight, testimonial.offsetHeight);
+            
+            // Restore original display style (respecting initial setup)
+            testimonial.style.position = ''; 
+            testimonial.style.visibility = '';
+            testimonial.style.display = originalDisplay;
+        });
+        
+        if (slider && maxHeight > 0) {
+            slider.style.height = `${maxHeight}px`;
+            console.log(`Set slider height to: ${maxHeight}px`);
+        }
+    }
+
+    function nextTestimonial() {
+      currentIndex = (currentIndex + 1) % totalTestimonials;
+      showTestimonial(currentIndex);
+    }
+
+    function prevTestimonial() {
+      currentIndex = (currentIndex - 1 + totalTestimonials) % totalTestimonials;
+      showTestimonial(currentIndex);
+    }
+
+    function startAutoSlide() {
+        // Clear existing interval if any
+        if (intervalId) clearInterval(intervalId);
+        intervalId = setInterval(nextTestimonial, slideInterval);
+    }
+
+    function stopAutoSlide() {
+        if (intervalId) clearInterval(intervalId);
+    }
+
+    if (totalTestimonials > 1) { // Only enable controls if more than one
+        nextBtn.addEventListener('click', () => {
+            nextTestimonial();
+            stopAutoSlide(); // Stop auto-slide on manual interaction
+            // Optional: Restart after a delay
+            // setTimeout(startAutoSlide, slideInterval * 2);
+        });
+
+        prevBtn.addEventListener('click', () => {
+            prevTestimonial();
+            stopAutoSlide(); // Stop auto-slide on manual interaction
+            // Optional: Restart after a delay
+            // setTimeout(startAutoSlide, slideInterval * 2);
+        });
+
+        // Pause on hover
+        sliderContainer.addEventListener('mouseenter', stopAutoSlide);
+        sliderContainer.addEventListener('mouseleave', startAutoSlide);
+        
+        // Initial setup
+        setSliderHeight(); // Set height before showing first slide
+        window.addEventListener('resize', setSliderHeight); // Recalculate on resize
+        showTestimonial(currentIndex); 
+        startAutoSlide(); 
+    } else {
+        // Hide buttons if only one testimonial
+        if(prevBtn) prevBtn.style.display = 'none';
+        if(nextBtn) nextBtn.style.display = 'none';
+    }
+  }
+  // --- End Testimonial Carousel --- 
+
   // --- Intersection Observer for Scroll Animations --- 
   const animatedElements = document.querySelectorAll('.animate-on-scroll');
   // console.log("Found elements to animate:", animatedElements.length); 

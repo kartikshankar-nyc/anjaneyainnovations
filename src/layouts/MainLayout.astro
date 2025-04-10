@@ -183,13 +183,17 @@ const currentPath = Astro.url.pathname;
     a {
       color: var(--accent-color); 
       text-decoration: underline;
-      text-decoration-color: transparent; /* Hide underline by default */
-      transition: color 0.2s ease, text-decoration-color 0.2s ease;
+      text-decoration-color: transparent; 
+      /* Add transform to transition */
+      transition: color 0.2s ease, text-decoration-color 0.2s ease, transform 0.2s ease;
+      display: inline-block; /* Needed for transform */
     }
     
     a:hover {
       color: #67E8F9;
-      text-decoration-color: #67E8F9; /* Show underline on hover */
+      text-decoration-color: #67E8F9; 
+      /* Add slight rightward movement */
+      transform: translateX(3px);
     }
 
     /* Header & Navigation - Dark Mode */
@@ -260,44 +264,50 @@ const currentPath = Astro.url.pathname;
 
     .menu a {
       color: var(--primary-color); /* Light menu links */
+      /* Remove base underline styles */
       text-decoration: none;
-      font-weight: 600; /* Semi-bold Inter */
+      /* text-decoration-color: transparent; */ 
+      font-weight: 600; 
       font-size: 0.9rem;
-      padding: 0.5rem 0; /* Only vertical padding */
-      transition: color 0.2s ease;
+      padding: 0.5rem 0; 
+      /* Adjust transition for color/transform only */
+      transition: color 0.2s ease, transform 0.2s ease;
       position: relative;
       letter-spacing: 0.5px;
+      display: inline-block; /* Ensure transform works */
     }
     
     .menu a::after {
       content: '';
       position: absolute;
-      width: 0;
-      /* Make slightly thicker */
+      width: 0; /* Underline hidden by default */
       height: 3px;
-      bottom: 0px; 
+      bottom: -2px; /* Position slightly below text */
       left: 0;
-      /* Set underline color to ACCENT */
       background-color: var(--accent-color);
-      transition: width 0.3s ease; /* Keep width transition */
+      transition: width 0.3s ease; 
     }
 
     .menu a:hover {
-      /* Keep text light, rely on thicker underline */
-      color: var(--primary-color);
+      /* Change text color to ACCENT on hover */
+      color: var(--accent-color);
+      /* Inherits transform: translateX(3px) from general a:hover */
+    }
+    
+    .menu a:hover::after {
+        /* Make underline appear on hover */
+        width: 100%; 
     }
     
     /* Style for the active menu link */
     .menu a.is-active {
-        color: var(--accent-color); /* Use accent color */
-        font-weight: 700; /* Make slightly bolder */
+        color: var(--accent-color); /* Keep accent color */
+        font-weight: 700; 
     }
-    /* Keep underline hidden by default for active link unless hovered */
+    
+    /* Make underline always visible for active link */
     .menu a.is-active::after {
-        width: 0;
-    }
-    .menu a.is-active:hover::after {
-        width: 100%; /* Show underline on hover */
+        width: 100%;
     }
 
     .header-status {
@@ -400,11 +410,13 @@ const currentPath = Astro.url.pathname;
         text-decoration-color: transparent;
         transition: color 0.2s ease, text-decoration-color 0.2s ease;
     }
+    /* Remove specific footer hover, rely on global a:hover */
+    /* 
     .footer-section a:hover {
         color: #67E8F9;
-        /* Show underline on hover */
         text-decoration-color: #67E8F9;
     }
+    */
 
     /* Footer specific elements */
     .logo-text-footer {
