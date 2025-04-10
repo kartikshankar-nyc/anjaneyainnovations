@@ -200,12 +200,10 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   /* Hero Section - Dark Mode */
   .hero {
-    /* Remove static background */
-    /* background: var(--background-color); */
-    /* Apply animated gradient */
-    background: linear-gradient(-45deg, #111827, #1F2937, #111827, #1a2330);
-    background-size: 400% 400%;
-    animation: gradientShift 25s ease infinite; 
+    /* Remove background - let body bg show through */
+    /* background: linear-gradient(...); */
+    /* background-size: 400% 400%; */
+    /* animation: gradientShift 25s ease infinite; */
     
     color: var(--primary-color); 
     padding: var(--space-4xl) var(--space-xl) var(--space-3xl); 
@@ -375,18 +373,18 @@ import MainLayout from '../layouts/MainLayout.astro';
     padding: var(--space-3xl) var(--space-xl); 
   }
   
-  /* Alternating Section Backgrounds - Dark Mode */
+  /* Alternating Section Backgrounds - REMOVE */
+  /* 
   section:nth-of-type(even) {
-     background-color: var(--background-color); /* Darkest */
+     background-color: var(--background-color); 
   }
-  
   section:nth-of-type(odd) {
-     background-color: var(--card-bg-color); /* Lighter dark */
+     background-color: var(--card-bg-color); 
   }
-  
   section.hero, section.cta-section {
-      background-color: var(--background-color); /* Ensure these are darkest */
+      background-color: var(--background-color); 
   }
+  */
 
 
   /* Services Section - Dark Mode */
@@ -603,9 +601,9 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   /* CTA Section - Dark Mode */
   .cta-section {
-    /* Use card background for contrast? Or keep darkest? */
-    background: var(--background-color); 
-    color: var(--primary-color); /* Light text */
+    /* Remove background - let body bg show through */
+    /* background: var(--background-color); */ 
+    color: var(--primary-color); 
     text-align: center;
     position: relative;
     overflow: hidden;
