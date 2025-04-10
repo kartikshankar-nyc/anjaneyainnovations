@@ -179,15 +179,15 @@ const currentPath = Astro.url.pathname;
     }
 
     a {
-      /* Use Cyan accent for links */
       color: var(--accent-color); 
-      text-decoration: none;
-      transition: color 0.2s ease;
+      text-decoration: underline;
+      text-decoration-color: transparent; /* Hide underline by default */
+      transition: color 0.2s ease, text-decoration-color 0.2s ease;
     }
     
     a:hover {
-      /* Lighten cyan slightly on hover */
       color: #67E8F9;
+      text-decoration-color: #67E8F9; /* Show underline on hover */
     }
 
     /* Header & Navigation - Dark Mode */
@@ -271,8 +271,9 @@ const currentPath = Astro.url.pathname;
       content: '';
       position: absolute;
       width: 0;
-      height: 2px;
-      bottom: 0px; /* Position underline right below */
+      /* Make slightly thicker */
+      height: 3px;
+      bottom: 0px; 
       left: 0;
       /* Set underline color to ACCENT */
       background-color: var(--accent-color);
@@ -280,8 +281,8 @@ const currentPath = Astro.url.pathname;
     }
 
     .menu a:hover {
-      /* Set text color to ACCENT on hover */
-      color: var(--accent-color);
+      /* Keep text light, rely on thicker underline */
+      color: var(--primary-color);
     }
     
     /* Style for the active menu link */
@@ -390,13 +391,17 @@ const currentPath = Astro.url.pathname;
     
     .footer-section a {
         display: block;
-        /* Adjust margin */
         margin-bottom: var(--space-sm); 
-        color: var(--accent-color); /* Default: Main Cyan */
+        color: var(--accent-color); 
+        /* Add underline effect */
+        text-decoration: underline;
+        text-decoration-color: transparent;
+        transition: color 0.2s ease, text-decoration-color 0.2s ease;
     }
     .footer-section a:hover {
-        /* Ensure hover color is lighter cyan */
         color: #67E8F9;
+        /* Show underline on hover */
+        text-decoration-color: #67E8F9;
     }
 
     /* Footer specific elements */
