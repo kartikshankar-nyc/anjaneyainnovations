@@ -1,0 +1,123 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+
+<MainLayout title="Insights - Anjaneya Innovations">
+  <section class="page-header">
+    <div class="container">
+      <h1>Insights</h1>
+      <p>Perspectives on technology, strategy, leadership, and innovation. Coming soon.</p>
+    </div>
+  </section>
+
+  <section class="content-placeholder-section">
+    <div class="container">
+        <h2>Building in Stealth</h2>
+        <p>Our team is currently focused on foundational work and key client engagements. We look forward to sharing our insights and expertise publicly in the near future.</p>
+        <p>Stay tuned for articles, case studies, and perspectives on leveraging AI-driven technology for transformative business outcomes.</p>
+        <a href="/contact" class="btn btn-primary">Contact Us</a>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  /* Use styles consistent with other pages */
+  .page-header {
+    background: var(--card-bg-color);
+    color: var(--primary-color);
+    padding: var(--space-3xl) var(--space-xl) var(--space-2xl); 
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .page-header h1 {
+    font-size: clamp(2.8rem, 5.5vw, 4rem); 
+    margin-bottom: 0.5rem;
+    font-weight: 800;
+    color: var(--primary-color);
+  }
+
+  .page-header p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto;
+    font-weight: 400; 
+    color: var(--secondary-color);
+  }
+
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--space-3xl) var(--space-xl); 
+  }
+  
+  .content-placeholder-section {
+      background-color: var(--background-color);
+      text-align: center;
+      padding: var(--space-4xl) var(--space-xl);
+  }
+  
+  .content-placeholder-section h2 {
+      color: var(--primary-color);
+      margin-bottom: var(--space-lg);
+      font-size: clamp(1.8rem, 4vw, 2.2rem);
+  }
+  
+  .content-placeholder-section p {
+      color: var(--secondary-color);
+      max-width: 65ch;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: var(--space-lg);
+  }
+  
+  .content-placeholder-section .btn {
+      margin-top: var(--space-lg);
+  }
+  
+  /* Define button styles locally for this page */
+  .btn {
+    display: inline-block;
+    padding: 0.9rem 2.2rem; 
+    border-radius: var(--radius-default); 
+    text-decoration: none;
+    font-family: var(--font-sans);
+    font-weight: 800; 
+    font-size: 0.9rem;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-transform: uppercase; 
+  }
+
+  .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1); 
+  }
+
+  .btn-primary {
+    /* Default: Dark bg, light text, accent border */
+    background-color: var(--card-bg-color);
+    color: var(--primary-color);
+    border-color: var(--accent-color);
+  }
+
+  .btn-primary:hover {
+    /* Hover: Cyan bg, dark text */
+    background-color: var(--accent-color); 
+    border-color: var(--accent-color);
+    color: var(--text-on-light);
+  }
+
+  @media (max-width: 768px) {
+      .container {
+          padding: var(--space-2xl) var(--space-md);
+      }
+      .content-placeholder-section {
+          padding: var(--space-3xl) var(--space-xl);
+      }
+  }
+  
+</style> 

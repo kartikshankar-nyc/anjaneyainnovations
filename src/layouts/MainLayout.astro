@@ -51,6 +51,7 @@ const currentPath = Astro.url.pathname;
         <a href="/" class:list={[ { 'is-active': currentPath === '/' } ]}>Home</a>
         <a href="/services" class:list={[ { 'is-active': currentPath === '/services' || currentPath.startsWith('/services/') } ]}>Services</a>
         <a href="/about" class:list={[ { 'is-active': currentPath === '/about' } ]}>About</a>
+        <a href="/insights" class:list={[ { 'is-active': currentPath === '/insights' || currentPath.startsWith('/insights/') } ]}>Insights</a>
         <a href="/contact" class:list={[ { 'is-active': currentPath === '/contact' } ]}>Contact</a>
       </div>
       <div class="header-status">
@@ -86,6 +87,7 @@ const currentPath = Astro.url.pathname;
         <a href="/">Home</a>
         <a href="/services">Services</a>
         <a href="/about">About</a>
+        <a href="/insights">Insights</a>
         <a href="/contact">Contact</a>
       </div>
     </div>
@@ -300,13 +302,11 @@ const currentPath = Astro.url.pathname;
 
     .header-status {
        font-size: 0.85rem;
-       color: var(--secondary-color); /* Keep text gray for subtlety */
-       /* Use standard border color */
-       border: 1px solid var(--border-color);
+       color: var(--secondary-color); 
+       /* Keep accent border for prominence */
+       border: 1px solid var(--accent-color);
        padding: var(--space-xs) var(--space-sm) var(--space-xs) var(--space-sm);
        border-radius: var(--radius-default);
-       /* Match header background */
-       background-color: rgba(17, 24, 39, 0.8);
        /* Use flex for dot alignment */
        display: inline-flex;
        align-items: center;
@@ -317,8 +317,9 @@ const currentPath = Astro.url.pathname;
     /* Add pulsing dot */
     .header-status::before {
         content: '';
-        width: 7px;
-        height: 7px;
+        /* Increase size */
+        width: 9px;
+        height: 9px;
         background-color: var(--accent-color);
         border-radius: 50%;
         display: inline-block;
@@ -329,16 +330,17 @@ const currentPath = Astro.url.pathname;
     /* Define the pulse animation */
     @keyframes pulse-beacon {
       0% {
-        transform: scale(0.8);
-        opacity: 0.7;
+        /* Adjust scale/opacity */
+        transform: scale(0.85);
+        opacity: 0.6;
       }
       50% {
-          transform: scale(1.2);
+          transform: scale(1.3);
           opacity: 1;
       }
       100% {
-        transform: scale(0.8);
-        opacity: 0.7;
+        transform: scale(0.85);
+        opacity: 0.6;
       }
     }
 
