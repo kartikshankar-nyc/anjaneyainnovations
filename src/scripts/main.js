@@ -74,7 +74,19 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Mobile menu toggle logic (placeholder)
   const setupMobileMenu = () => {
-    // Add mobile menu functionality when HTML is updated
+    const toggleButton = document.querySelector('.mobile-menu-toggle');
+    const menu = document.getElementById('main-menu');
+
+    if (toggleButton && menu) {
+      console.log("Setting up mobile menu toggle");
+      toggleButton.addEventListener('click', () => {
+        const isOpen = menu.classList.toggle('is-open');
+        toggleButton.setAttribute('aria-expanded', isOpen);
+        console.log("Mobile menu toggled:", isOpen);
+      });
+    } else {
+        console.error("Mobile menu toggle button or menu element not found.");
+    }
   };
   
   // Call setup functions that depend on DOM being ready, but can run after load

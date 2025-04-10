@@ -47,7 +47,13 @@ const currentPath = Astro.url.pathname;
           <sup class="sup-ai">AI</sup>
         </a>
       </div>
-      <div class="menu">
+      <!-- Add Mobile Menu Toggle Button -->
+      <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg class="icon-open" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        <svg class="icon-close" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <!-- Add ID to menu -->
+      <div class="menu" id="main-menu">
         <a href="/" class:list={[ { 'is-active': currentPath === '/' } ]}>Home</a>
         <a href="/services" class:list={[ { 'is-active': currentPath === '/services' || currentPath.startsWith('/services/') } ]}>Services</a>
         <a href="/about" class:list={[ { 'is-active': currentPath === '/about' } ]}>About</a>
@@ -597,6 +603,75 @@ const currentPath = Astro.url.pathname;
         outline: 2px solid var(--accent-color);
         outline-offset: 2px;
         box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.3); /* Optional glow */
+    }
+
+    /* Mobile Menu Styles */
+    .mobile-menu-toggle {
+        display: none; /* Hidden by default */
+        background: none;
+        border: none;
+        padding: var(--space-sm);
+        cursor: pointer;
+        z-index: 1001; /* Above header content */
+        color: var(--primary-color); /* Use light color */
+    }
+
+    .mobile-menu-toggle .icon-close {
+        display: none;
+    }
+
+    /* Style for when menu is open */
+    .mobile-menu-toggle[aria-expanded="true"] .icon-open {
+        display: none;
+    }
+    .mobile-menu-toggle[aria-expanded="true"] .icon-close {
+        display: block;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        gap: var(--space-md); 
+    }
+    
+    /* Show toggle button, hide desktop menu initially */
+    .mobile-menu-toggle {
+        display: block;
+        order: 3; /* Place after status */
+    }
+    
+    .menu {
+       display: none; /* Hide menu by default on mobile */
+       order: 5; /* Below breadcrumbs if they exist */
+       flex-direction: column;
+       align-items: center;
+       position: absolute; /* Or fixed */
+       top: 100%; /* Position below header */
+       left: 0;
+       width: 100%;
+       background-color: var(--background-color); /* Dark bg */
+       padding: var(--space-lg) 0;
+       border-top: 1px solid var(--border-color);
+       box-shadow: var(--shadow-medium);
+       /* Reset some desktop styles */
+       margin-top: 0;
+    }
+    
+    /* Style for open mobile menu */
+    .menu.is-open {
+        display: flex;
+    }
+    
+    .menu a {
+        padding: 0.5rem;
+        /* Ensure default mobile link color */
+        color: var(--primary-color);
+        font-weight: 600; // Match default non-active state
+    }
+    
+    /* Explicitly define active styles for mobile */
+    .menu a.is-active {
+        color: var(--accent-color); /* Cyan */
+        font-weight: 700; /* Bolder */
     }
   </style> 
 
