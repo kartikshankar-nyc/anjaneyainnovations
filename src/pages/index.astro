@@ -683,11 +683,11 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   /* Swiper Customization */
   .testimonial-swiper {
-      /* Add padding to create space for buttons */
-      padding: 0 var(--space-2xl); /* e.g., 3rem */
-      /* Adjust positioning relative to container */
+      padding: 0 var(--space-2xl); 
       position: relative; 
-      margin: 0 calc(-1 * var(--space-xl)); /* Pull edges out slightly if needed */
+      margin: 0 calc(-1 * var(--space-xl)); 
+      /* Allow hover transform to be visible */
+      overflow: visible !important; 
   }
 
   /* Style Swiper Navigation Buttons */
