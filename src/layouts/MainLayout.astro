@@ -101,7 +101,8 @@ const currentPath = Astro.url.pathname;
     :root {
       /* Option E Palette: Sophisticated Dark Mode */
       --primary-color: #E5E7EB; /* Light Gray/Off-White Text */
-      --secondary-color: #9CA3AF; /* Medium Gray Text */
+      /* Lighten secondary color for better contrast */
+      --secondary-color: #B0B8C4; 
       --accent-color: #22D3EE; /* Bright Cyan */
       --background-color: #111827; /* Very Dark Blue/Gray BG */
       /* Make card BG a subtle gradient */
@@ -578,6 +579,27 @@ const currentPath = Astro.url.pathname;
         opacity: 1;
         transform: scale(1.05);
       }
+    }
+
+    .btn-primary {
+      background-color: var(--accent-color); 
+      /* Use black for text on cyan for contrast */
+      color: var(--black); 
+      border-color: var(--accent-color);
+    }
+
+    .btn-primary:hover {
+      background-color: #67E8F9; /* Lighter cyan */
+      border-color: #67E8F9;
+      /* Use black for text on cyan for contrast */
+      color: var(--black); 
+    }
+
+    /* Ensure focus outline is visible for keyboard navigation */
+    *:focus-visible {
+        outline: 2px solid var(--accent-color);
+        outline-offset: 2px;
+        box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.3); /* Optional glow */
     }
   </style> 
 
