@@ -2,7 +2,7 @@
 import MainLayout from '../layouts/MainLayout.astro';
 ---
 
-<MainLayout title="Contact Us - Anjaneya Innovations LLC">
+<MainLayout title="Contact Us - Anjaneya Innovations">
   <section class="page-header">
     <div class="container">
       <div class="header-logo">
@@ -137,37 +137,25 @@ import MainLayout from '../layouts/MainLayout.astro';
 </MainLayout>
 
 <style>
-  /* Page Header */
+  /* Restyle page header for Dark Mode */
   .page-header {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    color: white;
-    padding: 6rem 2rem;
+    background: var(--card-bg-color);
+    color: var(--primary-color);
+    padding: 5rem 2rem 4rem; 
     text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border-color);
   }
   
-  .page-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('/images/pattern-overlay.svg') repeat;
-    opacity: 0.1;
-    z-index: 1;
+  /* Remove old overlays and logo */
+  .page-header::before, 
+  .page-header::after, 
+  .header-logo {
+     display: none; 
   }
-  
-  .page-header::after {
-    content: '';
-    position: absolute;
-    top: -20%;
-    right: -10%;
-    width: 60%;
-    height: 140%;
-    background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
-    opacity: 0.2;
-    z-index: 0;
-  }
+  /* Remove logo keyframes */
+  /* @keyframes logoFloat { ... } */
 
   .page-header .container {
     position: relative;
@@ -175,37 +163,53 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
 
   .page-header h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    font-family: var(--font-heading);
+    font-size: clamp(2.8rem, 5.5vw, 4rem); /* Match global H1 */
+    margin-bottom: 0.5rem;
     font-weight: 800;
+    color: var(--primary-color);
   }
 
   .page-header p {
-    font-size: 1.25rem;
-    max-width: 800px;
+    font-size: 1.2rem;
+    max-width: 700px;
     margin: 0 auto;
-    opacity: 0.9;
+    font-weight: 400; 
+    color: var(--secondary-color);
   }
 
-  /* Container */
+  /* Container - use global */
   .container {
-    max-width: 1200px;
+    max-width: var(--max-width);
     margin: 0 auto;
-    padding: 5rem 5%;
+    padding: 4rem 2rem; 
   }
+  
+  /* Apply Section background */
+  .contact-content {
+      background-color: var(--background-color); /* Darkest */
+  }
+  .map {
+      background-color: var(--card-bg-color); /* Lighter dark */
+  }
+  .faq {
+      background-color: var(--background-color); /* Darkest */
+      border-top: 1px solid var(--border-color);
+  }
+
 
   /* Contact Grid */
   .contact-grid {
     display: grid;
-    grid-template-columns: 3fr 2fr;
-    gap: 4rem;
+    /* Use explicit columns and top alignment */
+    grid-template-columns: 2fr 1fr; 
+    gap: 3rem;
+    align-items: start;
   }
 
-  /* Contact Form */
+  /* Contact Form - Dark Mode */
   .contact-form-container h2,
   .contact-info h2 {
-    font-size: 2rem;
+    font-size: clamp(1.8rem, 4vw, 2.2rem); /* Smaller H2 */
     margin-bottom: 1.5rem;
     color: var(--primary-color);
   }
@@ -213,7 +217,7 @@ import MainLayout from '../layouts/MainLayout.astro';
   .contact-form {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+    gap: 1rem; /* Reduce gap */
   }
 
   .form-group {
@@ -227,58 +231,76 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   label {
     margin-bottom: 0.5rem;
-    font-weight: 500;
+    font-weight: 600; /* Bolder labels */
+    font-size: 0.9rem;
+    color: var(--secondary-color);
   }
 
   input,
   textarea {
-    padding: 0.8rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    padding: 0.9rem; /* Adjust padding */
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-default);
     font-family: inherit;
     font-size: 1rem;
+    background-color: var(--card-bg-color); /* Card bg for inputs */
+    color: var(--primary-color); /* Light text in inputs */
   }
 
   textarea {
     resize: vertical;
+    min-height: 120px;
   }
 
   input:focus,
   textarea:focus {
     outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px rgba(255, 122, 0, 0.2);
+    border-color: var(--accent-color); /* Cyan focus */
+    box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.3); /* Cyan glow */
   }
 
-  /* Button */
+  /* Define button styles locally for consistency */
   .btn {
     display: inline-block;
-    padding: 12px 24px;
-    font-weight: 600;
-    text-align: center;
-    border: none;
-    border-radius: 4px;
+    padding: 0.9rem 2.2rem; /* Match index.astro padding */
+    border-radius: var(--radius-default); 
+    text-decoration: none;
+    font-family: var(--font-sans);
+    font-weight: 800; 
+    font-size: 0.9rem;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid transparent;
     cursor: pointer;
-    transition: all 0.3s ease;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-transform: uppercase; 
+  }
+
+  .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1); 
   }
 
   .btn-primary {
-    background-color: var(--primary-color);
-    color: white;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    background-color: var(--accent-color); 
+    color: var(--text-on-light); /* Dark text on cyan */
+    border-color: var(--accent-color);
   }
 
   .btn-primary:hover {
-    background-color: var(--secondary-color);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    background-color: #67E8F9; /* Lighter cyan */
+    border-color: #67E8F9;
+    color: var(--text-on-light);
   }
+  /* Add other btn types if needed (.btn-secondary, etc.) */
 
-  /* Contact Info */
+
+  /* Contact Info - Dark Mode */
   .contact-info {
-    background-color: #f8f9fa;
+    background-color: var(--card-bg-color); /* Card bg */
     padding: 2rem;
-    border-radius: 8px;
+    border-radius: var(--radius-default);
+    border: 1px solid var(--border-color);
   }
 
   .info-item {
@@ -286,26 +308,34 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
 
   .info-item h3 {
-    font-size: 1.3rem;
+    font-size: 1.2rem; /* Adjust size */
     margin-bottom: 0.5rem;
     color: var(--primary-color);
+    font-weight: 700;
+  }
+  
+  .info-item p {
+      color: var(--secondary-color);
+      font-size: 0.95rem;
+      line-height: 1.6;
   }
 
   .info-item a {
-    color: var(--color-text);
+    color: var(--accent-color); /* Cyan links */
     text-decoration: none;
     transition: color 0.3s ease;
   }
 
   .info-item a:hover {
-    color: var(--color-secondary);
+    color: #67E8F9; /* Lighter cyan */
   }
 
-  /* Social Links */
+  /* Social Links - Dark Mode */
   .social-links h3 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     margin-bottom: 1rem;
     color: var(--primary-color);
+    font-weight: 700;
   }
 
   .social-icons {
@@ -314,48 +344,60 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
 
   .social-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: white;
+    width: 36px; /* Adjust size */
+    height: 36px;
+    border-radius: var(--radius-default); /* Match button radius */
+    background-color: var(--background-color); /* Darker bg */
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--primary-color);
+    color: var(--secondary-color); /* Medium gray icon */
     transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+  }
+
+  .social-icon svg {
+      width: 18px;
+      height: 18px;
   }
 
   .social-icon:hover {
-    background-color: var(--color-secondary);
-    color: white;
+    background-color: var(--accent-color);
+    color: var(--text-on-light); /* Dark icon on cyan */
+    border-color: var(--accent-color);
   }
 
-  /* Map */
+  /* Map - Dark Mode */
+  .map {
+      padding: 0; /* Remove padding */
+  }
+  
   .map-placeholder {
     width: 100%;
     height: 400px;
-    background-color: #f0f0f0;
+    background-color: var(--background-color); /* Darkest bg */
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
   }
 
   .map-overlay {
     text-align: center;
-    color: #777;
+    color: var(--secondary-color);
+    opacity: 0.8;
   }
 
-  /* FAQ Section */
-  .faq {
-    background-color: #f8f9fa;
-  }
-
+  /* FAQ Section - Dark Mode */
+  /* Use global section title */
   .section-title {
-    font-size: 2.2rem;
-    margin-bottom: 3rem;
+    font-size: clamp(2.2rem, 5vw, 3rem); 
+    margin-bottom: 3rem; 
     text-align: center;
-    color: var(--primary-color);
+    color: var(--primary-color); /* Light Text */
+    font-weight: 800;
   }
 
   .faq-list {
@@ -364,18 +406,30 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
 
   .faq-item {
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 1.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+  }
+  
+  .faq-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
   }
 
   .faq-question {
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-    color: var(--color-text);
+    font-size: 1.2rem;
+    font-weight: 600; /* Make question bolder */
+    margin-bottom: 0.5rem; /* Reduce margin */
+    color: var(--primary-color);
     cursor: pointer;
     position: relative;
     padding-right: 30px;
+    transition: color 0.2s ease;
+  }
+  
+  .faq-question:hover {
+      color: var(--accent-color);
   }
 
   .faq-question::after {
@@ -384,30 +438,39 @@ import MainLayout from '../layouts/MainLayout.astro';
     right: 0;
     top: 0;
     font-size: 1.5rem;
-    color: var(--primary-color);
+    color: var(--secondary-color);
+    transition: transform 0.3s ease, color 0.2s ease;
+  }
+  
+  .faq-question.open::after {
+      transform: rotate(45deg);
+      color: var(--accent-color);
   }
 
   .faq-answer {
     line-height: 1.7;
+    color: var(--secondary-color);
+    font-size: 0.95rem;
+    padding-top: 0.5rem;
+    display: none; /* Hide by default */
   }
 
   /* Responsive Styles */
   @media (max-width: 992px) {
     .contact-grid {
+      /* Stack grid on tablet too */
       grid-template-columns: 1fr;
       gap: 3rem;
     }
 
     .contact-info {
-      order: -1;
+      order: -1; /* Info first on tablet */
     }
   }
 
   @media (max-width: 768px) {
-    .page-header h1 {
-      font-size: 2.2rem;
-    }
-
+    /* page header global */
+    
     .contact-form {
       grid-template-columns: 1fr;
     }
@@ -416,32 +479,15 @@ import MainLayout from '../layouts/MainLayout.astro';
       grid-column: span 1;
     }
 
-    .container {
-      padding: 3rem 5%;
-    }
+    /* container global */
   }
 
-  .header-logo {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 2rem;
-  }
-
-  .header-logo-image {
-    width: 100px;
-    height: 100px;
-    filter: drop-shadow(0 0 15px rgba(255, 122, 0, 0.5));
-    animation: logoFloat 4s ease-in-out infinite;
-  }
-
-  @keyframes logoFloat {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
+  /* Remove old logo styles */
+  /* 
+  .header-logo { ... }
+  .header-logo-image { ... }
+  @keyframes logoFloat { ... }
+  */
 </style>
 
 <script>
@@ -458,33 +504,39 @@ import MainLayout from '../layouts/MainLayout.astro';
     }
 
     // FAQ accordion functionality
-    const faqQuestions = document.querySelectorAll('.faq-question');
-    faqQuestions.forEach(question => {
-      question.addEventListener('click', () => {
-        const answer = question.nextElementSibling;
-        const isOpen = answer.style.display === 'block';
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
         
-        // Close all answers
-        document.querySelectorAll('.faq-answer').forEach(a => {
-          a.style.display = 'none';
-        });
-        
-        // Update all question markers
-        document.querySelectorAll('.faq-question').forEach(q => {
-          q.classList.remove('open');
-        });
-        
-        // Open clicked question if it was closed
-        if (!isOpen) {
-          answer.style.display = 'block';
-          question.classList.add('open');
+        if (question && answer) {
+            question.addEventListener('click', () => {
+                const isOpen = answer.style.display === 'block';
+                
+                // Close all other answers
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.querySelector('.faq-answer').style.display = 'none';
+                        otherItem.querySelector('.faq-question').classList.remove('open');
+                    }
+                });
+                
+                // Toggle current answer
+                if (isOpen) {
+                    answer.style.display = 'none';
+                    question.classList.remove('open');
+                } else {
+                    answer.style.display = 'block';
+                    question.classList.add('open');
+                }
+            });
         }
-      });
     });
 
-    // Initially open the first FAQ
-    if (faqQuestions.length > 0) {
-      faqQuestions[0].click();
-    }
+    // // Optionally open the first FAQ initially
+    // if (faqItems.length > 0) {
+    //   const firstQuestion = faqItems[0].querySelector('.faq-question');
+    //   if (firstQuestion) firstQuestion.click();
+    // }
   });
 </script> 

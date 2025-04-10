@@ -2,14 +2,7 @@
 import MainLayout from '../layouts/MainLayout.astro';
 ---
 
-<MainLayout title="Our Services - Anjaneya Innovations LLC">
-  <div class="stealth-indicator">
-    <div class="stealth-badge">
-      <span class="stealth-pulse"></span>
-      <span>STEALTH MODE</span>
-    </div>
-  </div>
-  
+<MainLayout title="Our Services - Anjaneya Innovations">
   <section class="page-header">
     <div class="container">
       <h1>Our Services</h1>
@@ -150,159 +143,30 @@ import MainLayout from '../layouts/MainLayout.astro';
 </MainLayout>
 
 <style>
-  /* Stealth Mode Styling */
-  .stealth-indicator {
-    position: fixed;
-    top: 80px;
-    right: 20px;
-    z-index: 100;
-  }
+  /* Remove old Stealth Mode Styling */
+  /* 
+  .stealth-indicator { ... }
+  .stealth-badge { ... }
+  .stealth-pulse { ... }
+  @keyframes pulse { ... }
+  */
 
-  .stealth-badge {
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    padding: 8px 15px;
-    border-radius: 50px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .stealth-pulse {
-    width: 8px;
-    height: 8px;
-    background-color: var(--accent-color);
-    border-radius: 50%;
-    display: inline-block;
-    position: relative;
-  }
-
-  .stealth-pulse::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: var(--accent-color);
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0% {
-      transform: scale(1);
-      opacity: 1;
-    }
-    100% {
-      transform: scale(3);
-      opacity: 0;
-    }
-  }
-
-  .stealth-banner {
-    margin-top: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background-color: rgba(255, 255, 255, 0.2);
-    padding: 12px 20px;
-    border-radius: 8px;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-  }
-
-  .coming-soon {
-    position: relative;
-    opacity: 0.9;
-  }
-
-  .coming-soon-badge {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    background: linear-gradient(135deg, var(--accent-color) 0%, var(--secondary-color) 100%);
-    color: white;
-    padding: 5px 15px;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 0.8rem;
-    letter-spacing: 1px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    z-index: 1;
-  }
-
-  .stealth-label {
-    background-color: var(--dark-accent);
-    color: white;
-    font-size: 0.7rem;
-    padding: 3px 8px;
-    border-radius: 4px;
-    vertical-align: middle;
-    font-weight: 600;
-    margin-left: 10px;
-    letter-spacing: 0.5px;
-  }
-
-  .exclusive-note {
-    margin-top: 1.5rem;
-    padding: 15px;
-    background-color: rgba(255, 122, 0, 0.05);
-    border-left: 3px solid var(--primary-color);
-    border-radius: 4px;
-  }
-
-  .exclusive-note p {
-    margin-bottom: 1rem;
-    font-style: italic;
-    font-size: 0.95rem;
-  }
-
-  .btn-sm {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-  }
-
-  /* Page Header */
+  /* Restyle page header for Dark Mode */
   .page-header {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    color: white;
-    padding: 7rem 5% 5rem;
+    /* Use card background, add padding */
+    background: var(--card-bg-color);
+    color: var(--primary-color);
+    padding: 5rem 2rem 4rem; /* Adjust padding */
     text-align: center;
     position: relative;
     overflow: hidden;
+    border-bottom: 1px solid var(--border-color);
   }
   
-  .page-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('/images/pattern-overlay.svg') repeat;
-    opacity: 0.1;
-    z-index: 1;
-  }
-  
+  /* Remove old overlays */
+  .page-header::before, 
   .page-header::after {
-    content: '';
-    position: absolute;
-    top: -20%;
-    right: -10%;
-    width: 60%;
-    height: 140%;
-    background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
-    opacity: 0.2;
-    z-index: 0;
+     display: none; 
   }
 
   .page-header .container {
@@ -311,380 +175,309 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
 
   .page-header h1 {
-    font-size: 3.2rem;
-    margin-bottom: 1rem;
+    font-size: clamp(2.8rem, 5.5vw, 4rem); /* Match global H1 */
+    margin-bottom: 0.5rem;
     font-weight: 800;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    color: var(--primary-color);
+    text-shadow: none; /* Remove shadow */
   }
 
   .page-header p {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     max-width: 700px;
-    margin: 0 auto;
-    font-weight: 300;
+    margin: 0 auto 1.5rem auto; /* Add bottom margin */
+    font-weight: 400; /* Regular weight */
+    color: var(--secondary-color);
+  }
+  
+  /* Restyle stealth banner within header */
+  .stealth-banner {
+    margin-top: 1.5rem;
+    display: inline-flex; /* Use inline-flex */
+    align-items: center;
+    gap: 10px;
+    background-color: var(--background-color); /* Darker bg */
+    padding: 8px 15px;
+    border-radius: var(--radius-default);
+    border: 1px solid var(--border-color);
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+  }
+  
+  .stealth-banner svg {
+      stroke: var(--secondary-color);
+      width: 16px;
+      height: 16px;
   }
 
-  /* Container */
+  /* Restyle Coming Soon elements */
+  .coming-soon {
+    position: relative;
+    opacity: 0.8; /* Keep slightly faded */
+    border-left: 3px solid var(--accent-color); /* Accent border */
+    padding-left: 2rem; 
+    margin-left: -2rem; /* Adjust positioning */
+  }
+
+  .coming-soon-badge {
+    position: absolute;
+    top: 1rem; /* Adjust position */
+    left: -2rem; /* Adjust position */
+    /* Use accent color */
+    background: var(--accent-color);
+    color: var(--text-on-light); /* Dark text */
+    padding: 3px 10px;
+    border-radius: var(--radius-default);
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    box-shadow: none;
+    z-index: 1;
+    writing-mode: vertical-rl; /* Vertical text */
+    text-orientation: mixed;
+  }
+  
+  /* Remove old stealth label */
+  /* .stealth-label { ... } */
+
+  /* Restyle exclusive note */
+  .exclusive-note {
+    margin-top: 1.5rem;
+    padding: 15px;
+    background-color: var(--background-color); /* Darker bg */
+    border-left: 3px solid var(--accent-color);
+    border-radius: var(--radius-default);
+  }
+
+  .exclusive-note p {
+    margin-bottom: 1rem;
+    font-style: normal; /* Remove italic */
+    font-size: 0.95rem;
+    color: var(--secondary-color);
+  }
+
+  /* Use standard button styles - rely on global */
+  .btn-sm {
+    /* Inherit from .btn, maybe adjust padding/font-size if needed */
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+  }
+
+  /* Container - use global */
   .container {
-    max-width: 1200px;
+    max-width: var(--max-width);
     margin: 0 auto;
-    padding: 5rem 5%;
+    padding: 4rem 2rem; /* Match index.astro */
   }
 
-  /* Services Detail */
+  /* Services Detail - Dark Mode */
+  .services-detail {
+      background-color: var(--card-bg-color); /* Lighter dark bg */
+  }
+  
   .service-item {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    margin-bottom: 5rem;
-    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 3rem;
+    margin-bottom: 4rem;
+    align-items: start; /* Align items to top */
+    direction: ltr !important; /* Override RTL */
   }
 
+  .service-item:last-child {
+      margin-bottom: 0;
+  }
+
+  /* Remove RTL alternation */
+  /* 
   .service-item:nth-child(even) {
     direction: rtl;
   }
-
   .service-item:nth-child(even) .service-content {
     direction: ltr;
   }
+  */
 
   .service-content h2 {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    color: var(--text-color);
+    font-size: clamp(1.8rem, 4vw, 2.2rem); /* Slightly smaller H2 */
+    margin-bottom: 1rem;
+    color: var(--primary-color); /* Light text */
   }
 
   .service-content p {
     margin-bottom: 1.5rem;
     line-height: 1.7;
+    color: var(--secondary-color);
   }
 
   .service-features {
     padding-left: 1.5rem;
+    list-style: none; /* Remove default list style */
+    margin-top: 1rem;
   }
 
   .service-features li {
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.7rem;
     position: relative;
+    font-size: 0.95rem;
+    color: var(--secondary-color);
   }
 
   .service-features li::before {
-    content: "•";
-    color: var(--primary-color);
+    content: "→"; /* Use arrow */
+    color: var(--accent-color); /* Cyan arrow */
     font-weight: bold;
-    display: inline-block;
-    width: 1rem;
-    margin-left: -1rem;
-  }
-
-  .image-placeholder {
-    width: 100%;
-    padding-bottom: 75%;
-    background-color: #f0f0f0;
-    border-radius: 8px;
-  }
-
-  /* Process Section */
-  .process {
-    background-color: #f8f9fa;
-  }
-
-  .section-title {
-    font-size: 2.2rem;
-    margin-bottom: 3rem;
-    text-align: center;
-    color: var(--text-color);
-  }
-
-  .process-steps {
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-    margin: 0 auto;
-    max-width: 1000px;
-  }
-
-  .process-steps::before {
-    content: "";
-    position: absolute;
-    top: 40px;
-    left: 50px;
-    right: 50px;
-    height: 2px;
-    background-color: var(--primary-color);
-    z-index: 1;
-  }
-
-  .process-step {
-    text-align: center;
-    padding: 0 1rem;
-    position: relative;
-    z-index: 2;
-    flex: 1;
-  }
-
-  .step-number {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: var(--primary-color);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1.5rem;
-    font-size: 1.5rem;
-    font-weight: 700;
-  }
-
-  .process-step h3 {
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-  }
-
-  /* CTA Section */
-  .cta-section {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    color: white;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .cta-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('/images/pattern-overlay.svg') repeat;
-    opacity: 0.1;
-    z-index: 1;
-  }
-  
-  .cta-section .container {
-    position: relative;
-    z-index: 2;
-  }
-
-  .cta-section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .cta-section p {
-    font-size: 1.2rem;
-    max-width: 700px;
-    margin: 0 auto 2rem;
-  }
-
-  .btn {
-    display: inline-block;
-    padding: 0.8rem 1.8rem;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-  }
-
-  .btn-primary {
-    background-color: white;
-    color: var(--primary-color);
-  }
-
-  .btn-primary:hover {
-    background-color: #f0f0f0;
-    transform: translateY(-2px);
-  }
-
-  /* Responsive Styles */
-  @media (max-width: 992px) {
-    .process-steps {
-      flex-direction: column;
-      gap: 3rem;
-    }
-
-    .process-steps::before {
-      display: none;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .page-header h1 {
-      font-size: 2.2rem;
-    }
-
-    .service-item {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-
-    .service-item:nth-child(even) {
-      direction: ltr;
-    }
-
-    .container {
-      padding: 3rem 5%;
-    }
-
-    .service-image {
-      order: -1;
-    }
-  }
-
-  .services-header {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    color: white;
-    padding: 6rem 2rem;
-    text-align: center;
-  }
-
-  .services-header h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    font-family: var(--font-heading);
-    font-weight: 800;
-  }
-
-  .services-header p {
-    font-size: 1.25rem;
-    max-width: 800px;
-    margin: 0 auto;
-    opacity: 0.9;
-  }
-
-  .services-content {
-    padding: 5rem 2rem;
-    max-width: var(--max-width);
-    margin: 0 auto;
-  }
-
-  .service-card {
-    background-color: white;
-    border-radius: var(--radius-default);
-    overflow: hidden;
-    box-shadow: var(--shadow-default);
-    margin-bottom: 3rem;
-    display: flex;
-    flex-direction: column;
-  }
-
-  @media (min-width: 768px) {
-    .service-card {
-      flex-direction: row;
-    }
-    
-    .service-card:nth-child(even) {
-      flex-direction: row-reverse;
-    }
+    display: inline-block; 
+    width: 1em;
+    margin-left: -1.1em; /* Adjust spacing */
+    font-size: 1.1em;
+    line-height: 1;
   }
 
   .service-image {
-    flex: 1;
-    min-height: 300px;
-    background-color: var(--light-bg);
+      /* Add some styling */
+      border-radius: var(--radius-default);
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+  }
+  
+  .image-placeholder {
+    width: 100%;
+    padding-bottom: 75%;
+    background-color: var(--background-color); /* Darkest bg */
+    border-radius: 0; /* Remove radius if inside bordered container */
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  .service-image img {
-    max-width: 100%;
-    max-height: 100%;
-  }
-
-  .service-content {
-    flex: 2;
-    padding: 2rem;
-  }
-
-  .service-content h2 {
-    color: var(--primary-color);
+    color: var(--border-color);
     font-size: 2rem;
-    margin-top: 0;
-    margin-bottom: 1rem;
-    font-family: var(--font-heading);
+  }
+  /* Add placeholder icon */
+  .image-placeholder::after {
+      content: '🖼️';
+      opacity: 0.5;
   }
 
-  .service-content p {
-    margin-bottom: 1.5rem;
-    color: var(--text-color);
+  /* Process Section - Dark Mode */
+  .process {
+    background-color: var(--background-color); /* Darkest bg */
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
   }
 
-  .service-features {
-    margin-top: 2rem;
+  /* Inherit section title from index.astro if possible, or redefine */
+  .section-title {
+    font-size: clamp(2.2rem, 5vw, 3rem); 
+    margin-bottom: 3rem; 
+    text-align: center;
+    color: var(--primary-color); /* Light Text */
+    font-weight: 800;
   }
 
-  .service-features h3 {
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-    color: var(--primary-color);
-    font-family: var(--font-heading);
-  }
-
-  .feature-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-  }
-
-  .feature-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .feature-icon {
-    background-color: var(--primary-color);
-    color: white;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-  }
-
-  .cta-section {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 5rem 2rem;
+  .process-steps {
+    display: grid; /* Use grid */
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
     text-align: center;
   }
 
-  .cta-content {
-    max-width: 800px;
-    margin: 0 auto;
+  .process-step {
+      background-color: var(--card-bg-color); /* Card bg */
+      padding: 1.5rem;
+      border-radius: var(--radius-default);
+      border: 1px solid var(--border-color);
   }
 
-  .cta-content h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    font-family: var(--font-heading);
+  .step-number {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    color: var(--text-on-light); /* Dark text */
+    font-weight: 700;
+    margin: 0 auto 1rem auto;
+    font-size: 1.1rem;
   }
 
-  .cta-content p {
+  .process-step h3 {
     font-size: 1.2rem;
-    margin-bottom: 2rem;
-    opacity: 0.9;
-  }
-
-  .cta-button {
-    display: inline-block;
-    background-color: white;
+    margin-bottom: 0.5rem;
     color: var(--primary-color);
-    font-weight: 600;
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--radius-default);
-    text-decoration: none;
-    transition: all 0.3s ease;
-    border: 2px solid white;
+    font-weight: 700;
+  }
+  
+  .process-step p {
+      font-size: 0.9rem;
+      color: var(--secondary-color);
+      max-width: none; /* Allow text to fill */
+      margin-bottom: 0;
   }
 
-  .cta-button:hover {
-    background-color: transparent;
-    color: white;
+  /* CTA Section - Use styles from index.astro */
+  .cta-section {
+    background: var(--card-bg-color); 
+    color: var(--primary-color); 
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid var(--border-color);
   }
+
+  .cta-section::before {
+     display: none;
+  }
+
+  .cta-section h2 {
+    font-size: 2.2rem; 
+    margin-bottom: 1rem; 
+    color: var(--primary-color); 
+  }
+
+  .cta-section p {
+    font-size: 1.1rem; 
+    max-width: 600px; 
+    margin: 0 auto 2rem; 
+    color: var(--secondary-color); 
+  }
+  
+  /* Button styles should be inherited or use index.astro's */
+  .btn {
+     /* Reuse from index.astro or define here if different */
+     /* ... */
+  }
+  .btn-primary {
+     /* ... */
+  }
+  .btn-outline {
+      /* ... */
+  }
+
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .service-item {
+      grid-template-columns: 1fr; /* Stack on mobile */
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    .service-item:nth-child(even) .service-image {
+      order: -1; /* Image first */
+    }
+    .coming-soon {
+        padding-left: 0;
+        margin-left: 0;
+        border-left: none;
+        border-top: 3px solid var(--accent-color);
+        padding-top: 2rem;
+        margin-top: 1rem;
+    }
+    .coming-soon-badge {
+        top: -15px; /* Adjust */
+        left: 1rem;
+        writing-mode: horizontal-tb;
+        text-orientation: unset;
+        width: auto;
+    }
+  }
+
 </style> 

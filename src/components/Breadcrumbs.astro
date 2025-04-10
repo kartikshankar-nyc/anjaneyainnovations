@@ -1,0 +1,72 @@
+---
+const { currentPageTitle } = Astro.props;
+
+// Extract base title if it contains extra info (e.g., "About Us - Anjaneya Innovations")
+const baseTitle = currentPageTitle.split(' - ')[0]; 
+---
+
+<nav aria-label="Breadcrumb" class="breadcrumbs-container">
+  <div class="container">
+    <ol>
+      <li>
+        <a href="/">Home</a>
+      </li>
+      <li aria-current="page">
+        {baseTitle}
+      </li>
+    </ol>
+  </div>
+</nav>
+
+<style>
+  .breadcrumbs-container {
+    background-color: var(--background-color); /* Match main bg */
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.5rem 0;
+    font-size: 0.85rem;
+  }
+
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    color: var(--secondary-color); /* Medium gray */
+  }
+
+  li:not(:last-child)::after {
+    content: '/';
+    margin-left: 0.5rem;
+    color: var(--secondary-color);
+    opacity: 0.7;
+  }
+
+  a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  a:hover {
+    color: var(--accent-color); /* Cyan hover */
+  }
+
+  /* Current page (non-link) */
+  li[aria-current="page"] {
+    color: var(--primary-color); /* Lighter text for current page */
+    font-weight: 500;
+  }
+</style> 

@@ -2,11 +2,11 @@
 import MainLayout from '../layouts/MainLayout.astro';
 ---
 
-<MainLayout title="About Us - Anjaneya Innovations LLC">
+<MainLayout title="About Us - Anjaneya Innovations">
   <section class="page-header">
     <div class="container">
       <h1>About Us</h1>
-      <p>Learn more about Anjaneya Innovations LLC and our mission</p>
+      <p>Learn more about Anjaneya Innovations and our mission</p>
     </div>
   </section>
 
@@ -15,7 +15,7 @@ import MainLayout from '../layouts/MainLayout.astro';
       <div class="about-grid">
         <div class="about-content">
           <h2>Our Story</h2>
-          <p>Anjaneya Innovations LLC was founded with a vision to provide exceptional consulting services that help businesses navigate the complexities of today's market landscape.</p>
+          <p>Anjaneya Innovations was founded with a vision to provide exceptional consulting services that help businesses navigate the complexities of today's market landscape.</p>
           <p>Named after the Hindu deity Anjaneya (also known as Hanuman), who symbolizes strength, wisdom, and unwavering dedication, our company embodies these values in every service we provide.</p>
           <p>With a team of experienced professionals and a client-centered approach, we have established ourselves as a trusted partner for businesses seeking innovative solutions to drive growth and achieve their objectives.</p>
         </div>
@@ -112,38 +112,22 @@ import MainLayout from '../layouts/MainLayout.astro';
 </MainLayout>
 
 <style>
-  /* Page Header */
+  /* Restyle page header for Dark Mode */
   .page-header {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    color: white;
-    padding: 7rem 5% 5rem;
+    /* Use card background, adjust padding */
+    background: var(--card-bg-color);
+    color: var(--primary-color);
+    padding: 5rem 2rem 4rem; 
     text-align: center;
     position: relative;
     overflow: hidden;
+    border-bottom: 1px solid var(--border-color);
   }
   
-  .page-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('/images/pattern-overlay.svg') repeat;
-    opacity: 0.1;
-    z-index: 1;
-  }
-  
+  /* Remove old overlays */
+  .page-header::before, 
   .page-header::after {
-    content: '';
-    position: absolute;
-    top: -20%;
-    right: -10%;
-    width: 60%;
-    height: 140%;
-    background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
-    opacity: 0.2;
-    z-index: 0;
+     display: none; 
   }
 
   .page-header .container {
@@ -152,199 +136,251 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
 
   .page-header h1 {
-    font-size: 3.2rem;
-    margin-bottom: 1rem;
+    font-size: clamp(2.8rem, 5.5vw, 4rem); /* Match global H1 */
+    margin-bottom: 0.5rem;
     font-weight: 800;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    color: var(--primary-color);
+    text-shadow: none; /* Remove shadow */
   }
 
   .page-header p {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     max-width: 700px;
     margin: 0 auto;
-    font-weight: 300;
+    font-weight: 400; /* Regular weight */
+    color: var(--secondary-color);
   }
 
-  /* Container */
+  /* Container - use global */
   .container {
-    max-width: 1200px;
+    max-width: var(--max-width);
     margin: 0 auto;
-    padding: 5rem 5%;
+    padding: 4rem 2rem; /* Match index.astro */
   }
 
-  /* About Intro */
+  /* Apply alternating backgrounds */
+  section:nth-of-type(even) {
+     background-color: var(--background-color); /* Darkest */
+  }
+  section:nth-of-type(odd) {
+     background-color: var(--card-bg-color); /* Lighter dark */
+  }
+  section.page-header, section.cta-section {
+      background-color: var(--card-bg-color); /* Override header/cta */
+  }
+
+
+  /* About Intro - Dark Mode */
   .about-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive */
+    gap: 3rem;
     align-items: center;
   }
 
   .about-content h2 {
-    font-size: 2.2rem;
-    margin-bottom: 1.5rem;
-    color: var(--text-color);
+    font-size: clamp(1.8rem, 4vw, 2.2rem); /* Smaller H2 */
+    margin-bottom: 1rem;
+    color: var(--primary-color); /* Light text */
   }
 
   .about-content p {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     line-height: 1.7;
+    color: var(--secondary-color); /* Medium gray text */
   }
 
+  /* Restyle image placeholder */
+  .about-image {
+      background-color: var(--background-color); /* Darkest BG */
+      border-radius: var(--radius-default);
+      min-height: 350px; /* Slightly taller */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+  }
+  
   .image-placeholder {
-    width: 100%;
-    padding-bottom: 75%;
-    background-color: #f0f0f0;
-    border-radius: 8px;
+    width: 100px;
+    height: 100px;
+    border: 2px dashed var(--border-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--border-color);
+    font-size: 2rem;
+    font-weight: bold;
+    opacity: 0.5;
+    padding: 0; /* Reset padding */
+    background: none; /* Remove light bg */
+  }
+  .image-placeholder::after {
+     content: '🖼️';
+     opacity: 0.5;
   }
 
-  /* Mission Vision */
+
+  /* Mission Vision - Dark Mode */
   .mission-vision {
-    background-color: #f8f9fa;
+    /* background handled by nth-of-type */
   }
 
   .mission-vision-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive */
+    gap: 3rem;
   }
 
   .mission h2, .vision h2 {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
+    font-size: clamp(1.6rem, 3.5vw, 2rem); /* Smaller H2 */
+    margin-bottom: 1rem;
     color: var(--primary-color);
+    border-bottom: 2px solid var(--accent-color); /* Accent underline */
+    display: inline-block; /* Fit underline to text */
+    padding-bottom: 0.3em;
   }
 
   .mission p, .vision p {
-    font-size: 1.1rem;
+    font-size: 1rem;
     line-height: 1.7;
+    color: var(--secondary-color);
   }
 
-  /* Values */
+  /* Values - Dark Mode */
+  /* Use global section title */
   .section-title {
-    font-size: 2.2rem;
-    margin-bottom: 3rem;
+    font-size: clamp(2.2rem, 5vw, 3rem); 
+    margin-bottom: 3rem; 
     text-align: center;
-    color: var(--text-color);
+    color: var(--primary-color); /* Light Text */
+    font-weight: 800;
   }
 
   .values-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    gap: 1.5rem; /* Slightly smaller gap */
   }
 
   .value-card {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease;
+    background-color: var(--card-bg-color); /* Card BG */
+    padding: 1.8rem; /* Adjust padding */
+    border-radius: var(--radius-default);
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    box-shadow: none;
   }
 
   .value-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
   }
 
   .value-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+    font-size: 1.3rem; /* Adjust size */
+    margin-bottom: 0.8rem;
     color: var(--primary-color);
+    font-weight: 700; /* Bold */
+  }
+  
+  .value-card p {
+      font-size: 0.95rem;
+      color: var(--secondary-color);
+      line-height: 1.6;
   }
 
-  /* Team */
+  /* Team - Dark Mode */
   .team {
-    background-color: #f8f9fa;
+    /* background handled by nth-of-type */
   }
 
   .team-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjust size */
+    gap: 2rem;
   }
 
   .team-member {
     text-align: center;
+    background-color: var(--card-bg-color);
+    padding: 2rem;
+    border-radius: var(--radius-default);
+    border: 1px solid var(--border-color);
   }
 
   .member-image {
     margin-bottom: 1.5rem;
+    width: 120px; /* Set size */
+    height: 120px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .member-image .image-placeholder {
-    padding-bottom: 100%;
+    padding-bottom: 0; /* Remove padding */
     border-radius: 50%;
+    width: 100%;
+    height: 100%;
   }
 
   .team-member h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+    margin-bottom: 0.3rem;
+    color: var(--primary-color);
+    font-weight: 700;
   }
 
   .team-member .position {
-    color: var(--primary-color);
+    color: var(--accent-color); /* Use accent for position */
     font-weight: 600;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
+    font-size: 0.9rem;
+    display: block;
   }
 
   .team-member .bio {
     line-height: 1.6;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
   }
 
-  /* CTA Section */
+  /* CTA Section - Dark Mode */
   .cta-section {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    color: white;
+    background: var(--card-bg-color); 
+    color: var(--primary-color); 
     text-align: center;
     position: relative;
     overflow: hidden;
+    border-top: 1px solid var(--border-color);
   }
   
   .cta-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('/images/pattern-overlay.svg') repeat;
-    opacity: 0.1;
-    z-index: 1;
+     display: none;
   }
   
-  .cta-section .container {
-    position: relative;
-    z-index: 2;
-  }
-
   .cta-section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
+    font-size: 2.2rem; 
+    margin-bottom: 1rem; 
+    color: var(--primary-color); 
   }
 
   .cta-section p {
-    font-size: 1.2rem;
-    max-width: 700px;
-    margin: 0 auto 2rem;
+    font-size: 1.1rem; 
+    max-width: 600px; 
+    margin: 0 auto 2rem; 
+    color: var(--secondary-color); 
   }
 
+  /* Use global/index button styles */
   .btn {
-    display: inline-block;
-    padding: 0.8rem 1.8rem;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
+     /* ... */
   }
-
   .btn-primary {
-    background-color: white;
-    color: var(--primary-color);
-  }
-
-  .btn-primary:hover {
-    background-color: #f0f0f0;
-    transform: translateY(-2px);
+     /* ... */
   }
 
   /* Responsive Styles */
@@ -359,24 +395,32 @@ import MainLayout from '../layouts/MainLayout.astro';
       max-width: 600px;
       margin: 0 auto;
     }
+    .mission h2, .vision h2 {
+        display: inline-block;
+    }
   }
 
   @media (max-width: 768px) {
-    .page-header h1 {
-      font-size: 2.2rem;
-    }
-
+    /* page header handled globally */
+    
     .about-grid {
       grid-template-columns: 1fr;
       gap: 2rem;
     }
 
-    .container {
-      padding: 3rem 5%;
-    }
+    /* container handled globally */
 
     .about-image {
       order: -1;
+      min-height: 250px;
+    }
+    
+    .values-grid {
+        grid-template-columns: 1fr; /* Stack values */
+    }
+    
+    .team-grid {
+        grid-template-columns: 1fr; /* Stack team */
     }
   }
 </style> 

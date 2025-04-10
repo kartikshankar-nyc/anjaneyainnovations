@@ -1,6 +1,6 @@
-# Anjaneya Innovations LLC Website
+# Anjaneya Innovations Website
 
-This repository contains the code for the Anjaneya Innovations LLC corporate website.
+This repository contains the code for the Anjaneya Innovations corporate website.
 
 ## Features
 
@@ -72,4 +72,4 @@ The site is configured to work with Cloudflare CDN for optimal global performanc
 
 ## License
 
-Copyright © 2025 Anjaneya Innovations LLC. All rights reserved. 
+Copyright © 2025 Anjaneya Innovations. All rights reserved. 
