@@ -2,6 +2,10 @@
 // import { gsap } from 'gsap';
 // import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+// Import tsParticles engine and slim preset
+import { tsParticles } from "@tsparticles/engine";
+import { loadSlim } from "@tsparticles/slim"; // loads tsparticles v3
+
 // For now, we'll use script tags in the layout for GSAP
 
 // Use DOMContentLoaded again
@@ -227,4 +231,80 @@ document.addEventListener('DOMContentLoaded', () => {
       // console.log("No elements with .animate-on-scroll found.");
   }
   // --- End Scroll Animations --- 
+
+  // --- tsParticles Initialization --- 
+  const initParticles = async () => {
+      console.log("Initializing tsParticles...");
+      // Load the slim preset into the engine
+      await loadSlim(tsParticles); 
+      // Now load the options using the engine
+      await tsParticles.load({ 
+          id: "particles-js",
+          options: {
+              background: {
+                  // color: "#111827", // Controlled by body CSS
+              },
+              fpsLimit: 60,
+              interactivity: {
+                  events: {
+                      onHover: {
+                          enable: true,
+                          mode: "repulse", // Subtle interaction
+                      },
+                      onClick: {
+                          enable: false, // No click interaction
+                          mode: "push",
+                      },
+                  },
+                  modes: {
+                      repulse: {
+                          distance: 80,
+                          duration: 0.4,
+                      },
+                  },
+              },
+              particles: {
+                  color: {
+                      value: ["#E5E7EB", "#9CA3AF", "#22D3EE"], // Use primary, secondary, accent colors
+                  },
+                  links: {
+                      color: "#374151", // Use border color for links
+                      distance: 150,
+                      enable: true,
+                      opacity: 0.3,
+                      width: 1,
+                  },
+                  move: {
+                      direction: "none",
+                      enable: true,
+                      outModes: {
+                          default: "out", // Bounce off edges
+                      },
+                      random: true,
+                      speed: 1, // Slow speed
+                      straight: false,
+                  },
+                  number: {
+                      density: {
+                          enable: true,
+                      },
+                      value: 80,
+                  },
+                  opacity: {
+                      value: { min: 0.2, max: 0.7 },
+                  },
+                  shape: {
+                      type: "circle",
+                  },
+                  size: {
+                      value: { min: 1, max: 4 },
+                  },
+              },
+              detectRetina: true,
+          }
+      });
+      console.log("tsParticles initialized.");
+  };
+  initParticles();
+  // --- End tsParticles Initialization --- 
 }); 

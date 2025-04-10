@@ -34,6 +34,9 @@ const currentPath = Astro.url.pathname;
   <title>{title}</title>
 </head>
 <body>
+  <!-- Particles Container -->
+  <div id="particles-js"></div>
+  
   <!-- Preloader -->
   <div id="preloader">
     <div class="preloader-logo">AI</div>
@@ -661,6 +664,16 @@ const currentPath = Astro.url.pathname;
     50% { background-position: 100% 100%; }
     75% { background-position: 0% 100%; }
     100% { background-position: 0% 0%; }
+  }
+
+  /* Particles Container Styles */
+  #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1; /* Place behind all content */
   }
 </style> 
 
