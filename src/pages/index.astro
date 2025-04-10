@@ -87,8 +87,7 @@ import MainLayout from '../layouts/MainLayout.astro';
   .stealth-subtitle {
     font-size: 1.1rem; 
     font-weight: 600;
-    margin-bottom: 1rem;
-    /* Use secondary gray text color */
+    margin-bottom: var(--space-md);
     color: var(--secondary-color); 
     text-transform: uppercase;
     letter-spacing: 1.5px; 
@@ -120,10 +119,9 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   /* Hero Section - Dark Mode */
   .hero {
-    /* Use primary dark color */
     background: var(--background-color);
-    color: var(--primary-color); /* Light text */
-    padding: 7rem 2rem 5rem; /* Adjusted padding */
+    color: var(--primary-color); 
+    padding: var(--space-4xl) var(--space-xl) var(--space-3xl); 
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -148,8 +146,8 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
 
   .hero h1 {
-    font-size: clamp(3rem, 6vw, 4.5rem); /* Larger Hero Heading */
-    margin-bottom: 1rem;
+    font-size: clamp(3rem, 6vw, 4.5rem); 
+    margin-bottom: var(--space-md);
     font-family: var(--font-sans);
     font-weight: 800; 
     color: var(--primary-color); /* Light Text */
@@ -157,16 +155,16 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
 
   .hero p {
-    font-size: 1.2rem; /* Slightly larger */
+    font-size: 1.2rem; 
     max-width: 650px; 
-    margin: 0 auto 2.5rem; 
+    margin: 0 auto var(--space-xl); 
     opacity: 1; 
     color: var(--secondary-color); /* Medium gray text */
   }
 
   .cta-buttons {
     display: flex;
-    gap: 1rem; /* Adjusted gap */
+    gap: var(--space-md); 
     justify-content: center;
   }
 
@@ -270,7 +268,8 @@ import MainLayout from '../layouts/MainLayout.astro';
   /* Section Styles - Adjust padding and title */
   .section-title {
     font-size: clamp(2.2rem, 5vw, 3rem); 
-    margin-bottom: 3rem; 
+    padding-bottom: var(--space-sm); 
+    margin-bottom: calc(var(--space-2xl) - var(--space-sm) - 2px); 
     text-align: center;
     color: var(--primary-color); /* Light Text */
     font-weight: 800;
@@ -282,9 +281,9 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
 
   .container {
-    max-width: var(--max-width); /* Use global max-width */
+    max-width: var(--max-width);
     margin: 0 auto;
-    padding: 4rem 2rem; /* Adjusted padding */
+    padding: var(--space-3xl) var(--space-xl); 
   }
   
   /* Alternating Section Backgrounds - Dark Mode */
@@ -304,14 +303,14 @@ import MainLayout from '../layouts/MainLayout.astro';
   /* Services Section - Dark Mode */
   .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted minmax */
-    gap: 1.5rem; /* Adjusted gap */
-    margin-bottom: 2.5rem; /* Adjusted margin */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: var(--space-xl); 
+    margin-bottom: var(--space-2xl); 
   }
 
   .service-card {
-    background-color: var(--card-bg-color); /* Use card background */
-    padding: 1.8rem; 
+    background: var(--card-bg-color); /* Use gradient */
+    padding: var(--space-xl); 
     border-radius: var(--radius-default);
     /* Subtle border */
     border: 1px solid var(--border-color); 
@@ -328,22 +327,22 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   .service-card h3 {
     font-size: 1.4rem; 
-    margin-bottom: 0.8rem; 
+    margin-bottom: var(--space-sm); 
     color: var(--primary-color); /* Light text */
     font-weight: 800; 
-    margin-top: 0.5rem;
+    margin-top: var(--space-sm);
   }
   
   .service-card p {
       font-size: 0.95rem;
       color: var(--secondary-color); /* Medium gray text */
       flex-grow: 1; 
-      margin-bottom: 1.5rem; 
+      margin-bottom: var(--space-lg); 
   }
 
   .services-cta {
     text-align: center;
-    margin-top: 1rem; /* Add margin above button */
+    margin-top: var(--space-lg); 
   }
 
   /* About Preview Section */
@@ -354,21 +353,21 @@ import MainLayout from '../layouts/MainLayout.astro';
   
   .about-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Make responsive */
-    gap: 3rem; /* Adjusted gap */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: var(--space-2xl); 
     align-items: center;
   }
 
   .about-content p {
-    margin-bottom: 1rem; /* Adjusted margin */
-    color: var(--text-color);
+    margin-bottom: var(--space-md); 
+    color: var(--secondary-color); /* Use secondary */
     font-size: 1rem;
   }
   
   .about-content .section-title {
-     text-align: left; /* Align title left */
-     margin-bottom: 1.5rem;
-     /* Add underline here too */
+     text-align: left; 
+     padding-bottom: var(--space-sm);
+     margin-bottom: calc(var(--space-lg) - var(--space-sm) - 2px);
      border-bottom: 2px solid var(--accent-color);
      display: inline-block; /* Fit underline */
      padding-bottom: 0.3em;
@@ -414,12 +413,13 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
   
   .testimonials .container {
-      max-width: 850px; /* Limit width for testimonials */
+      max-width: 850px; 
+      padding: var(--space-3xl) var(--space-xl); 
   }
 
   .testimonial {
-    background-color: var(--card-bg-color); /* Card background */
-    padding: 2rem 2.5rem; 
+    background: var(--card-bg-color); /* Use gradient */
+    padding: var(--space-xl) var(--space-2xl); 
     border-radius: var(--radius-default);
     border: 1px solid var(--border-color); 
     margin: 0 auto;
@@ -437,13 +437,13 @@ import MainLayout from '../layouts/MainLayout.astro';
   .testimonial-content {
     font-size: 1.1rem; 
     font-style: italic;
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--space-lg);
     color: var(--primary-color); /* Light text */
   }
 
   .testimonial-author .name {
     font-weight: 600; 
-    margin-bottom: 0.2rem; 
+    margin-bottom: var(--space-xs); 
     color: var(--primary-color); /* Light text */
   }
 
@@ -460,12 +460,13 @@ import MainLayout from '../layouts/MainLayout.astro';
   /* CTA Section - Dark Mode */
   .cta-section {
     /* Use card background for contrast? Or keep darkest? */
-    background: var(--card-bg-color); 
+    background: var(--background-color); 
     color: var(--primary-color); /* Light text */
     text-align: center;
     position: relative;
     overflow: hidden;
     border-top: 1px solid var(--border-color);
+    padding: var(--space-3xl) var(--space-xl); 
   }
 
   /* Remove pattern */
@@ -479,14 +480,14 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   .cta-section h2 {
     font-size: 2.2rem; 
-    margin-bottom: 1rem; 
+    margin-bottom: var(--space-md); 
     color: var(--primary-color); /* Light heading */
   }
 
   .cta-section p {
     font-size: 1.1rem; 
     max-width: 600px; 
-    margin: 0 auto 2rem; 
+    margin: 0 auto var(--space-xl); 
     color: var(--secondary-color); /* Medium gray text */
   }
   
@@ -509,7 +510,7 @@ import MainLayout from '../layouts/MainLayout.astro';
       .hero h1 { font-size: 2.5rem; }
       .hero p { font-size: 1.1rem; max-width: 90%; }
       .section-title { font-size: 1.8rem; }
-      .container { padding: 3rem 1.5rem; }
+      .container { padding: var(--space-2xl) var(--space-lg); } /* Adjust tablet padding */
   }
   
   
@@ -524,7 +525,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     
     .cta-buttons {
        flex-direction: column; /* Stack buttons */
-       gap: 0.8rem;
+       gap: var(--space-sm);
        align-items: center;
     }
     
@@ -536,7 +537,7 @@ import MainLayout from '../layouts/MainLayout.astro';
 
     .about-grid {
       grid-template-columns: 1fr; /* Stack about section */
-      gap: 2rem;
+      gap: var(--space-xl);
       text-align: center; /* Center text content */
     }
     
@@ -550,7 +551,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     }
     
     .container {
-      padding: 3rem 1rem; /* Adjust padding */
+      padding: var(--space-2xl) var(--space-md); /* Adjust mobile padding */
     }
     
     .services-grid {

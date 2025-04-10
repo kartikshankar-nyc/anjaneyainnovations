@@ -142,7 +142,7 @@ import MainLayout from '../layouts/MainLayout.astro';
   .page-header {
     background: var(--card-bg-color);
     color: var(--primary-color);
-    padding: 5rem 2rem 4rem; 
+    padding: var(--space-3xl) var(--space-xl) var(--space-2xl); 
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -180,13 +180,14 @@ import MainLayout from '../layouts/MainLayout.astro';
     margin: 0 auto;
     font-weight: 400; 
     color: var(--secondary-color);
+    margin-bottom: var(--space-md);
   }
 
   /* Container - use global */
   .container {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 4rem 2rem; 
+    padding: var(--space-3xl) var(--space-xl); 
   }
   
   /* Apply Section background */
@@ -205,29 +206,28 @@ import MainLayout from '../layouts/MainLayout.astro';
   /* Contact Grid */
   .contact-grid {
     display: grid;
-    /* Use explicit columns and top alignment */
     grid-template-columns: 2fr 1fr; 
-    gap: 3rem;
+    gap: var(--space-2xl);
     align-items: start;
   }
 
   /* Contact Form - Dark Mode */
   .contact-form-container h2,
   .contact-info h2 {
-    font-size: clamp(1.8rem, 4vw, 2.2rem); /* Smaller H2 */
-    margin-bottom: 1.5rem;
+    font-size: clamp(1.8rem, 4vw, 2.2rem); 
+    padding-bottom: var(--space-sm);
+    margin-bottom: calc(var(--space-lg) - var(--space-sm) - 2px); 
     color: var(--primary-color);
     /* Add underline */
     border-bottom: 2px solid var(--accent-color);
     display: inline-block; /* Fit underline */
     padding-bottom: 0.3em;
-    margin-bottom: calc(1.5rem - 0.3em - 2px); /* Adjust margin */
   }
 
   .contact-form {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem; /* Reduce gap */
+    gap: var(--space-lg); 
   }
 
   .form-group {
@@ -240,7 +240,7 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
 
   label {
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--space-sm);
     font-weight: 600; /* Bolder labels */
     font-size: 0.9rem;
     color: var(--secondary-color);
@@ -248,7 +248,7 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   input,
   textarea {
-    padding: 0.9rem; /* Adjust padding */
+    padding: var(--space-md); 
     border: 1px solid var(--border-color);
     border-radius: var(--radius-default);
     font-family: inherit;
@@ -272,7 +272,7 @@ import MainLayout from '../layouts/MainLayout.astro';
   .form-guidance {
       font-size: 0.95rem;
       color: var(--secondary-color);
-      margin-bottom: 1.5rem;
+      margin-bottom: var(--space-xl);
   }
 
   /* Define button styles locally */
@@ -314,18 +314,18 @@ import MainLayout from '../layouts/MainLayout.astro';
   /* Contact Info - Dark Mode */
   .contact-info {
     background-color: var(--card-bg-color); /* Card bg */
-    padding: 2rem;
+    padding: var(--space-xl);
     border-radius: var(--radius-default);
     border: 1px solid var(--border-color);
   }
 
   .info-item {
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--space-lg);
   }
 
   .info-item h3 {
     font-size: 1.2rem; /* Adjust size */
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--space-sm);
     color: var(--primary-color);
     font-weight: 700;
   }
@@ -349,14 +349,14 @@ import MainLayout from '../layouts/MainLayout.astro';
   /* Social Links - Dark Mode */
   .social-links h3 {
     font-size: 1.2rem;
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-md);
     color: var(--primary-color);
     font-weight: 700;
   }
 
   .social-icons {
     display: flex;
-    gap: 1rem;
+    gap: var(--space-md);
   }
 
   .social-icon {
@@ -410,7 +410,8 @@ import MainLayout from '../layouts/MainLayout.astro';
   /* Use global section title */
   .section-title {
     font-size: clamp(2.2rem, 5vw, 3rem); 
-    margin-bottom: 3rem; 
+    padding-bottom: var(--space-sm); 
+    margin-bottom: calc(var(--space-2xl) - var(--space-sm) - 2px); 
     text-align: center;
     color: var(--primary-color); /* Light Text */
     font-weight: 800;
@@ -418,7 +419,6 @@ import MainLayout from '../layouts/MainLayout.astro';
     border-bottom: 2px solid var(--accent-color);
     display: inline-block; /* Fit underline */
     padding-bottom: 0.3em;
-    margin-bottom: calc(3rem - 0.3em - 2px); /* Adjust margin */
   }
 
   .faq-list {
@@ -427,9 +427,9 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
 
   .faq-item {
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-md);
     border-bottom: 1px solid var(--border-color);
-    padding-bottom: 1rem;
+    padding-bottom: var(--space-md);
   }
   
   .faq-item:last-child {
@@ -441,7 +441,7 @@ import MainLayout from '../layouts/MainLayout.astro';
   .faq-question {
     font-size: 1.2rem;
     font-weight: 600; /* Make question bolder */
-    margin-bottom: 0.5rem; /* Reduce margin */
+    margin-bottom: var(--space-sm); /* Reduce margin */
     color: var(--primary-color);
     cursor: pointer;
     position: relative;
@@ -472,7 +472,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     line-height: 1.7;
     color: var(--secondary-color);
     font-size: 0.95rem;
-    padding-top: 0.5rem;
+    padding-top: var(--space-sm);
     display: none; /* Hide by default */
   }
 
@@ -481,7 +481,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     .contact-grid {
       /* Stack grid on tablet too */
       grid-template-columns: 1fr;
-      gap: 3rem;
+      gap: var(--space-xl);
     }
 
     .contact-info {
@@ -501,6 +501,9 @@ import MainLayout from '../layouts/MainLayout.astro';
     }
 
     /* container global */
+    .container {
+      padding: var(--space-2xl) var(--space-md); 
+    }
   }
 
   /* Remove old logo styles */

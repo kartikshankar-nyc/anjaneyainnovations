@@ -154,7 +154,8 @@ import MainLayout from '../layouts/MainLayout.astro';
     /* Use card background, add padding */
     background: var(--card-bg-color);
     color: var(--primary-color);
-    padding: 5rem 2rem 4rem; /* Adjust padding */
+    /* Adjust padding */
+    padding: var(--space-3xl) var(--space-xl) var(--space-2xl); 
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -183,19 +184,23 @@ import MainLayout from '../layouts/MainLayout.astro';
   .page-header p {
     font-size: 1.2rem;
     max-width: 700px;
-    margin: 0 auto 1.5rem auto; /* Add bottom margin */
+    /* Adjust margin */
+    margin: 0 auto var(--space-lg) auto; 
     font-weight: 400; /* Regular weight */
     color: var(--secondary-color);
   }
   
   /* Restyle stealth banner within header */
   .stealth-banner {
-    margin-top: 1.5rem;
+    /* Adjust margin */
+    margin-top: var(--space-lg);
     display: inline-flex; /* Use inline-flex */
     align-items: center;
-    gap: 10px;
+    /* Adjust gap */
+    gap: var(--space-sm); 
     background-color: var(--background-color); /* Darker bg */
-    padding: 8px 15px;
+    /* Adjust padding */
+    padding: var(--space-sm) var(--space-md);
     border-radius: var(--radius-default);
     border: 1px solid var(--border-color);
     color: var(--secondary-color);
@@ -209,13 +214,46 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
 
   /* Restyle Coming Soon elements */
-  /* .coming-soon { ... } */
-  /* .coming-soon-badge { ... } */
-  /* .exclusive-note { ... } */
+  .coming-soon {
+    position: relative;
+    opacity: 0.8; 
+    border-left: 3px solid var(--accent-color); 
+    /* Adjust padding/margin */
+    padding-left: var(--space-xl); 
+    margin-left: calc(-1 * var(--space-xl)); 
+  }
+
+  .coming-soon-badge {
+    position: absolute;
+    /* Adjust position */
+    top: var(--space-md); 
+    left: calc(-1 * var(--space-xl)); 
+    background: var(--accent-color);
+    color: var(--text-on-light); 
+    /* Adjust padding */
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-default);
+  }
+
+  .exclusive-note {
+    /* Adjust margin/padding */
+    margin-top: var(--space-lg);
+    padding: var(--space-lg);
+    background-color: var(--background-color); 
+    border-left: 3px solid var(--accent-color);
+  }
+
+  .exclusive-note p {
+    /* Adjust margin */
+    margin-bottom: var(--space-md);
+    font-style: normal; 
+    font-size: 0.95rem;
+  }
 
   /* Use standard button styles - rely on global */
   .btn-sm {
-    padding: 0.6rem 1.2rem;
+    /* Adjust padding */
+    padding: var(--space-sm) var(--space-md);
     font-size: 0.85rem;
   }
 
@@ -223,7 +261,8 @@ import MainLayout from '../layouts/MainLayout.astro';
   .container {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 4rem 2rem; /* Match index.astro */
+    /* Adjust padding */
+    padding: var(--space-3xl) var(--space-xl); 
   }
 
   /* Services Detail - Dark Mode */
@@ -234,8 +273,9 @@ import MainLayout from '../layouts/MainLayout.astro';
   .service-item {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
-    gap: 3rem;
-    margin-bottom: 4rem;
+    /* Adjust gap/margin */
+    gap: var(--space-2xl); 
+    margin-bottom: var(--space-3xl);
     align-items: start; /* Align items to top */
     direction: ltr !important; /* Override RTL */
   }
@@ -256,12 +296,14 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   .service-content h2 {
     font-size: clamp(1.8rem, 4vw, 2.2rem); /* Slightly smaller H2 */
-    margin-bottom: 1rem;
+    /* Adjust margin */
+    margin-bottom: var(--space-md);
     color: var(--primary-color); /* Light text */
   }
 
   .service-content p {
-    margin-bottom: 1.5rem;
+    /* Adjust margin */
+    margin-bottom: var(--space-lg);
     line-height: 1.7;
     color: var(--secondary-color);
   }
@@ -269,11 +311,13 @@ import MainLayout from '../layouts/MainLayout.astro';
   .service-features {
     padding-left: 1.5rem;
     list-style: none; /* Remove default list style */
-    margin-top: 1rem;
+    /* Adjust margin */
+    margin-top: var(--space-md);
   }
 
   .service-features li {
-    margin-bottom: 0.7rem;
+    /* Adjust margin */
+    margin-bottom: var(--space-sm);
     position: relative;
     font-size: 0.95rem;
     color: var(--secondary-color);
@@ -336,20 +380,21 @@ import MainLayout from '../layouts/MainLayout.astro';
     /* Add underline */
     border-bottom: 2px solid var(--accent-color);
     display: inline-block; /* Fit underline */
-    padding-bottom: 0.3em;
-    margin-bottom: calc(3rem - 0.3em - 2px); /* Adjust margin */
+    padding-bottom: var(--space-sm);
+    margin-bottom: calc(var(--space-2xl) - var(--space-sm) - 2px); /* Adjust margin */
   }
 
   .process-steps {
     display: grid; /* Use grid */
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1.5rem;
+    /* Adjust gap */
+    gap: var(--space-lg); 
     text-align: center;
   }
 
   .process-step {
       background-color: var(--card-bg-color); /* Card bg */
-      padding: 1.5rem;
+      padding: var(--space-lg);
       border-radius: var(--radius-default);
       border: 1px solid var(--border-color);
       /* Add transition */
@@ -369,13 +414,14 @@ import MainLayout from '../layouts/MainLayout.astro';
     background-color: var(--accent-color);
     color: var(--text-on-light); /* Dark text */
     font-weight: 700;
-    margin: 0 auto 1rem auto;
+    /* Adjust margin */
+    margin: 0 auto var(--space-md) auto;
     font-size: 1.1rem;
   }
 
   .process-step h3 {
     font-size: 1.2rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--space-sm);
     color: var(--primary-color);
     font-weight: 700;
   }
@@ -395,6 +441,8 @@ import MainLayout from '../layouts/MainLayout.astro';
     position: relative;
     overflow: hidden;
     border-top: 1px solid var(--border-color);
+    /* Adjust padding */
+    padding: var(--space-3xl) var(--space-xl); 
   }
 
   .cta-section::before {
@@ -403,14 +451,16 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   .cta-section h2 {
     font-size: 2.2rem; 
-    margin-bottom: 1rem; 
+    /* Adjust margin */
+    margin-bottom: var(--space-md); 
     color: var(--primary-color); 
   }
 
   .cta-section p {
     font-size: 1.1rem; 
     max-width: 600px; 
-    margin: 0 auto 2rem; 
+    /* Adjust margin */
+    margin: 0 auto var(--space-xl); 
     color: var(--secondary-color); 
   }
   
@@ -418,11 +468,26 @@ import MainLayout from '../layouts/MainLayout.astro';
   @media (max-width: 768px) {
     .service-item {
       grid-template-columns: 1fr; /* Stack on mobile */
-      gap: 2rem;
-      margin-bottom: 3rem;
+      gap: var(--space-xl); 
+      margin-bottom: var(--space-2xl); 
     }
     .service-item:nth-child(even) .service-image {
       order: -1; /* Image first */
+    }
+    .coming-soon {
+        padding-left: 0;
+        margin-left: 0;
+        border-left: none;
+        border-top: 3px solid var(--accent-color);
+        /* Adjust mobile padding/margin */
+        padding-top: var(--space-xl);
+        margin-top: var(--space-lg);
+    }
+    .coming-soon-badge {
+        /* Adjust mobile position */
+        top: calc(-1 * var(--space-md) + 2px); 
+        left: var(--space-md);
+        writing-mode: horizontal-tb;
     }
   }
 

@@ -111,7 +111,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     /* Use card background, adjust padding */
     background: var(--card-bg-color);
     color: var(--primary-color);
-    padding: 5rem 2rem 4rem; 
+    padding: var(--space-3xl) var(--space-xl) var(--space-2xl); 
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -143,13 +143,14 @@ import MainLayout from '../layouts/MainLayout.astro';
     margin: 0 auto;
     font-weight: 400; /* Regular weight */
     color: var(--secondary-color);
+    margin-bottom: var(--space-md);
   }
 
   /* Container - use global */
   .container {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 4rem 2rem; /* Match index.astro */
+    padding: var(--space-3xl) var(--space-xl); /* Match index.astro */
   }
 
   /* Apply alternating backgrounds */
@@ -168,18 +169,18 @@ import MainLayout from '../layouts/MainLayout.astro';
   .about-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive */
-    gap: 3rem;
+    gap: var(--space-2xl);
     align-items: center;
   }
 
   .about-content h2 {
     font-size: clamp(1.8rem, 4vw, 2.2rem); /* Smaller H2 */
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-lg);
     color: var(--primary-color); /* Light text */
   }
 
   .about-content p {
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-lg);
     line-height: 1.7;
     color: var(--secondary-color); /* Medium gray text */
   }
@@ -240,16 +241,19 @@ import MainLayout from '../layouts/MainLayout.astro';
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
   }
 
   .mission h2, .vision h2, 
   .purpose-content h2 {
     font-size: clamp(1.6rem, 3.5vw, 2rem); 
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-md);
     color: var(--primary-color);
     border-bottom: 2px solid var(--accent-color); 
     display: inline-block; 
-    padding-bottom: 0.3em;
+    padding-bottom: var(--space-sm);
   }
 
   .mission p, .vision p,
@@ -257,7 +261,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     font-size: 1rem;
     line-height: 1.7;
     color: var(--secondary-color);
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-md);
   }
   .purpose-content p strong {
       color: var(--primary-color);
@@ -268,26 +272,25 @@ import MainLayout from '../layouts/MainLayout.astro';
   /* Use global section title */
   .section-title {
     font-size: clamp(2.2rem, 5vw, 3rem); 
-    margin-bottom: 3rem; 
+    padding-bottom: var(--space-sm); 
+    margin-bottom: calc(var(--space-2xl) - var(--space-sm) - 2px);
     text-align: center;
     color: var(--primary-color); /* Light Text */
     font-weight: 800;
     /* Add underline */
     border-bottom: 2px solid var(--accent-color);
     display: inline-block; /* Fit underline */
-    padding-bottom: 0.3em;
-    margin-bottom: calc(3rem - 0.3em - 2px); /* Adjust margin */
   }
 
   .values-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem; /* Slightly smaller gap */
+    gap: var(--space-lg);
   }
 
   .value-card {
     background-color: var(--card-bg-color); /* Card BG */
-    padding: 1.8rem; /* Adjust padding */
+    padding: var(--space-xl); /* Adjust padding */
     border-radius: var(--radius-default);
     border: 1px solid var(--border-color);
     transition: transform 0.3s ease, border-color 0.3s ease;
@@ -301,7 +304,7 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   .value-card h3 {
     font-size: 1.3rem; /* Adjust size */
-    margin-bottom: 0.8rem;
+    margin-bottom: var(--space-sm);
     color: var(--primary-color);
     font-weight: 700; /* Bold */
   }
@@ -320,13 +323,13 @@ import MainLayout from '../layouts/MainLayout.astro';
   .team-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjust size */
-    gap: 2rem;
+    gap: var(--space-xl);
   }
 
   .team-member {
     text-align: center;
     background-color: var(--card-bg-color);
-    padding: 2rem;
+    padding: var(--space-xl);
     border-radius: var(--radius-default);
     border: 1px solid var(--border-color);
     transition: transform 0.3s ease, border-color 0.3s ease;
@@ -338,7 +341,7 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
 
   .member-image {
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--space-lg);
     width: 120px; 
     height: 120px;
     margin-left: auto;
@@ -359,7 +362,7 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   .team-member h3 {
     font-size: 1.4rem;
-    margin-bottom: 0.3rem;
+    margin-bottom: var(--space-xs);
     color: var(--primary-color);
     font-weight: 700;
   }
@@ -367,7 +370,7 @@ import MainLayout from '../layouts/MainLayout.astro';
   .team-member .position {
     color: var(--accent-color); /* Use accent for position */
     font-weight: 600;
-    margin-bottom: 0.8rem;
+    margin-bottom: var(--space-sm);
     font-size: 0.9rem;
     display: block;
   }
@@ -386,6 +389,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     position: relative;
     overflow: hidden;
     border-top: 1px solid var(--border-color);
+    padding: var(--space-3xl) var(--space-xl); 
   }
   
   .cta-section::before {
@@ -394,14 +398,14 @@ import MainLayout from '../layouts/MainLayout.astro';
   
   .cta-section h2 {
     font-size: 2.2rem; 
-    margin-bottom: 1rem; 
+    margin-bottom: var(--space-md); 
     color: var(--primary-color); 
   }
 
   .cta-section p {
     font-size: 1.1rem; 
     max-width: 600px; 
-    margin: 0 auto 2rem; 
+    margin: 0 auto var(--space-xl); 
     color: var(--secondary-color); 
   }
 
@@ -409,7 +413,7 @@ import MainLayout from '../layouts/MainLayout.astro';
   @media (max-width: 992px) {
     .mission-vision-grid {
       grid-template-columns: 1fr;
-      gap: 3rem;
+      gap: var(--space-xl);
     }
 
     .mission, .vision {
@@ -427,10 +431,13 @@ import MainLayout from '../layouts/MainLayout.astro';
     
     .about-grid {
       grid-template-columns: 1fr;
-      gap: 2rem;
+      gap: var(--space-xl);
     }
 
     /* container handled globally */
+    .container {
+      padding: var(--space-2xl) var(--space-md);
+    }
 
     .about-image {
       order: -1;
@@ -439,10 +446,12 @@ import MainLayout from '../layouts/MainLayout.astro';
     
     .values-grid {
         grid-template-columns: 1fr; /* Stack values */
+        gap: var(--space-lg);
     }
     
     .team-grid {
         grid-template-columns: 1fr; /* Stack team */
+        gap: var(--space-lg);
     }
   }
 

@@ -21,14 +21,14 @@ const baseTitle = currentPageTitle.split(' - ')[0];
 
 <style>
   .breadcrumbs-container {
-    /* Restore original styles */
     background-color: var(--background-color); 
     border-bottom: 1px solid var(--border-color);
-    padding: 0.5rem 0;
+    padding: var(--space-sm) 0;
     font-size: 0.85rem;
-    /* Remove width and order */
-    /* width: 100%; */
-    /* order: 4; */ 
+    
+    position: sticky;
+    top: 75px; 
+    z-index: 999;
   }
 
   /* Restore container styles */
@@ -74,5 +74,11 @@ const baseTitle = currentPageTitle.split(' - ')[0];
   li[aria-current="page"] {
     color: var(--primary-color); /* Lighter text for current page */
     font-weight: 500;
+  }
+  
+  @media (max-width: 768px) {
+      .breadcrumbs-container {
+          top: 105px; 
+      }
   }
 </style> 
