@@ -21,7 +21,12 @@ const baseTitle = currentPageTitle.split(' - ')[0];
 
 <style>
   .breadcrumbs-container {
-    background-color: var(--background-color); 
+    /* Remove opaque background */
+    /* background-color: var(--background-color); */
+    /* Add backdrop blur like header */
+    background-color: rgba(17, 24, 39, 0.8); /* Match header alpha */
+    backdrop-filter: blur(8px); 
+    
     border-bottom: 1px solid var(--border-color);
     padding: var(--space-sm) 0;
     font-size: 0.85rem;

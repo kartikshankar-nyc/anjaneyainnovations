@@ -155,13 +155,8 @@ const currentPath = Astro.url.pathname;
   body {
       font-family: var(--font-sans); /* Use Inter */
       color: var(--primary-color); /* Light primary text */
-      background-color: var(--background-color); /* Dark background */
-      /* Remove static radial gradient */
-      /* background-image: radial-gradient(circle at top center, rgba(31, 41, 55, 0.15) 0%, transparent 50%); */
-      /* Apply subtle animated gradient */
-      background: linear-gradient(135deg, var(--background-color) 0%, #1a2330 50%, #1F2937 100%);
-      background-size: 300% 300%; /* Large size for movement */
-      animation: subtleGradientShift 45s ease infinite; /* Slow animation */
+      /* Make body background transparent */
+      background-color: transparent; 
       
     margin: 0;
     padding: 0;
@@ -171,6 +166,8 @@ const currentPath = Astro.url.pathname;
       line-height: 1.7; /* Increased line height for readability */
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+    /* Prevent horizontal scroll */
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -658,13 +655,12 @@ const currentPath = Astro.url.pathname;
   }
 
   /* Define Subtle Gradient Shift Animation for Body */
+  /* Remove keyframes as well */
+  /* 
   @keyframes subtleGradientShift {
-    0% { background-position: 0% 0%; }
-    25% { background-position: 100% 0%; }
-    50% { background-position: 100% 100%; }
-    75% { background-position: 0% 100%; }
-    100% { background-position: 0% 0%; }
+    ...
   }
+  */
 
   /* Particles Container Styles */
   #particles-js {
