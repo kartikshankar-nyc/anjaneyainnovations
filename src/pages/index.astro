@@ -170,42 +170,42 @@ import MainLayout from '../layouts/MainLayout.astro';
     justify-content: center;
   }
 
-  /* Button Styles - Redefine based on new C1 palette */
+  /* Define button styles locally */ 
   .btn {
     display: inline-block;
-    padding: 0.9rem 2.2rem;
-    border-radius: var(--radius-default); /* Use global radius */
+    padding: 0.9rem 2.2rem; 
+    border-radius: var(--radius-default); 
     text-decoration: none;
-    font-family: var(--font-heading); /* Use heading font for buttons */
-    font-weight: 800;
+    font-family: var(--font-sans);
+    font-weight: 700; /* Revert weight if needed */
     font-size: 0.9rem;
     transition: all 0.2s ease-in-out;
-    border: 1px solid transparent; /* Base border */
+    border: 1px solid transparent;
     cursor: pointer;
     text-align: center;
     letter-spacing: 0.5px;
-    text-transform: uppercase; /* Uppercase for studio feel */
+    text-transform: uppercase; 
   }
 
   .btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 3px 6px rgba(0,0,0,0.1); /* Subtle shadow */
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1); 
   }
 
-  /* Primary Button: Accent background, dark text */
   .btn-primary {
-    background-color: var(--accent-color); 
-    color: var(--text-on-light); /* Dark text on cyan */
+    /* Default: Dark bg, light text, accent border */
+    background-color: var(--card-bg-color);
+    color: var(--primary-color);
     border-color: var(--accent-color);
   }
 
   .btn-primary:hover {
-    background-color: #67E8F9; /* Lighter cyan */
-    border-color: #67E8F9;
+    /* Hover: Cyan bg, dark text */
+    background-color: var(--accent-color); 
+    border-color: var(--accent-color);
     color: var(--text-on-light);
   }
 
-  /* Secondary/Outline Button: Light outline/text, transparent bg */
   .btn-secondary,
   .btn-outline {
     background-color: transparent;
@@ -213,28 +213,14 @@ import MainLayout from '../layouts/MainLayout.astro';
     color: var(--primary-color); /* Light text */
   }
 
-  /* Hero secondary uses light border/text */
-  .hero .btn-secondary {
-    border-color: var(--primary-color);
-    color: var(--primary-color);
-  }
-  
-  .hero .btn-secondary:hover {
-      /* Hover: Cyan background, dark text */
-      background-color: var(--accent-color); 
-      color: var(--text-on-light);
-      border-color: var(--accent-color);
-  }
-
-  /* Regular secondary/outline hover */
   .btn-secondary:hover,
   .btn-outline:hover {
-    background-color: var(--primary-color);
-    color: var(--background-color); /* Dark text on light hover */
-    border-color: var(--primary-color);
+    /* Ensure Corrected Hover: Transparent BG, Accent border/text */
+    background-color: transparent;
+    color: var(--accent-color);
+    border-color: var(--accent-color);
   }
 
-  /* Text Button: Simple text link */
   .btn-text {
     color: var(--primary-color);
     font-weight: 600;
@@ -244,9 +230,12 @@ import MainLayout from '../layouts/MainLayout.astro';
     background: none;
     padding: 0;
     border: none;
-    text-transform: none; /* Keep text button normal case */
+    text-transform: none; 
     letter-spacing: normal;
-    font-family: var(--font-body); /* Use body font */
+    font-family: var(--font-sans); 
+    text-decoration: underline;
+    text-decoration-color: transparent; /* Hide underline by default */
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
   }
 
   .btn-text .arrow {
@@ -256,12 +245,26 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   .btn-text:hover {
     color: var(--accent-color);
+    text-decoration-color: var(--accent-color); /* Show underline on hover */
     box-shadow: none; 
     transform: none; 
   }
   
   .btn-text:hover .arrow {
     transform: translateX(3px);
+  }
+
+  /* Restore hero specific button styles */
+  .hero .btn-secondary {
+    border-color: var(--primary-color); /* Light border */
+    color: var(--primary-color); /* Light text */
+  }
+  
+  .hero .btn-secondary:hover {
+      /* Hover: Cyan background, dark text */
+      background-color: var(--accent-color); 
+      color: var(--text-on-light);
+      border-color: var(--accent-color);
   }
 
   /* Section Styles - Adjust padding and title */
@@ -271,6 +274,11 @@ import MainLayout from '../layouts/MainLayout.astro';
     text-align: center;
     color: var(--primary-color); /* Light Text */
     font-weight: 800;
+    /* Add underline */
+    border-bottom: 2px solid var(--accent-color);
+    display: inline-block; /* Fit underline */
+    padding-bottom: 0.3em;
+    margin-bottom: calc(3rem - 0.3em - 2px); /* Adjust margin */
   }
 
   .container {
@@ -360,6 +368,11 @@ import MainLayout from '../layouts/MainLayout.astro';
   .about-content .section-title {
      text-align: left; /* Align title left */
      margin-bottom: 1.5rem;
+     /* Add underline here too */
+     border-bottom: 2px solid var(--accent-color);
+     display: inline-block; /* Fit underline */
+     padding-bottom: 0.3em;
+     margin-bottom: calc(1.5rem - 0.3em - 2px); /* Adjust margin */
   }
   
   .about-image {
@@ -408,11 +421,17 @@ import MainLayout from '../layouts/MainLayout.astro';
     background-color: var(--card-bg-color); /* Card background */
     padding: 2rem 2.5rem; 
     border-radius: var(--radius-default);
-    /* Use border instead of shadow */
     border: 1px solid var(--border-color); 
     margin: 0 auto;
     position: relative; 
     box-shadow: none; /* Remove shadow */
+    /* Add transition */
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  
+  .testimonial:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-color);
   }
 
   .testimonial-content {

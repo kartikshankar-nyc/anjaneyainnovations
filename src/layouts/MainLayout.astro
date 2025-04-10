@@ -390,8 +390,17 @@ const currentPath = Astro.url.pathname;
     
     .menu a {
         padding: 0.5rem;
+        /* Ensure default mobile link color */
+        color: var(--primary-color);
+        font-weight: 600; // Match default non-active state
     }
     
+    /* Explicitly define active styles for mobile */
+    .menu a.is-active {
+        color: var(--accent-color); /* Cyan */
+        font-weight: 700; /* Bolder */
+    }
+
     .header-status {
         order: 2; /* Status after logo */
         font-size: 0.8rem;
@@ -420,4 +429,18 @@ const currentPath = Astro.url.pathname;
     /* Keep negative margin */
     margin-left: -0.1em; 
   }
+
+  /* REMOVE Global Button Styles */
+  /* 
+  .btn { ... }
+  .btn:hover { ... }
+  .btn-primary { ... }
+  .btn-primary:hover { ... }
+  .btn-secondary, .btn-outline { ... }
+  .btn-secondary:hover, .btn-outline:hover { ... }
+  .btn-text { ... }
+  .btn-text .arrow { ... }
+  .btn-text:hover { ... }
+  .btn-text:hover .arrow { ... }
+  */
 </style> 

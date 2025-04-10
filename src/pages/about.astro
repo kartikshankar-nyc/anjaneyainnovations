@@ -239,9 +239,10 @@ import MainLayout from '../layouts/MainLayout.astro';
     font-size: clamp(1.6rem, 3.5vw, 2rem); /* Smaller H2 */
     margin-bottom: 1rem;
     color: var(--primary-color);
-    border-bottom: 2px solid var(--accent-color); /* Accent underline */
-    display: inline-block; /* Fit underline to text */
-    padding-bottom: 0.3em;
+    /* Remove underline - use standard H2 style */
+    /* border-bottom: 2px solid var(--accent-color); */
+    /* display: inline-block; */ 
+    /* padding-bottom: 0.3em; */
   }
 
   .mission p, .vision p {
@@ -258,6 +259,11 @@ import MainLayout from '../layouts/MainLayout.astro';
     text-align: center;
     color: var(--primary-color); /* Light Text */
     font-weight: 800;
+    /* Add underline */
+    border-bottom: 2px solid var(--accent-color);
+    display: inline-block; /* Fit underline */
+    padding-bottom: 0.3em;
+    margin-bottom: calc(3rem - 0.3em - 2px); /* Adjust margin */
   }
 
   .values-grid {
@@ -310,6 +316,12 @@ import MainLayout from '../layouts/MainLayout.astro';
     padding: 2rem;
     border-radius: var(--radius-default);
     border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  
+  .team-member:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-color);
   }
 
   .member-image {
@@ -375,14 +387,6 @@ import MainLayout from '../layouts/MainLayout.astro';
     color: var(--secondary-color); 
   }
 
-  /* Use global/index button styles */
-  .btn {
-     /* ... */
-  }
-  .btn-primary {
-     /* ... */
-  }
-
   /* Responsive Styles */
   @media (max-width: 992px) {
     .mission-vision-grid {
@@ -422,5 +426,41 @@ import MainLayout from '../layouts/MainLayout.astro';
     .team-grid {
         grid-template-columns: 1fr; /* Stack team */
     }
+  }
+
+  /* Define button styles locally */
+  .btn {
+    display: inline-block;
+    padding: 0.9rem 2.2rem; 
+    border-radius: var(--radius-default); 
+    text-decoration: none;
+    font-family: var(--font-sans);
+    font-weight: 800; 
+    font-size: 0.9rem;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-transform: uppercase; 
+  }
+
+  .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1); 
+  }
+
+  .btn-primary {
+    /* Default: Dark bg, light text, accent border */
+    background-color: var(--card-bg-color);
+    color: var(--primary-color);
+    border-color: var(--accent-color);
+  }
+
+  .btn-primary:hover {
+    /* Hover: Cyan bg, dark text */
+    background-color: var(--accent-color); 
+    border-color: var(--accent-color);
+    color: var(--text-on-light);
   }
 </style> 

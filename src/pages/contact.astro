@@ -167,6 +167,10 @@ import MainLayout from '../layouts/MainLayout.astro';
     margin-bottom: 0.5rem;
     font-weight: 800;
     color: var(--primary-color);
+    /* Add underline */
+    border-bottom: 2px solid var(--accent-color);
+    display: inline-block; /* Fit underline */
+    padding-bottom: 0.3em;
   }
 
   .page-header p {
@@ -212,6 +216,11 @@ import MainLayout from '../layouts/MainLayout.astro';
     font-size: clamp(1.8rem, 4vw, 2.2rem); /* Smaller H2 */
     margin-bottom: 1.5rem;
     color: var(--primary-color);
+    /* Add underline */
+    border-bottom: 2px solid var(--accent-color);
+    display: inline-block; /* Fit underline */
+    padding-bottom: 0.3em;
+    margin-bottom: calc(1.5rem - 0.3em - 2px); /* Adjust margin */
   }
 
   .contact-form {
@@ -259,10 +268,10 @@ import MainLayout from '../layouts/MainLayout.astro';
     box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.3); /* Cyan glow */
   }
 
-  /* Define button styles locally for consistency */
+  /* Define button styles locally */
   .btn {
     display: inline-block;
-    padding: 0.9rem 2.2rem; /* Match index.astro padding */
+    padding: 0.9rem 2.2rem; 
     border-radius: var(--radius-default); 
     text-decoration: none;
     font-family: var(--font-sans);
@@ -282,18 +291,18 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
 
   .btn-primary {
-    background-color: var(--accent-color); 
-    color: var(--text-on-light); /* Dark text on cyan */
+    /* Default: Dark bg, light text, accent border */
+    background-color: var(--card-bg-color);
+    color: var(--primary-color);
     border-color: var(--accent-color);
   }
 
   .btn-primary:hover {
-    background-color: #67E8F9; /* Lighter cyan */
-    border-color: #67E8F9;
+    /* Hover: Cyan bg, dark text */
+    background-color: var(--accent-color); 
+    border-color: var(--accent-color);
     color: var(--text-on-light);
   }
-  /* Add other btn types if needed (.btn-secondary, etc.) */
-
 
   /* Contact Info - Dark Mode */
   .contact-info {
@@ -398,6 +407,11 @@ import MainLayout from '../layouts/MainLayout.astro';
     text-align: center;
     color: var(--primary-color); /* Light Text */
     font-weight: 800;
+    /* Add underline */
+    border-bottom: 2px solid var(--accent-color);
+    display: inline-block; /* Fit underline */
+    padding-bottom: 0.3em;
+    margin-bottom: calc(3rem - 0.3em - 2px); /* Adjust margin */
   }
 
   .faq-list {
