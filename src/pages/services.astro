@@ -6,7 +6,7 @@ import MainLayout from '../layouts/MainLayout.astro';
   <section class="page-header">
     <div class="container">
       <h1>Our Capabilities</h1>
-      <p>Bespoke solutions designed for transformative results.</p>
+      <p>Bespoke, AI-driven technology solutions designed for transformative results.</p>
       <div class="stealth-banner">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="10"></circle>
@@ -20,6 +20,8 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   <section class="services-detail">
     <div class="container">
+      <p class="section-intro">We deliver end-to-end technology solutions, integrating AI and modern engineering practices across core business functions and specialized domains.</p>
+      
       <div class="service-item animate-on-scroll">
         <div class="service-content">
           <h2>Strategic Transformation</h2>
@@ -30,6 +32,7 @@ import MainLayout from '../layouts/MainLayout.astro';
             <li>Change Management</li>
             <li>Cost Optimization</li>
             <li>Scaling Results</li>
+            <li>SDLC Transformation</li>
           </ul>
         </div>
         <div class="service-image">
@@ -46,12 +49,20 @@ import MainLayout from '../layouts/MainLayout.astro';
             <li>Custom Software Development</li>
             <li>Cloud Native Architecture (AWS, Azure, GCP)</li>
             <li>Legacy System Modernization</li>
+            <li>Mobile App Development (iOS & Android)</li>
+            <li>Rapid Prototyping</li>
+            <li>UX Consulting & Strategy</li>
+            <li>End-to-End UI Design</li>
             <li>API Strategy & Development</li>
             <li>DevSecOps & SRE Practices</li>
+            <li>Test Engineering Transformation</li>
             <li>Cybersecurity Strategy & Implementation</li>
             <li>Rapid Prototyping</li>
             <li>UX Consulting & Strategy</li>
             <li>End-to-End UI Design</li>
+            <li>Developer Experience (DevEx / DX) Enhancement</li>
+            <li>Engineering Productivity Improvement</li>
+            <li>Software Intelligence Platform Implementation</li>
           </ul>
         </div>
         <div class="service-image">
@@ -67,8 +78,42 @@ import MainLayout from '../layouts/MainLayout.astro';
             <li>Data Engineering & Platform Builds</li>
             <li>Business Intelligence & Analytics</li>
             <li>Data Visualization & Reporting</li>
-            <li>AI/ML Implementation</li>
+            <li>AI/ML Implementation & Integration</li>
             <li>Customer & Market Insights</li>
+          </ul>
+        </div>
+        <div class="service-image">
+          <div class="image-placeholder"></div>
+        </div>
+      </div>
+
+      <div class="service-item animate-on-scroll">
+        <div class="service-content">
+          <h2>Financial Services Technology</h2>
+          <p>Deep domain expertise in architecting and implementing mission-critical technology solutions for the financial sector, leveraging AI for enhanced client intelligence and operational efficiency.</p>
+          <ul class="service-features">
+            <li>Investment Banking Platforms</li>
+            <li>Wealth Management Technology</li>
+            <li>Global Capital Markets Systems</li>
+            <li>CRM & Client Intelligence (AI-Enhanced)</li>
+            <li>Compliance & Regulatory Tech</li>
+          </ul>
+        </div>
+        <div class="service-image">
+          <div class="image-placeholder"></div>
+        </div>
+      </div>
+
+      <div class="service-item animate-on-scroll">
+        <div class="service-content">
+          <h2>Salesforce Implementation & Optimization</h2>
+          <p>End-to-end, custom Salesforce implementations designed to maximize CRM effectiveness, streamline workflows, and provide actionable client intelligence, tailored to your specific business processes.</p>
+          <ul class="service-features">
+            <li>Custom Salesforce Development (Apex, LWC)</li>
+            <li>Sales Cloud, Service Cloud, Experience Cloud</li>
+            <li>Integration with Enterprise Systems</li>
+            <li>AI-Powered Insights (Einstein Analytics)</li>
+            <li>Org Optimization & Health Checks</li>
           </ul>
         </div>
         <div class="service-image">
@@ -540,6 +585,15 @@ import MainLayout from '../layouts/MainLayout.astro';
     background-color: transparent;
     color: var(--accent-color);
     border-color: var(--accent-color);
+  }
+
+  /* Add style for intro paragraph */
+  .section-intro {
+      font-size: 1.1rem;
+      color: var(--secondary-color);
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto var(--space-2xl) auto;
   }
 
 </style> 
