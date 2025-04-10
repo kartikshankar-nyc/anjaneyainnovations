@@ -22,6 +22,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     <div class="container">
       <p class="section-intro">We deliver end-to-end technology solutions, integrating AI and modern engineering practices across core business functions and specialized domains.</p>
       
+      <!-- Service 1: Strategic Transformation -->
       <div class="service-item animate-on-scroll">
         <div class="service-content">
           <h2>Strategic Transformation</h2>
@@ -35,11 +36,9 @@ import MainLayout from '../layouts/MainLayout.astro';
             <li>SDLC Transformation</li>
           </ul>
         </div>
-        <div class="service-image">
-          <div class="image-placeholder"></div>
-        </div>
       </div>
 
+      <!-- Service 2: Technology Leadership & Execution -->
       <div class="service-item animate-on-scroll">
         <div class="service-content">
           <h2>Technology Leadership & Execution</h2>
@@ -65,11 +64,9 @@ import MainLayout from '../layouts/MainLayout.astro';
             <li>Software Intelligence Platform Implementation</li>
           </ul>
         </div>
-        <div class="service-image">
-          <div class="image-placeholder"></div>
-        </div>
       </div>
 
+      <!-- Service 3: Data & AI Solutions -->
       <div class="service-item animate-on-scroll">
         <div class="service-content">
           <h2>Data & AI Solutions</h2>
@@ -82,11 +79,9 @@ import MainLayout from '../layouts/MainLayout.astro';
             <li>Customer & Market Insights</li>
           </ul>
         </div>
-        <div class="service-image">
-          <div class="image-placeholder"></div>
-        </div>
       </div>
 
+      <!-- Service 4: Financial Services Technology -->
       <div class="service-item animate-on-scroll">
         <div class="service-content">
           <h2>Financial Services Technology</h2>
@@ -99,11 +94,9 @@ import MainLayout from '../layouts/MainLayout.astro';
             <li>Compliance & Regulatory Tech</li>
           </ul>
         </div>
-        <div class="service-image">
-          <div class="image-placeholder"></div>
-        </div>
       </div>
 
+      <!-- Service 5: Salesforce Implementation & Optimization -->
       <div class="service-item animate-on-scroll">
         <div class="service-content">
           <h2>Salesforce Implementation & Optimization</h2>
@@ -116,11 +109,9 @@ import MainLayout from '../layouts/MainLayout.astro';
             <li>Org Optimization & Health Checks</li>
           </ul>
         </div>
-        <div class="service-image">
-          <div class="image-placeholder"></div>
-        </div>
       </div>
 
+      <!-- Service 6: Talent & Team Augmentation -->
       <div class="service-item animate-on-scroll">
         <div class="service-content">
           <h2>Talent & Team Augmentation</h2>
@@ -131,9 +122,6 @@ import MainLayout from '../layouts/MainLayout.astro';
             <li>On-Demand Engineering Talent</li>
             <li>ODC/GCC Setup Guidance</li>
           </ul>
-        </div>
-        <div class="service-image">
-          <div class="image-placeholder"></div>
         </div>
       </div>
     </div>
@@ -315,35 +303,69 @@ import MainLayout from '../layouts/MainLayout.astro';
       background-color: var(--card-bg-color); /* Lighter dark bg */
   }
   
-  .service-item {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
-    /* Adjust gap/margin */
-    gap: var(--space-2xl); 
-    margin-bottom: var(--space-3xl);
-    align-items: start; /* Align items to top */
-    direction: ltr !important; /* Override RTL */
-  }
+  /* Remove Alternating Services Layout Styles */
+  /*
+  .alternating-services-layout { ... }
+  .alternating-services-layout::before { ... }
+  */
 
+  .service-item {
+      /* Revert to simpler layout */
+      display: block; /* Standard block flow */
+      /* grid-template-columns: 1fr var(--space-2xl) 1fr; */
+      /* gap: 0; */ 
+      margin-bottom: var(--space-2xl);
+      /* align-items: start; */ 
+      border: none;
+      background: none;
+      padding: 0;
+      /* Add bottom border for separation */
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: var(--space-xl);
+  }
+  
   .service-item:last-child {
       margin-bottom: 0;
+      border-bottom: none; /* No border on last item */
+      padding-bottom: 0;
   }
+  
+  .service-content {
+      /* Reset grid positioning */
+      grid-column: auto; 
+      position: relative; 
+      padding: 0; /* Remove padding */
+      background: none; /* Remove card background */
+      border-radius: 0;
+      border: none; /* Remove card border */
+      transition: none; /* Remove transitions */
+      z-index: auto; 
+      /* Reset margins */
+      margin-left: 0;
+      margin-right: 0;
+  }
+  
+  /* Remove positioning styles */
+  /*
+  .service-item:nth-child(odd) .service-content { ... }
+  .service-item:nth-child(even) .service-content { ... }
+  */
 
-  /* Remove RTL alternation */
-  /* 
-  .service-item:nth-child(even) {
-    direction: rtl;
-  }
-  .service-item:nth-child(even) .service-content {
-    direction: ltr;
-  }
+  /* Remove hover effects */
+  /*
+  .service-item:hover .service-content { ... }
+  .service-item:hover .service-content h2, ... { ... }
+  .service-item:hover .service-content .service-features li::before { ... }
   */
 
   .service-content h2 {
-    font-size: clamp(1.8rem, 4vw, 2.2rem); /* Slightly smaller H2 */
-    /* Adjust margin */
+    font-size: clamp(1.8rem, 4vw, 2.2rem); 
     margin-bottom: var(--space-md);
-    color: var(--primary-color); /* Light text */
+    color: var(--primary-color); 
+    /* Remove underline from here */
+    /* border-bottom: 2px solid var(--accent-color); */
+    /* display: inline-block; */
+    /* padding-bottom: var(--space-sm); */
   }
 
   .service-content p {
@@ -378,35 +400,6 @@ import MainLayout from '../layouts/MainLayout.astro';
     font-size: 1.1em;
     line-height: 1;
   }
-
-  .service-image {
-      /* Add some styling */
-      border-radius: var(--radius-default);
-      overflow: hidden;
-      border: 1px solid var(--border-color);
-  }
-  
-  .image-placeholder {
-    width: 100%;
-    padding-bottom: 75%; /* Maintain aspect ratio */
-    background-color: var(--background-color); /* Darkest bg as fallback */
-    border-radius: 0; 
-    /* Remove flex centering and icon content */
-    /* display: flex; */
-    /* align-items: center; */
-    /* justify-content: center; */
-    /* color: var(--border-color); */
-    /* font-size: 2rem; */
-    /* Apply gradient */
-    background-image: linear-gradient(135deg, rgba(31, 41, 55, 0.3) 0%, rgba(17, 24, 39, 0.5) 100%);
-  }
-  /* Remove placeholder icon style */
-  /* 
-  .image-placeholder::after {
-      content: '🖼️';
-      opacity: 0.5;
-  }
-  */
 
   /* Process Section - Dark Mode */
   .process {
@@ -511,13 +504,25 @@ import MainLayout from '../layouts/MainLayout.astro';
   
   /* Responsive Styles */
   @media (max-width: 768px) {
-    .service-item {
-      grid-template-columns: 1fr; /* Stack on mobile */
-      gap: var(--space-xl); 
-      margin-bottom: var(--space-2xl); 
+    /* Collapse to single column on mobile */
+    .alternating-services-layout {
+        padding: 0; /* Remove padding */
+        &::before {
+            display: none; /* Hide central line */
+        }
     }
-    .service-item:nth-child(even) .service-image {
-      order: -1; /* Image first */
+    
+    .service-item {
+      grid-template-columns: 1fr; /* Single column */
+      margin-bottom: var(--space-xl);
+    }
+    
+    .service-item:nth-child(odd) .service-content,
+    .service-item:nth-child(even) .service-content {
+        grid-column: 1 / -1; /* Span full width */
+        justify-self: auto; /* Reset alignment */
+        margin-left: 0;
+        margin-right: 0;
     }
     .coming-soon {
         padding-left: 0;
@@ -595,5 +600,12 @@ import MainLayout from '../layouts/MainLayout.astro';
       max-width: 800px;
       margin: 0 auto var(--space-2xl) auto;
   }
+
+  /* Remove Placeholder Styles */
+  /*
+  .service-image { ... }
+  .image-placeholder { ... }
+  .image-placeholder::before { ... }
+  */
 
 </style> 

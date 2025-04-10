@@ -443,19 +443,20 @@ const currentPath = Astro.url.pathname;
     /* Responsive */
     @media (max-width: 768px) {
       nav {
-         flex-wrap: wrap; /* Allow wrapping */
-         justify-content: center; /* Center logo/menu */
-         /* Adjust mobile gap */
-         gap: var(--space-md); 
+         flex-wrap: wrap; 
+         justify-content: center; 
+         /* Reduce mobile gap further */
+         gap: var(--space-sm); 
+         /* Reduce horizontal padding slightly */
+         padding: 0 var(--space-lg);
       }
       
       .menu {
-         order: 3; /* Move menu below logo/status */
+         order: 3; 
          width: 100%;
          justify-content: center;
-         /* Adjust mobile gap */
-         gap: var(--space-lg); 
-         /* Adjust mobile margin */
+         /* Reduce mobile menu gap */
+         gap: var(--space-md); 
          margin-top: var(--space-sm); 
       }
       
@@ -471,6 +472,13 @@ const currentPath = Astro.url.pathname;
           color: var(--accent-color); /* Cyan */
           font-weight: 700; /* Bolder */
       }
+
+      /* Reduce logo text size slightly on mobile */
+      .logo-text {
+          font-size: 1.3rem;
+      }
+      /* Adjust sup size relative to new logo text size */
+      /* The sup size uses 'em', so it should adjust automatically */
 
       .header-status {
           order: 2; /* Status after logo */

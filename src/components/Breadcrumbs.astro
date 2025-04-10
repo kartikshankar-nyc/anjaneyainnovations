@@ -76,9 +76,13 @@ const baseTitle = currentPageTitle.split(' - ')[0];
     font-weight: 500;
   }
   
+  /* Adjust sticky top for mobile */
   @media (max-width: 768px) {
       .breadcrumbs-container {
-          top: 105px; 
+          /* Remove sticky positioning on mobile */
+          position: static;
+          top: auto;
+          z-index: auto;
       }
   }
 </style> 
