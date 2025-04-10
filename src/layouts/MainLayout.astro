@@ -457,6 +457,28 @@ const currentPath = Astro.url.pathname;
       opacity: 0.8;
     }
 
+    /* Mobile Menu Styles (Base - Hidden by default) */
+    .mobile-menu-toggle {
+        display: none; 
+        background: none;
+        border: none;
+        padding: var(--space-sm);
+        cursor: pointer;
+        z-index: 1001; 
+        color: var(--primary-color); 
+    }
+
+    .mobile-menu-toggle .icon-close {
+        display: none;
+    }
+
+    .mobile-menu-toggle[aria-expanded="true"] .icon-open {
+        display: none;
+    }
+    .mobile-menu-toggle[aria-expanded="true"] .icon-close {
+        display: block;
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
        /* All mobile styles should be within this block */
@@ -624,29 +646,6 @@ const currentPath = Astro.url.pathname;
         outline: 2px solid var(--accent-color);
         outline-offset: 2px;
         box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.3); /* Optional glow */
-    }
-
-    /* Mobile Menu Styles (Base - Hidden) */
-    .mobile-menu-toggle {
-        display: none; /* Hidden by default on desktop */
-        background: none;
-        border: none;
-        padding: var(--space-sm);
-        cursor: pointer;
-        z-index: 1001; /* Above header content */
-        color: var(--primary-color); /* Use light color */
-    }
-
-    .mobile-menu-toggle .icon-close {
-        display: none;
-    }
-
-    /* Style for when menu is open */
-    .mobile-menu-toggle[aria-expanded="true"] .icon-open {
-        display: none;
-    }
-    .mobile-menu-toggle[aria-expanded="true"] .icon-close {
-        display: block;
     }
   </style> 
 
