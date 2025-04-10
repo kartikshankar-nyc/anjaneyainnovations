@@ -5,6 +5,7 @@ const { currentPageTitle } = Astro.props;
 const baseTitle = currentPageTitle.split(' - ')[0]; 
 ---
 
+<!-- Restore outer container div -->
 <nav aria-label="Breadcrumb" class="breadcrumbs-container">
   <div class="container">
     <ol>
@@ -20,12 +21,17 @@ const baseTitle = currentPageTitle.split(' - ')[0];
 
 <style>
   .breadcrumbs-container {
-    background-color: var(--background-color); /* Match main bg */
+    /* Restore original styles */
+    background-color: var(--background-color); 
     border-bottom: 1px solid var(--border-color);
     padding: 0.5rem 0;
     font-size: 0.85rem;
+    /* Remove width and order */
+    /* width: 100%; */
+    /* order: 4; */ 
   }
 
+  /* Restore container styles */
   .container {
     max-width: var(--max-width);
     margin: 0 auto;

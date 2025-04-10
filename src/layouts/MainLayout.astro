@@ -54,7 +54,7 @@ const currentPath = Astro.url.pathname;
     </nav>
   </header>
 
-  <!-- Add Breadcrumbs (conditionally) -->
+  <!-- Restore Breadcrumbs rendering location -->
   {currentPath !== '/' && (
     <Breadcrumbs currentPageTitle={title} />
   )}
@@ -181,10 +181,10 @@ const currentPath = Astro.url.pathname;
     top: 0;
     z-index: 1000; 
     border-bottom: 1px solid var(--border-color); 
-    padding: 0.75rem 0; 
-    backdrop-filter: blur(8px); /* Increase blur */
-    /* Adjust RGBA background for dark base */
-    background-color: rgba(17, 24, 39, 0.8); /* Semi-transparent dark bg */
+    /* Slightly increase padding for larger text */
+    padding: 0.8rem 0; 
+    backdrop-filter: blur(8px); 
+    background-color: rgba(17, 24, 39, 0.8); 
 
   }
 
@@ -215,10 +215,11 @@ const currentPath = Astro.url.pathname;
   }
 
   .logo-text {
-    font-family: var(--font-sans); /* Use Inter */
-    font-weight: 700; /* Bold weight */
-    font-size: 1.3rem; /* Keep size */ 
-    color: var(--primary-color); /* Light text */
+    font-family: var(--font-sans); 
+    font-weight: 700; 
+    /* Increase font size */
+    font-size: 1.4rem; 
+    color: var(--primary-color); 
     text-decoration: none;
     transition: color 0.2s ease;
     /* Ensure text also uses baseline */
@@ -277,16 +278,46 @@ const currentPath = Astro.url.pathname;
 
   .header-status {
      font-size: 0.85rem;
-     color: var(--secondary-color); /* Medium gray status text */
-     border: 1px solid var(--border-color);
-     padding: 4px 10px;
+     color: var(--secondary-color); /* Keep text gray for subtlety */
+     /* Use accent border */
+     border: 1px solid var(--accent-color);
+     padding: 4px 10px 4px 8px; /* Adjust padding left */
      border-radius: var(--radius-default);
-     /* Use darker card background */
-     background-color: var(--card-bg-color);
+     /* Match header background */
+     background-color: rgba(17, 24, 39, 0.8);
+     /* Use flex for dot alignment */
+     display: inline-flex;
+     align-items: center;
+     gap: 6px; /* Gap between dot and text */
+  }
+  
+  /* Add pulsing dot */
+  .header-status::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      background-color: var(--accent-color);
+      border-radius: 50%;
+      display: inline-block;
+      /* Animation */
+      animation: pulse-beacon 2s infinite cubic-bezier(0.45, 0.05, 0.55, 0.95);
   }
 
-  /* Remove old Stealth Banner styles */
-  /* .stealth-banner {...} */
+  /* Define the pulse animation */
+  @keyframes pulse-beacon {
+    0% {
+      transform: scale(0.8);
+      opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+      transform: scale(0.8);
+      opacity: 0.7;
+    }
+  }
 
   /* Main Content */
   main {
@@ -415,18 +446,14 @@ const currentPath = Astro.url.pathname;
 
   /* Style the sup AI */
   .logo sup.sup-ai {
-    /* Use Cyan accent */
     color: var(--accent-color);
-    font-family: var(--font-sans); /* Use Inter */
-    font-weight: 700; /* Bold */
-    font-size: 0.8em; 
-    /* Remove vertical-align and line-height */
-    /* vertical-align: super; */
-    /* line-height: 0; */
-    /* Use relative positioning for fine-tuning */
+    font-family: var(--font-sans); 
+    font-weight: 700; 
+    /* Increase relative size */
+    font-size: 0.85em; 
     position: relative;
-    top: -0.3em; /* Adjust this value as needed */
-    /* Keep negative margin */
+    /* Adjust top position slightly for new base size */
+    top: -0.35em; 
     margin-left: -0.1em; 
   }
 
