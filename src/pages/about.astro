@@ -198,23 +198,36 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
   
   .image-placeholder {
-    width: 100px;
-    height: 100px;
-    border: 2px dashed var(--border-color);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--border-color);
-    font-size: 2rem;
-    font-weight: bold;
-    opacity: 0.5;
-    padding: 0; /* Reset padding */
-    background: none; /* Remove light bg */
+    width: 100%; /* Apply to both placeholders initially */
+    height: 100%;
+    /* Remove dashed border etc */
+    /* border: 2px dashed var(--border-color); */
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    /* color: var(--border-color); */
+    /* font-size: 2rem; */
+    /* font-weight: bold; */
+    opacity: 1; /* Reset opacity */
+    padding: 0; 
+    background: none; 
+    /* Apply Gradient */
+    background-color: var(--background-color); /* Fallback */
+    background-image: linear-gradient(160deg, rgba(31, 41, 55, 0.4) 0%, rgba(17, 24, 39, 0.6) 100%);
+    border-radius: inherit; /* Inherit from parent (.about-image or .member-image) */
   }
+  /* Remove placeholder icon */
+  /* 
   .image-placeholder::after {
      content: '🖼️';
      opacity: 0.5;
+  }
+  */
+
+  /* Ensure the main about image placeholder fills height */
+  .about-image .image-placeholder {
+     padding-bottom: 0; /* Reset padding if needed */
+     /* Height is controlled by .about-image min-height */
   }
 
 
@@ -326,17 +339,22 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   .member-image {
     margin-bottom: 1.5rem;
-    width: 120px; /* Set size */
+    width: 120px; 
     height: 120px;
     margin-left: auto;
     margin-right: auto;
+    border-radius: 50%; /* Make container round */
+    overflow: hidden; /* Clip gradient to circle */
+    border: 1px solid var(--border-color);
   }
 
   .member-image .image-placeholder {
-    padding-bottom: 0; /* Remove padding */
-    border-radius: 50%;
+    padding-bottom: 0; 
+    border-radius: 50%; /* Ensure placeholder itself is round */
     width: 100%;
     height: 100%;
+    /* Use a slightly different gradient maybe? */
+    background-image: linear-gradient(45deg, rgba(31, 41, 55, 0.2) 0%, rgba(17, 24, 39, 0.4) 100%);
   }
 
   .team-member h3 {
