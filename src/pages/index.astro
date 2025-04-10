@@ -64,7 +64,7 @@ import MainLayout from '../layouts/MainLayout.astro';
       <h2 class="section-title">What Our Clients Say</h2>
       <!-- Add container and controls -->
       <div class="testimonial-slider-container">
-        <div class="testimonial-slider">
+      <div class="testimonial-slider">
           <!-- Original Testimonial -->
           <div class="testimonial" data-index="0">
             <div class="testimonial-content">
@@ -122,7 +122,7 @@ import MainLayout from '../layouts/MainLayout.astro';
             </div>
           </div>
            <div class="testimonial" data-index="6">
-            <div class="testimonial-content">
+          <div class="testimonial-content">
               <p>"The AI-driven analytics platform they built gives us a significant competitive edge. Their technical depth is impressive."</p>
             </div>
             <div class="testimonial-author">
@@ -133,8 +133,8 @@ import MainLayout from '../layouts/MainLayout.astro';
            <div class="testimonial" data-index="7">
             <div class="testimonial-content">
               <p>"Navigating our cloud migration seemed daunting, but Anjaneya's team made it seamless and efficient. Fantastic execution."</p>
-            </div>
-            <div class="testimonial-author">
+          </div>
+          <div class="testimonial-author">
               <p class="name">Chloe Dubois</p>
               <p class="position">IT Director, SecureNet Solutions</p>
             </div>
@@ -191,9 +191,22 @@ import MainLayout from '../layouts/MainLayout.astro';
     margin-left: 10px; /* Adjusted margin */
   }
 
+  /* Define Gradient Shift Animation */
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
   /* Hero Section - Dark Mode */
   .hero {
-    background: var(--background-color);
+    /* Remove static background */
+    /* background: var(--background-color); */
+    /* Apply animated gradient */
+    background: linear-gradient(-45deg, #111827, #1F2937, #111827, #1a2330);
+    background-size: 400% 400%;
+    animation: gradientShift 25s ease infinite; 
+    
     color: var(--primary-color); 
     padding: var(--space-4xl) var(--space-xl) var(--space-3xl); 
     text-align: center;
@@ -223,7 +236,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     font-size: clamp(3rem, 6vw, 4.5rem); 
     margin-bottom: var(--space-md);
     font-family: var(--font-sans);
-    font-weight: 800; 
+    font-weight: 800;
     color: var(--primary-color); /* Light Text */
     line-height: 1.1;
   }
@@ -321,7 +334,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     box-shadow: none; 
     transform: none; 
   }
-  
+
   .btn-text:hover .arrow {
     transform: translateX(3px);
   }
@@ -604,7 +617,7 @@ import MainLayout from '../layouts/MainLayout.astro';
   .cta-section::before {
      display: none;
      /*
-     content: '';
+    content: '';
      ...
      */
   }
@@ -690,7 +703,7 @@ import MainLayout from '../layouts/MainLayout.astro';
       order: -1; /* Image first on mobile */
       min-height: 250px;
     }
-    
+
     .container {
       padding: var(--space-2xl) var(--space-md); /* Adjust mobile padding */
     }

@@ -102,9 +102,9 @@ const currentPath = Astro.url.pathname;
     </div>
   </footer>
 
-  <style>
-    /* Base styles */
-    :root {
+<style>
+  /* Base styles */
+  :root {
       /* Option E Palette: Sophisticated Dark Mode */
       --primary-color: #E5E7EB; /* Light Gray/Off-White Text */
       /* Lighten secondary color for better contrast */
@@ -139,33 +139,33 @@ const currentPath = Astro.url.pathname;
     
     /* Import Fonts - Moved link tag to <head> */
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
     html {
       scroll-behavior: smooth;
     }
 
-    body {
+  body {
       font-family: var(--font-sans); /* Use Inter */
       color: var(--primary-color); /* Light primary text */
       background-color: var(--background-color); /* Dark background */
       /* Add subtle radial gradient for depth */
       background-image: radial-gradient(circle at top center, rgba(31, 41, 55, 0.15) 0%, transparent 50%);
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
       line-height: 1.7; /* Increased line height for readability */
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-    }
+  }
 
-    h1, h2, h3, h4, h5, h6 {
+  h1, h2, h3, h4, h5, h6 {
       font-family: var(--font-sans); /* Use Inter */
       font-weight: 800; /* Bold weight for headings */
       color: var(--primary-color); 
@@ -204,10 +204,10 @@ const currentPath = Astro.url.pathname;
     }
 
     /* Header & Navigation - Dark Mode */
-    header {
+  header {
       background-color: transparent; 
-      position: sticky;
-      top: 0;
+    position: sticky;
+    top: 0;
       z-index: 1000; 
       border-bottom: 1px solid var(--border-color); 
       /* Increase padding slightly */
@@ -215,25 +215,25 @@ const currentPath = Astro.url.pathname;
       backdrop-filter: blur(8px); 
       background-color: rgba(17, 24, 39, 0.8); 
 
-    }
+  }
 
-    nav {
-      display: flex;
-      justify-content: space-between;
+  nav {
+    display: flex;
+    justify-content: space-between;
       align-items: baseline;
       /* Adjust horizontal padding */
       padding: 0 var(--space-xl); 
-      max-width: var(--max-width);
-      margin: 0 auto;
+    max-width: var(--max-width);
+    margin: 0 auto;
       /* Add gap for mobile wrapping */
       gap: var(--space-lg);
-    }
+  }
 
-    .logo {
+  .logo {
       /* Use inline-flex and baseline alignment */
       display: inline-flex; 
       align-items: baseline;
-      text-decoration: none;
+    text-decoration: none;
       /* Adjust gap */
       gap: var(--space-xs); 
     }
@@ -245,15 +245,15 @@ const currentPath = Astro.url.pathname;
       text-decoration: none;
       /* Ensure link also uses baseline alignment */
       vertical-align: baseline;
-    }
+  }
 
-    .logo-text {
+  .logo-text {
       font-family: var(--font-sans); 
-      font-weight: 700; 
+    font-weight: 700;
       /* Increase font size */
-      font-size: 1.5rem; 
+    font-size: 1.5rem;
       color: var(--primary-color); 
-      text-decoration: none;
+    text-decoration: none;
       transition: color 0.2s ease;
       /* Ensure text also uses baseline */
       vertical-align: baseline;
@@ -261,17 +261,17 @@ const currentPath = Astro.url.pathname;
     
     .logo:hover .logo-text {
        color: var(--primary-color); /* Keep light on hover */
-    }
+  }
 
-    .menu {
-      display: flex;
+  .menu {
+    display: flex;
       /* Adjust gap */
       gap: var(--space-xl); 
-    }
+  }
 
-    .menu a {
+  .menu a {
       color: var(--primary-color); 
-      text-decoration: none;
+    text-decoration: none;
       font-weight: 600; 
       /* Increase font size */
       font-size: 0.95rem; 
@@ -321,7 +321,7 @@ const currentPath = Astro.url.pathname;
        /* Keep accent border for prominence */
        border: 1px solid var(--accent-color);
        padding: var(--space-xs) var(--space-sm) var(--space-xs) var(--space-sm);
-       border-radius: var(--radius-default);
+    border-radius: var(--radius-default);
        /* Use flex for dot alignment */
        display: inline-flex;
        align-items: center;
@@ -335,7 +335,7 @@ const currentPath = Astro.url.pathname;
         /* Increase size */
         width: 9px;
         height: 9px;
-        background-color: var(--accent-color);
+    background-color: var(--accent-color);
         border-radius: 50%;
         display: inline-block;
         /* Animation */
@@ -357,25 +357,25 @@ const currentPath = Astro.url.pathname;
         transform: scale(0.85);
         opacity: 0.6;
       }
-    }
+  }
 
-    /* Main Content */
-    main {
+  /* Main Content */
+  main {
       flex-grow: 1; 
-    }
+  }
 
     /* Footer - Dark Mode */
-    footer {
+  footer {
       background-color: transparent; /* Match body bg */
       color: var(--secondary-color); /* Medium gray footer text */
       opacity: 1; /* Reset opacity */
       /* Adjust padding */
       padding: var(--space-2xl) var(--space-xl) var(--space-xl); 
-      margin-top: auto;
+    margin-top: auto;
       border-top: 1px solid var(--border-color); /* Subtle top border */
-    }
+  }
 
-    .footer-content {
+  .footer-content {
       display: grid; /* Use grid for footer layout */
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       /* Adjust gap */
@@ -383,9 +383,9 @@ const currentPath = Astro.url.pathname;
       max-width: var(--max-width);
       /* Adjust bottom margin */
       margin: 0 auto var(--space-xl) auto; 
-    }
+  }
 
-    .footer-section {
+  .footer-section {
        font-size: 0.9rem;
     }
     
@@ -444,10 +444,10 @@ const currentPath = Astro.url.pathname;
         padding: 5px 0;
         /* border-top: 1px dashed var(--border-color); */
         display: inline-block;
-    }
+  }
 
-    .copyright {
-      text-align: center;
+  .copyright {
+    text-align: center;
       /* Adjust margin/padding */
       margin-top: var(--space-xl);
       padding-top: var(--space-lg); 
@@ -477,10 +477,10 @@ const currentPath = Astro.url.pathname;
     }
     .mobile-menu-toggle[aria-expanded="true"] .icon-close {
         display: block;
-    }
+  }
 
-    /* Responsive */
-    @media (max-width: 768px) {
+  /* Responsive */
+  @media (max-width: 768px) {
        /* All mobile styles should be within this block */
        nav {
          flex-wrap: wrap; 
@@ -490,7 +490,7 @@ const currentPath = Astro.url.pathname;
          padding: 0 var(--space-lg);
       }
       
-      .menu {
+    .menu {
          /* order: 3; Remove explicit order */
          width: 100%;
          justify-content: center;
@@ -647,8 +647,8 @@ const currentPath = Astro.url.pathname;
         outline: 2px solid var(--accent-color);
         outline-offset: 2px;
         box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.3); /* Optional glow */
-    }
-  </style> 
+  }
+</style> 
 
   <!-- Ensure main.js is loaded -->
   <script src="../scripts/main.js"></script>

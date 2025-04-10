@@ -164,14 +164,17 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
 
   .page-header h1 {
-    font-size: clamp(2.8rem, 5.5vw, 4rem); /* Match global H1 */
-    margin-bottom: 0.5rem;
+    font-size: clamp(2.8rem, 5.5vw, 4rem); 
+    margin-bottom: var(--space-lg);
     font-weight: 800;
     color: var(--primary-color);
-    /* Add underline */
     border-bottom: 2px solid var(--accent-color);
-    display: inline-block; /* Fit underline */
-    padding-bottom: 0.3em;
+    display: block; 
+    width: fit-content;
+    text-align: center; 
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: var(--space-xs);
   }
 
   .page-header p {
@@ -180,7 +183,6 @@ import MainLayout from '../layouts/MainLayout.astro';
     margin: 0 auto;
     font-weight: 400; 
     color: var(--secondary-color);
-    margin-bottom: var(--space-md);
   }
 
   /* Container - use global */
@@ -216,13 +218,15 @@ import MainLayout from '../layouts/MainLayout.astro';
   .contact-form-container h2,
   .contact-info h2 {
     font-size: clamp(1.8rem, 4vw, 2.2rem); 
-    padding-bottom: var(--space-sm);
-    margin-bottom: calc(var(--space-lg) - var(--space-sm) - 2px); 
+    padding-bottom: var(--space-xs); 
+    margin-bottom: var(--space-xl);
     color: var(--primary-color);
-    /* Add underline */
     border-bottom: 2px solid var(--accent-color);
-    display: inline-block; /* Fit underline */
-    padding-bottom: 0.3em;
+    display: block; 
+    width: fit-content;
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .contact-form {
@@ -411,15 +415,16 @@ import MainLayout from '../layouts/MainLayout.astro';
   /* Use global section title */
   .section-title {
     font-size: clamp(2.2rem, 5vw, 3rem); 
-    padding-bottom: var(--space-sm); 
-    margin-bottom: calc(var(--space-2xl) - var(--space-sm) - 2px); 
-    text-align: center;
-    color: var(--primary-color); /* Light Text */
+    padding-bottom: var(--space-xs); 
+    margin-bottom: var(--space-xl); 
+    color: var(--primary-color); 
     font-weight: 800;
-    /* Add underline */
     border-bottom: 2px solid var(--accent-color);
-    display: inline-block; /* Fit underline */
-    padding-bottom: 0.3em;
+    display: block; 
+    width: fit-content;
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .faq-list {
