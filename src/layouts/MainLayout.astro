@@ -153,13 +153,18 @@ const currentPath = Astro.url.pathname;
       font-family: var(--font-sans); /* Use Inter */
       color: var(--primary-color); /* Light primary text */
       background-color: var(--background-color); /* Dark background */
-      /* Add subtle radial gradient for depth */
-      background-image: radial-gradient(circle at top center, rgba(31, 41, 55, 0.15) 0%, transparent 50%);
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+      /* Remove static radial gradient */
+      /* background-image: radial-gradient(circle at top center, rgba(31, 41, 55, 0.15) 0%, transparent 50%); */
+      /* Apply subtle animated gradient */
+      background: linear-gradient(135deg, var(--background-color) 0%, #1a2330 50%, #1F2937 100%);
+      background-size: 300% 300%; /* Large size for movement */
+      animation: subtleGradientShift 45s ease infinite; /* Slow animation */
+      
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
       line-height: 1.7; /* Increased line height for readability */
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -647,6 +652,15 @@ const currentPath = Astro.url.pathname;
         outline: 2px solid var(--accent-color);
         outline-offset: 2px;
         box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.3); /* Optional glow */
+  }
+
+  /* Define Subtle Gradient Shift Animation for Body */
+  @keyframes subtleGradientShift {
+    0% { background-position: 0% 0%; }
+    25% { background-position: 100% 0%; }
+    50% { background-position: 100% 100%; }
+    75% { background-position: 0% 100%; }
+    100% { background-position: 0% 0%; }
   }
 </style> 
 
