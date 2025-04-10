@@ -204,8 +204,8 @@ const currentPath = Astro.url.pathname;
       top: 0;
       z-index: 1000; 
       border-bottom: 1px solid var(--border-color); 
-      /* Adjust padding using variables */
-      padding: var(--space-md) 0; 
+      /* Increase padding slightly */
+      padding: 0.9rem 0; 
       backdrop-filter: blur(8px); 
       background-color: rgba(17, 24, 39, 0.8); 
 
@@ -245,7 +245,7 @@ const currentPath = Astro.url.pathname;
       font-family: var(--font-sans); 
       font-weight: 700; 
       /* Increase font size */
-      font-size: 1.4rem; 
+      font-size: 1.5rem; 
       color: var(--primary-color); 
       text-decoration: none;
       transition: color 0.2s ease;
@@ -264,14 +264,12 @@ const currentPath = Astro.url.pathname;
     }
 
     .menu a {
-      color: var(--primary-color); /* Light menu links */
-      /* Remove base underline styles */
+      color: var(--primary-color); 
       text-decoration: none;
-      /* text-decoration-color: transparent; */ 
       font-weight: 600; 
-      font-size: 0.9rem;
+      /* Increase font size */
+      font-size: 0.95rem; 
       padding: 0.5rem 0; 
-      /* Adjust transition for color/transform only */
       transition: color 0.2s ease, transform 0.2s ease;
       position: relative;
       letter-spacing: 0.5px;
@@ -486,9 +484,9 @@ const currentPath = Astro.url.pathname;
           font-weight: 700; /* Bolder */
       }
 
-      /* Reduce logo text size slightly on mobile */
+      /* Increase mobile logo text size */
       .logo-text {
-          font-size: 1.3rem;
+          font-size: 1.4rem;
       }
       /* Adjust sup size relative to new logo text size */
       /* The sup size uses 'em', so it should adjust automatically */
@@ -510,11 +508,10 @@ const currentPath = Astro.url.pathname;
       color: var(--accent-color);
       font-family: var(--font-sans); 
       font-weight: 700; 
-      /* Increase relative size */
-      font-size: 0.85em; 
+      font-size: 0.85em; /* Keep relative size */
       position: relative;
-      /* Adjust top position slightly for new base size */
-      top: -0.35em; 
+      /* Adjust top position slightly */
+      top: -0.4em; 
       margin-left: -0.1em; 
     }
 
