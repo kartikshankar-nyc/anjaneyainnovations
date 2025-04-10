@@ -675,6 +675,11 @@ const currentPath = Astro.url.pathname;
       left: 0;
       z-index: -1; /* Place behind all content */
   }
+
+  /* Set HTML background for iOS overscroll */
+  html {
+      background-color: var(--background-color);
+  }
 </style> 
 
   <!-- Ensure main.js is loaded -->

@@ -2,9 +2,18 @@
 // import { gsap } from 'gsap';
 // import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/autoplay';
+
 // Import tsParticles engine and slim preset
 import { tsParticles } from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim"; // loads tsparticles v3
+
+// Import Swiper core and required modules
+import Swiper from 'swiper';
+import { Navigation, Autoplay } from 'swiper/modules';
 
 // For now, we'll use script tags in the layout for GSAP
 
@@ -96,32 +105,30 @@ document.addEventListener('DOMContentLoaded', () => {
   // Call setup functions that depend on DOM being ready, but can run after load
   setupMobileMenu();
 
-  // --- Testimonial Carousel Logic --- 
+  // --- REMOVE Old Testimonial Carousel Logic --- 
+  /* 
   const sliderContainer = document.querySelector('.testimonial-slider-container');
   if (sliderContainer) {
     const testimonials = sliderContainer.querySelectorAll('.testimonial');
     const prevBtn = sliderContainer.querySelector('.slider-btn.prev');
     const nextBtn = sliderContainer.querySelector('.slider-btn.next');
-    const slider = sliderContainer.querySelector('.testimonial-slider'); // Get slider element
+    const slider = sliderContainer.querySelector('.testimonial-slider'); 
     let currentIndex = 0;
     let intervalId = null;
     const totalTestimonials = testimonials.length;
-    const slideInterval = 7000; // Time in ms for auto-slide
+    const slideInterval = 7000; 
 
     function showTestimonial(index) {
       testimonials.forEach((testimonial, i) => {
-        // Ensure the element exists and has style property
         if (testimonial && testimonial.style) {
             if (i === index) {
-                testimonial.style.position = ''; // Let it occupy space
+                testimonial.style.position = ''; 
                 testimonial.style.opacity = '1';
                 testimonial.style.pointerEvents = 'auto';
             } else {
                 testimonial.style.opacity = '0';
-                testimonial.style.position = 'absolute'; // Stack hidden ones
+                testimonial.style.position = 'absolute'; 
                 testimonial.style.pointerEvents = 'none';
-                // REMOVE setting display: none
-                // testimonial.style.display = 'none'; 
             }
         } else {
             console.error('Testimonial element or style property not found for index:', i);
@@ -129,24 +136,18 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Function to set slider height based on tallest item
     function setSliderHeight() {
         let maxHeight = 0;
         testimonials.forEach(testimonial => {
-            // Temporarily display to measure height accurately
             const originalDisplay = testimonial.style.display;
-            testimonial.style.position = 'absolute'; // Avoid affecting flow
+            testimonial.style.position = 'absolute'; 
             testimonial.style.visibility = 'hidden';
             testimonial.style.display = 'block';
-            
             maxHeight = Math.max(maxHeight, testimonial.offsetHeight);
-            
-            // Restore original display style (respecting initial setup)
             testimonial.style.position = ''; 
             testimonial.style.visibility = '';
             testimonial.style.display = originalDisplay;
         });
-        
         if (slider && maxHeight > 0) {
             slider.style.height = `${maxHeight}px`;
             console.log(`Set slider height to: ${maxHeight}px`);
@@ -164,7 +165,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function startAutoSlide() {
-        // Clear existing interval if any
         if (intervalId) clearInterval(intervalId);
         intervalId = setInterval(nextTestimonial, slideInterval);
     }
@@ -173,37 +173,52 @@ document.addEventListener('DOMContentLoaded', () => {
         if (intervalId) clearInterval(intervalId);
     }
 
-    if (totalTestimonials > 1) { // Only enable controls if more than one
-        nextBtn.addEventListener('click', () => {
+    if (totalTestimonials > 1) {
+      setSliderHeight(); 
+      window.addEventListener('resize', setSliderHeight); 
+      showTestimonial(currentIndex); 
+      startAutoSlide(); 
+      nextBtn.addEventListener('click', () => {
             nextTestimonial();
-            stopAutoSlide(); // Stop auto-slide on manual interaction
-            // Optional: Restart after a delay
-            // setTimeout(startAutoSlide, slideInterval * 2);
-        });
-
-        prevBtn.addEventListener('click', () => {
+            stopAutoSlide(); 
+      });
+      prevBtn.addEventListener('click', () => {
             prevTestimonial();
-            stopAutoSlide(); // Stop auto-slide on manual interaction
-            // Optional: Restart after a delay
-            // setTimeout(startAutoSlide, slideInterval * 2);
-        });
-
-        // Pause on hover
-        sliderContainer.addEventListener('mouseenter', stopAutoSlide);
-        sliderContainer.addEventListener('mouseleave', startAutoSlide);
-        
-        // Initial setup
-        setSliderHeight(); // Set height before showing first slide
-        window.addEventListener('resize', setSliderHeight); // Recalculate on resize
-        showTestimonial(currentIndex); 
-        startAutoSlide(); 
+            stopAutoSlide(); 
+      });
+      sliderContainer.addEventListener('mouseenter', stopAutoSlide);
+      sliderContainer.addEventListener('mouseleave', startAutoSlide);
     } else {
-        // Hide buttons if only one testimonial
         if(prevBtn) prevBtn.style.display = 'none';
         if(nextBtn) nextBtn.style.display = 'none';
     }
   }
-  // --- End Testimonial Carousel --- 
+  */
+  // --- End Old Testimonial Carousel --- 
+  
+  // --- Swiper Initialization --- 
+  const testimonialSwiper = document.querySelector('.testimonial-swiper');
+  if (testimonialSwiper) {
+      console.log("Initializing Swiper...");
+      new Swiper('.testimonial-swiper', {
+          modules: [Navigation, Autoplay],
+          loop: true,
+          slidesPerView: 1,
+          spaceBetween: 30, 
+          autoplay: {
+            delay: 7000,
+            disableOnInteraction: true, 
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+      });
+      console.log("Swiper Initialized.");
+  } else {
+      console.log("Testimonial Swiper element not found.");
+  }
+  // --- End Swiper Initialization --- 
 
   // --- Intersection Observer for Scroll Animations --- 
   const animatedElements = document.querySelectorAll('.animate-on-scroll');
