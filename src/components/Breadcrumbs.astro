@@ -21,19 +21,22 @@ const baseTitle = currentPageTitle.split(' - ')[0];
 
 <style>
   .breadcrumbs-container {
-    /* Remove opaque background */
-    /* background-color: var(--background-color); */
-    /* Add backdrop blur like header */
-    background-color: rgba(17, 24, 39, 0.8); /* Match header alpha */
-    backdrop-filter: blur(8px); 
-    
+    /* Dark theme styles */
+    background-color: rgba(17, 24, 39, 0.9); /* Increased opacity for dark theme */
+    backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border-color);
     padding: var(--space-sm) 0;
-    font-size: 0.85rem;
-    
+    font-size: 0.9rem; /* Slightly larger font size */
     position: sticky;
     top: 75px; 
     z-index: 999;
+  }
+
+  /* Light theme adjustments for breadcrumbs - all devices */
+  :global(.light-theme) .breadcrumbs-container {
+    background-color: var(--light-card-bg-solid); /* Use solid background color for all devices */
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08); /* Enhanced shadow for better separation */
+    border-bottom: 1px solid var(--light-border-color);
   }
 
   /* Restore container styles */
@@ -55,9 +58,10 @@ const baseTitle = currentPageTitle.split(' - ')[0];
   li {
     display: flex;
     align-items: center;
-    color: var(--secondary-color); /* Medium gray */
+    color: var(--secondary-color);
   }
 
+  /* Separator color adjustment */
   li:not(:last-child)::after {
     content: '/';
     margin-left: 0.5rem;
@@ -65,29 +69,52 @@ const baseTitle = currentPageTitle.split(' - ')[0];
     opacity: 0.7;
   }
 
+  /* Light theme text color adjustments */
+  :global(.light-theme) li {
+    color: var(--light-secondary-color);
+  }
+
+  :global(.light-theme) li:not(:last-child)::after {
+    color: var(--light-secondary-color);
+  }
+
   a {
     color: var(--secondary-color);
     text-decoration: none;
     transition: color 0.2s ease;
+    font-weight: 500; /* Slightly bolder for better visibility */
+  }
+
+  :global(.light-theme) a {
+    color: var(--light-secondary-color);
   }
 
   a:hover {
-    color: var(--accent-color); /* Cyan hover */
+    color: var(--accent-color);
+    transform: none; /* Prevent default rightward movement */
   }
 
   /* Current page (non-link) */
   li[aria-current="page"] {
-    color: var(--primary-color); /* Lighter text for current page */
-    font-weight: 500;
+    color: var(--primary-color);
+    font-weight: 600;
   }
   
-  /* Adjust sticky top for mobile */
+  :global(.light-theme) li[aria-current="page"] {
+    color: var(--light-primary-color);
+  }
+  
+  /* Adjust for mobile */
   @media (max-width: 768px) {
-      .breadcrumbs-container {
-          /* Remove sticky positioning on mobile */
-          position: static;
-          top: auto;
-          z-index: auto;
-      }
+    .breadcrumbs-container {
+      position: static;
+      top: auto;
+      z-index: auto;
+      padding: var(--space-md) 0;
+    }
+    
+    .container {
+      padding: 0 var(--space-md);
+    }
   }
 </style> 
