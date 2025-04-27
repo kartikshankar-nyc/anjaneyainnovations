@@ -66,6 +66,25 @@ const currentPath = Astro.url.pathname;
       <div class="header-status">
         <span>Status: Stealth</span>
       </div>
+      <!-- Add theme toggle button -->
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark/light mode">
+        <!-- Sun icon for dark mode (show in dark mode, clicking switches to light) -->
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <!-- Moon icon for light mode (show in light mode, clicking switches to dark) -->
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
     </nav>
   </header>
 
@@ -108,39 +127,124 @@ const currentPath = Astro.url.pathname;
 <style>
   /* Base styles */
   :root {
-      /* Option E Palette: Sophisticated Dark Mode */
-      --primary-color: #E5E7EB; /* Light Gray/Off-White Text */
-      /* Lighten secondary color for better contrast */
-      --secondary-color: #B0B8C4; 
-      --accent-color: #22D3EE; /* Bright Cyan */
-      --background-color: #111827; /* Very Dark Blue/Gray BG */
-      /* Make card BG a subtle gradient */
-      --card-bg-color: linear-gradient(180deg, #1F2937 0%, #1a2330 100%); 
-      --border-color: #374151; /* Medium Dark Gray Borders */
-      --text-on-light: #1F2937; /* Dark text if needed on light elements */
-      --white: #ffffff;
-      --black: #111827; /* Use background color as black reference */
-      
-      /* Typography: Inter */
-      --font-sans: 'Inter', sans-serif;
-      
-      --shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.1);
-      --shadow-medium: 0 4px 10px rgba(0, 0, 0, 0.2);
-      --radius-default: 6px; /* Modern radius */
-      --max-width: 1100px; 
-      
-      /* Spacing Scale */
-      --space-xs: 0.25rem; /* 4px */
-      --space-sm: 0.5rem;  /* 8px */
-      --space-md: 1rem;    /* 16px */
-      --space-lg: 1.5rem;  /* 24px */
-      --space-xl: 2rem;    /* 32px */
-      --space-2xl: 3rem;   /* 48px */
-      --space-3xl: 4rem;   /* 64px */
-      --space-4xl: 5rem;   /* 80px */
+    /* Color schemes - Dark theme (default) */
+    --primary-color: #E5E7EB; /* Light Gray/Off-White Text */
+    --secondary-color: #B0B8C4; 
+    --accent-color: #22D3EE; /* Bright Cyan */
+    --background-color: #111827; /* Very Dark Blue/Gray BG */
+    --card-bg-color: linear-gradient(180deg, #1F2937 0%, #1a2330 100%); 
+    --card-bg-solid: #1F2937; /* Solid fallback for card background */
+    --border-color: #374151; /* Medium Dark Gray Borders */
+    --text-on-light: #1F2937; /* Dark text if needed on light elements */
+    --white: #ffffff;
+    --black: #111827; /* Use background color as black reference */
+    
+    /* Light theme variables (will be applied when .light-theme class is added) */
+    --light-primary-color: #1F2937; /* Dark Gray Text (same as text-on-light) */
+    --light-secondary-color: #4B5563; /* Medium Gray Text */
+    --light-accent-color: #0891B2; /* Slightly darker cyan for better contrast */
+    --light-background-color: #F9FAFB; /* Light Gray Background */
+    --light-card-bg-color: linear-gradient(180deg, #FFFFFF 0%, #F3F4F6 100%); /* White to Light Gray */
+    --light-card-bg-solid: #FFFFFF; /* Solid fallback for card background */
+    --light-border-color: #E5E7EB; /* Light Gray Borders */
+    --light-text-on-dark: #F9FAFB; /* Light text for dark elements */
+    
+    /* Typography: Inter */
+    --font-sans: 'Inter', sans-serif;
+    
+    --shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 4px 10px rgba(0, 0, 0, 0.2);
+    --radius-default: 6px; /* Modern radius */
+    --max-width: 1100px; 
+    
+    /* Spacing Scale */
+    --space-xs: 0.25rem; /* 4px */
+    --space-sm: 0.5rem;  /* 8px */
+    --space-md: 1rem;    /* 16px */
+    --space-lg: 1.5rem;  /* 24px */
+    --space-xl: 2rem;    /* 32px */
+    --space-2xl: 3rem;   /* 48px */
+    --space-3xl: 4rem;   /* 64px */
+    --space-4xl: 5rem;   /* 80px */
+  }
+
+  /* Light theme class that will be toggled */
+  .light-theme {
+    /* Apply light theme colors */
+    --primary-color: var(--light-primary-color);
+    --secondary-color: var(--light-secondary-color);
+    --accent-color: var(--light-accent-color);
+    --background-color: var(--light-background-color);
+    --card-bg-color: var(--light-card-bg-color);
+    --card-bg-solid: var(--light-card-bg-solid);
+    --border-color: var(--light-border-color);
+    --text-on-light: var(--light-text-on-dark);
+    --black: var(--light-primary-color);
+  }
+
+  /* Apply user preference by default */
+  @media (prefers-color-scheme: light) {
+    :root:not(.dark-theme-set) {
+      /* Apply light theme colors */
+      --primary-color: var(--light-primary-color);
+      --secondary-color: var(--light-secondary-color);
+      --accent-color: var(--light-accent-color);
+      --background-color: var(--light-background-color);
+      --card-bg-color: var(--light-card-bg-color);
+      --card-bg-solid: var(--light-card-bg-solid);
+      --border-color: var(--light-border-color);
+      --text-on-light: var(--light-text-on-dark);
+      --black: var(--light-primary-color);
     }
     
-    /* Import Fonts - Moved link tag to <head> */
+    /* Show/hide the appropriate theme icon */
+    :root:not(.dark-theme-set) .theme-toggle .sun-icon {
+      display: none;
+    }
+    
+    :root:not(.dark-theme-set) .theme-toggle .moon-icon {
+      display: block;
+    }
+  }
+
+  /* Theme toggle button styles */
+  .theme-toggle {
+    background: none;
+    border: none;
+    color: var(--accent-color);
+    cursor: pointer;
+    padding: var(--space-xs);
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .theme-toggle:hover {
+    background-color: rgba(34, 211, 238, 0.1);
+    transform: rotate(15deg);
+  }
+  
+  /* Default icon visibility */
+  .theme-toggle .sun-icon {
+    display: block;
+  }
+  
+  .theme-toggle .moon-icon {
+    display: none;
+  }
+  
+  /* Light theme icon visibility */
+  .light-theme .theme-toggle .sun-icon {
+    display: none;
+  }
+  
+  .light-theme .theme-toggle .moon-icon {
+    display: block;
+  }
 
   * {
     margin: 0;
@@ -218,6 +322,12 @@ const currentPath = Astro.url.pathname;
       backdrop-filter: blur(8px); /* Blur content scrolling under */
       background-color: rgba(17, 24, 39, 0.8); /* Semi-transparent fallback */
 
+  }
+
+  /* Light theme header adjustments */
+  .light-theme header {
+    background-color: rgba(249, 250, 251, 0.8); /* Light bg with transparency */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle shadow for light theme */
   }
 
   nav {
@@ -664,6 +774,24 @@ const currentPath = Astro.url.pathname;
   /* Set HTML background for iOS overscroll */
   html {
       background-color: var(--background-color);
+  }
+
+  /* Particles container in light mode */
+  .light-theme #particles-js {
+    opacity: 0.4; /* More transparent particles in light mode */
+  }
+
+  /* Responsive styles for the theme toggle */
+  @media (max-width: 768px) {
+    .theme-toggle {
+      order: 2; /* Position between status and menu toggle */
+      margin-left: auto; /* Push to the right */
+    }
+    
+    nav {
+      justify-content: space-between;
+      padding: 0 var(--space-md);
+    }
   }
 </style> 
 

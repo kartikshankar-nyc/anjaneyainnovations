@@ -17,9 +17,87 @@ import { Navigation, Autoplay } from 'swiper/modules';
 
 // For now, we'll use script tags in the layout for GSAP
 
+// Theme toggle functionality
+const initThemeToggle = () => {
+  const themeToggle = document.getElementById('theme-toggle');
+  const htmlElement = document.documentElement;
+  const STORAGE_KEY = 'anjaneya-theme-preference';
+  
+  // Check for saved theme preference or use system preference
+  const getStoredTheme = () => localStorage.getItem(STORAGE_KEY);
+  const setStoredTheme = (theme) => localStorage.setItem(STORAGE_KEY, theme);
+  
+  // Function to set theme
+  const setTheme = (theme) => {
+    if (theme === 'light') {
+      htmlElement.classList.add('light-theme');
+      htmlElement.classList.remove('dark-theme-set');
+    } else {
+      htmlElement.classList.remove('light-theme');
+      htmlElement.classList.add('dark-theme-set');
+    }
+    setStoredTheme(theme);
+  };
+  
+  // Initialize theme
+  const initializeTheme = () => {
+    const storedTheme = getStoredTheme();
+    
+    if (storedTheme) {
+      // If user has a saved preference, use it
+      setTheme(storedTheme);
+    } else {
+      // Otherwise check system preference
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setTheme(prefersDark ? 'dark' : 'light');
+    }
+  };
+  
+  // Toggle theme function
+  const toggleTheme = () => {
+    const currentTheme = htmlElement.classList.contains('light-theme') ? 'light' : 'dark';
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    
+    // If using particles, update particle colors for light/dark mode
+    const particlesContainer = document.getElementById('particles-js');
+    if (particlesContainer && window.tsParticles) {
+      const container = window.tsParticles.domItem(0);
+      if (container) {
+        // Update particle colors based on theme
+        const colors = newTheme === 'light' 
+          ? ["#4B5563", "#9CA3AF", "#0891B2"] // Light theme colors
+          : ["#E5E7EB", "#B0B8C4", "#22D3EE"]; // Dark theme colors
+        
+        container.options.particles.color.value = colors;
+        container.refresh();
+      }
+    }
+  };
+  
+  // Add click event listener to theme toggle button
+  if (themeToggle) {
+    themeToggle.addEventListener('click', toggleTheme);
+  }
+  
+  // Initialize theme on page load
+  initializeTheme();
+  
+  // Listen for system preference changes
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ({ matches }) => {
+    // Only apply if user hasn't set a preference
+    if (!getStoredTheme()) {
+      setTheme(matches ? 'dark' : 'light');
+    }
+  });
+};
+
 // Use DOMContentLoaded again
 document.addEventListener('DOMContentLoaded', () => {
   // console.log("DOM Content Loaded - main.js executing"); 
+  
+  // Initialize theme toggle
+  initThemeToggle();
   
   // --- Preloader Fade Out --- 
   // Add 'loaded' class to body after a short delay 
@@ -115,74 +193,90 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- tsParticles Initialization --- 
   // Function to load and configure background particles
   const initParticles = async () => {
-      // console.log("Initializing tsParticles...");
-      // Load the slim preset (contains necessary features)
-      await loadSlim(tsParticles); 
-      // Load configuration onto the #particles-js canvas
-      await tsParticles.load({ 
-          id: "particles-js",
-          options: {
-              background: {},
-              fpsLimit: 60,
-              interactivity: {
-                  events: {
-                      onHover: {
-                          enable: true,
-                          mode: "repulse",
-                      },
-                      onClick: {
-                          enable: false,
-                          mode: "push",
-                      },
-                  },
-                  modes: {
-                      repulse: {
-                          distance: 80,
-                          duration: 0.4,
-                      },
-                  },
-              },
-              particles: {
-                  color: {
-                      value: ["#E5E7EB", "#B0B8C4", "#22D3EE"], // Updated secondary color
-                  },
-                  links: {
-                      color: "#374151",
-                      distance: 150,
-                      enable: true,
-                      opacity: 0.3,
-                      width: 1,
-                  },
-                  move: {
-                      direction: "none",
-                      enable: true,
-                      outModes: {
-                          default: "out",
-                      },
-                      random: true,
-                      speed: 1,
-                      straight: false,
-                  },
-                  number: {
-                      density: {
-                          enable: true,
-                      },
-                      value: 80,
-                  },
-                  opacity: {
-                      value: { min: 0.2, max: 0.7 },
-                  },
-                  shape: {
-                      type: "circle",
-                  },
-                  size: {
-                      value: { min: 1, max: 4 },
-                  },
-              },
-              detectRetina: true,
-          }
-      });
-      // console.log("tsParticles initialized.");
+    // console.log("Initializing tsParticles...");
+    
+    // Determine if we're in light mode
+    const isLightMode = document.documentElement.classList.contains('light-theme');
+    
+    // Choose colors based on theme
+    const particleColors = isLightMode 
+      ? ["#4B5563", "#9CA3AF", "#0891B2"] // Light theme colors
+      : ["#E5E7EB", "#B0B8C4", "#22D3EE"]; // Dark theme colors
+    
+    const linkColor = isLightMode ? "#E5E7EB" : "#374151";
+    const particleOpacity = isLightMode ? { min: 0.1, max: 0.5 } : { min: 0.2, max: 0.7 };
+    
+    // Load the slim preset (contains necessary features)
+    await loadSlim(tsParticles); 
+    // Load configuration onto the #particles-js canvas
+    await tsParticles.load({ 
+      id: "particles-js",
+      options: {
+        background: {},
+        fpsLimit: 60,
+        interactivity: {
+          events: {
+            onHover: {
+              enable: true,
+              mode: "repulse",
+            },
+            onClick: {
+              enable: false,
+              mode: "push",
+            },
+          },
+          modes: {
+            repulse: {
+              distance: 80,
+              duration: 0.4,
+            },
+          },
+        },
+        particles: {
+          color: {
+            value: particleColors,
+          },
+          links: {
+            color: linkColor,
+            distance: 150,
+            enable: true,
+            opacity: isLightMode ? 0.2 : 0.3,
+            width: 1,
+          },
+          move: {
+            direction: "none",
+            enable: true,
+            outModes: {
+              default: "out",
+            },
+            random: true,
+            speed: isLightMode ? 0.8 : 1,
+            straight: false,
+          },
+          number: {
+            density: {
+              enable: true,
+            },
+            value: isLightMode ? 60 : 80,
+          },
+          opacity: {
+            value: particleOpacity,
+          },
+          shape: {
+            type: "circle",
+          },
+          size: {
+            value: { min: 1, max: 4 },
+          },
+        },
+        detectRetina: true,
+      }
+    });
+    
+    // Make particles available to the theme toggle
+    window.tsParticles = tsParticles;
+    
+    // console.log("tsParticles initialized.");
   };
   // Initialize particles when DOM is ready
   initParticles().catch(err => console.error("Particle Init Error:", err)); // Add catch for async errors
