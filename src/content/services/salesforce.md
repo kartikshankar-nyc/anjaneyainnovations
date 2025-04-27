@@ -1,11 +1,14 @@
 ---
-title: Salesforce Implementation & Optimization
-description: Maximize CRM effectiveness with end-to-end custom Salesforce implementations. We streamline workflows, integrate enterprise systems, and leverage AI-powered insights to provide actionable client intelligence tailored to your business.
+title: Salesforce Solutions
+description: As certified Salesforce specialists, we provide end-to-end implementation, customization, and optimization services to maximize your CRM investment. Our tailored solutions leverage the full power of the Salesforce platform to transform customer relationships, enhance sales operations, and drive business growth.
 features:
-  - Custom Salesforce Development (Apex, LWC)
-  - Sales Cloud, Service Cloud, Experience Cloud
-  - Integration with Enterprise Systems
-  - AI-Powered Insights (Einstein Analytics)
-  - Org Optimization & Health Checks
+  - Salesforce Implementation & Integration
+  - Sales Cloud & Service Cloud Customization
+  - Marketing Cloud & Commerce Cloud Solutions
+  - Einstein AI Implementation & Analytics
+  - CPQ & Revenue Cloud Configuration
+  - Lightning Experience Migration
+  - AppExchange Product Development
+  - Salesforce DevOps & Continuous Delivery
 order: 5
 --- 

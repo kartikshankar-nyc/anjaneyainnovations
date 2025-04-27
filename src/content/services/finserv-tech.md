@@ -1,11 +1,14 @@
 ---
 title: Financial Services Technology
-description: Deep domain expertise in architecting and implementing mission-critical technology for the financial sector. We leverage AI for enhanced client intelligence, operational efficiency, and robust solutions across Investment Banking, Wealth Management, and Global Capital Markets.
+description: We specialize in technology solutions tailored for the unique challenges of financial institutions. Our team combines deep domain expertise in banking, payments, insurance, and capital markets with cutting-edge technical capabilities to deliver secure, compliant, and innovative financial technology solutions.
 features:
-  - Investment Banking Platforms
-  - Wealth Management Technology
-  - Global Capital Markets Systems
-  - CRM & Client Intelligence (AI-Enhanced)
-  - Compliance & Regulatory Tech
+  - Core Banking System Modernization
+  - Payment Processing & Infrastructure
+  - Wealth Management Platforms
+  - Risk Management & Compliance Systems
+  - Digital Banking Transformation
+  - InsurTech Solutions Development
+  - Fintech Integration & Open Banking
+  - Blockchain & Distributed Ledger Technology
 order: 4
 --- 

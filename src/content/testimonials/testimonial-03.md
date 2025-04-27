@@ -1,6 +1,6 @@
 ---
-quote: "The custom software delivered exceeded our expectations, streamlining critical workflows and boosting our team's productivity immensely."
-name: Raj Patel
-position: VP Operations, Global Logistics Inc.
+quote: "The Salesforce implementation led by Anjaneya Innovations transformed our sales process completely. Their team's technical expertise combined with deep business understanding resulted in a 63% reduction in sales cycle time and improved pipeline visibility."
+name: Michael Chen
+position: VP of Sales, Global Retail Solutions
 order: 3
 --- 

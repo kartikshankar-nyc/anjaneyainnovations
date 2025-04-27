@@ -1,11 +1,14 @@
 ---
 title: Data & AI Solutions
-description: Unlock the power of your data ecosystem. We design and build modern data platforms, implement advanced analytics and business intelligence, and integrate AI/ML to create predictive insights and durable competitive advantages.
+description: We help organizations harness the transformative power of data and artificial intelligence to drive innovation and competitive advantage. From modern data architectures to sophisticated AI/ML implementations, our end-to-end solutions turn data into actionable insights and intelligent automation that deliver measurable business outcomes.
 features:
-  - Data Engineering & Platform Builds
-  - Business Intelligence & Analytics
-  - Data Visualization & Reporting
-  - AI/ML Implementation & Integration
-  - Customer & Market Insights
+  - Enterprise Data Strategy & Governance
+  - Modern Data Platform Architecture
+  - Data Engineering & Pipeline Development
+  - Advanced Analytics & Business Intelligence
+  - AI/ML Model Development & Deployment
+  - Generative AI & LLM Implementation
+  - Computer Vision & NLP Solutions
+  - MLOps & AI Governance Frameworks
 order: 3
 --- 

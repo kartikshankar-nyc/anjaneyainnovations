@@ -1,5 +1,5 @@
 ---
 title: Excellence
-description: A commitment to best-in-class engineering, strategic thinking, and delivering exceptional, measurable results.
+description: We relentlessly pursue technical and strategic perfection in everything we deliver. Our commitment to excellence drives continuous learning, rigorous quality standards, and measurable outcomes that consistently exceed client expectations.
 order: 2
 --- 

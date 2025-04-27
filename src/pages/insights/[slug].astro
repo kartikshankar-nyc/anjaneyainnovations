@@ -1,0 +1,166 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { getCollection, getEntryBySlug } from 'astro:content';
+
+// Get the slug from the URL
+export async function getStaticPaths() {
+  const insights = await getCollection('insights');
+  return insights.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+// Format the date
+const formattedDate = new Date(entry.data.publishDate).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+
+<MainLayout title={`${entry.data.title} - Anjaneya Innovations`}>
+  <div class="article-container">
+    <article class="article-content">
+      <header class="article-header">
+        <h1>{entry.data.title}</h1>
+        <div class="article-meta">
+          <span class="article-date">Published on {formattedDate}</span>
+          {entry.data.author && <span class="article-author">by {entry.data.author}</span>}
+        </div>
+        {entry.data.tags && (
+          <div class="article-tags">
+            {entry.data.tags.map(tag => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        )}
+      </header>
+      
+      <div class="article-body">
+        <Content />
+      </div>
+      
+      <footer class="article-footer">
+        <a href="/insights" class="btn btn-text">← Back to all insights</a>
+      </footer>
+    </article>
+  </div>
+</MainLayout>
+
+<style>
+  .article-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--space-3xl) var(--space-xl);
+  }
+  
+  .article-header {
+    margin-bottom: var(--space-2xl);
+    text-align: left;
+  }
+  
+  .article-header h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: var(--space-md);
+    color: var(--primary-color);
+    line-height: 1.2;
+  }
+  
+  .article-meta {
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    margin-bottom: var(--space-md);
+  }
+  
+  .article-author {
+    margin-left: var(--space-sm);
+  }
+  
+  .article-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-top: var(--space-md);
+  }
+  
+  .tag {
+    background-color: var(--card-bg-color);
+    color: var(--accent-color);
+    padding: 0.3rem 0.8rem;
+    border-radius: var(--radius-default);
+    font-size: 0.8rem;
+    border: 1px solid var(--border-color);
+  }
+  
+  .article-body {
+    color: var(--secondary-color);
+    line-height: 1.8;
+    font-size: 1.1rem;
+  }
+  
+  .article-body h2 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin: var(--space-2xl) 0 var(--space-md);
+    border-bottom: 2px solid var(--accent-color);
+    display: inline-block;
+    padding-bottom: var(--space-xs);
+  }
+  
+  .article-body h3 {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    margin: var(--space-xl) 0 var(--space-md);
+  }
+  
+  .article-body p {
+    margin-bottom: var(--space-lg);
+  }
+  
+  .article-body ul, .article-body ol {
+    margin-bottom: var(--space-lg);
+    padding-left: 1.5rem;
+  }
+  
+  .article-body li {
+    margin-bottom: var(--space-sm);
+  }
+  
+  .article-footer {
+    margin-top: var(--space-3xl);
+    padding-top: var(--space-xl);
+    border-top: 1px solid var(--border-color);
+  }
+  
+  .btn-text {
+    color: var(--primary-color);
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem; 
+    background: none;
+    padding: 0;
+    border: none;
+    text-transform: none; 
+    letter-spacing: normal;
+    font-family: var(--font-sans); 
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+  }
+  
+  .btn-text:hover {
+    color: var(--accent-color);
+    text-decoration-color: var(--accent-color);
+  }
+  
+  @media (max-width: 768px) {
+    .article-container {
+      padding: var(--space-xl) var(--space-md);
+    }
+  }
+</style>

@@ -1,5 +1,5 @@
 ---
 title: Partnership
-description: Operating as true partners, fostering collaboration, shared ownership, and mutual success with clients and our internal team.
+description: We become an extension of our clients' teams, sharing both challenges and successes. Our collaborative approach integrates deeply with client organizations, fostering knowledge transfer, shared ownership, and sustainable long-term value creation.
 order: 3
 --- 

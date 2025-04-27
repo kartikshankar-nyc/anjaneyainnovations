@@ -1,21 +1,14 @@
 ---
 title: Technology Leadership & Execution
-description: Expert fractional leadership (CTO, CDO, CISO, Chief Architect) and end-to-end custom software development. We modernize legacy systems, design compelling user experiences, architect robust multi-cloud solutions (AWS, Azure, GCP), and implement elite engineering practices—from API strategy to DevSecOps, SRE, and test engineering transformation.
+description: Our experienced technology leaders bridge strategic vision with tactical execution, helping organizations build, scale, and optimize their technical capabilities. Whether leading critical initiatives, augmenting existing leadership, or providing interim leadership during transitions, we deliver technical excellence with business acumen.
 features:
-  - Fractional C-Suite Leadership
-  - Custom Software Development (End-to-End)
-  - Cloud Native Architecture (AWS, Azure, GCP)
-  - Legacy System Modernization
-  - Mobile App Development (iOS & Android)
-  - Rapid Prototyping
-  - UX Consulting & Strategy
-  - End-to-End UI Design
-  - API Strategy & Development
-  - DevSecOps & SRE Practices
-  - Test Engineering Transformation
-  - Cybersecurity Strategy & Implementation
-  - Developer Experience (DevEx / DX) Enhancement
-  - Engineering Productivity Improvement
-  - Software Intelligence Platform Implementation
+  - Interim CTO/CIO Services
+  - Technology Roadmap Development
+  - Technical Due Diligence
+  - Product Development Leadership
+  - Cloud Migration & Optimization
+  - Technology Portfolio Rationalization
+  - DevOps Transformation & Implementation
+  - Scalability & Performance Engineering
 order: 2
 --- 

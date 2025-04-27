@@ -1,6 +1,6 @@
 ---
-name: Jane Smith
+name: Priya Sharma
 position: Chief Strategy Officer
-bio: Jane brings extensive knowledge in strategic planning and business development to our clients.
+bio: Priya brings 15+ years of strategic consulting expertise with a focus on AI-driven business transformation. Her background in data science and management consulting enables her to translate complex technical solutions into tangible business outcomes for clients across healthcare, finance, and retail.
 order: 2
 --- 
