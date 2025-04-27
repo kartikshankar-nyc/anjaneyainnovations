@@ -198,13 +198,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Determine if we're in light mode
     const isLightMode = document.documentElement.classList.contains('light-theme');
     
-    // Choose colors based on theme
+    // Choose colors based on theme - make colors more vibrant
     const particleColors = isLightMode 
-      ? ["#4B5563", "#9CA3AF", "#0891B2"] // Light theme colors
-      : ["#E5E7EB", "#B0B8C4", "#22D3EE"]; // Dark theme colors
+      ? ["#3B4965", "#64748B", "#0E7490"] // Enhanced light theme colors - deeper blues
+      : ["#E5E7EB", "#CBD5E1", "#38BDF8"]; // Enhanced dark theme colors - added lighter blue
     
-    const linkColor = isLightMode ? "#E5E7EB" : "#374151";
-    const particleOpacity = isLightMode ? { min: 0.1, max: 0.5 } : { min: 0.2, max: 0.7 };
+    const linkColor = isLightMode ? "#94A3B8" : "#475569";
+    // Increase opacity for more visibility
+    const particleOpacity = isLightMode ? { min: 0.15, max: 0.6 } : { min: 0.25, max: 0.8 };
     
     // Load the slim preset (contains necessary features)
     await loadSlim(tsParticles); 
@@ -227,7 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
           },
           modes: {
             repulse: {
-              distance: 80,
+              distance: 100, // Increased interaction distance
               duration: 0.4,
             },
           },
@@ -240,8 +241,8 @@ document.addEventListener('DOMContentLoaded', () => {
             color: linkColor,
             distance: 150,
             enable: true,
-            opacity: isLightMode ? 0.2 : 0.3,
-            width: 1,
+            opacity: isLightMode ? 0.3 : 0.4, // Increased link opacity
+            width: isLightMode ? 1 : 1.2, // Slightly thicker lines in dark mode
           },
           move: {
             direction: "none",
@@ -250,14 +251,15 @@ document.addEventListener('DOMContentLoaded', () => {
               default: "out",
             },
             random: true,
-            speed: isLightMode ? 0.8 : 1,
+            speed: isLightMode ? 0.9 : 1.1, // Slightly faster in dark mode
             straight: false,
           },
           number: {
             density: {
               enable: true,
+              area: 800, // Smaller area means more particles
             },
-            value: isLightMode ? 60 : 80,
+            value: isLightMode ? 75 : 90, // Increased number of particles
           },
           opacity: {
             value: particleOpacity,
@@ -266,7 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
             type: "circle",
           },
           size: {
-            value: { min: 1, max: 4 },
+            value: { min: 1, max: isLightMode ? 4 : 5 }, // Slightly larger particles in dark mode
           },
         },
         detectRetina: true,

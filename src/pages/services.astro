@@ -9,366 +9,233 @@ const services = (await getCollection('services')).sort(
 ---
 
 <MainLayout title="Our Capabilities - Anjaneya Innovations">
-  <section class="page-header">
-    <div class="container">
-      <h1>Our Capabilities</h1>
-      <p>Bespoke, AI-driven technology solutions designed for transformative results.</p>
-      <div class="stealth-banner">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="12" y1="8" x2="12" y2="12"></line>
-          <line x1="12" y1="16" x2="12.01" y2="16"></line>
-        </svg>
-        <span>Some services are currently in development and will be fully revealed soon</span>
+  <div class="page-wrapper">
+    <section class="intro-section section-spacing">
+      <div class="container">
+        <div class="section-content animate-on-scroll">
+          <h1 class="section-heading">Our Capabilities</h1>
+          <p class="intro-tagline">Bespoke, AI-driven technology solutions designed for transformative results.</p>
+          <p class="section-text">At Anjaneya Innovations, we deliver end-to-end technology solutions that integrate cutting-edge artificial intelligence, cloud architecture, and modern engineering practices. Our expertise spans across critical business functions and specialized domains, allowing us to address complex challenges with precision and vision.</p>
+          <p class="section-text">Our team of seasoned technologists and strategists work as an extension of your organization, bringing both technical excellence and business acumen to every engagement. Whether you need strategic guidance, implementation support, or full-scale digital transformation, we tailor our approach to deliver measurable results that drive your business forward.</p>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="services-detail">
-    <div class="container">
-      <p class="section-intro">We deliver end-to-end technology solutions, integrating AI and modern engineering practices across core business functions and specialized domains.</p>
-      
-      <!-- Loop through services collection -->
-      {services.map(service => (
-        <div class="service-item animate-on-scroll">
-          <div class="service-content">
-            <h2>{service.data.title}</h2>
-            <p>{service.data.description}</p>
-            {service.data.features && service.data.features.length > 0 && (
-              <ul class="service-features">
-                {service.data.features.map(feature => <li>{feature}</li>)}
-              </ul>
-            )}
+    <section class="services-section section-spacing">
+      <div class="container">
+        <div class="section-content">
+          <!-- Loop through services collection -->
+          {services.map(service => (
+            <div class="service-item animate-on-scroll">
+              <div class="service-content">
+                <h2 class="section-heading">{service.data.title}</h2>
+                <p class="section-text">{service.data.description}</p>
+                {service.data.features && service.data.features.length > 0 && (
+                  <ul class="feature-list">
+                    {service.data.features.map(feature => <li>{feature}</li>)}
+                  </ul>
+                )}
+              </div>
+            </div>
+          ))}
+          <!-- End loop -->
+        </div>
+      </div>
+    </section>
+
+    <section class="approach-section section-spacing">
+      <div class="container">
+        <div class="section-content animate-on-scroll">
+          <h2 class="section-heading">Our Approach</h2>
+          <p class="section-text centered-text">We follow a structured yet flexible methodology that emphasizes collaboration, transparency, and measurable outcomes. Each step is designed to maximize value and minimize risk.</p>
+          
+          <div class="process-steps">
+            <div class="process-step">
+              <div class="step-number">1</div>
+              <h3>Discovery</h3>
+              <p>Understand your business goals, context, challenges, and unique requirements through deep stakeholder engagement and analysis.</p>
+            </div>
+            
+            <div class="process-step">
+              <div class="step-number">2</div>
+              <h3>Analysis</h3>
+              <p>Analyze your current state, market landscape, and identify key opportunities using data-driven insights and industry expertise.</p>
+            </div>
+            
+            <div class="process-step">
+              <div class="step-number">3</div>
+              <h3>Strategy</h3>
+              <p>Design bespoke, practical, and high-impact solutions rigorously aligned with your objectives and technical realities.</p>
+            </div>
+            
+            <div class="process-step">
+              <div class="step-number">4</div>
+              <h3>Implementation</h3>
+              <p>Execute with precision, agility, and seamless integration with your teams, using modern engineering practices and transparent progress tracking.</p>
+            </div>
+            
+            <div class="process-step">
+              <div class="step-number">5</div>
+              <h3>Evaluation</h3>
+              <p>Continuously measure results, refine approaches, and ensure tangible value delivery against defined success metrics.</p>
+            </div>
           </div>
         </div>
-      ))}
-      <!-- End loop -->
-    </div>
-  </section>
+      </div>
+    </section>
 
-  <section class="process animate-on-scroll">
-    <div class="container">
-      <h2 class="section-title">Our Approach</h2>
-      <div class="process-steps">
-        <div class="process-step">
-          <div class="step-number">1</div>
-          <h3>Discovery</h3>
-          <p>Understand your business goals, context, challenges, and unique requirements.</p>
-        </div>
-        
-        <div class="process-step">
-          <div class="step-number">2</div>
-          <h3>Analysis</h3>
-          <p>Analyze your current state, market landscape, and identify key opportunities.</p>
-        </div>
-        
-        <div class="process-step">
-          <div class="step-number">3</div>
-          <h3>Strategy</h3>
-          <p>Design bespoke, practical, and high-impact solutions rigorously aligned with your objectives.</p>
-        </div>
-        
-        <div class="process-step">
-          <div class="step-number">4</div>
-          <h3>Implementation</h3>
-          <p>Execute with precision, agility, and seamless integration with your teams.</p>
-        </div>
-        
-        <div class="process-step">
-          <div class="step-number">5</div>
-          <h3>Evaluation</h3>
-          <p>Continuously measure results, refine approaches, and ensure tangible value delivery.</p>
+    <section class="cta-section section-spacing">
+      <div class="container">
+        <div class="section-content animate-on-scroll text-center">
+          <h2 class="section-heading">Ready to Transform Your Business?</h2>
+          <p class="section-text">Schedule a consultation to learn how our capabilities can help you achieve your business goals and overcome technology challenges.</p>
+          <a href="/contact" class="btn btn-primary">Contact Us Today</a>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section class="cta-section animate-on-scroll">
-    <div class="container">
-      <h2>Ready to Transform Your Business?</h2>
-      <p>Schedule a consultation to learn how our services can help you achieve your business goals.</p>
-      <a href="/contact" class="btn btn-primary">Contact Us Today</a>
-    </div>
-  </section>
+    </section>
+  </div>
 </MainLayout>
 
 <style>
-  /* Remove old Stealth Mode Styling */
-  /* 
-  .stealth-indicator { ... }
-  .stealth-badge { ... }
-  .stealth-pulse { ... }
-  @keyframes pulse { ... }
-  */
+  /* Page Wrapper */
+  .page-wrapper {
+    width: 100%;
+    overflow-x: hidden;
+  }
 
-  /* Restyle page header for Dark Mode */
-  .page-header {
-    /* Remove background */
-    /* background: var(--card-bg-color); */
-    color: var(--primary-color);
-    /* Adjust padding */
-    padding: var(--space-3xl) var(--space-xl) var(--space-2xl); 
-    text-align: center;
-    position: relative;
-    overflow: hidden;
+  /* Common Section Styling */
+  .section-spacing {
+    padding: var(--space-3xl) 0;
     border-bottom: 1px solid var(--border-color);
   }
   
-  /* Remove old overlays */
-  .page-header::before, 
-  .page-header::after {
-     display: none; 
-  }
-
-  .page-header .container {
-    position: relative;
-    z-index: 2;
-  }
-
-  .page-header h1 {
-    font-size: clamp(2.8rem, 5.5vw, 4rem); 
-    margin-bottom: 0.5rem;
-    font-weight: 800;
-    color: var(--primary-color);
-    text-shadow: none; 
-    /* Add underline */
-    border-bottom: 2px solid var(--accent-color);
-    display: inline-block; /* Center alignment is default for header */
-    padding-bottom: var(--space-xs);
-  }
-
-  .page-header p {
-    font-size: 1.2rem;
-    max-width: 700px;
-    /* Adjust margin */
-    margin: 0 auto var(--space-lg) auto; 
-    font-weight: 400; /* Regular weight */
-    color: var(--secondary-color);
+  .section-spacing:last-child {
+    border-bottom: none;
   }
   
-  /* Restyle stealth banner within header */
-  .stealth-banner {
-    /* Adjust margin */
-    margin-top: var(--space-lg);
-    display: inline-flex; /* Use inline-flex */
-    align-items: center;
-    /* Adjust gap */
-    gap: var(--space-sm); 
-    background-color: var(--background-color); /* Darker bg */
-    /* Adjust padding */
-    padding: var(--space-sm) var(--space-md);
-    border-radius: var(--radius-default);
-    border: 1px solid var(--border-color);
-    color: var(--secondary-color);
-    font-size: 0.9rem;
-  }
-  
-  .stealth-banner svg {
-      stroke: var(--secondary-color);
-      width: 16px;
-      height: 16px;
-  }
-
-  /* Restyle Coming Soon elements */
-  .coming-soon {
-    position: relative;
-    opacity: 0.8; 
-    border-left: 3px solid var(--accent-color); 
-    /* Adjust padding/margin */
-    padding-left: var(--space-xl); 
-    margin-left: calc(-1 * var(--space-xl)); 
-  }
-
-  .coming-soon-badge {
-    position: absolute;
-    /* Adjust position */
-    top: var(--space-md); 
-    left: calc(-1 * var(--space-xl)); 
-    background: var(--accent-color);
-    color: var(--text-on-light); 
-    /* Adjust padding */
-    padding: var(--space-xs) var(--space-sm);
-    border-radius: var(--radius-default);
-  }
-
-  .exclusive-note {
-    /* Adjust margin/padding */
-    margin-top: var(--space-lg);
-    padding: var(--space-lg);
-    background-color: var(--background-color); 
-    border-left: 3px solid var(--accent-color);
-  }
-
-  .exclusive-note p {
-    /* Adjust margin */
-    margin-bottom: var(--space-md);
-    font-style: normal; 
-    font-size: 0.95rem;
-  }
-
-  /* Use standard button styles - rely on global */
-  .btn-sm {
-    /* Adjust padding */
-    padding: var(--space-sm) var(--space-md);
-    font-size: 0.85rem;
-  }
-
-  /* Container - use global */
+  /* Container */
   .container {
     max-width: var(--max-width);
+    width: 100%;
     margin: 0 auto;
-    /* Adjust padding */
-    padding: var(--space-3xl) var(--space-xl); 
-  }
-
-  /* Services Detail - Dark Mode */
-  .services-detail {
-      /* Remove background */
-      /* background-color: var(--card-bg-color); */
+    padding: 0 var(--space-xl);
   }
   
-  /* Remove Alternating Services Layout Styles */
-  /*
-  .alternating-services-layout { ... }
-  .alternating-services-layout::before { ... }
-  */
+  /* Section Content */
+  .section-content {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  /* Heading Styles */
+  .section-heading {
+    font-size: clamp(2.2rem, 5vw, 3rem);
+    font-weight: 800;
+    color: var(--primary-color);
+    margin-bottom: var(--space-lg);
+    position: relative;
+    display: inline-block;
+    padding-bottom: var(--space-xs);
+    border-bottom: 2px solid var(--accent-color);
+  }
+  
+  h1.section-heading {
+    font-size: clamp(2.8rem, 5.5vw, 4rem);
+  }
+  
+  /* Text Styles */
+  .section-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--secondary-color);
+    margin-bottom: var(--space-lg);
+  }
+  
+  .centered-text {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 800px;
+  }
+  
+  .intro-tagline {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--secondary-color);
+    margin-bottom: var(--space-xl);
+  }
+  
+  .text-center {
+    text-align: center;
+  }
 
+  /* Services Section */
   .service-item {
-      /* Revert to simpler layout */
-      display: block; /* Standard block flow */
-      /* grid-template-columns: 1fr var(--space-2xl) 1fr; */
-      /* gap: 0; */ 
-      margin-bottom: var(--space-2xl);
-      /* align-items: start; */ 
-      border: none;
-      background: none;
-      padding: 0;
-      /* Add bottom border for separation */
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: var(--space-xl);
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid var(--border-color);
   }
   
   .service-item:last-child {
-      margin-bottom: 0;
-      border-bottom: none; /* No border on last item */
-      padding-bottom: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
   }
   
-  .service-content {
-      /* Reset grid positioning */
-      grid-column: auto; 
-      position: relative; 
-      padding: 0; /* Remove padding */
-      background: none; /* Remove card background */
-      border-radius: 0;
-      border: none; /* Remove card border */
-      transition: none; /* Remove transitions */
-      z-index: auto; 
-      /* Reset margins */
-      margin-left: 0;
-      margin-right: 0;
-  }
-  
-  /* Remove positioning styles */
-  /*
-  .service-item:nth-child(odd) .service-content { ... }
-  .service-item:nth-child(even) .service-content { ... }
-  */
-
-  /* Remove hover effects */
-  /*
-  .service-item:hover .service-content { ... }
-  .service-item:hover .service-content h2, ... { ... }
-  .service-item:hover .service-content .service-features li::before { ... }
-  */
-
-  .service-content h2 {
-    font-size: clamp(1.8rem, 4vw, 2.2rem); 
-    margin-bottom: var(--space-md);
-    color: var(--primary-color); 
-    /* Remove underline from here */
-    /* border-bottom: 2px solid var(--accent-color); */
-    /* display: inline-block; */
-    /* padding-bottom: var(--space-sm); */
-  }
-
-  .service-content p {
-    /* Adjust margin */
-    margin-bottom: var(--space-lg);
-    line-height: 1.7;
-    color: var(--secondary-color);
-  }
-
-  .service-features {
+  /* Feature Lists */
+  .feature-list {
     padding-left: 1.5rem;
-    list-style: none; /* Remove default list style */
-    /* Adjust margin */
+    list-style: none;
     margin-top: var(--space-md);
+    margin-bottom: var(--space-xl);
   }
 
-  .service-features li {
-    /* Adjust margin */
+  .feature-list li {
     margin-bottom: var(--space-sm);
     position: relative;
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: var(--secondary-color);
   }
 
-  .service-features li::before {
-    content: "→"; /* Use arrow */
-    color: var(--accent-color); /* Cyan arrow */
+  .feature-list li::before {
+    content: "→";
+    color: var(--accent-color);
     font-weight: bold;
     display: inline-block;
-    /* Increase width for more space */
     width: 1.5em;
-    /* Adjust margin to compensate for width */
     margin-left: -1.6em; 
-    /* Increase font size for prominence */
     font-size: 1.3em;
     line-height: 1;
   }
 
-  /* Process Section - Dark Mode */
-  .process {
-    /* Remove background */
-    /* background-color: var(--background-color); */
-    border-top: 1px solid var(--border-color);
-    border-bottom: 1px solid var(--border-color);
+  /* Process Section */
+  .approach-section {
+    background-color: var(--background-color);
   }
-
-  /* Apply consistent style to section title */
-  .section-title {
-    font-size: clamp(2.2rem, 5vw, 3rem); 
-    padding-bottom: var(--space-xs); 
-    margin-bottom: calc(var(--space-2xl) - var(--space-xs) - 2px); 
-    text-align: center;
-    color: var(--primary-color); 
-    font-weight: 800;
-    /* Ensure underline */
-    border-bottom: 2px solid var(--accent-color);
-    display: inline-block; 
-  }
-
+  
   .process-steps {
-    display: grid; /* Use grid */
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    /* Adjust gap */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: var(--space-lg); 
-    text-align: center;
+    margin-top: var(--space-2xl);
   }
 
   .process-step {
-      background-color: var(--card-bg-color); /* Card bg */
-      padding: var(--space-lg);
-      border-radius: var(--radius-default);
-      border: 1px solid var(--border-color);
-      /* Add transition */
-      transition: transform 0.3s ease, border-color 0.3s ease;
+    background-color: var(--card-bg-color);
+    padding: var(--space-lg);
+    border-radius: var(--radius-default);
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
   
   .process-step:hover {
-      transform: translateY(-5px);
-      border-color: var(--accent-color);
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
   }
 
   .step-number {
@@ -377,9 +244,8 @@ const services = (await getCollection('services')).sort(
     line-height: 40px;
     border-radius: 50%;
     background-color: var(--accent-color);
-    color: var(--text-on-light); /* Dark text */
+    color: var(--text-on-light);
     font-weight: 700;
-    /* Adjust margin */
     margin: 0 auto var(--space-md) auto;
     font-size: 1.1rem;
   }
@@ -392,84 +258,24 @@ const services = (await getCollection('services')).sort(
   }
   
   .process-step p {
-      font-size: 0.9rem;
-      color: var(--secondary-color);
-      max-width: none; /* Allow text to fill */
-      margin-bottom: 0;
+    font-size: 0.95rem;
+    color: var(--secondary-color);
+    margin-bottom: 0;
+    flex-grow: 1;
   }
 
-  /* CTA Section - Use styles from index.astro */
+  /* CTA Section */
   .cta-section {
-    /* Remove background */
-    /* background: var(--card-bg-color); */ 
-    color: var(--primary-color); 
+    background-color: var(--background-color);
     text-align: center;
-    position: relative;
-    overflow: hidden;
-    border-top: 1px solid var(--border-color);
-    /* Adjust padding */
-    padding: var(--space-3xl) var(--space-xl); 
-  }
-  
-  .cta-section::before {
-     display: none;
   }
 
-  .cta-section h2 {
-    font-size: 2.2rem; 
-    /* Adjust margin */
-    margin-bottom: var(--space-md); 
-    color: var(--primary-color); 
+  .cta-section .section-text {
+    max-width: 600px;
+    margin: 0 auto var(--space-xl);
   }
 
-  .cta-section p {
-    font-size: 1.1rem; 
-    max-width: 600px; 
-    /* Adjust margin */
-    margin: 0 auto var(--space-xl); 
-    color: var(--secondary-color); 
-  }
-
-  /* Responsive Styles */
-  @media (max-width: 768px) {
-    /* Collapse to single column on mobile */
-    .alternating-services-layout {
-        padding: 0; /* Remove padding */
-        &::before {
-            display: none; /* Hide central line */
-        }
-    }
-
-    .service-item {
-      grid-template-columns: 1fr; /* Single column */
-      margin-bottom: var(--space-xl);
-    }
-    
-    .service-item:nth-child(odd) .service-content,
-    .service-item:nth-child(even) .service-content {
-        grid-column: 1 / -1; /* Span full width */
-        justify-self: auto; /* Reset alignment */
-        margin-left: 0;
-        margin-right: 0;
-    }
-    .coming-soon {
-        padding-left: 0;
-        margin-left: 0;
-        border-left: none;
-        border-top: 3px solid var(--accent-color);
-        /* Adjust mobile padding/margin */
-        padding-top: var(--space-xl);
-        margin-top: var(--space-lg);
-    }
-    .coming-soon-badge {
-        /* Adjust mobile position */
-        top: calc(-1 * var(--space-md) + 2px); 
-        left: var(--space-md);
-        writing-mode: horizontal-tb;
-    }
-  }
-
-  /* Define button styles locally */
+  /* Button styles */
   .btn {
     display: inline-block;
     padding: 0.9rem 2.2rem; 
@@ -487,53 +293,54 @@ const services = (await getCollection('services')).sort(
   }
 
   .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 3px 6px rgba(0,0,0,0.1); 
+    transform: translateY(-2px);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1); 
   }
 
   .btn-primary {
-    /* Default: Dark bg, light text, accent border */
     background-color: var(--card-bg-color);
     color: var(--primary-color);
     border-color: var(--accent-color);
   }
-
+  
   .btn-primary:hover {
-    /* Hover: Cyan bg, dark text */
-    background-color: var(--accent-color); 
-    border-color: var(--accent-color);
+    background-color: var(--accent-color);
     color: var(--text-on-light);
-  }
-  
-  .btn-secondary,
-  .btn-outline {
-    background-color: transparent;
-    border-color: var(--primary-color); /* Light border */
-    color: var(--primary-color); /* Light text */
-  }
-  
-  .btn-secondary:hover,
-  .btn-outline:hover {
-    /* Corrected Hover: Transparent BG, Accent border/text */
-    background-color: transparent;
-    color: var(--accent-color);
     border-color: var(--accent-color);
   }
 
-  /* Add style for intro paragraph */
-  .section-intro {
-      font-size: 1.1rem;
-      color: var(--secondary-color);
-    text-align: center;
-    max-width: 800px;
-      margin: 0 auto var(--space-2xl) auto;
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .section-spacing {
+      padding: var(--space-2xl) 0;
+    }
+    
+    .container {
+      padding: 0 var(--space-md);
+    }
+    
+    .section-heading {
+      margin-bottom: var(--space-md);
+    }
+    
+    .section-text {
+      font-size: 1rem;
+      margin-bottom: var(--space-md);
+    }
+    
+    .service-item {
+      margin-bottom: var(--space-xl);
+      padding-bottom: var(--space-lg);
+    }
+    
+    .process-steps {
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+    }
+    
+    .process-step {
+      padding: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
   }
-
-  /* Remove Placeholder Styles */
-  /*
-  .service-image { ... }
-  .image-placeholder { ... }
-  .image-placeholder::before { ... }
-  */
-
 </style> 

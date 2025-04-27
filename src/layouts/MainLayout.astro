@@ -180,6 +180,8 @@ const currentPath = Astro.url.pathname;
     --border-color: var(--light-border-color);
     --text-on-light: var(--light-text-on-dark);
     --black: var(--light-primary-color);
+    /* Add subtle gradient in light theme */
+    background-image: linear-gradient(to bottom right, #F9FAFB, #F3F4F6);
   }
 
   /* Apply user preference by default */
@@ -254,6 +256,9 @@ const currentPath = Astro.url.pathname;
 
     html {
       scroll-behavior: smooth;
+      background-color: var(--background-color);
+      /* Add subtle gradient in dark theme */
+      background-image: linear-gradient(to bottom right, #111827, #1F2937);
   }
 
   body {
@@ -763,22 +768,23 @@ const currentPath = Astro.url.pathname;
 
   /* Particles Container Styles */
   #particles-js {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      z-index: -1; /* Place behind all body content */
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1; /* Place behind all body content */
+    opacity: 0.9; /* Slightly more prominent in dark mode */
   }
 
   /* Set HTML background for iOS overscroll */
   html {
-      background-color: var(--background-color);
+    background-color: var(--background-color);
   }
 
-  /* Particles container in light mode */
+  /* Particles container in light theme */
   .light-theme #particles-js {
-    opacity: 0.4; /* More transparent particles in light mode */
+    opacity: 0.7; /* More visible in light mode while still preserving text readability */
   }
 
   /* Responsive styles for the theme toggle */
