@@ -315,6 +315,85 @@ const currentPath = Astro.url.pathname;
       transform: translateX(3px);
     }
 
+    /* Form Element Styles - Enhanced with prominent cyan outlines */
+    input, 
+    textarea, 
+    select, 
+    button:not(.btn):not(.theme-toggle):not(.mobile-menu-toggle) {
+      background-color: var(--card-bg-color);
+      color: var(--primary-color);
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-default);
+      padding: var(--space-md);
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    /* Add subtle cyan glow on normal state */
+    .light-theme input,
+    .light-theme textarea,
+    .light-theme select,
+    .light-theme button:not(.btn):not(.theme-toggle):not(.mobile-menu-toggle) {
+      border-color: var(--border-color);
+      box-shadow: 0 0 0 1px rgba(9, 145, 178, 0.15); /* Light theme subtle cyan outline */
+    }
+    
+    /* Dark theme inputs */
+    :not(.light-theme) input,
+    :not(.light-theme) textarea,
+    :not(.light-theme) select,
+    :not(.light-theme) button:not(.btn):not(.theme-toggle):not(.mobile-menu-toggle) {
+      border-color: var(--border-color);
+      box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.15); /* Dark theme subtle cyan outline */
+    }
+    
+    /* Focus state with prominent cyan glow */
+    input:focus,
+    textarea:focus,
+    select:focus,
+    button:not(.btn):not(.theme-toggle):not(.mobile-menu-toggle):focus {
+      outline: none;
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.3); /* More pronounced cyan glow */
+    }
+    
+    /* Light theme focus state - slightly adjusted for better visibility */
+    .light-theme input:focus,
+    .light-theme textarea:focus,
+    .light-theme select:focus,
+    .light-theme button:not(.btn):not(.theme-toggle):not(.mobile-menu-toggle):focus {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px rgba(9, 145, 178, 0.25); /* Adjusted for light theme */
+    }
+    
+    /* Hover state with subtle cyan hint */
+    input:hover:not(:focus),
+    textarea:hover:not(:focus),
+    select:hover:not(:focus),
+    button:not(.btn):not(.theme-toggle):not(.mobile-menu-toggle):hover:not(:focus) {
+      border-color: rgba(34, 211, 238, 0.6); /* Lighter cyan on hover */
+      box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.15); /* Add subtle glow on hover */
+      transform: translateY(-1px); /* Slight lift effect */
+      transition: all 0.2s ease;
+    }
+    
+    /* Dark theme hover styles */
+    :not(.light-theme) input:hover:not(:focus),
+    :not(.light-theme) textarea:hover:not(:focus),
+    :not(.light-theme) select:hover:not(:focus),
+    :not(.light-theme) button:not(.btn):not(.theme-toggle):not(.mobile-menu-toggle):hover:not(:focus) {
+      background-color: rgba(31, 41, 55, 0.95); /* Slightly lighter background in dark theme */
+    }
+    
+    /* Light theme hover styles */
+    .light-theme input:hover:not(:focus),
+    .light-theme textarea:hover:not(:focus),
+    .light-theme select:hover:not(:focus),
+    .light-theme button:not(.btn):not(.theme-toggle):not(.mobile-menu-toggle):hover:not(:focus) {
+      background-color: #FFFFFF; /* Pure white background in light theme */
+    }
+
     /* Header & Navigation - Dark Mode */
   header {
       background-color: transparent; 
@@ -668,10 +747,57 @@ const currentPath = Astro.url.pathname;
       color: var(--accent-color);
       font-family: var(--font-sans); 
       font-weight: 700; 
-      font-size: 0.85em; /* Keep relative size */
+      font-size: 1.1em; /* Increase size from 0.85em */
       position: relative; /* Allows fine-tuning with 'top' */
       top: -0.4em; /* Adjust vertical position */
       margin-left: -0.1em; /* Pull slightly closer */
+      animation: pulse-ai 1.5s infinite ease-in-out; /* Faster animation (was 2s) */
+      transform-origin: center; /* Ensure scaling from center */
+    }
+    
+    /* Add pulsing animation for AI superscript */
+    @keyframes pulse-ai {
+      0%, 100% {
+        opacity: 0.8;
+        transform: scale(1);
+        text-shadow: 0 0 3px rgba(34, 211, 238, 0.3); /* Subtle glow at rest state */
+        color: var(--accent-color);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.4); /* Larger scale - was 1.2 */
+        text-shadow: 
+          0 0 10px rgba(34, 211, 238, 0.9),  /* Primary glow - stronger */
+          0 0 20px rgba(34, 211, 238, 0.7),  /* Secondary larger glow - brighter */
+          0 0 30px rgba(34, 211, 238, 0.5),  /* Tertiary outer glow - brighter */
+          0 0 40px rgba(34, 211, 238, 0.3);  /* Fourth outer glow - added */
+        color: #FFF; /* Change to white at peak for more contrast */
+      }
+    }
+    
+    /* Add an additional pulse effect for light theme */
+    .light-theme .logo sup.sup-ai {
+      animation: pulse-ai-light 1.5s infinite ease-in-out;
+    }
+    
+    @keyframes pulse-ai-light {
+      0%, 100% {
+        opacity: 0.9;
+        transform: scale(1);
+        text-shadow: 0 0 3px rgba(8, 145, 178, 0.3); /* Subtle glow at rest state */
+        color: var(--accent-color);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.4);
+        text-shadow: 
+          0 0 10px rgba(8, 145, 178, 0.9),
+          0 0 20px rgba(8, 145, 178, 0.7),
+          0 0 30px rgba(8, 145, 178, 0.5),
+          0 0 40px rgba(8, 145, 178, 0.3);
+        color: var(--accent-color); /* Keep color but intensify glow in light theme */
+        filter: brightness(1.3); /* Brighten at peak for light theme */
+      }
     }
 
     /* End Global Button Styles */
