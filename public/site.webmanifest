@@ -1,6 +1,6 @@
 {
   "name": "Anjaneya Innovations",
-  "short_name": "Anjaneya",
+  "short_name": "AI",
   "icons": [
     {
       "src": "/favicon.svg",
@@ -18,7 +18,7 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#111827",
+  "theme_color": "#22D3EE",
   "background_color": "#111827",
   "display": "standalone"
 } 

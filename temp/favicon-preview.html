@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Favicon Preview</title>
+  <link rel="icon" type="image/svg+xml" href="../public/favicon.svg">
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      text-align: center;
+    }
+    .preview-container {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+    }
+    .preview-item {
+      border: 1px solid #ddd;
+      padding: 1rem;
+      border-radius: 8px;
+    }
+    .favicon-large {
+      width: 120px;
+      height: 120px;
+      margin-bottom: 1rem;
+    }
+    .browser-tab {
+      display: flex;
+      align-items: center;
+      background: #f0f0f0;
+      border-radius: 8px 8px 0 0;
+      padding: 0.5rem 1rem;
+      width: fit-content;
+      margin: 0 auto;
+    }
+    .browser-tab img {
+      width: 16px;
+      height: 16px;
+      margin-right: 0.5rem;
+    }
+    .dark-mode {
+      background: #222;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>Anjaneya Innovations Favicon Preview</h1>
+  
+  <div class="preview-container">
+    <div class="preview-item">
+      <h2>Large Preview</h2>
+      <img src="../public/favicon.svg" alt="Favicon" class="favicon-large">
+    </div>
+    
+    <div class="preview-item">
+      <h2>Browser Tab (Light Mode)</h2>
+      <div class="browser-tab">
+        <img src="../public/favicon.svg" alt="Favicon">
+        <span>Anjaneya Innovations</span>
+      </div>
+    </div>
+    
+    <div class="preview-item dark-mode">
+      <h2>Browser Tab (Dark Mode)</h2>
+      <div class="browser-tab dark-mode">
+        <img src="../public/favicon.svg" alt="Favicon">
+        <span>Anjaneya Innovations</span>
+      </div>
+    </div>
+  </div>
+  
+  <p>Check the browser tab above to see the favicon in action.</p>
+</body>
+</html> 

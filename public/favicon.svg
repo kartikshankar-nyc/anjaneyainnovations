@@ -1,10 +1,15 @@
-<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Use dark card background for slightly more visibility than pure black -->
-  <rect width="32" height="32" rx="6" fill="#1F2937"/> 
-  <!-- Use text with common font for clarity -->
-  <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" 
-        font-family="Arial, sans-serif" font-size="20" font-weight="bold" 
-        fill="#22D3EE">
-    AI
-  </text>
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <style>
+    :root { 
+      --bg: #111827; /* Original dark background */
+      --text: #22D3EE; /* Original cyan text */
+    }
+  </style>
+  
+  <!-- Square background -->
+  <rect width="32" height="32" fill="var(--bg)" />
+  
+  <!-- Extra large lowercase 'ai' text that maximizes available space -->
+  <text x="16" y="22" fill="var(--text)" font-family="Arial Black, Arial, sans-serif" 
+        font-weight="900" font-size="24" text-anchor="middle" letter-spacing="-1">ai</text>
 </svg> 
