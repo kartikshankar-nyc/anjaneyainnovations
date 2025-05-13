@@ -57,7 +57,50 @@ const initThemeToggle = () => {
   const toggleTheme = () => {
     const currentTheme = htmlElement.classList.contains('light-theme') ? 'light' : 'dark';
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
+    
+    // Apply GSAP animations if available
+    if (typeof gsap !== 'undefined') {
+      // Animate the toggle button with a rotation
+      gsap.to(themeToggle, {
+        rotation: '+=180',
+        duration: 0.5,
+        ease: 'back.out(1.7)'
+      });
+      
+      // Animate page elements for smooth transition
+      const contentElements = [
+        'body', 
+        'header', 
+        '.logo-text', 
+        'h1', 'h2', 'h3', 
+        'p', 
+        '.btn', 
+        'input', 
+        'textarea'
+      ];
+      
+      // Fade elements slightly during transition
+      gsap.to(contentElements, {
+        opacity: 0.92,
+        duration: 0.2,
+        ease: 'power1.out',
+        onComplete: () => {
+          // Apply the theme class change
+          setTheme(newTheme);
+          
+          // Animate back to full opacity with the new theme
+          gsap.to(contentElements, {
+            opacity: 1,
+            duration: 0.3,
+            delay: 0.1,
+            ease: 'power1.in'
+          });
+        }
+      });
+    } else {
+      // Fallback for when GSAP is not available
+      setTheme(newTheme);
+    }
     
     // If using particles, update particle colors for light/dark mode
     const particlesContainer = document.getElementById('particles-js');
