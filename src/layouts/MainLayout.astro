@@ -124,6 +124,20 @@ const currentPath = Astro.url.pathname;
     </div>
   </footer>
 
+  <!-- Initialize GSAP -->
+  <script>
+    // Import and initialize GSAP
+    import { gsap } from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+    
+    // Register ScrollTrigger plugin
+    gsap.registerPlugin(ScrollTrigger);
+    
+    // Make GSAP available globally
+    window.gsap = gsap;
+    window.ScrollTrigger = ScrollTrigger;
+  </script>
+
 <style>
   /* Base styles */
   :root {

@@ -670,4 +670,99 @@ const testimonials = (await getCollection('testimonials')).sort(
       });
     }
   });
+</script>
+
+<!-- Hero Section Animations -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Safely check if GSAP is available
+    if (typeof gsap !== 'undefined') {
+      // Initially set the opacity to 0 to prevent flash of unstyled content
+      gsap.set(['.stealth-subtitle', '.hero h1', '.hero-content p', '.cta-buttons .btn'], { 
+        opacity: 0,
+        y: 30
+      });
+      
+      // Create a timeline for staggered animation
+      const heroTl = gsap.timeline({ delay: 0.3 });
+      
+      // Animate the subtitle with a reveal effect
+      heroTl.to('.stealth-subtitle', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power3.out'
+      })
+      // Animate the main heading with a reveal
+      .to('h1', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power3.out'
+      }, "-=0.4")
+      // Animate paragraph with a fade-in
+      .to('.hero-content p', {
+        opacity: 1,
+        y: 0, 
+        duration: 0.8,
+        ease: 'power2.out'
+      }, "-=0.4")
+      // Animate CTA buttons with staggered entrance
+      .to('.cta-buttons .btn', {
+        opacity: 1,
+        y: 0,
+        duration: 0.6, 
+        stagger: 0.2,
+        ease: 'back.out(1.2)'
+      }, "-=0.4");
+    }
+  });
+</script>
+
+<!-- Service Cards Scroll Animations -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Safely check if GSAP and ScrollTrigger are available
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      // Get all service cards
+      const serviceCards = document.querySelectorAll('.service-card');
+      
+      // Set initial state to prevent flash of unstyled content
+      gsap.set(serviceCards, { 
+        opacity: 0,
+        y: 50
+      });
+      
+      // Animate each service card when scrolled into view
+      serviceCards.forEach((card, i) => {
+        gsap.to(card, {
+          scrollTrigger: {
+            trigger: card,
+            start: "top 80%", // Start animation when the top of the card reaches 80% from the top of viewport
+            toggleActions: "play none none none", // Play animation once when entering the trigger area
+            // markers: false // For debugging - shows markers on screen
+          },
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          delay: i * 0.15, // Stagger based on card index
+          ease: 'power2.out',
+          clearProps: 'all' // Clean up after animation completes for better performance
+        });
+      });
+
+      // Special animation for the "View All Services" button
+      gsap.from('.services-cta .btn', {
+        scrollTrigger: {
+          trigger: '.services-cta',
+          start: "top 85%"
+        },
+        opacity: 0,
+        y: 20,
+        duration: 0.6,
+        ease: 'back.out(1.7)',
+        delay: 0.2 // Small delay after cards animate
+      });
+    }
+  });
 </script> 
