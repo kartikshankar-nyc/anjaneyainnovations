@@ -524,53 +524,262 @@ const faqs = (await getCollection('faq')).sort(
   */
 </style>
 
+<!-- Form Animation and Enhanced UX -->
 <script>
-  // Contact form functionality will be added when JavaScript environment is set up
+  document.addEventListener('DOMContentLoaded', () => {
+    // Check if GSAP is available
+    if (typeof gsap !== 'undefined') {
+      // Get all form elements
+      const formElements = document.querySelectorAll('.contact-form input, .contact-form textarea');
+      const formGroups = document.querySelectorAll('.form-group');
+      const formContainer = document.querySelector('.contact-form-container');
+      const submitButton = document.querySelector('.contact-form button[type="submit"]');
+      
+      // Begin form fields with reduced opacity
+      gsap.set(formGroups, { 
+        opacity: 0,
+        y: 30
+      });
+      
+      // Setup enhanced form animation sequence on scroll
+      if (formContainer) {
+        // Animate the form groups in sequence
+        gsap.to(formGroups, {
+          opacity: 1,
+          y: 0,
+          stagger: 0.1, // Stagger the animations for a sequenced appearance
+          duration: 0.6,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: formContainer,
+            start: 'top 80%'
+          }
+        });
+      }
+      
+      // Add focus animations to form fields
+      formElements.forEach(field => {
+        const formGroup = field.closest('.form-group');
+        const label = formGroup.querySelector('label');
+        
+        // Focus animation
+        field.addEventListener('focus', () => {
+          // Highlight the label
+          gsap.to(label, {
+            color: 'var(--accent-color)',
+            fontWeight: 800,
+            y: -3,
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+          
+          // Highlight the input field
+          gsap.to(field, {
+            borderColor: 'var(--accent-color)',
+            boxShadow: '0 0 0 3px rgba(34, 211, 238, 0.3)',
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+          
+          // Give a subtle highlight to the entire form group
+          gsap.to(formGroup, {
+            backgroundColor: 'rgba(34, 211, 238, 0.03)',
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+        });
+        
+        // Blur animation
+        field.addEventListener('blur', () => {
+          // Return label to normal if empty
+          gsap.to(label, {
+            color: 'var(--primary-color)',
+            fontWeight: 700,
+            y: 0,
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+          
+          // Keep field highlighted if it has a value
+          if (!field.value) {
+            gsap.to(field, {
+              borderColor: 'var(--border-color)',
+              boxShadow: 'none',
+              duration: 0.3,
+              ease: 'power2.out'
+            });
+          }
+          
+          // Remove background highlight
+          gsap.to(formGroup, {
+            backgroundColor: 'transparent',
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+        });
+      });
+      
+      // Submit button animation
+      if (submitButton) {
+        // Add hover effect
+        submitButton.addEventListener('mouseenter', () => {
+          gsap.to(submitButton, {
+            backgroundColor: 'var(--accent-color)',
+            color: 'var(--text-on-light)',
+            scale: 1.03,
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+        });
+        
+        submitButton.addEventListener('mouseleave', () => {
+          gsap.to(submitButton, {
+            backgroundColor: 'var(--card-bg-color)',
+            color: 'var(--primary-color)',
+            scale: 1,
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+        });
+      }
+      
+      // Enhanced FAQ animations
+      const faqItems = document.querySelectorAll('.faq-item');
+      
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+        
+        if (question && answer) {
+          question.addEventListener('click', () => {
+            const isOpen = answer.style.display === 'block';
+            
+            // Close all other answers with animation
+            faqItems.forEach(otherItem => {
+              if (otherItem !== item) {
+                const otherQuestion = otherItem.querySelector('.faq-question');
+                const otherAnswer = otherItem.querySelector('.faq-answer');
+                
+                if (otherAnswer.style.display === 'block') {
+                  gsap.to(otherAnswer, {
+                    height: 0,
+                    opacity: 0,
+                    duration: 0.3,
+                    ease: 'power2.in',
+                    onComplete: () => {
+                      otherAnswer.style.display = 'none';
+                      otherQuestion.classList.remove('open');
+                    }
+                  });
+                }
+              }
+            });
+            
+            // Toggle current answer with animation
+            if (isOpen) {
+              gsap.to(answer, {
+                height: 0,
+                opacity: 0,
+                duration: 0.3,
+                ease: 'power2.in',
+                onComplete: () => {
+                  answer.style.display = 'none';
+                  question.classList.remove('open');
+                }
+              });
+            } else {
+              answer.style.display = 'block';
+              answer.style.height = '0px';
+              
+              gsap.to(answer, {
+                height: 'auto',
+                opacity: 1,
+                duration: 0.4,
+                ease: 'power2.out'
+              });
+              
+              question.classList.add('open');
+            }
+          });
+        }
+      });
+    }
+  });
+</script>
+
+<script>
+  // Contact form functionality
   document.addEventListener('DOMContentLoaded', () => {
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
       contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        // Form submission logic will be implemented later
-        alert('Thank you for your message! We will get back to you soon.');
-        contactForm.reset();
-      });
-    }
-
-    // FAQ accordion functionality
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        const answer = item.querySelector('.faq-answer');
         
-        if (question && answer) {
-            question.addEventListener('click', () => {
-                const isOpen = answer.style.display === 'block';
+        // Add GSAP animation for form submission feedback
+        if (typeof gsap !== 'undefined') {
+          const button = contactForm.querySelector('button[type="submit"]');
+          const formGroups = contactForm.querySelectorAll('.form-group');
+          
+          // Animate button during submission
+          gsap.to(button, {
+            scale: 0.95,
+            duration: 0.2,
+            ease: 'power2.out',
+            onComplete: () => {
+              // Success animation
+              gsap.to(button, {
+                backgroundColor: '#10B981', // Success green
+                color: 'white',
+                borderColor: '#10B981',
+                duration: 0.5,
+                ease: 'power2.out'
+              });
+              
+              // Text change animation
+              const originalText = button.textContent;
+              button.textContent = 'Message Sent!';
+              
+              // Add success visual feedback
+              gsap.to(formGroups, {
+                opacity: 0.7,
+                duration: 0.5,
+                stagger: 0.05,
+                ease: 'power2.out'
+              });
+              
+              // Reset form after delay
+              setTimeout(() => {
+                contactForm.reset();
                 
-                // Close all other answers
-                faqItems.forEach(otherItem => {
-                    if (otherItem !== item) {
-                        otherItem.querySelector('.faq-answer').style.display = 'none';
-                        otherItem.querySelector('.faq-question').classList.remove('open');
-                    }
+                // Reset button
+                gsap.to(button, {
+                  backgroundColor: 'var(--card-bg-color)',
+                  color: 'var(--primary-color)',
+                  borderColor: 'var(--accent-color)',
+                  scale: 1,
+                  duration: 0.5,
+                  ease: 'power2.out',
+                  onComplete: () => {
+                    button.textContent = originalText;
+                  }
                 });
                 
-                // Toggle current answer
-                if (isOpen) {
-                    answer.style.display = 'none';
-                    question.classList.remove('open');
-                } else {
-                    answer.style.display = 'block';
-                    question.classList.add('open');
-                }
-            });
+                // Reset form opacity
+                gsap.to(formGroups, {
+                  opacity: 1,
+                  duration: 0.5,
+                  stagger: 0.05,
+                  ease: 'power2.out'
+                });
+              }, 2000);
+            }
+          });
+        } else {
+          // Fallback for when GSAP is not available
+          alert('Thank you for your message! We will get back to you soon.');
+          contactForm.reset();
         }
-    });
-
-    // // Optionally open the first FAQ initially
-    // if (faqItems.length > 0) {
-    //   const firstQuestion = faqItems[0].querySelector('.faq-question');
-    //   if (firstQuestion) firstQuestion.click();
-    // }
+      });
+    }
   });
 </script> 
