@@ -301,22 +301,24 @@ const testimonials = (await getCollection('testimonials')).sort(
     font-size: clamp(2.2rem, 5vw, 3rem); 
     padding-bottom: var(--space-sm); 
     margin-bottom: calc(var(--space-2xl) - var(--space-sm) - 2px); 
-    /* --- Ensure Left Alignment --- */
-    text-align: left; 
+    /* --- Center Alignment --- */
+    text-align: center; 
     color: var(--primary-color); 
     font-weight: 800;
     border-bottom: 2px solid var(--accent-color);
-    display: block; /* Default, but explicit */
-    /* --- Remove Conflicting Alignment Styles --- */
-    /* width: fit-content; */
-    /* margin-left: 0; */ 
-    /* margin-right: auto; */ 
+    /* --- Make underline only as wide as text --- */
+    display: inline-block; 
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .container {
     max-width: var(--max-width);
     margin: 0 auto;
     padding: var(--space-3xl) var(--space-xl); 
+    /* Center section titles */
+    text-align: center;
   }
   
   /* Alternating Section Backgrounds - REMOVE */
