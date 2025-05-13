@@ -251,11 +251,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const particleOpacity = isLightMode ? { min: 0.15, max: 0.6 } : { min: 0.25, max: 0.8 };
     
     // Load the slim preset (contains necessary features)
-    await loadSlim(tsParticles); 
+    await loadSlim(tsParticles);
     // Load configuration onto the #particles-js canvas
     await tsParticles.load({ 
       id: "particles-js",
       options: {
+        fullScreen: {
+          enable: false, // Disable fullscreen to prevent overflow issues
+          zIndex: -1
+        },
         background: {},
         fpsLimit: 60,
         interactivity: {

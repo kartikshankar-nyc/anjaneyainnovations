@@ -46,7 +46,14 @@ const insights = (await getCollection('insights')).sort(
 </MainLayout>
 
 <style>
-  /* Use styles consistent with other pages */
+  /* Page Wrapper */
+  .page-wrapper {
+    width: 100%;
+    overflow-x: hidden;
+    position: relative;
+  }
+  
+  /* Page Header */
   .page-header {
     /* Remove opaque background */
     /* background: var(--card-bg-color); */

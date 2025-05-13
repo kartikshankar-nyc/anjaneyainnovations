@@ -340,6 +340,10 @@ const currentPath = Astro.url.pathname;
       background-color: var(--background-color);
       /* Add subtle gradient in dark theme */
       background-image: linear-gradient(to bottom right, #111827, #1F2937);
+      /* Prevent horizontal scroll */
+      overflow-x: hidden;
+      width: 100%;
+      position: relative;
   }
 
   body {
@@ -356,6 +360,8 @@ const currentPath = Astro.url.pathname;
       -moz-osx-font-smoothing: grayscale;
       /* Prevent horizontal scroll */
       overflow-x: hidden;
+      width: 100%;
+      position: relative;
     }
 
   h1, h2, h3, h4, h5, h6 {
@@ -976,12 +982,16 @@ const currentPath = Astro.url.pathname;
   /* Particles Container Styles */
   #particles-js {
     position: fixed;
-    width: 100%;
-    height: 100%;
+    width: 100vw; /* Use viewport width instead of 100% */
+    height: 100vh; /* Use viewport height instead of 100% */
     top: 0;
     left: 0;
+    right: 0;
+    bottom: 0;
     z-index: -1; /* Place behind all body content */
     opacity: 0.9; /* Slightly more prominent in dark mode */
+    overflow: hidden; /* Ensure particles don't cause overflow */
+    max-width: 100%; /* Prevent overflowing the viewport */
   }
 
   /* Set HTML background for iOS overscroll */

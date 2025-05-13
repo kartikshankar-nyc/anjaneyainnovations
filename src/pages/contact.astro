@@ -135,6 +135,19 @@ const faqs = (await getCollection('faq')).sort(
 </MainLayout>
 
 <style>
+  /* Page Wrapper */
+  .page-wrapper {
+    width: 100%;
+    overflow-x: hidden;
+    position: relative;
+  }
+  
+  /* Common Section Styling */
+  .section-spacing {
+    padding: var(--space-3xl) 0;
+    border-bottom: 1px solid var(--border-color);
+  }
+
   /* Restyle page header for Dark Mode */
   .page-header {
     /* Remove background */
