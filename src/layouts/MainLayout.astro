@@ -138,6 +138,73 @@ const currentPath = Astro.url.pathname;
     window.ScrollTrigger = ScrollTrigger;
   </script>
 
+  <!-- Logo Animation -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof gsap !== 'undefined') {
+        // Get logo elements
+        const logo = document.querySelector('.logo');
+        const logoText = document.querySelector('.logo-text');
+        const supAI = document.querySelector('.sup-ai');
+        
+        if (logo && logoText && supAI) {
+          // Create an enhanced pulsing timeline for the AI text
+          // that works with the existing CSS animation
+          const aiPulse = gsap.timeline({
+            paused: true, // Start paused, will be triggered on hover
+            defaults: { duration: 0.4, ease: "back.out(1.7)" }
+          });
+          
+          aiPulse.to(supAI, {
+            color: '#67E8F9', // Brighter cyan
+            textShadow: '0 0 8px rgba(34, 211, 238, 0.8), 0 0 12px rgba(34, 211, 238, 0.5)',
+            scale: 1.5,
+            yoyo: true,
+            repeat: 1,
+            repeatDelay: 0.1
+          });
+          
+          // Interactive hover animation for the logo
+          logo.addEventListener('mouseenter', () => {
+            // Stop the CSS animation temporarily
+            supAI.style.animationPlayState = 'paused';
+            
+            // Animate logoText color
+            gsap.to(logoText, {
+              color: 'var(--accent-color)',
+              duration: 0.3,
+              ease: 'power2.out'
+            });
+            
+            // Play our enhanced pulse animation
+            aiPulse.restart();
+          });
+          
+          logo.addEventListener('mouseleave', () => {
+            // Resume CSS animation
+            supAI.style.animationPlayState = 'running';
+            
+            // Return logoText to original color
+            gsap.to(logoText, {
+              color: 'var(--primary-color)',
+              duration: 0.3,
+              ease: 'power2.out'
+            });
+          });
+          
+          // Initial animation when page loads
+          gsap.from(logo, {
+            opacity: 0,
+            y: -20,
+            duration: 0.7,
+            ease: 'power2.out',
+            delay: 0.2
+          });
+        }
+      }
+    });
+  </script>
+
 <style>
   /* Base styles */
   :root {
