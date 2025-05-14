@@ -47,7 +47,7 @@ const currentPath = Astro.url.pathname;
       <div class="logo">
         <a href="/">
           <span class="logo-text">(Anjaneya Innovations)</span>
-          <sup class="sup-ai">AI</sup>
+          <sup class="sup-ai" aria-label="AI" role="text">AI</sup>
         </a>
       </div>
       <!-- Add Mobile Menu Toggle Button -->
@@ -155,10 +155,10 @@ const currentPath = Astro.url.pathname;
             defaults: { duration: 0.4, ease: "back.out(1.7)" }
           });
           
+          // Modified animation that avoids conflicts with CSS animation
           aiPulse.to(supAI, {
-            color: '#67E8F9', // Brighter cyan
-            textShadow: '0 0 8px rgba(34, 211, 238, 0.8), 0 0 12px rgba(34, 211, 238, 0.5)',
-            scale: 1.5,
+            filter: "brightness(1.5)", // Use filter instead of direct color/shadow changes
+            scale: 1.2, // Keep scale more modest
             yoyo: true,
             repeat: 1,
             repeatDelay: 0.1
@@ -166,8 +166,8 @@ const currentPath = Astro.url.pathname;
           
           // Interactive hover animation for the logo
           logo.addEventListener('mouseenter', () => {
-            // Stop the CSS animation temporarily
-            supAI.style.animationPlayState = 'paused';
+            // Temporarily pause CSS animation during GSAP animation
+            supAI.style.animation = 'none';
             
             // Animate logoText color
             gsap.to(logoText, {
@@ -181,8 +181,18 @@ const currentPath = Astro.url.pathname;
           });
           
           logo.addEventListener('mouseleave', () => {
-            // Resume CSS animation
-            supAI.style.animationPlayState = 'running';
+            // Resume CSS animation after a short delay
+            setTimeout(() => {
+              // Check for iOS
+              const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+              if (isIOS) {
+                supAI.style.animation = 'pulse-ai-ios 1.5s infinite ease-in-out';
+              } else if (document.documentElement.classList.contains('light-theme')) {
+                supAI.style.animation = 'pulse-ai-light 1.5s infinite ease-in-out';
+              } else {
+                supAI.style.animation = 'pulse-ai 1.5s infinite ease-in-out';
+              }
+            }, 300);
             
             // Return logoText to original color
             gsap.to(logoText, {
@@ -840,29 +850,52 @@ const currentPath = Astro.url.pathname;
       margin-left: -0.1em; /* Pull slightly closer */
       animation: pulse-ai 1.5s infinite ease-in-out; /* Faster animation (was 2s) */
       transform-origin: center; /* Ensure scaling from center */
+      /* Add hardware acceleration and ensure element is visible */
+      -webkit-transform: translateZ(0);
+      -webkit-backface-visibility: hidden;
+      -webkit-perspective: 1000;
+      display: inline-block; /* Ensure proper display on iOS */
     }
     
     /* Add pulsing animation for AI superscript */
     @keyframes pulse-ai {
       0%, 100% {
         opacity: 0.8;
-        transform: scale(1);
-        text-shadow: 0 0 3px rgba(34, 211, 238, 0.3); /* Subtle glow at rest state */
+        transform: scale(1) translateZ(0);
+        text-shadow: 0 0 3px rgba(34, 211, 238, 0.3); /* Simplified glow at rest */
         color: var(--accent-color);
       }
       50% {
         opacity: 1;
-        transform: scale(1.4); /* Larger scale - was 1.2 */
-        text-shadow: 
-          0 0 10px rgba(34, 211, 238, 0.9),  /* Primary glow - stronger */
-          0 0 20px rgba(34, 211, 238, 0.7),  /* Secondary larger glow - brighter */
-          0 0 30px rgba(34, 211, 238, 0.5),  /* Tertiary outer glow - brighter */
-          0 0 40px rgba(34, 211, 238, 0.3);  /* Fourth outer glow - added */
+        transform: scale(1.3) translateZ(0); /* Slightly smaller scale for better performance */
+        text-shadow: 0 0 8px rgba(34, 211, 238, 0.8); /* Simplified shadow for iOS */
         color: #FFF; /* Change to white at peak for more contrast */
       }
     }
     
-    /* Add an additional pulse effect for light theme */
+    /* Specific fixes for iOS */
+    @supports (-webkit-touch-callout: none) {
+      /* iOS-specific CSS */
+      .logo sup.sup-ai {
+        top: -0.5em; /* Adjust further up on iOS */
+        animation: pulse-ai-ios 1.5s infinite ease-in-out;
+      }
+      
+      @keyframes pulse-ai-ios {
+        0%, 100% {
+          opacity: 0.8;
+          transform: scale(1) translateZ(0);
+          color: var(--accent-color);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.2) translateZ(0); /* Even smaller scale for iOS */
+          color: #FFF;
+        }
+      }
+    }
+
+    /* An additional pulse effect for light theme */
     .light-theme .logo sup.sup-ai {
       animation: pulse-ai-light 1.5s infinite ease-in-out;
     }
@@ -870,20 +903,15 @@ const currentPath = Astro.url.pathname;
     @keyframes pulse-ai-light {
       0%, 100% {
         opacity: 0.9;
-        transform: scale(1);
-        text-shadow: 0 0 3px rgba(8, 145, 178, 0.3); /* Subtle glow at rest state */
+        transform: scale(1) translateZ(0);
+        text-shadow: 0 0 3px rgba(8, 145, 178, 0.3); /* Simplified shadow */
         color: var(--accent-color);
       }
       50% {
         opacity: 1;
-        transform: scale(1.4);
-        text-shadow: 
-          0 0 10px rgba(8, 145, 178, 0.9),
-          0 0 20px rgba(8, 145, 178, 0.7),
-          0 0 30px rgba(8, 145, 178, 0.5),
-          0 0 40px rgba(8, 145, 178, 0.3);
+        transform: scale(1.3) translateZ(0);
+        text-shadow: 0 0 8px rgba(8, 145, 178, 0.7); /* Simplified shadow stack */
         color: var(--accent-color); /* Keep color but intensify glow in light theme */
-        filter: brightness(1.3); /* Brighten at peak for light theme */
       }
     }
 

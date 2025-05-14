@@ -142,14 +142,50 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize theme toggle
   initThemeToggle();
   
+  // --- iOS Superscript Fix ---
+  // Ensure the AI superscript is visible on iOS
+  const ensureIOSSuperscript = () => {
+    // Check if running on iOS
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    
+    if (isIOS) {
+      // Get the AI superscript element
+      const supAI = document.querySelector('.sup-ai');
+      
+      if (supAI) {
+        // Apply iOS-specific fixes
+        supAI.style.display = 'inline-block';
+        supAI.style.webkitTransform = 'translateZ(0)';
+        supAI.style.transform = 'translateZ(0)';
+        
+        // Set up a periodic check to ensure visibility
+        const checkInterval = setInterval(() => {
+          // If computed style shows element isn't visible, reset styles
+          const computedStyle = window.getComputedStyle(supAI);
+          if (computedStyle.display === 'none' || computedStyle.opacity === '0') {
+            supAI.style.display = 'inline-block';
+            supAI.style.opacity = '1';
+            supAI.style.animation = 'pulse-ai-ios 1.5s infinite ease-in-out';
+          }
+        }, 2000); // Check every 2 seconds
+        
+        // Clear interval after 10 seconds - by then page should be stable
+        setTimeout(() => clearInterval(checkInterval), 10000);
+      }
+    }
+  };
+  
+  // Run iOS fix
+  ensureIOSSuperscript();
+  
   // --- Preloader Fade Out --- 
   // Add 'loaded' class to body after a short delay 
   // to trigger CSS transition for preloader fade-out.
   setTimeout(() => {
     document.body.classList.add('loaded');
     // console.log("Added .loaded class to body after delay"); 
-  }, 300); 
-  // --- End preloader logic --- 
+  }, 300);
+  // --- End preloader logic ---
   
   // Initialize animations when GSAP is available
   // --- REMOVE GSAP CODE BLOCK --- 
