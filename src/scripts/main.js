@@ -2,6 +2,9 @@
 // import { gsap } from 'gsap';
 // import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+// Remove the custom cursor styles import
+// import '../styles/cursor.css';
+
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -20,47 +23,37 @@ import { Navigation, Autoplay, EffectCreative } from 'swiper/modules';
 // Add link prefetching for faster page transitions
 const initLinkPrefetch = () => {
   // Don't prefetch if the user prefers reduced data usage
-  if (navigator.connection &&
-    (navigator.connection.saveData ||
-      (navigator.connection.effectiveType && navigator.connection.effectiveType.includes('2g')))) {
+  if (navigator.connection && (navigator.connection.saveData || navigator.connection.effectiveType.includes('2g'))) {
     return;
   }
 
-  // Check if the browser supports IntersectionObserver
-  if (!('IntersectionObserver' in window)) return;
+  const prefetchLinks = document.querySelectorAll('a[href^="/"]:not([prefetch="false"])');
+  const prefetched = new Set();
 
-  // Create observer for links that enter the viewport
-  const linkObserver = new IntersectionObserver((entries) => {
+  // Observe links
+  const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const link = entry.target;
+        const link = entry.target.getAttribute('href');
 
-        // Only prefetch internal relative links
-        const href = link.getAttribute('href');
-        if (!href ||
-          href.startsWith('#') ||
-          href.startsWith('http') ||
-          href.startsWith('mailto:') ||
-          href.startsWith('tel:')) {
-          return;
+        if (!prefetched.has(link)) {
+          // Create prefetch element
+          const prefetch = document.createElement('link');
+          prefetch.rel = 'prefetch';
+          prefetch.href = link;
+          document.head.appendChild(prefetch);
+
+          prefetched.add(link);
+          // Stop observing this link
+          observer.unobserve(entry.target);
         }
-
-        // Create prefetch link
-        const prefetch = document.createElement('link');
-        prefetch.rel = 'prefetch';
-        prefetch.href = href;
-        prefetch.as = 'document';
-
-        // Add to head and stop observing this link
-        document.head.appendChild(prefetch);
-        linkObserver.unobserve(link);
       }
     });
-  }, { threshold: 0.2 }); // Start prefetching when 20% of the link is visible
+  });
 
-  // Observe all links in the navigation
-  document.querySelectorAll('nav a, .footer-links a').forEach(link => {
-    linkObserver.observe(link);
+  // Observe each link
+  prefetchLinks.forEach(link => {
+    observer.observe(link);
   });
 };
 
@@ -206,263 +199,180 @@ const initThemeToggle = () => {
   });
 };
 
-// Use DOMContentLoaded again
-document.addEventListener('DOMContentLoaded', () => {
-  // console.log("DOM Content Loaded - main.js executing"); 
+// Add magnetic effect to interactive elements
+const initMagneticElements = () => {
+  const magneticElements = document.querySelectorAll('.magnetic-element');
 
-  // Initialize prefetching for faster transitions
-  initLinkPrefetch();
+  magneticElements.forEach(element => {
+    element.addEventListener('mousemove', e => {
+      // Get element dimensions and position
+      const rect = element.getBoundingClientRect();
 
-  // Initialize theme toggle
-  initThemeToggle();
+      // Calculate mouse position relative to the element's center
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
 
-  // Initialize page transition elements
-  initPageTransitions();
+      // Distance from center (normalized)
+      const distanceX = (e.clientX - centerX) / (rect.width / 2);
+      const distanceY = (e.clientY - centerY) / (rect.height / 2);
 
-  // GSAP and ScrollTrigger for Testimonial Journey
+      // Calculate movement amount (max 10px)
+      const moveX = distanceX * 10;
+      const moveY = distanceY * 10;
+
+      // Apply transformation
+      element.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    });
+
+    // Reset position on mouse leave
+    element.addEventListener('mouseleave', () => {
+      element.style.transform = 'translate(0, 0)';
+    });
+  });
+};
+
+// Initialize GSAP safety
+const ensureGSAP = () => {
+  // Make sure GSAP is registered correctly
   if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-    gsap.registerPlugin(ScrollTrigger);
+    try {
+      // Force re-register ScrollTrigger globally
+      gsap.registerPlugin(ScrollTrigger);
 
-    const scenes = document.querySelectorAll('.testimonial-scene');
+      // Make sure GSAP and ScrollTrigger are available globally
+      window.gsap = gsap;
+      window.ScrollTrigger = ScrollTrigger;
 
-    if (scenes.length > 0) {
-      scenes.forEach((scene, index) => {
-        const quoteWords = scene.querySelectorAll('.testimonial-quote span');
-        const authorDetails = scene.querySelector('.testimonial-author-details');
+      // Set initialization flag to true
+      window.gsapInitialized = true;
 
-        // Only apply GSAP animations if elements exist
-        if (quoteWords.length > 0 && authorDetails) {
-          // Set initial state
-          gsap.set(quoteWords, { opacity: 0, y: 20 });
-          gsap.set(authorDetails, { opacity: 0, y: 20 });
+      // Dispatch event for components that might be waiting
+      document.dispatchEvent(new CustomEvent('gsap-ready'));
 
-          const tl = gsap.timeline({
-            scrollTrigger: {
-              trigger: scene,
-              start: 'top top', // Start pinning when top of scene meets top of viewport
-              // End pinning after scrolling 1.5 times the height of the scene
-              // This gives enough scroll distance for the animation to play out while pinned.
-              end: () => `+=${scene.offsetHeight * 1.5}`,
-              pin: true, // Pin the current scene
-              scrub: 1, // Smoothly link animation progress to scrollbar position (0.5 to 3 is common)
-              // markers: true, // Uncomment for debugging ScrollTrigger positions
-              // toggleActions: 'play none none reverse', // Not typically used with scrub
-            }
-          });
-
-          tl.to(quoteWords, {
-            opacity: 1,
-            y: 0,
-            stagger: 0.05, // Time between each word animating in
-            duration: 1, // Relative duration for this part of the scrub
-            ease: 'power2.out'
-          })
-            .to(authorDetails, {
-              opacity: 1,
-              y: 0,
-              duration: 0.5, // Relative duration for this part of the scrub
-              ease: 'power2.out'
-            }, '-=0.3'); // Start this slightly before the quote finishes for a smoother overlap
-        } else {
-          // If elements don't exist, make them visible by default
-          if (quoteWords.length > 0) {
-            quoteWords.forEach(span => span.style.opacity = 1);
-          }
-          if (authorDetails) {
-            authorDetails.style.opacity = 1;
-          }
-        }
-      });
+      console.log("GSAP ScrollTrigger registered globally");
+      return true;
+    } catch (e) {
+      console.error("Error registering ScrollTrigger:", e);
     }
   } else {
-    // Fallback for when GSAP/ScrollTrigger might not be loaded
-    // You could add a class to .testimonial-scene to make them visible by default
-    document.querySelectorAll('.testimonial-scene').forEach(scene => {
-      // scene.style.opacity = 1;
-      const spans = scene.querySelectorAll('.testimonial-quote span');
-      if (spans.length) spans.forEach(span => span.style.opacity = 1);
+    console.warn("GSAP or ScrollTrigger not available");
+  }
+  return false;
+};
 
-      const author = scene.querySelector('.testimonial-author-details');
-      if (author) author.style.opacity = 1;
-    });
-    console.warn('GSAP or ScrollTrigger not available for testimonial animations.');
+// Function to load and configure background particles
+const initParticles = async () => {
+  // Check if particles container exists
+  const particlesContainer = document.getElementById('particles-js');
+  if (!particlesContainer) {
+    return;
   }
 
-  // --- iOS Superscript Fix ---
-  // Ensure the AI superscript is visible on iOS
-  const ensureIOSSuperscript = () => {
-    // Check if running on iOS
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  // Determine if we're in light mode
+  const isLightMode = document.documentElement.classList.contains('light-theme');
 
-    if (isIOS) {
-      // Get the AI superscript element
-      const supAI = document.querySelector('.sup-ai');
+  // Choose colors based on theme - make colors more vibrant
+  const particleColors = isLightMode
+    ? ["#3B4965", "#64748B", "#0E7490"] // Enhanced light theme colors - deeper blues
+    : ["#E5E7EB", "#CBD5E1", "#38BDF8"]; // Enhanced dark theme colors - added lighter blue
 
-      if (supAI) {
-        // Apply iOS-specific fixes
-        supAI.style.display = 'inline-block';
-        supAI.style.webkitTransform = 'translateZ(0)';
-        supAI.style.transform = 'translateZ(0)';
+  const linkColor = isLightMode ? "#94A3B8" : "#475569";
+  // Increase opacity for more visibility
+  const particleOpacity = isLightMode ? { min: 0.15, max: 0.6 } : { min: 0.25, max: 0.8 };
 
-        // Set up a periodic check to ensure visibility
-        const checkInterval = setInterval(() => {
-          // If computed style shows element isn't visible, reset styles
-          const computedStyle = window.getComputedStyle(supAI);
-          if (computedStyle.display === 'none' || computedStyle.opacity === '0') {
-            supAI.style.display = 'inline-block';
-            supAI.style.opacity = '1';
-            supAI.style.animation = 'pulse-ai-ios 1.5s infinite ease-in-out';
-          }
-        }, 2000); // Check every 2 seconds
-
-        // Clear interval after 10 seconds - by then page should be stable
-        setTimeout(() => clearInterval(checkInterval), 10000);
+  try {
+    // Load the slim preset (contains necessary features)
+    await loadSlim(tsParticles);
+    // Load configuration onto the #particles-js canvas
+    await tsParticles.load({
+      id: "particles-js",
+      options: {
+        fullScreen: {
+          enable: false, // Disable fullscreen to prevent overflow issues
+          zIndex: -1
+        },
+        background: {},
+        fpsLimit: 60,
+        interactivity: {
+          events: {
+            onHover: {
+              enable: true,
+              mode: "repulse",
+            },
+            onClick: {
+              enable: false,
+              mode: "push",
+            },
+          },
+          modes: {
+            repulse: {
+              distance: 100, // Increased interaction distance
+              duration: 0.4,
+            },
+          },
+        },
+        particles: {
+          color: {
+            value: particleColors,
+          },
+          links: {
+            color: linkColor,
+            distance: 150,
+            enable: true,
+            opacity: isLightMode ? 0.3 : 0.4, // Increased link opacity
+            width: isLightMode ? 1 : 1.2, // Slightly thicker lines in dark mode
+          },
+          move: {
+            direction: "none",
+            enable: true,
+            outModes: {
+              default: "out",
+            },
+            random: true,
+            speed: isLightMode ? 0.9 : 1.1, // Slightly faster in dark mode
+            straight: false,
+          },
+          number: {
+            density: {
+              enable: true,
+              area: 800, // Smaller area means more particles
+            },
+            value: isLightMode ? 75 : 90, // Increased number of particles
+          },
+          opacity: {
+            value: particleOpacity,
+          },
+          shape: {
+            type: "circle",
+          },
+          size: {
+            value: { min: 1, max: isLightMode ? 4 : 5 }, // Slightly larger particles in dark mode
+          },
+        },
+        detectRetina: true,
       }
-    }
-  };
+    });
 
-  // Run iOS fix
-  ensureIOSSuperscript();
+    // Make particles available to the theme toggle
+    window.tsParticles = tsParticles;
 
-  // --- Preloader Fade Out --- 
-  // Add 'loaded' class to body after a short delay 
-  // to trigger CSS transition for preloader fade-out.
-  setTimeout(() => {
-    document.body.classList.add('loaded');
-    // console.log("Added .loaded class to body after delay"); 
-  }, 300);
-  // --- End preloader logic ---
+  } catch (err) {
+    console.error("Particle Init Error:", err);
+  }
+};
 
-  // --- Swiper Initialization --- 
-  // const testimonialSwiper = document.querySelector('.testimonial-swiper'); // REMOVED
-  // if (testimonialSwiper) { // REMOVED
-  // ENTIRE new Swiper('.testimonial-swiper', { ... }); BLOCK REMOVED
-  // } // REMOVED
-  // --- End Swiper Initialization --- 
-
-  // --- tsParticles Initialization --- 
-  // Function to load and configure background particles
-  const initParticles = async () => {
-    // console.log("Initializing tsParticles...");
-
-    // Check if particles container exists
-    const particlesContainer = document.getElementById('particles-js');
-    if (!particlesContainer) {
-      // Skip particle initialization if container doesn't exist
-      return;
-    }
-
-    // Determine if we're in light mode
-    const isLightMode = document.documentElement.classList.contains('light-theme');
-
-    // Choose colors based on theme - make colors more vibrant
-    const particleColors = isLightMode
-      ? ["#3B4965", "#64748B", "#0E7490"] // Enhanced light theme colors - deeper blues
-      : ["#E5E7EB", "#CBD5E1", "#38BDF8"]; // Enhanced dark theme colors - added lighter blue
-
-    const linkColor = isLightMode ? "#94A3B8" : "#475569";
-    // Increase opacity for more visibility
-    const particleOpacity = isLightMode ? { min: 0.15, max: 0.6 } : { min: 0.25, max: 0.8 };
-
-    try {
-      // Load the slim preset (contains necessary features)
-      await loadSlim(tsParticles);
-      // Load configuration onto the #particles-js canvas
-      await tsParticles.load({
-        id: "particles-js",
-        options: {
-          fullScreen: {
-            enable: false, // Disable fullscreen to prevent overflow issues
-            zIndex: -1
-          },
-          background: {},
-          fpsLimit: 60,
-          interactivity: {
-            events: {
-              onHover: {
-                enable: true,
-                mode: "repulse",
-              },
-              onClick: {
-                enable: false,
-                mode: "push",
-              },
-            },
-            modes: {
-              repulse: {
-                distance: 100, // Increased interaction distance
-                duration: 0.4,
-              },
-            },
-          },
-          particles: {
-            color: {
-              value: particleColors,
-            },
-            links: {
-              color: linkColor,
-              distance: 150,
-              enable: true,
-              opacity: isLightMode ? 0.3 : 0.4, // Increased link opacity
-              width: isLightMode ? 1 : 1.2, // Slightly thicker lines in dark mode
-            },
-            move: {
-              direction: "none",
-              enable: true,
-              outModes: {
-                default: "out",
-              },
-              random: true,
-              speed: isLightMode ? 0.9 : 1.1, // Slightly faster in dark mode
-              straight: false,
-            },
-            number: {
-              density: {
-                enable: true,
-                area: 800, // Smaller area means more particles
-              },
-              value: isLightMode ? 75 : 90, // Increased number of particles
-            },
-            opacity: {
-              value: particleOpacity,
-            },
-            shape: {
-              type: "circle",
-            },
-            size: {
-              value: { min: 1, max: isLightMode ? 4 : 5 }, // Slightly larger particles in dark mode
-            },
-          },
-          detectRetina: true,
-        }
-      });
-
-      // Make particles available to the theme toggle
-      window.tsParticles = tsParticles;
-
-      // console.log("tsParticles initialized.");
-    } catch (err) {
-      console.error("Particle Init Error:", err);
-    }
-  };
-  // Initialize particles when DOM is ready
-  initParticles().catch(err => console.error("Particle Init Error:", err)); // Add catch for async errors
-  // --- End tsParticles Initialization --- 
-
-  // --- Scroll Animations (Intersection Observer) --- 
+// Initialize scroll animations with Intersection Observer
+const initScrollAnimations = () => {
   const animatedElements = document.querySelectorAll('.animate-on-scroll');
-  // console.log("Found elements to animate:", animatedElements.length); 
 
   if (animatedElements.length > 0) {
     // Create an observer to watch for elements entering the viewport
     const observer = new IntersectionObserver((entries, observerInstance) => {
       entries.forEach(entry => {
-        // console.log("Observing:", entry.target, "Intersecting:", entry.isIntersecting); 
         // If element is at least 10% visible
         if (entry.isIntersecting) {
           // Add .is-visible class to trigger CSS animation
           entry.target.classList.add('is-visible');
-          // console.log("Added .is-visible to:", entry.target); 
           // Stop observing this element once animated
           observerInstance.unobserve(entry.target);
         }
@@ -472,90 +382,78 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     // Start observing each tagged element
     animatedElements.forEach(el => {
-      // console.log("Observing element:", el); 
       observer.observe(el);
     });
-  } else {
-    // console.log("No elements with .animate-on-scroll found.");
   }
-  // --- End Scroll Animations --- 
+};
 
-  // --- Mobile Menu Toggle Logic --- 
-  const setupMobileMenu = () => {
-    const toggleButton = document.querySelector('.mobile-menu-toggle');
-    const menu = document.getElementById('main-menu');
+// Set up mobile menu
+const setupMobileMenu = () => {
+  const toggleButton = document.querySelector('.mobile-menu-toggle');
+  const menu = document.getElementById('main-menu');
 
-    if (toggleButton && menu) {
-      // console.log("Setting up mobile menu toggle");
-      // Add click listener to the toggle button
-      toggleButton.addEventListener('click', () => {
-        // Toggle the .is-open class on the menu element
-        const isOpen = menu.classList.toggle('is-open');
-        // Update ARIA attribute for accessibility
-        toggleButton.setAttribute('aria-expanded', isOpen);
-        // console.log("Mobile menu toggled:", isOpen);
-      });
-    } else {
-      console.error("Mobile menu toggle button or menu element not found.");
+  if (toggleButton && menu) {
+    // Add click listener to the toggle button
+    toggleButton.addEventListener('click', () => {
+      // Toggle the .is-open class on the menu element
+      const isOpen = menu.classList.toggle('is-open');
+      // Update ARIA attribute for accessibility
+      toggleButton.setAttribute('aria-expanded', isOpen);
+    });
+  }
+};
+
+// iOS-specific fixes
+const applyIOSFixes = () => {
+  // Check if running on iOS
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+  if (isIOS) {
+    // Get the AI superscript element
+    const supAI = document.querySelector('.sup-ai');
+
+    if (supAI) {
+      // Apply iOS-specific fixes
+      supAI.style.display = 'inline-block';
+      supAI.style.webkitTransform = 'translateZ(0)';
+      supAI.style.transform = 'translateZ(0)';
     }
-  };
+  }
+};
 
-  // Call setup functions
+// Initialize all features on page load
+const initializeFeatures = () => {
+  // Core functionality
+  initLinkPrefetch();
+  initMagneticElements();
+  initThemeToggle();
+  ensureGSAP();
   setupMobileMenu();
-});
+  initScrollAnimations();
 
-// Initialize page transitions enhancements
-const initPageTransitions = () => {
-  // Add smooth animation for logo and navigation elements on page load
-  if (typeof gsap !== 'undefined') {
-    // Add a small delay to ensure the page is ready
-    setTimeout(() => {
-      const header = document.querySelector('header');
-      if (header) {
-        gsap.from(header, {
-          y: -20,
-          opacity: 0.8,
-          duration: 0.8,
-          ease: 'power3.out',
-          clearProps: 'all' // Add clearProps to reset all transforms
-        });
-      }
-
-      // Remove the navigation link animations - they should load normally
-      // Keep only transform cleanup for consistent positioning
-      const navLinks = document.querySelectorAll('.menu a');
-      if (navLinks.length) {
-        // Instead of animating, just ensure transforms are cleared
-        gsap.set(navLinks, { clearProps: 'all' });
-      }
-    }, 100);
-  }
-
-  // Ensure navigation links are aligned properly after transitions
-  document.addEventListener('astro:page-load', () => {
-    // Force reset any transforms on navigation links
-    const navLinks = document.querySelectorAll('.menu a');
-    if (navLinks.length && typeof gsap !== 'undefined') {
-      // Reset transforms immediately
-      gsap.set(navLinks, { clearProps: 'transform' });
-    }
-
-    // Ensure we're at the correct scroll position
-    if ('scrollRestoration' in history) {
-      // Get stored position or 0
-      const scrollY = sessionStorage.getItem('scrollPosition') || 0;
-
-      // Only scroll if we're supposed to be somewhere specific
-      if (scrollY > 0) {
-        window.scrollTo(0, parseInt(scrollY, 10));
-        sessionStorage.removeItem('scrollPosition');
-      }
-    }
+  // Apply magnetic effect to buttons
+  const buttons = document.querySelectorAll('.btn-primary, .btn-secondary, .nav-arrow');
+  buttons.forEach(button => {
+    button.classList.add('magnetic-element');
   });
 
-  // Store scroll position before navigation
-  document.addEventListener('astro:before-preparation', () => {
-    // Save current scroll position
-    sessionStorage.setItem('scrollPosition', window.scrollY.toString());
-  });
-}; 
+  // Background particles
+  initParticles().catch(err => console.error("Particle initialization error:", err));
+
+  // iOS fixes
+  applyIOSFixes();
+
+  // Remove preloader
+  setTimeout(() => {
+    document.body.classList.add('loaded');
+  }, 300);
+};
+
+// Main event listeners
+document.addEventListener('DOMContentLoaded', initializeFeatures);
+
+// Astro view transitions support
+document.addEventListener('astro:page-load', () => {
+  console.log("Page load event fired - initializing features");
+  initializeFeatures();
+}); 

@@ -800,393 +800,454 @@ const testimonials = (await getCollection('testimonials')).sort(
 
 <!-- Hero Section Animations -->
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    if (typeof gsap !== 'undefined') {
-      // Select elements individually instead of as NodeLists
-      const subtitle = document.querySelector('.stealth-subtitle');
-      const heading = document.querySelector('.hero h1');
-      const paragraph = document.querySelector('.hero-content p');
-      const buttons = document.querySelectorAll('.cta-buttons .btn');
-      
-      // Set initial state for each element individually
-      if (subtitle) gsap.set(subtitle, { opacity: 0, y: 30 });
-      if (heading) gsap.set(heading, { opacity: 0, y: 30 });
-      if (paragraph) gsap.set(paragraph, { opacity: 0, y: 30 });
-      if (buttons.length) {
-        buttons.forEach(btn => {
-          gsap.set(btn, { opacity: 0, y: 30 });
-        });
-      }
-      
-      const heroTl = gsap.timeline({ delay: 0.3 });
-      
-      if (subtitle) {
-        heroTl.to(subtitle, {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: 'power3.out'
-        });
-      }
-      
-      if (heading) {
-        heroTl.to(heading, {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: 'power3.out'
-        }, "-=0.4");
-      }
-      
-      if (paragraph) {
-        heroTl.to(paragraph, {
-          opacity: 1,
-          y: 0, 
-          duration: 0.8,
-          ease: 'power2.out'
-        }, "-=0.4");
-      }
-      
-      if (buttons.length) {
-        buttons.forEach((btn, i) => {
-          heroTl.to(btn, {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: 'back.out(1.2)'
-          }, `-=${0.4 - (i * 0.1)}`);
-        });
-      }
+  // Wait for GSAP to be fully initialized
+  function initHeroAnimations() {
+    if (!window.gsap) {
+      console.warn("GSAP not available for hero animations");
+      return;
     }
-  });
+
+    // Make sure ScrollTrigger is registered
+    if (window.ScrollTrigger && window.isGSAPReady && !window.isGSAPReady()) {
+      console.log("Re-registering ScrollTrigger for hero animations");
+      gsap.registerPlugin(ScrollTrigger);
+    }
+    
+    // Select elements individually instead of as NodeLists
+    const subtitle = document.querySelector('.stealth-subtitle');
+    const heading = document.querySelector('.hero h1');
+    const paragraph = document.querySelector('.hero-content p');
+    const buttons = document.querySelectorAll('.cta-buttons .btn');
+    
+    // Set initial state for each element individually
+    if (subtitle) gsap.set(subtitle, { opacity: 0, y: 30 });
+    if (heading) gsap.set(heading, { opacity: 0, y: 30 });
+    if (paragraph) gsap.set(paragraph, { opacity: 0, y: 30 });
+    if (buttons.length) {
+      buttons.forEach(btn => {
+        gsap.set(btn, { opacity: 0, y: 30 });
+      });
+    }
+    
+    const heroTl = gsap.timeline({ delay: 0.3 });
+    
+    if (subtitle) {
+      heroTl.to(subtitle, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power3.out'
+      });
+    }
+    
+    if (heading) {
+      heroTl.to(heading, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power3.out'
+      }, "-=0.4");
+    }
+    
+    if (paragraph) {
+      heroTl.to(paragraph, {
+        opacity: 1,
+        y: 0, 
+        duration: 0.8,
+        ease: 'power2.out'
+      }, "-=0.4");
+    }
+    
+    if (buttons.length) {
+      buttons.forEach((btn, i) => {
+        heroTl.to(btn, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: 'back.out(1.2)'
+        }, `-=${0.4 - (i * 0.1)}`);
+      });
+    }
+  }
+
+  // Initialize on GSAP ready event or on DOMContentLoaded if GSAP is already initialized
+  if (window.isGSAPReady && window.isGSAPReady()) {
+    initHeroAnimations();
+  } else {
+    document.addEventListener('gsap-ready', initHeroAnimations);
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.isGSAPReady && window.isGSAPReady()) {
+        initHeroAnimations();
+      }
+    });
+  }
 </script>
 
 <!-- Service Cards Scroll Animations -->
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-      const serviceCards = document.querySelectorAll('.service-card');
-      
-      if (serviceCards.length) {
-        // Set initial state for each card individually 
-        serviceCards.forEach(card => {
-          gsap.set(card, { opacity: 0, y: 50 });
-        });
-        
-        // Animate each card individually
-        serviceCards.forEach((card, i) => {
-          gsap.to(card, {
-            scrollTrigger: {
-              trigger: card,
-              start: "top 80%", 
-              toggleActions: "play none none none", 
-            },
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            delay: i * 0.15, 
-            ease: 'power2.out',
-            clearProps: 'all' 
-          });
-        });
-      }
-      
-      const ctaButton = document.querySelector('.services-cta .btn');
-      if (ctaButton) {
-        gsap.from(ctaButton, {
-          scrollTrigger: {
-            trigger: '.services-cta',
-            start: "top 85%"
-          },
-          opacity: 0,
-          y: 20,
-          duration: 0.6,
-          ease: 'back.out(1.7)',
-          delay: 0.2 
-        });
-      }
+  // Wait for GSAP to be fully initialized
+  function initServiceCardAnimations() {
+    if (!window.gsap) {
+      console.warn("GSAP not available for service card animations");
+      return;
     }
-  });
+
+    // Make sure ScrollTrigger is registered
+    if (window.ScrollTrigger && window.isGSAPReady && !window.isGSAPReady()) {
+      console.log("Re-registering ScrollTrigger for service card animations");
+      gsap.registerPlugin(ScrollTrigger);
+    }
+    
+    const serviceCards = document.querySelectorAll('.service-card');
+    
+    if (serviceCards.length) {
+      // Set initial state for each card individually 
+      serviceCards.forEach(card => {
+        gsap.set(card, { opacity: 0, y: 50 });
+      });
+      
+      // Animate each card individually
+      serviceCards.forEach((card, i) => {
+        gsap.to(card, {
+          scrollTrigger: {
+            trigger: card,
+            start: "top 80%", 
+            toggleActions: "play none none none", 
+          },
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          delay: i * 0.15, 
+          ease: 'power2.out',
+          clearProps: 'all' 
+        });
+      });
+    }
+    
+    const ctaButton = document.querySelector('.services-cta .btn');
+    if (ctaButton) {
+      gsap.from(ctaButton, {
+        scrollTrigger: {
+          trigger: '.services-cta',
+          start: "top 85%"
+        },
+        opacity: 0,
+        y: 20,
+        duration: 0.6,
+        ease: 'back.out(1.7)',
+        delay: 0.2 
+      });
+    }
+  }
+
+  // Initialize on GSAP ready event or on DOMContentLoaded if GSAP is already initialized
+  if (window.isGSAPReady && window.isGSAPReady()) {
+    initServiceCardAnimations();
+  } else {
+    document.addEventListener('gsap-ready', initServiceCardAnimations);
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.isGSAPReady && window.isGSAPReady()) {
+        initServiceCardAnimations();
+      }
+    });
+  }
 </script>
 
 <!-- Add GSAP animation for testimonial slider -->
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    if (typeof gsap !== 'undefined') {
-      // Initialize the slider
-      const slides = document.querySelectorAll('.slide');
-      const dots = document.querySelectorAll('.pagination-dot');
-      const prevBtn = document.querySelector('.nav-arrow.prev');
-      const nextBtn = document.querySelector('.nav-arrow.next');
-      let currentIndex = 0;
-      let isAnimating = false;
+  // Wait for GSAP to be fully initialized
+  function initTestimonialSlider() {
+    if (!window.gsap) {
+      console.warn("GSAP not available for testimonial slider");
+      return;
+    }
+
+    // Make sure ScrollTrigger is registered
+    if (window.ScrollTrigger && window.isGSAPReady && !window.isGSAPReady()) {
+      console.log("Re-registering ScrollTrigger for testimonial slider");
+      gsap.registerPlugin(ScrollTrigger);
+    }
+    
+    // Initialize the slider
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.pagination-dot');
+    const prevBtn = document.querySelector('.nav-arrow.prev');
+    const nextBtn = document.querySelector('.nav-arrow.next');
+    let currentIndex = 0;
+    let isAnimating = false;
+    
+    // Initialize the 3D slider
+    function initSlider() {
+      // Set initial positions
+      gsap.set(slides, { 
+        opacity: 0,
+        visibility: 'hidden',
+        x: 100,
+        z: -400,
+        rotationY: 25
+      });
       
-      // Initialize the 3D slider
-      function initSlider() {
-        // Set initial positions
-        gsap.set(slides, { 
-          opacity: 0,
-          visibility: 'hidden',
-          x: 100,
-          z: -400,
-          rotationY: 25
-        });
-        
-        // Active slide
-        gsap.set(slides[0], { 
-          opacity: 1,
+      // Active slide
+      gsap.set(slides[0], { 
+        opacity: 1,
+        visibility: 'visible',
+        x: 0,
+        z: 0,
+        rotationY: 0
+      });
+      slides[0].classList.add('active');
+      
+      // Previous slide (if exists)
+      if (slides.length > 1) {
+        const prevIndex = (slides.length - 1);
+        gsap.set(slides[prevIndex], { 
+          opacity: 0.5,
           visibility: 'visible',
+          x: '-85%',
+          z: -150,
+          rotationY: -15
+        });
+        slides[prevIndex].classList.add('prev');
+      }
+      
+      // Next slide (if exists)
+      if (slides.length > 2) {
+        gsap.set(slides[1], { 
+          opacity: 0.5,
+          visibility: 'visible',
+          x: '85%',
+          z: -150,
+          rotationY: 15
+        });
+        slides[1].classList.add('next');
+      }
+    }
+    
+    // Change slide function
+    function goToSlide(newIndex) {
+      if (isAnimating || newIndex === currentIndex) return;
+      isAnimating = true;
+      
+      // Improved direction detection that accounts for wrap-around cases
+      let direction;
+      if (newIndex === 0 && currentIndex === slides.length - 1) {
+        // Special case: going from last to first (should be "next")
+        direction = 'next';
+      } else if (newIndex === slides.length - 1 && currentIndex === 0) {
+        // Special case: going from first to last (should be "prev")
+        direction = 'prev';
+      } else {
+        // Normal case: compare indices
+        direction = newIndex > currentIndex ? 'next' : 'prev';
+      }
+      
+      // Determine slide indices - handle wrap around
+      const oldIndex = currentIndex;
+      const oldPrevIndex = (oldIndex - 1 + slides.length) % slides.length;
+      const oldNextIndex = (oldIndex + 1) % slides.length;
+      
+      // New indices after the transition
+      const newPrevIndex = (newIndex - 1 + slides.length) % slides.length;
+      const newNextIndex = (newIndex + 1) % slides.length;
+      
+      // Clear any existing classes
+      slides.forEach(slide => {
+        slide.classList.remove('active', 'prev', 'next');
+      });
+      
+      // Update pagination dots
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === newIndex);
+      });
+      
+      // Create animation timeline
+      const tl = gsap.timeline({
+        onComplete: () => {
+          // Update current index
+          currentIndex = newIndex;
+          
+          // Update classes
+          slides[newIndex].classList.add('active');
+          slides[newPrevIndex].classList.add('prev');
+          slides[newNextIndex].classList.add('next');
+          
+          // Reset other slides
+          slides.forEach((slide, i) => {
+            if (i !== newIndex && i !== newPrevIndex && i !== newNextIndex) {
+              gsap.set(slide, { 
+                visibility: 'hidden', 
+                opacity: 0,
+                x: 100,
+                z: -400,
+                rotationY: 25
+              });
+            }
+          });
+          
+          isAnimating = false;
+        }
+      });
+      
+      if (direction === 'next') {
+        // Current to previous
+        tl.to(slides[oldIndex], {
+          opacity: 0.5,
+          x: '-85%',
+          z: -150,
+          rotationY: -15,
+          duration: 0.8,
+          ease: "power3.out",
+          force3D: true
+        }, 0);
+        
+        // Next to current
+        tl.to(slides[oldNextIndex], {
+          opacity: 1,
           x: 0,
           z: 0,
-          rotationY: 0
-        });
-        slides[0].classList.add('active');
+          rotationY: 0,
+          duration: 0.8,
+          ease: "power2.out", 
+          force3D: true
+        }, 0);
         
-        // Previous slide (if exists)
-        if (slides.length > 1) {
-          const prevIndex = (slides.length - 1);
-          gsap.set(slides[prevIndex], { 
-            opacity: 0.5,
-            visibility: 'visible',
-            x: '-85%',
-            z: -150,
-            rotationY: -15
-          });
-          slides[prevIndex].classList.add('prev');
-        }
+        // Setup new next
+        tl.set(slides[newNextIndex], {
+          visibility: 'visible',
+          opacity: 0,
+          x: '130%',
+          z: -200,
+          rotationY: 25,
+          force3D: true
+        }, 0);
         
-        // Next slide (if exists)
-        if (slides.length > 2) {
-          gsap.set(slides[1], { 
-            opacity: 0.5,
-            visibility: 'visible',
-            x: '85%',
-            z: -150,
-            rotationY: 15
-          });
-          slides[1].classList.add('next');
-        }
+        // Animate new next
+        tl.to(slides[newNextIndex], {
+          opacity: 0.5,
+          x: '85%',
+          z: -150,
+          rotationY: 15,
+          duration: 0.8,
+          ease: "power2.inOut",
+          force3D: true
+        }, 0.1);
+        
+      } else { // direction === 'prev'
+        // Current to next
+        tl.to(slides[oldIndex], {
+          opacity: 0.5,
+          x: '85%',
+          z: -150,
+          rotationY: 15,
+          duration: 0.8,
+          ease: "power3.out",
+          force3D: true
+        }, 0);
+        
+        // Prev to current
+        tl.to(slides[oldPrevIndex], {
+          opacity: 1,
+          x: 0,
+          z: 0,
+          rotationY: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          force3D: true
+        }, 0);
+        
+        // Setup new prev
+        tl.set(slides[newPrevIndex], {
+          visibility: 'visible',
+          opacity: 0,
+          x: '-130%',
+          z: -200,
+          rotationY: -25,
+          force3D: true
+        }, 0);
+        
+        // Animate new prev
+        tl.to(slides[newPrevIndex], {
+          opacity: 0.5,
+          x: '-85%',
+          z: -150,
+          rotationY: -15,
+          duration: 0.8,
+          ease: "power2.inOut",
+          force3D: true
+        }, 0.1);
       }
-      
-      // Change slide function
-      function goToSlide(newIndex) {
-        if (isAnimating || newIndex === currentIndex) return;
-        isAnimating = true;
-        
-        // Improved direction detection that accounts for wrap-around cases
-        let direction;
-        if (newIndex === 0 && currentIndex === slides.length - 1) {
-          // Special case: going from last to first (should be "next")
-          direction = 'next';
-        } else if (newIndex === slides.length - 1 && currentIndex === 0) {
-          // Special case: going from first to last (should be "prev")
-          direction = 'prev';
-        } else {
-          // Normal case: compare indices
-          direction = newIndex > currentIndex ? 'next' : 'prev';
-        }
-        
-        // Determine slide indices - handle wrap around
-        const oldIndex = currentIndex;
-        const oldPrevIndex = (oldIndex - 1 + slides.length) % slides.length;
-        const oldNextIndex = (oldIndex + 1) % slides.length;
-        
-        // New indices after the transition
-        const newPrevIndex = (newIndex - 1 + slides.length) % slides.length;
-        const newNextIndex = (newIndex + 1) % slides.length;
-        
-        // Clear any existing classes
-        slides.forEach(slide => {
-          slide.classList.remove('active', 'prev', 'next');
-        });
-        
-        // Update pagination dots
-        dots.forEach((dot, i) => {
-          dot.classList.toggle('active', i === newIndex);
-        });
-        
-        // Create animation timeline
-        const tl = gsap.timeline({
-          onComplete: () => {
-            // Update current index
-            currentIndex = newIndex;
-            
-            // Update classes
-            slides[newIndex].classList.add('active');
-            slides[newPrevIndex].classList.add('prev');
-            slides[newNextIndex].classList.add('next');
-            
-            // Reset other slides
-            slides.forEach((slide, i) => {
-              if (i !== newIndex && i !== newPrevIndex && i !== newNextIndex) {
-                gsap.set(slide, { 
-                  visibility: 'hidden', 
-                  opacity: 0,
-                  x: 100,
-                  z: -400,
-                  rotationY: 25
-                });
-              }
-            });
-            
-            isAnimating = false;
-          }
-        });
-        
-        if (direction === 'next') {
-          // Current to previous
-          tl.to(slides[oldIndex], {
-            opacity: 0.5,
-            x: '-85%',
-            z: -150,
-            rotationY: -15,
-            duration: 0.8,
-            ease: "power3.out",
-            force3D: true
-          }, 0);
-          
-          // Next to current
-          tl.to(slides[oldNextIndex], {
-            opacity: 1,
-            x: 0,
-            z: 0,
-            rotationY: 0,
-            duration: 0.8,
-            ease: "power2.out", 
-            force3D: true
-          }, 0);
-          
-          // Setup new next
-          tl.set(slides[newNextIndex], {
-            visibility: 'visible',
-            opacity: 0,
-            x: '130%',
-            z: -200,
-            rotationY: 25,
-            force3D: true
-          }, 0);
-          
-          // Animate new next
-          tl.to(slides[newNextIndex], {
-            opacity: 0.5,
-            x: '85%',
-            z: -150,
-            rotationY: 15,
-            duration: 0.8,
-            ease: "power2.inOut",
-            force3D: true
-          }, 0.1);
-          
-        } else { // direction === 'prev'
-          // Current to next
-          tl.to(slides[oldIndex], {
-            opacity: 0.5,
-            x: '85%',
-            z: -150,
-            rotationY: 15,
-            duration: 0.8,
-            ease: "power3.out",
-            force3D: true
-          }, 0);
-          
-          // Prev to current
-          tl.to(slides[oldPrevIndex], {
-            opacity: 1,
-            x: 0,
-            z: 0,
-            rotationY: 0,
-            duration: 0.8,
-            ease: "power2.out",
-            force3D: true
-          }, 0);
-          
-          // Setup new prev
-          tl.set(slides[newPrevIndex], {
-            visibility: 'visible',
-            opacity: 0,
-            x: '-130%',
-            z: -200,
-            rotationY: -25,
-            force3D: true
-          }, 0);
-          
-          // Animate new prev
-          tl.to(slides[newPrevIndex], {
-            opacity: 0.5,
-            x: '-85%',
-            z: -150,
-            rotationY: -15,
-            duration: 0.8,
-            ease: "power2.inOut",
-            force3D: true
-          }, 0.1);
-        }
-      }
-      
-      // Initialize the slider
-      initSlider();
-      
-      // Event listeners for controls
+    }
+    
+    // Initialize the slider
+    initSlider();
+    
+    // Event listeners for controls
+    if (prevBtn) {
       prevBtn.addEventListener('click', () => {
         const newIndex = (currentIndex - 1 + slides.length) % slides.length;
         goToSlide(newIndex);
       });
-      
+    }
+    
+    if (nextBtn) {
       nextBtn.addEventListener('click', () => {
         const newIndex = (currentIndex + 1) % slides.length;
         goToSlide(newIndex);
       });
-      
-      // Dot navigation with smart direction detection
-      dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-          // Don't do anything if clicking the current dot
-          if (index === currentIndex) return;
-          
-          // Calculate shortest path (clockwise or counterclockwise)
-          // This determines whether we should go "next" or "prev" to provide
-          // the most natural-looking transition
-          const totalSlides = slides.length;
-          const clockwiseDist = (index - currentIndex + totalSlides) % totalSlides;
-          const counterClockwiseDist = (currentIndex - index + totalSlides) % totalSlides;
-          
-          // Choose the shortest distance
-          if (clockwiseDist <= counterClockwiseDist) {
-            // Clockwise is shorter or equal, use "next" transitions
-            goToSlide(index);
-          } else {
-            // Counter-clockwise is shorter, use "prev" transitions
-            goToSlide(index);
-          }
-        });
+    }
+    
+    // Dot navigation with smart direction detection
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        // Don't do anything if clicking the current dot
+        if (index === currentIndex) return;
+        
+        // Calculate shortest path (clockwise or counterclockwise)
+        // This determines whether we should go "next" or "prev" to provide
+        // the most natural-looking transition
+        const totalSlides = slides.length;
+        const clockwiseDist = (index - currentIndex + totalSlides) % totalSlides;
+        const counterClockwiseDist = (currentIndex - index + totalSlides) % totalSlides;
+        
+        // Choose the shortest distance
+        if (clockwiseDist <= counterClockwiseDist) {
+          // Clockwise is shorter or equal, use "next" transitions
+          goToSlide(index);
+        } else {
+          // Counter-clockwise is shorter, use "prev" transitions
+          goToSlide(index);
+        }
+      });
+    });
+    
+    // Auto advance with next direction
+    let autoplayTimer = setInterval(() => {
+      // Always advance in the "next" direction
+      const newIndex = (currentIndex + 1) % slides.length;
+      goToSlide(newIndex);
+    }, 7000);
+    
+    // Pause autoplay on hover/interaction
+    const sliderElement = document.querySelector('.showcase-slider');
+    
+    if (sliderElement) {
+      sliderElement.addEventListener('mouseenter', () => {
+        clearInterval(autoplayTimer);
       });
       
-      // Auto advance with next direction
-      let autoplayTimer = setInterval(() => {
-        // Always advance in the "next" direction
-        const newIndex = (currentIndex + 1) % slides.length;
-        goToSlide(newIndex);
-      }, 7000);
-      
-      // Pause autoplay on hover/interaction
-      const sliderElement = document.querySelector('.showcase-slider');
-      
-      if (sliderElement) {
-        sliderElement.addEventListener('mouseenter', () => {
-          clearInterval(autoplayTimer);
-        });
-        
-        sliderElement.addEventListener('mouseleave', () => {
-          clearInterval(autoplayTimer);
-          autoplayTimer = setInterval(() => {
-            const newIndex = (currentIndex + 1) % slides.length;
-            goToSlide(newIndex);
-          }, 7000);
-        });
-      }
-      
-      // Entry animation when in viewport
-      if (typeof ScrollTrigger !== 'undefined') {
+      sliderElement.addEventListener('mouseleave', () => {
+        clearInterval(autoplayTimer);
+        autoplayTimer = setInterval(() => {
+          const newIndex = (currentIndex + 1) % slides.length;
+          goToSlide(newIndex);
+        }, 7000);
+      });
+    }
+    
+    // Add ScrollTrigger animations if available
+    if (window.ScrollTrigger) {
+      try {
+        // Entry animation when in viewport
         gsap.from('.showcase-wrapper', {
           y: 70,
           opacity: 0,
@@ -1210,7 +1271,24 @@ const testimonials = (await getCollection('testimonials')).sort(
             scrub: true
           }
         });
+      } catch (e) {
+        console.error("Error setting up ScrollTrigger animations:", e);
       }
+    } else {
+      console.warn("ScrollTrigger not available for testimonial animations");
     }
-  });
+  }
+
+  // Initialize on GSAP ready event or on DOMContentLoaded if GSAP is already initialized
+  if (window.isGSAPReady && window.isGSAPReady()) {
+    initTestimonialSlider();
+  } else {
+    document.addEventListener('gsap-ready', initTestimonialSlider);
+    document.addEventListener('DOMContentLoaded', () => {
+      // Double-check if GSAP is ready now (might have loaded during this code execution)
+      if (window.isGSAPReady && window.isGSAPReady()) {
+        initTestimonialSlider();
+      }
+    });
+  }
 </script> 

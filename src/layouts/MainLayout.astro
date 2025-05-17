@@ -42,6 +42,82 @@ const currentPath = Astro.url.pathname;
   <!-- Add our custom page transition effects -->
   <ClientRouter />
   
+  <!-- GSAP (added via CDN for now) -->
+  <script is:inline>
+    // Save any existing GSAP reference
+    window._oldGSAP = window.gsap;
+    window._oldScrollTrigger = window.ScrollTrigger;
+    
+    // Define the GSAP loading state object
+    window.gsapLoaded = false;
+    window.scrollTriggerLoaded = false;
+    window.gsapInitialized = false;
+    
+    // Initialize GSAP and ScrollTrigger synchronously
+    function initGSAP() {
+      // Only proceed if both have loaded
+      if (!window.gsapLoaded || !window.scrollTriggerLoaded) return;
+      
+      // If already initialized, exit
+      if (window.gsapInitialized) return;
+      
+      try {
+        // Register the plugin
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Mark as initialized
+        window.gsapInitialized = true;
+        
+        console.log("GSAP and ScrollTrigger successfully initialized globally");
+        
+        // Create a global event that scripts can listen for
+        document.dispatchEvent(new CustomEvent('gsap-ready'));
+      } catch(e) {
+        console.error("Error initializing GSAP:", e);
+      }
+    }
+  </script>
+  
+  <!-- Load GSAP core -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" is:inline onload="window.gsapLoaded = true; initGSAP();"></script>
+  
+  <!-- Load ScrollTrigger plugin -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" is:inline onload="window.scrollTriggerLoaded = true; initGSAP();"></script>
+  
+  <!-- Helper functions -->
+  <script is:inline>
+    // Create helper to check if GSAP is ready
+    window.isGSAPReady = function() {
+      return window.gsapInitialized === true;
+    };
+    
+    // Provide a global reregister function as fallback
+    window.reregisterGSAPPlugins = function() {
+      if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        try {
+          gsap.registerPlugin(ScrollTrigger);
+          return true;
+        } catch(e) {
+          console.error("Failed to reregister plugins", e);
+          return false;
+        }
+      }
+      return false;
+    };
+  </script>
+  
+  <!-- Dark mode detector -->
+  <script is:inline>
+    // Immediately set dark mode to prevent flash
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  </script>
+  
   <title>{title}</title>
 </head>
 <body>
@@ -135,18 +211,14 @@ const currentPath = Astro.url.pathname;
     </div>
   </footer>
 
-  <!-- Initialize GSAP -->
+  <!-- Initialize GSAP - Using CDN version -->
   <script>
-    // Import and initialize GSAP
-    import { gsap } from 'gsap';
-    import { ScrollTrigger } from 'gsap/ScrollTrigger';
-    
-    // Register ScrollTrigger plugin
-    gsap.registerPlugin(ScrollTrigger);
-    
-    // Make GSAP available globally
-    window.gsap = gsap;
-    window.ScrollTrigger = ScrollTrigger;
+    // Ensure GSAP is properly registered after Astro page transitions
+    document.addEventListener('astro:page-load', () => {
+      if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+      }
+    });
   </script>
 
   <!-- Logo Animation -->
@@ -325,6 +397,9 @@ const currentPath = Astro.url.pathname;
     align-items: center;
     justify-content: center;
     transition: background-color 0.3s, transform 0.3s;
+    position: relative;
+    z-index: 10001; /* Highest z-index for visibility */
+    pointer-events: auto !important; /* Ensure clicks always work */
   }
   
   .theme-toggle:hover {
