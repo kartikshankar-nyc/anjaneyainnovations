@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Favicon Generator</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            line-height: 1.5;
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        canvas {
+            border: 1px solid #ccc;
+            margin: 10px;
+        }
+
+        .instructions {
+            background: #f5f5f5;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>SVG to PNG Favicon Generator</h1>
+
+    <div class="instructions">
+        <p>This tool generates PNG favicons in 16x16 and 32x32 sizes from your SVG favicon.</p>
+        <p>Instructions:</p>
+        <ol>
+            <li>The images will be drawn on the canvases below</li>
+            <li>Right-click each image and select "Save Image As..."</li>
+            <li>Save as "favicon-16x16.png" and "favicon-32x32.png" in your public folder</li>
+        </ol>
+    </div>
+
+    <div id="container">
+        <h2>32x32 favicon:</h2>
+        <canvas id="canvas32" width="32" height="32"></canvas>
+        <p>Right-click and save as "favicon-32x32.png"</p>
+
+        <h2>16x16 favicon:</h2>
+        <canvas id="canvas16" width="16" height="16"></canvas>
+        <p>Right-click and save as "favicon-16x16.png"</p>
+    </div>
+
+    <script>
+        // Colors for the favicon (assuming Anjaneya's cyan accent color)
+        // Adjust if needed to match your brand
+        const colors = {
+            background: 'transparent',
+            accent: '#22D3EE',
+            text: '#E5E7EB'
+        };
+
+        function drawFavicon(canvas, size) {
+            const ctx = canvas.getContext('2d');
+
+            // Clear canvas
+            ctx.clearRect(0, 0, size, size);
+
+            // Background (transparent)
+            ctx.fillStyle = colors.background;
+            ctx.fillRect(0, 0, size, size);
+
+            // Draw "AI" text - simplified version that will work for a favicon
+            ctx.fillStyle = colors.accent;
+            ctx.font = `bold ${Math.floor(size * 0.7)}px sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('AI', size / 2, size / 2);
+
+            // Optional: add a simple border (can be removed if not needed)
+            ctx.strokeStyle = colors.accent;
+            ctx.lineWidth = size > 20 ? 2 : 1;
+            ctx.strokeRect(2, 2, size - 4, size - 4);
+        }
+
+        // Draw both favicons
+        drawFavicon(document.getElementById('canvas32'), 32);
+        drawFavicon(document.getElementById('canvas16'), 16);
+    </script>
+</body>
+
+</html>

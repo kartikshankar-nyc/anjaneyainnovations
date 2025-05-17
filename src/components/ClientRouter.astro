@@ -1,0 +1,240 @@
+---
+// ClientRouter.astro - adds client-side router with smooth page transitions
+---
+
+<!-- Create DOM elements for transition effects -->
+<div id="page-transition-overlay" aria-hidden="true">
+  <div class="transition-circle"></div>
+</div>
+
+<script>
+  // Set up page entry animation
+  document.addEventListener('astro:page-load', () => {
+    // Reset transition overlay
+    const overlay = document.getElementById('page-transition-overlay');
+    if (overlay) {
+      overlay.classList.remove('is-active', 'is-exiting');
+    }
+    
+    // Fix any transform issues with navigation links
+    const navLinks = document.querySelectorAll('.menu a');
+    navLinks.forEach(link => {
+      // Immediately reset any transforms - no animation
+      if (link.style.transform) {
+        link.style.transform = 'translateZ(0)';
+      }
+      
+      // Apply view transition names without animations
+      const href = link.getAttribute('href');
+      if (href) {
+        const cleanHref = href.replace(/^\/+|\/+$/g, '') || 'home';
+        link.style.setProperty('--view-transition-name', `nav-link-${cleanHref}`);
+      }
+    });
+    
+    // Animate the content container when the page loads
+    const mainContent = document.querySelector('main');
+    if (mainContent && window.gsap) {
+      gsap.fromTo(
+        mainContent,
+        { 
+          opacity: 0,
+          y: 30 
+        },
+        { 
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power3.out',
+          clearProps: 'all'
+        }
+      );
+    }
+  });
+  
+  // Handle navigation preparation
+  document.addEventListener('astro:before-preparation', (event) => {
+    // Start the transition animation
+    const overlay = document.getElementById('page-transition-overlay');
+    if (overlay) {
+      overlay.classList.add('is-active');
+      
+      // Store click position for circular transition 
+      // Default to center if no event is available
+      const circle = overlay.querySelector('.transition-circle');
+      
+      // Try to get coordinates from navigation event
+      const navEvent = window._lastNavEvent;
+      if (navEvent && navEvent.clientX && navEvent.clientY && circle) {
+        // Use click position
+        circle.style.top = `${navEvent.clientY}px`;
+        circle.style.left = `${navEvent.clientX}px`;
+      } else {
+        // Default to center of viewport
+        circle.style.top = '50%';
+        circle.style.left = '50%';
+      }
+      
+      // Get navigation direction
+      const currentPath = window.location.pathname;
+      const targetPath = new URL(event.to).pathname;
+      
+      // Get path depth as proxy for navigation direction
+      const direction = currentPath.split('/').length < targetPath.split('/').length 
+        ? 'deeper' : 'shallower';
+      
+      // Store direction in session
+      sessionStorage.setItem('lastNavigationDirection', direction);
+    }
+    
+    // Optional fade-out current page content
+    const mainContent = document.querySelector('main');
+    if (mainContent && window.gsap) {
+      gsap.to(mainContent, {
+        opacity: 0, 
+        y: -20,
+        duration: 0.4,
+        ease: 'power2.in'
+      });
+    }
+  });
+  
+  // After page content swap
+  document.addEventListener('astro:after-swap', () => {
+    // Update transition status
+    const overlay = document.getElementById('page-transition-overlay');
+    if (overlay) {
+      // Start exit animation
+      overlay.classList.add('is-exiting');
+    }
+    
+    // Reset any transforms on navigation menu items - no animation
+    if (window.gsap) {
+      const navLinks = document.querySelectorAll('.menu a');
+      if (navLinks.length) {
+        // Immediately reset transforms without animation
+        gsap.set(navLinks, { 
+          clearProps: 'transform,translate',
+          transform: 'translateZ(0)'
+        });
+      }
+    }
+  });
+  
+  // Capture click events on all internal links
+  document.addEventListener('click', (event) => {
+    // Check if it's a link click
+    const link = event.target.closest('a');
+    if (!link) return;
+    
+    // Check if it's an internal link
+    const href = link.getAttribute('href');
+    if (!href || href.startsWith('http') || href.startsWith('//') || href.startsWith('#')) return;
+    
+    // Store the click event for the transition animation
+    window._lastNavEvent = event;
+  });
+</script>
+
+<style is:global>
+  /* Base page transition styles */
+  #page-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    pointer-events: none;
+    visibility: hidden;
+  }
+  
+  #page-transition-overlay.is-active {
+    visibility: visible;
+  }
+  
+  .transition-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 3000px; /* Large enough to cover the viewport */
+    height: 3000px;
+    border-radius: 50%;
+    background-color: var(--accent-color); /* Use brand color */
+    transition: transform 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+  }
+  
+  /* Active state - expand the circle */
+  #page-transition-overlay.is-active .transition-circle {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  
+  /* Exit state - collapse the circle */
+  #page-transition-overlay.is-exiting .transition-circle {
+    transform: translate(-50%, -50%) scale(0);
+    transition-delay: 0.1s; /* Slight delay before exit */
+  }
+  
+  /* Respect user preference for reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    #page-transition-overlay {
+      display: none;
+    }
+    
+    ::view-transition-group(*),
+    ::view-transition-old(*),
+    ::view-transition-new(*) {
+      animation: none !important;
+    }
+  }
+  
+  /* Special named view transitions for specific elements */
+  @media (prefers-reduced-motion: no-preference) {
+    /* Define persistent elements that maintain state during transitions */
+    .logo-text {
+      view-transition-name: logo;
+    }
+    
+    .header-status {
+      view-transition-name: status-indicator;  
+    }
+    
+    /* Define custom properties for view transition names on links */
+    .menu a {
+      /* Default empty value */
+      --view-transition-name: none;
+    }
+    
+    .menu a {
+      /* Use the custom property for view-transition-name */
+      view-transition-name: var(--view-transition-name);
+    }
+  }
+</style>
+
+<!-- Script to properly set unique view-transition-names for navigation links -->
+<script>
+  document.addEventListener('astro:page-load', () => {
+    // Select all navigation links
+    const navLinks = document.querySelectorAll('.menu a');
+    
+    // Assign unique view-transition-name to each link based on its href
+    navLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (href) {
+        // Create a unique identifier from the href
+        const cleanHref = href.replace(/^\/+|\/+$/g, '') || 'home';
+        
+        // Use CSS variables instead of direct style manipulation to avoid transform issues
+        // This prevents conflicts with transforms
+        link.style.setProperty('--view-transition-name', `nav-link-${cleanHref}`);
+        
+        // Reset transforms immediately - no animation
+        if (link.style.transform) {
+          link.style.transform = 'none';
+        }
+      }
+    });
+  });
+</script> 

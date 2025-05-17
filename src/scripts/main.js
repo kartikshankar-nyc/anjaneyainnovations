@@ -17,6 +17,53 @@ import { Navigation, Autoplay, EffectCreative } from 'swiper/modules';
 
 // For now, we'll use script tags in the layout for GSAP
 
+// Add link prefetching for faster page transitions
+const initLinkPrefetch = () => {
+  // Don't prefetch if the user prefers reduced data usage
+  if (navigator.connection &&
+    (navigator.connection.saveData ||
+      (navigator.connection.effectiveType && navigator.connection.effectiveType.includes('2g')))) {
+    return;
+  }
+
+  // Check if the browser supports IntersectionObserver
+  if (!('IntersectionObserver' in window)) return;
+
+  // Create observer for links that enter the viewport
+  const linkObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const link = entry.target;
+
+        // Only prefetch internal relative links
+        const href = link.getAttribute('href');
+        if (!href ||
+          href.startsWith('#') ||
+          href.startsWith('http') ||
+          href.startsWith('mailto:') ||
+          href.startsWith('tel:')) {
+          return;
+        }
+
+        // Create prefetch link
+        const prefetch = document.createElement('link');
+        prefetch.rel = 'prefetch';
+        prefetch.href = href;
+        prefetch.as = 'document';
+
+        // Add to head and stop observing this link
+        document.head.appendChild(prefetch);
+        linkObserver.unobserve(link);
+      }
+    });
+  }, { threshold: 0.2 }); // Start prefetching when 20% of the link is visible
+
+  // Observe all links in the navigation
+  document.querySelectorAll('nav a, .footer-links a').forEach(link => {
+    linkObserver.observe(link);
+  });
+};
+
 // Theme toggle functionality
 const initThemeToggle = () => {
   const themeToggle = document.getElementById('theme-toggle');
@@ -163,8 +210,14 @@ const initThemeToggle = () => {
 document.addEventListener('DOMContentLoaded', () => {
   // console.log("DOM Content Loaded - main.js executing"); 
 
+  // Initialize prefetching for faster transitions
+  initLinkPrefetch();
+
   // Initialize theme toggle
   initThemeToggle();
+
+  // Initialize page transition elements
+  initPageTransitions();
 
   // GSAP and ScrollTrigger for Testimonial Journey
   if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
@@ -449,4 +502,60 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Call setup functions
   setupMobileMenu();
-}); 
+});
+
+// Initialize page transitions enhancements
+const initPageTransitions = () => {
+  // Add smooth animation for logo and navigation elements on page load
+  if (typeof gsap !== 'undefined') {
+    // Add a small delay to ensure the page is ready
+    setTimeout(() => {
+      const header = document.querySelector('header');
+      if (header) {
+        gsap.from(header, {
+          y: -20,
+          opacity: 0.8,
+          duration: 0.8,
+          ease: 'power3.out',
+          clearProps: 'all' // Add clearProps to reset all transforms
+        });
+      }
+
+      // Remove the navigation link animations - they should load normally
+      // Keep only transform cleanup for consistent positioning
+      const navLinks = document.querySelectorAll('.menu a');
+      if (navLinks.length) {
+        // Instead of animating, just ensure transforms are cleared
+        gsap.set(navLinks, { clearProps: 'all' });
+      }
+    }, 100);
+  }
+
+  // Ensure navigation links are aligned properly after transitions
+  document.addEventListener('astro:page-load', () => {
+    // Force reset any transforms on navigation links
+    const navLinks = document.querySelectorAll('.menu a');
+    if (navLinks.length && typeof gsap !== 'undefined') {
+      // Reset transforms immediately
+      gsap.set(navLinks, { clearProps: 'transform' });
+    }
+
+    // Ensure we're at the correct scroll position
+    if ('scrollRestoration' in history) {
+      // Get stored position or 0
+      const scrollY = sessionStorage.getItem('scrollPosition') || 0;
+
+      // Only scroll if we're supposed to be somewhere specific
+      if (scrollY > 0) {
+        window.scrollTo(0, parseInt(scrollY, 10));
+        sessionStorage.removeItem('scrollPosition');
+      }
+    }
+  });
+
+  // Store scroll position before navigation
+  document.addEventListener('astro:before-preparation', () => {
+    // Save current scroll position
+    sessionStorage.setItem('scrollPosition', window.scrollY.toString());
+  });
+}; 

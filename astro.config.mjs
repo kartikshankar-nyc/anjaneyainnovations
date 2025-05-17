@@ -1,5 +1,7 @@
 // astro.config.mjs
-export default {
+import { defineConfig } from 'astro/config';
+
+export default defineConfig({
   site: 'https://anjaneyainnovations.com',
   compressHTML: true,
   output: 'static',
@@ -7,6 +9,8 @@ export default {
     assets: 'assets',
     inlineStylesheets: 'never'
   },
+  // Use standard viewTransitions integration
+  viewTransitions: true,
   vite: {
     build: {
       cssCodeSplit: true,
@@ -25,4 +29,4 @@ export default {
     // Optimize images during build
     plugins: []
   }
-}; 
+}); 

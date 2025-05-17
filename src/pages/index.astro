@@ -487,6 +487,8 @@ const testimonials = (await getCollection('testimonials')).sort(
     transform: translateX(100px) translateZ(-400px) rotateY(25deg);
     transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
     will-change: transform, opacity;
+    backface-visibility: hidden; /* Prevent flickering during transforms */
+    transform-style: preserve-3d;
   }
 
   .slide.active {
@@ -1038,8 +1040,9 @@ const testimonials = (await getCollection('testimonials')).sort(
             x: '-85%',
             z: -150,
             rotationY: -15,
-            duration: 0.7,
-            ease: 'power2.inOut'
+            duration: 0.8,
+            ease: "power3.out",
+            force3D: true
           }, 0);
           
           // Next to current
@@ -1048,8 +1051,9 @@ const testimonials = (await getCollection('testimonials')).sort(
             x: 0,
             z: 0,
             rotationY: 0,
-            duration: 0.7,
-            ease: 'power2.inOut'
+            duration: 0.8,
+            ease: "power2.out", 
+            force3D: true
           }, 0);
           
           // Setup new next
@@ -1058,7 +1062,8 @@ const testimonials = (await getCollection('testimonials')).sort(
             opacity: 0,
             x: '130%',
             z: -200,
-            rotationY: 25
+            rotationY: 25,
+            force3D: true
           }, 0);
           
           // Animate new next
@@ -1067,8 +1072,9 @@ const testimonials = (await getCollection('testimonials')).sort(
             x: '85%',
             z: -150,
             rotationY: 15,
-            duration: 0.7,
-            ease: 'power2.inOut'
+            duration: 0.8,
+            ease: "power2.inOut",
+            force3D: true
           }, 0.1);
           
         } else { // direction === 'prev'
@@ -1078,8 +1084,9 @@ const testimonials = (await getCollection('testimonials')).sort(
             x: '85%',
             z: -150,
             rotationY: 15,
-            duration: 0.7,
-            ease: 'power2.inOut'
+            duration: 0.8,
+            ease: "power3.out",
+            force3D: true
           }, 0);
           
           // Prev to current
@@ -1088,8 +1095,9 @@ const testimonials = (await getCollection('testimonials')).sort(
             x: 0,
             z: 0,
             rotationY: 0,
-            duration: 0.7,
-            ease: 'power2.inOut'
+            duration: 0.8,
+            ease: "power2.out",
+            force3D: true
           }, 0);
           
           // Setup new prev
@@ -1098,7 +1106,8 @@ const testimonials = (await getCollection('testimonials')).sort(
             opacity: 0,
             x: '-130%',
             z: -200,
-            rotationY: -25
+            rotationY: -25,
+            force3D: true
           }, 0);
           
           // Animate new prev
@@ -1107,8 +1116,9 @@ const testimonials = (await getCollection('testimonials')).sort(
             x: '-85%',
             z: -150,
             rotationY: -15,
-            duration: 0.7,
-            ease: 'power2.inOut'
+            duration: 0.8,
+            ease: "power2.inOut",
+            force3D: true
           }, 0.1);
         }
       }

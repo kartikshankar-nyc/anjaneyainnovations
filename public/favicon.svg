@@ -1,15 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-  <style>
-    :root { 
-      --bg: #111827; /* Original dark background */
-      --text: #22D3EE; /* Original cyan text */
-    }
-  </style>
+<!-- Anjaneya Innovations favicon -->
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="32" height="32" rx="4" fill="#22D3EE" />
   
-  <!-- Square background -->
-  <rect width="32" height="32" fill="var(--bg)" />
+  <!-- "A" letter - bold, simple path -->
+  <path d="M6 24L11 8H15L20 24H16L15 20H11L10 24H6ZM12 16H14L13 12L12 16Z" fill="white"/>
   
-  <!-- Extra large lowercase 'ai' text that maximizes available space -->
-  <text x="16" y="22" fill="var(--text)" font-family="Arial Black, Arial, sans-serif" 
-        font-weight="900" font-size="24" text-anchor="middle" letter-spacing="-1">ai</text>
+  <!-- "I" letter - bold, simple path -->
+  <path d="M22 24H26V8H22V24Z" fill="white"/>
 </svg> 

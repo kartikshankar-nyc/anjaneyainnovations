@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SVG to PNG Converter</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        canvas {
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+
+        .instructions {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>SVG to PNG Favicon Converter</h1>
+
+    <div class="instructions">
+        <p>This tool generates PNG versions of your favicon.</p>
+        <p>Instructions:</p>
+        <ol>
+            <li>The SVG favicon will be loaded automatically</li>
+            <li>The PNGs will be drawn on the canvases below</li>
+            <li>Right-click each canvas and select "Save Image As..." to download</li>
+            <li>Save as "favicon-16x16.png" and "favicon-32x32.png" in your public folder</li>
+        </ol>
+    </div>
+
+    <h2>16x16 Favicon PNG</h2>
+    <canvas id="canvas16" width="16" height="16"></canvas>
+    <button onclick="downloadCanvas('canvas16', 'favicon-16x16.png')">Download 16x16 PNG</button>
+
+    <h2>32x32 Favicon PNG</h2>
+    <canvas id="canvas32" width="32" height="32"></canvas>
+    <button onclick="downloadCanvas('canvas32', 'favicon-32x32.png')">Download 32x32 PNG</button>
+
+    <script>
+        window.onload = function () {
+            // Create image from SVG
+            const img = new Image();
+            img.onload = function () {
+                // Draw on 16x16 canvas
+                const canvas16 = document.getElementById('canvas16');
+                const ctx16 = canvas16.getContext('2d');
+                ctx16.drawImage(img, 0, 0, 16, 16);
+
+                // Draw on 32x32 canvas
+                const canvas32 = document.getElementById('canvas32');
+                const ctx32 = canvas32.getContext('2d');
+                ctx32.drawImage(img, 0, 0, 32, 32);
+            };
+
+            // Load the SVG from the same directory
+            img.src = '/favicon.svg';
+        };
+
+        function downloadCanvas(canvasId, filename) {
+            const canvas = document.getElementById(canvasId);
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+    </script>
+</body>
+
+</html>
