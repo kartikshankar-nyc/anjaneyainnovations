@@ -886,6 +886,15 @@ const currentPath = Astro.url.pathname;
          border-top: 1px solid var(--border-color);
          box-shadow: var(--shadow-medium);
          margin-top: 0;
+         opacity: 1; /* Start visible - GSAP will handle transitions */
+         z-index: 999; /* High z-index to appear above content */
+         backdrop-filter: blur(6px); /* Add blur for a modern effect and to make content behind readable */
+         background-color: rgba(17, 24, 39, 0.95); /* Semi-transparent background */
+      }
+      
+      /* Light theme mobile menu background */
+      .light-theme .menu {
+        background-color: rgba(249, 250, 251, 0.95);
       }
       
       .menu a {
@@ -1135,7 +1144,7 @@ const currentPath = Astro.url.pathname;
   }
 </style> 
 
-  <!-- Ensure main.js is loaded -->
-  <script src="../scripts/main.js"></script>
+  <!-- Ensure main.js is loaded with correct path -->
+  <script src="/scripts/main.js"></script>
 </body>
 </html> 

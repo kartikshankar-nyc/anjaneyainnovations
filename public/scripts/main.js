@@ -63,8 +63,11 @@ const initThemeToggle = () => {
     const currentTheme = htmlElement.classList.contains('light-theme') ? 'light' : 'dark';
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
 
-    // Apply GSAP animations if available
-    if (typeof gsap !== 'undefined') {
+    // Check if on mobile device for simplified animations
+    const isMobile = window.innerWidth < 768 || ('ontouchstart' in window);
+
+    // Apply GSAP animations if available and not on mobile
+    if (typeof gsap !== 'undefined' && !isMobile) {
       // Animate the toggle button with a rotation
       gsap.to(themeToggle, {
         rotation: '+=180',
@@ -72,22 +75,16 @@ const initThemeToggle = () => {
         ease: 'back.out(1.7)'
       });
 
-      // Animate page elements for smooth transition
+      // Use minimal elements for animation on mobile
       const contentElements = [
         'body',
-        'header',
-        '.logo-text',
-        'h1', 'h2', 'h3',
-        'p',
-        '.btn',
-        'input',
-        'textarea'
+        'header'
       ];
 
       // Fade elements slightly during transition
       gsap.to(contentElements, {
-        opacity: 0.92,
-        duration: 0.2,
+        opacity: 0.95,
+        duration: 0.15,
         ease: 'power1.out',
         onComplete: () => {
           // Apply the theme class change
@@ -96,14 +93,13 @@ const initThemeToggle = () => {
           // Animate back to full opacity with the new theme
           gsap.to(contentElements, {
             opacity: 1,
-            duration: 0.3,
-            delay: 0.1,
+            duration: 0.15,
             ease: 'power1.in'
           });
         }
       });
     } else {
-      // Fallback for when GSAP is not available
+      // Simple non-animated theme switch for mobile or when GSAP isn't available
       setTheme(newTheme);
     }
 
@@ -206,26 +202,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Load the slim preset (contains necessary features)
     await loadSlim(tsParticles);
-    // Load configuration onto the #particles-js canvas
+    // Check if we're on mobile
+    const isMobile = window.innerWidth < 768 || ('ontouchstart' in window);
+
+    // Load configuration onto the #particles-js canvas - optimized for mobile
     await tsParticles.load({
       id: "particles-js",
       options: {
         background: {},
-        fpsLimit: 60,
+        fpsLimit: isMobile ? 30 : 60, // Lower fps on mobile
         interactivity: {
           events: {
             onHover: {
-              enable: true,
+              enable: !isMobile, // Disable hover effects on mobile
               mode: "repulse",
             },
             onClick: {
               enable: false,
-              mode: "push",
             },
           },
           modes: {
             repulse: {
-              distance: 100, // Increased interaction distance
+              distance: 100,
               duration: 0.4,
             },
           },
@@ -238,8 +236,8 @@ document.addEventListener('DOMContentLoaded', () => {
             color: linkColor,
             distance: 150,
             enable: true,
-            opacity: isLightMode ? 0.3 : 0.4, // Increased link opacity
-            width: isLightMode ? 1 : 1.2, // Slightly thicker lines in dark mode
+            opacity: isLightMode ? 0.3 : 0.4,
+            width: isLightMode ? 1 : 1.2,
           },
           move: {
             direction: "none",
@@ -248,15 +246,15 @@ document.addEventListener('DOMContentLoaded', () => {
               default: "out",
             },
             random: true,
-            speed: isLightMode ? 0.9 : 1.1, // Slightly faster in dark mode
+            speed: isMobile ? (isLightMode ? 0.4 : 0.6) : (isLightMode ? 0.9 : 1.1), // Much slower on mobile
             straight: false,
           },
           number: {
             density: {
               enable: true,
-              area: 800, // Smaller area means more particles
+              area: isMobile ? 1600 : 800, // Fewer particles on mobile
             },
-            value: isLightMode ? 75 : 90, // Increased number of particles
+            value: isMobile ? (isLightMode ? 30 : 40) : (isLightMode ? 75 : 90), // Much fewer particles on mobile
           },
           opacity: {
             value: particleOpacity,
@@ -265,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
             type: "circle",
           },
           size: {
-            value: { min: 1, max: isLightMode ? 4 : 5 }, // Slightly larger particles in dark mode
+            value: { min: 1, max: isLightMode ? 4 : 5 },
           },
         },
         detectRetina: true,
@@ -282,33 +280,43 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- End tsParticles Initialization --- 
 
   // --- Scroll Animations (Intersection Observer) --- 
-  const animatedElements = document.querySelectorAll('.animate-on-scroll');
-  // console.log("Found elements to animate:", animatedElements.length); 
+  // Check if mobile for reduced animations
+  const isMobile = window.innerWidth < 768 || ('ontouchstart' in window);
 
-  if (animatedElements.length > 0) {
-    // Create an observer to watch for elements entering the viewport
-    const observer = new IntersectionObserver((entries, observerInstance) => {
-      entries.forEach(entry => {
-        // console.log("Observing:", entry.target, "Intersecting:", entry.isIntersecting); 
-        // If element is at least 10% visible
-        if (entry.isIntersecting) {
-          // Add .is-visible class to trigger CSS animation
-          entry.target.classList.add('is-visible');
-          // console.log("Added .is-visible to:", entry.target); 
-          // Stop observing this element once animated
-          observerInstance.unobserve(entry.target);
-        }
+  // On mobile, we'll add a small delay before setting up animations to prioritize page rendering
+  const setupScrollAnimations = () => {
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+
+    if (animatedElements.length > 0) {
+      // Use lower threshold on mobile to trigger animations sooner
+      const observerThreshold = isMobile ? 0.05 : 0.1;
+
+      // Create an observer with optimized options for mobile
+      const observer = new IntersectionObserver((entries, observerInstance) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // Add .is-visible class to trigger CSS animation
+            entry.target.classList.add('is-visible');
+            // Stop observing this element once animated
+            observerInstance.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: observerThreshold,
+        // Add rootMargin to start loading earlier on mobile (when element is near viewport)
+        rootMargin: isMobile ? '50px 0px' : '0px'
       });
-    }, {
-      threshold: 0.1 // % of element visibility needed to trigger
-    });
-    // Start observing each tagged element
-    animatedElements.forEach(el => {
-      // console.log("Observing element:", el); 
-      observer.observe(el);
-    });
+
+      // Start observing each tagged element
+      animatedElements.forEach(el => observer.observe(el));
+    }
+  };
+
+  // On mobile, delay setup slightly to prioritize critical rendering
+  if (isMobile) {
+    setTimeout(setupScrollAnimations, 300);
   } else {
-    // console.log("No elements with .animate-on-scroll found.");
+    setupScrollAnimations();
   }
   // --- End Scroll Animations --- 
 
@@ -318,15 +326,44 @@ document.addEventListener('DOMContentLoaded', () => {
     const menu = document.getElementById('main-menu');
 
     if (toggleButton && menu) {
-      // console.log("Setting up mobile menu toggle");
-      // Add click listener to the toggle button
-      toggleButton.addEventListener('click', () => {
-        // Toggle the .is-open class on the menu element
-        const isOpen = menu.classList.toggle('is-open');
-        // Update ARIA attribute for accessibility
-        toggleButton.setAttribute('aria-expanded', isOpen);
-        // console.log("Mobile menu toggled:", isOpen);
-      });
+      // Preload menu animation to improve performance
+      if (typeof gsap !== 'undefined') {
+        // Create reusable animation timelines
+        const openMenu = gsap.timeline({ paused: true })
+          .set(menu, { display: 'flex', opacity: 0 })
+          .to(menu, { opacity: 1, duration: 0.2 });
+
+        const closeMenu = gsap.timeline({ paused: true })
+          .to(menu, { opacity: 0, duration: 0.2 })
+          .set(menu, { display: 'none' });
+
+        // Add click listener with optimized animation
+        toggleButton.addEventListener('click', () => {
+          const wasOpen = toggleButton.getAttribute('aria-expanded') === 'true';
+          const isOpen = !wasOpen;
+
+          // Update ARIA attribute for accessibility
+          toggleButton.setAttribute('aria-expanded', isOpen);
+
+          // Use the correct animation based on state
+          if (isOpen) {
+            menu.classList.add('is-open');
+            openMenu.restart();
+          } else {
+            closeMenu.restart();
+            // Remove class after animation completes
+            setTimeout(() => menu.classList.remove('is-open'), 200);
+          }
+        });
+      } else {
+        // Fallback for when GSAP is not available
+        toggleButton.addEventListener('click', () => {
+          // Toggle the .is-open class on the menu element
+          const isOpen = menu.classList.toggle('is-open');
+          // Update ARIA attribute for accessibility
+          toggleButton.setAttribute('aria-expanded', isOpen);
+        });
+      }
     } else {
       console.error("Mobile menu toggle button or menu element not found.");
     }
