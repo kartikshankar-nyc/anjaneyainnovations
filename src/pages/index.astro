@@ -436,6 +436,9 @@ const testimonials = (await getCollection('testimonials')).sort(
     position: relative; 
     box-shadow: none; 
     transition: transform 0.3s ease, border-color 0.3s ease;
+    height: 100%; /* Make card take full height of swiper-slide */
+    display: flex; /* Allow flex properties */
+    flex-direction: column; /* Arrange content vertically */
   }
   
   .testimonial:hover {
@@ -448,6 +451,7 @@ const testimonials = (await getCollection('testimonials')).sort(
     font-style: italic;
     margin-bottom: var(--space-lg);
     color: var(--primary-color); /* Light text */
+    flex-grow: 1; /* Allow content to grow and push author to bottom */
   }
 
   .testimonial-author .name {
@@ -468,6 +472,11 @@ const testimonials = (await getCollection('testimonials')).sort(
       box-shadow: none; 
       opacity: 1; /* Ensure default opacity is 1 */
       display: block; 
+  }
+
+  /* Add styles for swiper-slide */
+  .swiper-slide {
+    height: auto; /* Adjust height based on content */
   }
 
   /* CTA Section - Dark Mode */
