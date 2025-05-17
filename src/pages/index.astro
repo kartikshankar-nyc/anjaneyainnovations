@@ -65,30 +65,46 @@ const testimonials = (await getCollection('testimonials')).sort(
     </div>
   </section>
 
-  <section class="testimonials animate-on-scroll">
+  <!-- Replace the testimonials-journey section with a modern testimonial slider -->
+  <section class="testimonials-showcase animate-on-scroll">
     <div class="container">
-      <h2 class="section-title">What Our Clients Say</h2>
-      <!-- Swiper Container -->
-      <div class="swiper testimonial-swiper">
-        <div class="swiper-wrapper">
-          <!-- Loop through testimonials collection -->
-          {testimonials.map(testimonial => (
-            <div class="swiper-slide">
-              <div class="testimonial">
-                <div class="testimonial-content">
-                  <p>"{testimonial.data.quote}"</p>
-                </div>
-                <div class="testimonial-author">
-                  <p class="name">{testimonial.data.name}</p>
-                  <p class="position">{testimonial.data.position}</p>
+      <h2 class="section-title">Our Impact, In Their Words</h2>
+      
+      <div class="showcase-wrapper">
+        <div class="showcase-slider">
+          <div class="slides-container">
+            {testimonials.map((testimonial, index) => (
+              <div class="slide" key={`testimonial-${index}`} data-index={index}>
+                <div class="slide-content">
+                  <div class="quote-text">"{testimonial.data.quote}"</div>
+                  <div class="slide-footer">
+                    <div class="author">{testimonial.data.name}</div>
+                    <div class="position">{testimonial.data.position}</div>
+                  </div>
                 </div>
               </div>
+            ))}
+          </div>
+          
+          <div class="slider-nav">
+            <button class="nav-arrow prev" aria-label="Previous testimonial">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <div class="pagination">
+              {testimonials.map((_, index) => (
+                <button 
+                  class={`pagination-dot ${index === 0 ? 'active' : ''}`} 
+                  data-index={index} 
+                  aria-label={`Go to testimonial ${index + 1}`}
+                  key={`dot-${index}`}
+                ></button>
+              ))}
             </div>
-          ))}
+            <button class="nav-arrow next" aria-label="Next testimonial">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
         </div>
-        <!-- Add Swiper Navigation Buttons -->
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
       </div>
     </div>
   </section>
@@ -428,253 +444,322 @@ const testimonials = (await getCollection('testimonials')).sort(
       padding: var(--space-3xl) var(--space-xl); 
   }
 
-  .testimonial {
-    background: var(--card-bg-color); 
-    padding: var(--space-xl) var(--space-2xl); 
-    border-radius: var(--radius-default);
-    border: 1px solid var(--border-color); 
-    position: relative; 
-    box-shadow: none; 
-    transition: transform 0.3s ease, border-color 0.3s ease;
-    height: 100%; /* Make card take full height of swiper-slide */
-    display: flex; /* Allow flex properties */
-    flex-direction: column; /* Arrange content vertically */
-  }
-  
-  .testimonial:hover {
-      transform: translateY(-5px);
-      border-color: var(--accent-color);
+  /* New Testimonial Slider Styles */
+  .testimonials-showcase {
+    position: relative;
+    padding: var(--space-3xl) 0;
+    overflow: hidden;
+    background-color: var(--background-color);
   }
 
-  .testimonial-content {
-    font-size: 1.1rem; 
-    font-style: italic;
-    margin-bottom: var(--space-lg);
-    color: var(--primary-color); /* Light text */
-    flex-grow: 1; /* Allow content to grow and push author to bottom */
+  .showcase-wrapper {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-3xl);
   }
 
-  .testimonial-author .name {
-    font-weight: 600; 
-    margin-bottom: var(--space-xs); 
-    color: var(--primary-color); /* Light text */
+  .showcase-slider {
+    position: relative;
+    perspective: 1200px;
+    overflow: visible;
   }
 
-  .testimonial-author .position {
-    color: var(--secondary-color); /* Medium gray */
+  .slides-container {
+    position: relative;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    transform-style: preserve-3d;
+  }
+
+  .slide {
+    position: absolute;
+    width: 65%;
+    max-width: 1000px;
+    height: auto;
+    top: 0;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(100px) translateZ(-400px) rotateY(25deg);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+    will-change: transform, opacity;
+  }
+
+  .slide.active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 10;
+    transform: translateX(0) translateZ(0) rotateY(0);
+  }
+
+  .slide.prev {
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 5;
+    transform: translateX(-85%) translateZ(-150px) rotateY(-15deg);
+  }
+
+  .slide.next {
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 5;
+    transform: translateX(85%) translateZ(-150px) rotateY(15deg);
+  }
+
+  .slide-content {
+    position: relative;
+    padding: var(--space-2xl);
+    background: var(--card-bg-color);
+    border-radius: 16px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .slide-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to bottom right,
+      rgba(var(--accent-rgb, 14, 165, 233), 0.05) 0%,
+      rgba(var(--accent-rgb, 14, 165, 233), 0) 70%
+    );
+    z-index: -1;
+  }
+
+  .quote-text {
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    line-height: 1.6;
+    color: var(--primary-color);
+    margin-bottom: var(--space-xl);
+    font-weight: 300;
+    position: relative;
+    flex-grow: 1;
+  }
+
+  .quote-text::before {
+    content: '"';
+    position: absolute;
+    top: -30px;
+    left: -10px;
+    font-size: 6rem;
+    font-family: Georgia, serif;
+    color: var(--accent-color);
+    opacity: 0.2;
+    line-height: 1;
+  }
+
+  .slide-footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: var(--space-md);
+  }
+
+  .author {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+  }
+
+  .position {
     font-size: 0.9rem;
-  }
-  
-  /* Style the active testimonial */
-  .testimonial {
-      margin: 0 auto; 
-      position: relative; 
-      box-shadow: none; 
-      opacity: 1; /* Ensure default opacity is 1 */
-      display: block; 
+    color: var(--accent-color);
+    opacity: 0.9;
   }
 
-  /* Add styles for swiper-slide */
-  .swiper-slide {
-    height: auto; /* Adjust height based on content */
+  /* Slider Nav Controls */
+  .slider-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-lg);
+    margin-top: var(--space-xl);
+    position: relative;
+    z-index: 20;
   }
 
-  /* CTA Section - Dark Mode */
-  .cta-section {
-    /* Remove background - let body bg show through */
-    /* background: var(--background-color); */ 
-    color: var(--primary-color); 
-    text-align: center;
+  /* Control buttons styles that match site design language */
+  .nav-arrow {
+    background: var(--card-bg-solid);
+    border: 1px solid var(--border-color);
+    color: var(--primary-color);
+    cursor: pointer;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Create overlay for cyan highlight effect */
+  .nav-arrow::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--accent-color);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 1;
+  }
+
+  .nav-arrow:hover::after {
+    opacity: 1;
+  }
+
+  .nav-arrow svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2.5px;
+    transition: all 0.2s ease;
+    stroke: var(--primary-color);
+    fill: none;
+    position: relative;
+    z-index: 2;
+  }
+
+  .nav-arrow:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+  }
+
+  .nav-arrow:hover svg {
+    stroke: var(--text-on-light);
+  }
+
+  .nav-arrow:active {
+    transform: translateY(0);
+  }
+
+  .nav-arrow.prev:hover svg {
+    transform: translateX(-2px);
+  }
+
+  .nav-arrow.next:hover svg {
+    transform: translateX(2px);
+  }
+
+  .pagination {
+    display: flex;
+    gap: 10px;
+  }
+
+  .pagination-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--border-color);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-    border-top: 1px solid var(--border-color);
-    padding: var(--space-3xl) var(--space-xl); 
   }
 
-  /* Remove pattern */
-  .cta-section::before {
-     display: none;
-     /*
+  .pagination-dot::after {
     content: '';
-     ...
-     */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
-  .cta-section h2 {
-    font-size: 2.2rem; 
-    margin-bottom: var(--space-md); 
-    color: var(--primary-color); /* Light heading */
+  .pagination-dot:hover::after {
+    transform: scale(0.7);
   }
 
-  .cta-section p {
-    font-size: 1.1rem; 
-    max-width: 600px; 
-    margin: 0 auto var(--space-xl); 
-    color: var(--secondary-color); /* Medium gray text */
-  }
-  
-  .cta-section .btn-primary {
-     /* CTA button might need slightly different styling? */
-     /* Example: Use the orange accent */
-     /* background-color: var(--accent-orange); */
-     /* border-color: var(--accent-orange); */
-     /* color: var(--primary-color); */ 
-  }
-  
-  .cta-section .btn-primary:hover {
-     /* background-color: #E57A00; */ /* Darker orange */
-     /* border-color: #E57A00; */
+  .pagination-dot.active::after {
+    transform: scale(1);
   }
 
+  .pagination-dot:hover {
+    transform: translateY(-1px);
+  }
 
-  /* Responsive Styles */
-  @media (max-width: 992px) {
-    .hero h1 { font-size: 2.5rem; }
-    .hero p { font-size: 1.1rem; max-width: 90%; }
-    .section-title { font-size: 1.8rem; }
-    .container { padding: var(--space-2xl) var(--space-lg); } /* Adjust tablet padding */
-    /* Adjust slider container padding for tablet */
-    .testimonial-slider-container {
-        padding: 0 var(--space-xl); /* Less padding for buttons */
+  .pagination-dot.active {
+    transform: scale(1.2);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 1024px) {
+    .slides-container {
+      height: 380px;
     }
-    .slider-btn.prev {
-        left: -10px; 
-    }
-    .slider-btn.next {
-        right: -10px;
+    
+    .slide {
+      width: 85%;
     }
   }
-  
-  
+
   @media (max-width: 768px) {
-    .hero h1 {
-      font-size: 2rem; /* Further adjust hero size */
+    .slides-container {
+      height: 400px;
     }
     
-    .hero p {
-        font-size: 1rem;
+    .slide {
+      width: 90%;
     }
     
-    .cta-buttons {
-       flex-direction: column; /* Stack buttons */
-       gap: var(--space-sm);
-       align-items: center;
-    }
-    
-    .btn {
-       padding: 0.8rem 1.5rem;
-       width: 80%; /* Make buttons wider */
-       max-width: 300px;
-    }
-
-    .about-grid {
-      grid-template-columns: 1fr; /* Stack about section */
-      gap: var(--space-xl);
-      text-align: center; /* Center text content */
-    }
-    
-    .about-content .section-title {
-        text-align: center; /* Center title */
-    }
-
-    .about-image {
-      order: -1; /* Image first on mobile */
-      min-height: 250px;
-    }
-
-    .container {
-      padding: var(--space-2xl) var(--space-md); /* Adjust mobile padding */
-    }
-    
-    .services-grid {
-       grid-template-columns: 1fr; /* Single column for services */
-    }
-    
-    .section-title {
-        font-size: 1.6rem;
-    }
-    
-    .cta-section h2 {
-        font-size: 1.8rem;
-    }
-    
-    .cta-section p {
-        font-size: 1rem;
-    }
-    /* Adjust slider container padding for mobile */
-    .testimonial-slider-container {
-        padding: 0 var(--space-lg); /* Even less padding */
-    }
-    .slider-btn {
-        /* Make buttons smaller on mobile */
-        width: 36px;
-        height: 36px;
-        font-size: 1.2rem;
-    }
-    .slider-btn.prev {
-        left: -5px; 
-    }
-    .slider-btn.next {
-        right: -5px;
+    .slide.prev, .slide.next {
+      opacity: 0.3;
+      transform: translateX(0) translateZ(-200px);
     }
   }
 
-  /* Swiper Customization */
-  .testimonial-swiper {
-      padding: 0 var(--space-2xl); 
-      position: relative; 
-      margin: 0 calc(-1 * var(--space-xl)); 
-      /* Allow hover transform to be visible */
-      overflow: visible !important; 
+  @media (max-width: 480px) {
+    .slides-container {
+      height: 450px;
+    }
+    
+    .quote-text {
+      font-size: 1rem;
+    }
   }
 
-  /* Style Swiper Navigation Buttons */
-  .testimonial-swiper .swiper-button-prev,
-  .testimonial-swiper .swiper-button-next {
-      /* Use Accent Color */
-      color: var(--accent-color);
-      /* Adjust default positioning if needed */
-      /* top: 50%; */
-      /* height: 44px; */ /* Default */
-      /* transition for hover */
-      transition: color 0.2s ease, transform 0.2s ease;
+  .testimonial-scene {
+    min-height: 100vh; /* Each scene takes at least full viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; /* Center content wrapper */
+    position: relative; /* For absolute positioning of internal elements or pseudo-elements */
+    padding: var(--space-2xl) var(--space-xl);
+    /* opacity: 0; */ /* Will be controlled by ScrollTrigger */
+    /* border-bottom: 1px solid var(--border-color); */ /* Optional separator */
   }
-  
-  .testimonial-swiper .swiper-button-prev::after,
-  .testimonial-swiper .swiper-button-next::after {
-      /* Override default font size if needed */
-      /* font-size: 1.5rem; */ 
-  }
-
-  /* Swiper Button Hover Effects */
-  .testimonial-swiper .swiper-button-prev:hover,
-  .testimonial-swiper .swiper-button-next:hover {
-      color: #67E8F9; /* Lighter cyan */
-      /* Add slight rightward movement */
-      /* transform: translateX(3px); Might feel odd on arrows, use scale instead? */
-      /* transform: scale(1.1); */ /* Optional: Slight scale */
-  }
-  
-  /* Keep rightward shift for consistency */
-   .testimonial-swiper .swiper-button-prev:hover {
-       transform: translateX(-3px); /* Move left arrow left */
-   }
-   .testimonial-swiper .swiper-button-next:hover {
-       transform: translateX(3px); /* Move right arrow right */
-   }
 </style>
 
 <script>
-  // Add GSAP animation for the logo if GSAP is available
+  // Remove hero-logo animation as the element doesn't exist
   document.addEventListener('DOMContentLoaded', () => {
     if (typeof gsap !== 'undefined') {
-      gsap.from('.hero-logo', {
-        duration: 1.5,
-        opacity: 0,
-        y: -50,
-        rotation: -10,
-        ease: 'elastic.out(1, 0.5)'
-      });
+      // No hero-logo animation
     }
   });
 </script>
@@ -682,46 +767,62 @@ const testimonials = (await getCollection('testimonials')).sort(
 <!-- Hero Section Animations -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // Safely check if GSAP is available
     if (typeof gsap !== 'undefined') {
-      // Initially set the opacity to 0 to prevent flash of unstyled content
-      gsap.set(['.stealth-subtitle', '.hero h1', '.hero-content p', '.cta-buttons .btn'], { 
-        opacity: 0,
-        y: 30
-      });
+      // Select elements individually instead of as NodeLists
+      const subtitle = document.querySelector('.stealth-subtitle');
+      const heading = document.querySelector('.hero h1');
+      const paragraph = document.querySelector('.hero-content p');
+      const buttons = document.querySelectorAll('.cta-buttons .btn');
       
-      // Create a timeline for staggered animation
+      // Set initial state for each element individually
+      if (subtitle) gsap.set(subtitle, { opacity: 0, y: 30 });
+      if (heading) gsap.set(heading, { opacity: 0, y: 30 });
+      if (paragraph) gsap.set(paragraph, { opacity: 0, y: 30 });
+      if (buttons.length) {
+        buttons.forEach(btn => {
+          gsap.set(btn, { opacity: 0, y: 30 });
+        });
+      }
+      
       const heroTl = gsap.timeline({ delay: 0.3 });
       
-      // Animate the subtitle with a reveal effect
-      heroTl.to('.stealth-subtitle', {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: 'power3.out'
-      })
-      // Animate the main heading with a reveal
-      .to('h1', {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: 'power3.out'
-      }, "-=0.4")
-      // Animate paragraph with a fade-in
-      .to('.hero-content p', {
-        opacity: 1,
-        y: 0, 
-        duration: 0.8,
-        ease: 'power2.out'
-      }, "-=0.4")
-      // Animate CTA buttons with staggered entrance
-      .to('.cta-buttons .btn', {
-        opacity: 1,
-        y: 0,
-        duration: 0.6, 
-        stagger: 0.2,
-        ease: 'back.out(1.2)'
-      }, "-=0.4");
+      if (subtitle) {
+        heroTl.to(subtitle, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power3.out'
+        });
+      }
+      
+      if (heading) {
+        heroTl.to(heading, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power3.out'
+        }, "-=0.4");
+      }
+      
+      if (paragraph) {
+        heroTl.to(paragraph, {
+          opacity: 1,
+          y: 0, 
+          duration: 0.8,
+          ease: 'power2.out'
+        }, "-=0.4");
+      }
+      
+      if (buttons.length) {
+        buttons.forEach((btn, i) => {
+          heroTl.to(btn, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: 'back.out(1.2)'
+          }, `-=${0.4 - (i * 0.1)}`);
+        });
+      }
     }
   });
 </script>
@@ -729,47 +830,345 @@ const testimonials = (await getCollection('testimonials')).sort(
 <!-- Service Cards Scroll Animations -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // Safely check if GSAP and ScrollTrigger are available
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-      // Get all service cards
       const serviceCards = document.querySelectorAll('.service-card');
       
-      // Set initial state to prevent flash of unstyled content
-      gsap.set(serviceCards, { 
-        opacity: 0,
-        y: 50
+      if (serviceCards.length) {
+        // Set initial state for each card individually 
+        serviceCards.forEach(card => {
+          gsap.set(card, { opacity: 0, y: 50 });
+        });
+        
+        // Animate each card individually
+        serviceCards.forEach((card, i) => {
+          gsap.to(card, {
+            scrollTrigger: {
+              trigger: card,
+              start: "top 80%", 
+              toggleActions: "play none none none", 
+            },
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            delay: i * 0.15, 
+            ease: 'power2.out',
+            clearProps: 'all' 
+          });
+        });
+      }
+      
+      const ctaButton = document.querySelector('.services-cta .btn');
+      if (ctaButton) {
+        gsap.from(ctaButton, {
+          scrollTrigger: {
+            trigger: '.services-cta',
+            start: "top 85%"
+          },
+          opacity: 0,
+          y: 20,
+          duration: 0.6,
+          ease: 'back.out(1.7)',
+          delay: 0.2 
+        });
+      }
+    }
+  });
+</script>
+
+<!-- Add GSAP animation for testimonial slider -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    if (typeof gsap !== 'undefined') {
+      // Initialize the slider
+      const slides = document.querySelectorAll('.slide');
+      const dots = document.querySelectorAll('.pagination-dot');
+      const prevBtn = document.querySelector('.nav-arrow.prev');
+      const nextBtn = document.querySelector('.nav-arrow.next');
+      let currentIndex = 0;
+      let isAnimating = false;
+      
+      // Initialize the 3D slider
+      function initSlider() {
+        // Set initial positions
+        gsap.set(slides, { 
+          opacity: 0,
+          visibility: 'hidden',
+          x: 100,
+          z: -400,
+          rotationY: 25
+        });
+        
+        // Active slide
+        gsap.set(slides[0], { 
+          opacity: 1,
+          visibility: 'visible',
+          x: 0,
+          z: 0,
+          rotationY: 0
+        });
+        slides[0].classList.add('active');
+        
+        // Previous slide (if exists)
+        if (slides.length > 1) {
+          const prevIndex = (slides.length - 1);
+          gsap.set(slides[prevIndex], { 
+            opacity: 0.5,
+            visibility: 'visible',
+            x: '-85%',
+            z: -150,
+            rotationY: -15
+          });
+          slides[prevIndex].classList.add('prev');
+        }
+        
+        // Next slide (if exists)
+        if (slides.length > 2) {
+          gsap.set(slides[1], { 
+            opacity: 0.5,
+            visibility: 'visible',
+            x: '85%',
+            z: -150,
+            rotationY: 15
+          });
+          slides[1].classList.add('next');
+        }
+      }
+      
+      // Change slide function
+      function goToSlide(newIndex) {
+        if (isAnimating || newIndex === currentIndex) return;
+        isAnimating = true;
+        
+        // Improved direction detection that accounts for wrap-around cases
+        let direction;
+        if (newIndex === 0 && currentIndex === slides.length - 1) {
+          // Special case: going from last to first (should be "next")
+          direction = 'next';
+        } else if (newIndex === slides.length - 1 && currentIndex === 0) {
+          // Special case: going from first to last (should be "prev")
+          direction = 'prev';
+        } else {
+          // Normal case: compare indices
+          direction = newIndex > currentIndex ? 'next' : 'prev';
+        }
+        
+        // Determine slide indices - handle wrap around
+        const oldIndex = currentIndex;
+        const oldPrevIndex = (oldIndex - 1 + slides.length) % slides.length;
+        const oldNextIndex = (oldIndex + 1) % slides.length;
+        
+        // New indices after the transition
+        const newPrevIndex = (newIndex - 1 + slides.length) % slides.length;
+        const newNextIndex = (newIndex + 1) % slides.length;
+        
+        // Clear any existing classes
+        slides.forEach(slide => {
+          slide.classList.remove('active', 'prev', 'next');
+        });
+        
+        // Update pagination dots
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === newIndex);
+        });
+        
+        // Create animation timeline
+        const tl = gsap.timeline({
+          onComplete: () => {
+            // Update current index
+            currentIndex = newIndex;
+            
+            // Update classes
+            slides[newIndex].classList.add('active');
+            slides[newPrevIndex].classList.add('prev');
+            slides[newNextIndex].classList.add('next');
+            
+            // Reset other slides
+            slides.forEach((slide, i) => {
+              if (i !== newIndex && i !== newPrevIndex && i !== newNextIndex) {
+                gsap.set(slide, { 
+                  visibility: 'hidden', 
+                  opacity: 0,
+                  x: 100,
+                  z: -400,
+                  rotationY: 25
+                });
+              }
+            });
+            
+            isAnimating = false;
+          }
+        });
+        
+        if (direction === 'next') {
+          // Current to previous
+          tl.to(slides[oldIndex], {
+            opacity: 0.5,
+            x: '-85%',
+            z: -150,
+            rotationY: -15,
+            duration: 0.7,
+            ease: 'power2.inOut'
+          }, 0);
+          
+          // Next to current
+          tl.to(slides[oldNextIndex], {
+            opacity: 1,
+            x: 0,
+            z: 0,
+            rotationY: 0,
+            duration: 0.7,
+            ease: 'power2.inOut'
+          }, 0);
+          
+          // Setup new next
+          tl.set(slides[newNextIndex], {
+            visibility: 'visible',
+            opacity: 0,
+            x: '130%',
+            z: -200,
+            rotationY: 25
+          }, 0);
+          
+          // Animate new next
+          tl.to(slides[newNextIndex], {
+            opacity: 0.5,
+            x: '85%',
+            z: -150,
+            rotationY: 15,
+            duration: 0.7,
+            ease: 'power2.inOut'
+          }, 0.1);
+          
+        } else { // direction === 'prev'
+          // Current to next
+          tl.to(slides[oldIndex], {
+            opacity: 0.5,
+            x: '85%',
+            z: -150,
+            rotationY: 15,
+            duration: 0.7,
+            ease: 'power2.inOut'
+          }, 0);
+          
+          // Prev to current
+          tl.to(slides[oldPrevIndex], {
+            opacity: 1,
+            x: 0,
+            z: 0,
+            rotationY: 0,
+            duration: 0.7,
+            ease: 'power2.inOut'
+          }, 0);
+          
+          // Setup new prev
+          tl.set(slides[newPrevIndex], {
+            visibility: 'visible',
+            opacity: 0,
+            x: '-130%',
+            z: -200,
+            rotationY: -25
+          }, 0);
+          
+          // Animate new prev
+          tl.to(slides[newPrevIndex], {
+            opacity: 0.5,
+            x: '-85%',
+            z: -150,
+            rotationY: -15,
+            duration: 0.7,
+            ease: 'power2.inOut'
+          }, 0.1);
+        }
+      }
+      
+      // Initialize the slider
+      initSlider();
+      
+      // Event listeners for controls
+      prevBtn.addEventListener('click', () => {
+        const newIndex = (currentIndex - 1 + slides.length) % slides.length;
+        goToSlide(newIndex);
       });
       
-      // Animate each service card when scrolled into view
-      serviceCards.forEach((card, i) => {
-        gsap.to(card, {
-          scrollTrigger: {
-            trigger: card,
-            start: "top 80%", // Start animation when the top of the card reaches 80% from the top of viewport
-            toggleActions: "play none none none", // Play animation once when entering the trigger area
-            // markers: false // For debugging - shows markers on screen
-          },
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          delay: i * 0.15, // Stagger based on card index
-          ease: 'power2.out',
-          clearProps: 'all' // Clean up after animation completes for better performance
+      nextBtn.addEventListener('click', () => {
+        const newIndex = (currentIndex + 1) % slides.length;
+        goToSlide(newIndex);
+      });
+      
+      // Dot navigation with smart direction detection
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+          // Don't do anything if clicking the current dot
+          if (index === currentIndex) return;
+          
+          // Calculate shortest path (clockwise or counterclockwise)
+          // This determines whether we should go "next" or "prev" to provide
+          // the most natural-looking transition
+          const totalSlides = slides.length;
+          const clockwiseDist = (index - currentIndex + totalSlides) % totalSlides;
+          const counterClockwiseDist = (currentIndex - index + totalSlides) % totalSlides;
+          
+          // Choose the shortest distance
+          if (clockwiseDist <= counterClockwiseDist) {
+            // Clockwise is shorter or equal, use "next" transitions
+            goToSlide(index);
+          } else {
+            // Counter-clockwise is shorter, use "prev" transitions
+            goToSlide(index);
+          }
         });
       });
-
-      // Special animation for the "View All Services" button
-      gsap.from('.services-cta .btn', {
-        scrollTrigger: {
-          trigger: '.services-cta',
-          start: "top 85%"
-        },
-        opacity: 0,
-        y: 20,
-        duration: 0.6,
-        ease: 'back.out(1.7)',
-        delay: 0.2 // Small delay after cards animate
-      });
+      
+      // Auto advance with next direction
+      let autoplayTimer = setInterval(() => {
+        // Always advance in the "next" direction
+        const newIndex = (currentIndex + 1) % slides.length;
+        goToSlide(newIndex);
+      }, 7000);
+      
+      // Pause autoplay on hover/interaction
+      const sliderElement = document.querySelector('.showcase-slider');
+      
+      if (sliderElement) {
+        sliderElement.addEventListener('mouseenter', () => {
+          clearInterval(autoplayTimer);
+        });
+        
+        sliderElement.addEventListener('mouseleave', () => {
+          clearInterval(autoplayTimer);
+          autoplayTimer = setInterval(() => {
+            const newIndex = (currentIndex + 1) % slides.length;
+            goToSlide(newIndex);
+          }, 7000);
+        });
+      }
+      
+      // Entry animation when in viewport
+      if (typeof ScrollTrigger !== 'undefined') {
+        gsap.from('.showcase-wrapper', {
+          y: 70,
+          opacity: 0,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.testimonials-showcase',
+            start: 'top 70%',
+            toggleActions: 'play none none none'
+          }
+        });
+        
+        // Add subtle parallax effect to the slider
+        gsap.to('.slides-container', {
+          y: -30,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '.testimonials-showcase',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true
+          }
+        });
+      }
     }
   });
 </script> 
