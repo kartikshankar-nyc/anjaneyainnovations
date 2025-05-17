@@ -84,6 +84,14 @@ const currentPath = Astro.url.pathname;
   <!-- Load ScrollTrigger plugin -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" is:inline onload="window.scrollTriggerLoaded = true; initGSAP();"></script>
   
+  <!-- Load tsParticles (for particles background) -->
+  <script src="https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.0.3/tsparticles.engine.min.js" is:inline></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tsparticles/slim@3.0.3/tsparticles.slim.min.js" is:inline></script>
+  
+  <!-- Load Swiper.js for testimonials -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" is:inline></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  
   <!-- Helper functions -->
   <script is:inline>
     // Create helper to check if GSAP is ready
@@ -931,8 +939,10 @@ const currentPath = Astro.url.pathname;
       }
       
       /* Style for open mobile menu */
-      .menu.is-open {
+      /* Style for open mobile menu - use opacity instead of display for smoother transitions */
+    .menu.is-open {
           display: flex;
+          opacity: 1;
       }
       /* Closing brace for the media query */
     }

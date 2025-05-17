@@ -1,21 +1,5 @@
-// Import GSAP (This will work once Node.js is installed)
-// import { gsap } from 'gsap';
-// import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/autoplay';
-
-// Import tsParticles engine and slim preset
-import { tsParticles } from "@tsparticles/engine";
-import { loadSlim } from "@tsparticles/slim"; // loads tsparticles v3
-
-// Import Swiper core and required modules
-import Swiper from 'swiper';
-import { Navigation, Autoplay } from 'swiper/modules';
-
-// For now, we'll use script tags in the layout for GSAP
+// Plain JavaScript for public scripts folder
+// Note: No import statements here since this is loaded as a plain script tag
 
 // Theme toggle functionality
 const initThemeToggle = () => {
@@ -37,11 +21,6 @@ const initThemeToggle = () => {
       htmlElement.classList.add('dark-theme-set');
     }
     setStoredTheme(theme);
-
-    // Remove cursor theme update function
-    // if (window.updateCursorTheme) {
-    //   window.updateCursorTheme();
-    // }
   };
 
   // Initialize theme
@@ -67,9 +46,9 @@ const initThemeToggle = () => {
     const isMobile = window.innerWidth < 768 || ('ontouchstart' in window);
 
     // Apply GSAP animations if available and not on mobile
-    if (typeof gsap !== 'undefined' && !isMobile) {
+    if (typeof window.gsap !== 'undefined' && !isMobile) {
       // Animate the toggle button with a rotation
-      gsap.to(themeToggle, {
+      window.gsap.to(themeToggle, {
         rotation: '+=180',
         duration: 0.5,
         ease: 'back.out(1.7)'
@@ -82,7 +61,7 @@ const initThemeToggle = () => {
       ];
 
       // Fade elements slightly during transition
-      gsap.to(contentElements, {
+      window.gsap.to(contentElements, {
         opacity: 0.95,
         duration: 0.15,
         ease: 'power1.out',
@@ -91,7 +70,7 @@ const initThemeToggle = () => {
           setTheme(newTheme);
 
           // Animate back to full opacity with the new theme
-          gsap.to(contentElements, {
+          window.gsap.to(contentElements, {
             opacity: 1,
             duration: 0.15,
             ease: 'power1.in'
@@ -136,57 +115,54 @@ const initThemeToggle = () => {
   });
 };
 
-// Remove the entire custom cursor implementation
-// const initCustomCursor = () => { ... };
-
 // Use DOMContentLoaded again
 document.addEventListener('DOMContentLoaded', () => {
-  // console.log("DOM Content Loaded - main.js executing"); 
-
   // Initialize theme toggle
   initThemeToggle();
-
-  // Remove custom cursor initialization
-  // initCustomCursor();
 
   // --- Preloader Fade Out --- 
   // Add 'loaded' class to body after a short delay 
   // to trigger CSS transition for preloader fade-out.
   setTimeout(() => {
     document.body.classList.add('loaded');
-    // console.log("Added .loaded class to body after delay"); 
   }, 300);
   // --- End preloader logic --- 
 
   // --- Swiper Initialization --- 
-  const testimonialSwiper = document.querySelector('.testimonial-swiper');
-  if (testimonialSwiper) {
-    // console.log("Initializing Swiper...");
-    new Swiper('.testimonial-swiper', {
-      // Include necessary modules
-      modules: [Navigation, Autoplay],
-      loop: true, // Enable continuous loop
-      slidesPerView: 1, // Show one slide at a time
-      spaceBetween: 30, // Space between slides (if multiple were shown)
-      // Configure Autoplay
-      autoplay: {
-        delay: 7000, // Time between slides
-        disableOnInteraction: true, // Stop autoplay on manual interaction
-      },
-      // Configure Navigation Arrows
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-    });
-    // console.log("Swiper Initialized.");
+  const initSwiper = () => {
+    const testimonialSwiper = document.querySelector('.testimonial-swiper');
+    if (testimonialSwiper && window.Swiper) {
+      new window.Swiper('.testimonial-swiper', {
+        loop: true, // Enable continuous loop
+        slidesPerView: 1, // Show one slide at a time
+        spaceBetween: 30, // Space between slides (if multiple were shown)
+        // Configure Autoplay
+        autoplay: {
+          delay: 7000, // Time between slides
+          disableOnInteraction: true, // Stop autoplay on manual interaction
+        },
+        // Configure Navigation Arrows
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      });
+    }
+  };
+
+  // Initialize Swiper if it's available (loaded via separate script)
+  if (typeof window.Swiper !== 'undefined') {
+    initSwiper();
   }
   // --- End Swiper Initialization --- 
 
   // --- tsParticles Initialization --- 
-  // Function to load and configure background particles
+  // Function to load and configure background particles if available
   const initParticles = async () => {
-    // console.log("Initializing tsParticles...");
+    // Check if tsParticles is loaded
+    if (!window.tsParticles || !window.tsParticles.load) {
+      return;
+    }
 
     // Determine if we're in light mode
     const isLightMode = document.documentElement.classList.contains('light-theme');
@@ -200,83 +176,87 @@ document.addEventListener('DOMContentLoaded', () => {
     // Increase opacity for more visibility
     const particleOpacity = isLightMode ? { min: 0.15, max: 0.6 } : { min: 0.25, max: 0.8 };
 
-    // Load the slim preset (contains necessary features)
-    await loadSlim(tsParticles);
     // Check if we're on mobile
     const isMobile = window.innerWidth < 768 || ('ontouchstart' in window);
 
-    // Load configuration onto the #particles-js canvas - optimized for mobile
-    await tsParticles.load({
-      id: "particles-js",
-      options: {
-        background: {},
-        fpsLimit: isMobile ? 30 : 60, // Lower fps on mobile
-        interactivity: {
-          events: {
-            onHover: {
-              enable: !isMobile, // Disable hover effects on mobile
-              mode: "repulse",
+    try {
+      // Configure particles with reasonable defaults
+      await window.tsParticles.load({
+        id: "particles-js",
+        options: {
+          background: {},
+          fpsLimit: isMobile ? 30 : 60, // Lower fps on mobile
+          interactivity: {
+            events: {
+              onHover: {
+                enable: !isMobile, // Disable hover effects on mobile
+                mode: "repulse",
+              },
+              onClick: {
+                enable: false,
+              },
             },
-            onClick: {
-              enable: false,
+            modes: {
+              repulse: {
+                distance: 100,
+                duration: 0.4,
+              },
             },
           },
-          modes: {
-            repulse: {
-              distance: 100,
-              duration: 0.4,
+          particles: {
+            color: {
+              value: particleColors,
             },
-          },
-        },
-        particles: {
-          color: {
-            value: particleColors,
-          },
-          links: {
-            color: linkColor,
-            distance: 150,
-            enable: true,
-            opacity: isLightMode ? 0.3 : 0.4,
-            width: isLightMode ? 1 : 1.2,
-          },
-          move: {
-            direction: "none",
-            enable: true,
-            outModes: {
-              default: "out",
-            },
-            random: true,
-            speed: isMobile ? (isLightMode ? 0.4 : 0.6) : (isLightMode ? 0.9 : 1.1), // Much slower on mobile
-            straight: false,
-          },
-          number: {
-            density: {
+            links: {
+              color: linkColor,
+              distance: 150,
               enable: true,
-              area: isMobile ? 1600 : 800, // Fewer particles on mobile
+              opacity: isLightMode ? 0.3 : 0.4,
+              width: isLightMode ? 1 : 1.2,
             },
-            value: isMobile ? (isLightMode ? 30 : 40) : (isLightMode ? 75 : 90), // Much fewer particles on mobile
+            move: {
+              direction: "none",
+              enable: true,
+              outModes: {
+                default: "out",
+              },
+              random: true,
+              speed: isMobile ? (isLightMode ? 0.4 : 0.6) : (isLightMode ? 0.9 : 1.1), // Much slower on mobile
+              straight: false,
+            },
+            number: {
+              density: {
+                enable: true,
+                area: isMobile ? 1600 : 800, // Fewer particles on mobile
+              },
+              value: isMobile ? (isLightMode ? 30 : 40) : (isLightMode ? 75 : 90), // Much fewer particles on mobile
+            },
+            opacity: {
+              value: particleOpacity,
+            },
+            shape: {
+              type: "circle",
+            },
+            size: {
+              value: { min: 1, max: isLightMode ? 4 : 5 },
+            },
           },
-          opacity: {
-            value: particleOpacity,
-          },
-          shape: {
-            type: "circle",
-          },
-          size: {
-            value: { min: 1, max: isLightMode ? 4 : 5 },
-          },
-        },
-        detectRetina: true,
-      }
-    });
-
-    // Make particles available to the theme toggle
-    window.tsParticles = tsParticles;
-
-    // console.log("tsParticles initialized.");
+          detectRetina: true,
+        }
+      });
+    } catch (err) {
+      console.error("Particle Init Error:", err);
+    }
   };
-  // Initialize particles when DOM is ready
-  initParticles().catch(err => console.error("Particle Init Error:", err)); // Add catch for async errors
+
+  // Try to initialize particles if tsParticles is available
+  if (typeof window.tsParticles !== 'undefined') {
+    // Only initialize when needed (on pages with particles container)
+    const particlesContainer = document.getElementById('particles-js');
+    if (particlesContainer) {
+      initParticles().catch(err => console.error("Particle initialization error:", err));
+    }
+  }
   // --- End tsParticles Initialization --- 
 
   // --- Scroll Animations (Intersection Observer) --- 
@@ -314,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // On mobile, delay setup slightly to prioritize critical rendering
   if (isMobile) {
-    setTimeout(setupScrollAnimations, 300);
+    setTimeout(setupScrollAnimations, 500); // Increase timeout on mobile
   } else {
     setupScrollAnimations();
   }
@@ -327,17 +307,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (toggleButton && menu) {
       // Preload menu animation to improve performance
-      if (typeof gsap !== 'undefined') {
-        // Create reusable animation timelines
-        const openMenu = gsap.timeline({ paused: true })
-          .set(menu, { display: 'flex', opacity: 0 })
-          .to(menu, { opacity: 1, duration: 0.2 });
-
-        const closeMenu = gsap.timeline({ paused: true })
-          .to(menu, { opacity: 0, duration: 0.2 })
-          .set(menu, { display: 'none' });
-
-        // Add click listener with optimized animation
+      if (typeof window.gsap !== 'undefined') {
+        // Use simplified toggle approach for better mobile performance
         toggleButton.addEventListener('click', () => {
           const wasOpen = toggleButton.getAttribute('aria-expanded') === 'true';
           const isOpen = !wasOpen;
@@ -345,27 +316,31 @@ document.addEventListener('DOMContentLoaded', () => {
           // Update ARIA attribute for accessibility
           toggleButton.setAttribute('aria-expanded', isOpen);
 
-          // Use the correct animation based on state
+          // Use direct manipulation for better performance on mobile
           if (isOpen) {
+            menu.style.display = 'flex';
             menu.classList.add('is-open');
-            openMenu.restart();
+            // Only use GSAP for opacity
+            window.gsap.to(menu, { opacity: 1, duration: 0.2 });
           } else {
-            closeMenu.restart();
-            // Remove class after animation completes
-            setTimeout(() => menu.classList.remove('is-open'), 200);
+            window.gsap.to(menu, {
+              opacity: 0,
+              duration: 0.2,
+              onComplete: () => {
+                menu.style.display = 'none';
+                menu.classList.remove('is-open');
+              }
+            });
           }
         });
       } else {
         // Fallback for when GSAP is not available
         toggleButton.addEventListener('click', () => {
-          // Toggle the .is-open class on the menu element
           const isOpen = menu.classList.toggle('is-open');
-          // Update ARIA attribute for accessibility
           toggleButton.setAttribute('aria-expanded', isOpen);
+          menu.style.display = isOpen ? 'flex' : 'none';
         });
       }
-    } else {
-      console.error("Mobile menu toggle button or menu element not found.");
     }
   };
 
