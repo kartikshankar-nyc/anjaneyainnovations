@@ -468,7 +468,8 @@ const testimonials = (await getCollection('testimonials')).sort(
 
   .slides-container {
     position: relative;
-    height: 450px;
+    height: auto;
+    min-height: 450px; /* Changed from fixed height to min-height */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -481,6 +482,7 @@ const testimonials = (await getCollection('testimonials')).sort(
     width: 65%;
     max-width: 1000px;
     height: auto;
+    min-height: 350px; /* Added min-height to ensure consistent size */
     top: 0;
     opacity: 0;
     pointer-events: none;
@@ -517,6 +519,7 @@ const testimonials = (await getCollection('testimonials')).sort(
     border-radius: 16px;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     height: 100%;
+    min-height: 350px; /* Added min-height for consistent card size */
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -709,21 +712,31 @@ const testimonials = (await getCollection('testimonials')).sort(
   /* Responsive adjustments */
   @media (max-width: 1024px) {
     .slides-container {
-      height: 380px;
+      min-height: 420px; /* Changed from height to min-height */
     }
     
     .slide {
       width: 85%;
+      min-height: 380px; /* Added min-height */
+    }
+    
+    .slide-content {
+      min-height: 380px; /* Added min-height */
     }
   }
 
   @media (max-width: 768px) {
     .slides-container {
-      height: 400px;
+      min-height: 450px; /* Changed from height to min-height */
     }
     
     .slide {
       width: 90%;
+      min-height: 420px; /* Added min-height */
+    }
+    
+    .slide-content {
+      min-height: 420px; /* Added min-height */
     }
     
     .slide.prev, .slide.next {
@@ -734,7 +747,16 @@ const testimonials = (await getCollection('testimonials')).sort(
 
   @media (max-width: 480px) {
     .slides-container {
-      height: 450px;
+      min-height: 500px; /* Changed from height to min-height and increased value */
+    }
+    
+    .slide {
+      min-height: 470px; /* Added min-height */
+    }
+    
+    .slide-content {
+      min-height: 470px; /* Added min-height */
+      padding: var(--space-xl); /* Reduced padding for mobile */
     }
     
     .quote-text {
@@ -887,6 +909,18 @@ const testimonials = (await getCollection('testimonials')).sort(
       let currentIndex = 0;
       let isAnimating = false;
       
+      // Function to set the slider container height based on the current active slide
+      function updateSliderHeight() {
+        const activeSlide = document.querySelector('.slide.active');
+        const slidesContainer = document.querySelector('.slides-container');
+        
+        if (activeSlide && slidesContainer) {
+          const slideHeight = activeSlide.offsetHeight;
+          // Set the container height to match the active slide, plus some buffer
+          slidesContainer.style.height = `${slideHeight + 20}px`;
+        }
+      }
+      
       // Initialize the 3D slider
       function initSlider() {
         // Set initial positions
@@ -932,6 +966,9 @@ const testimonials = (await getCollection('testimonials')).sort(
           });
           slides[1].classList.add('next');
         }
+        
+        // Update height to match content
+        updateSliderHeight();
       }
       
       // Change slide function
@@ -995,6 +1032,9 @@ const testimonials = (await getCollection('testimonials')).sort(
               }
             });
             
+            // Update height to match content after slide change
+            updateSliderHeight();
+            
             isAnimating = false;
           }
         });
@@ -1038,8 +1078,8 @@ const testimonials = (await getCollection('testimonials')).sort(
             duration: 0.7,
             ease: 'power2.inOut'
           }, 0.1);
-          
-        } else { // direction === 'prev'
+        } else if (direction === 'prev') {
+          // Fix: Added missing 'else if' condition that was causing bugs
           // Current to next
           tl.to(slides[oldIndex], {
             opacity: 0.5,
@@ -1169,6 +1209,11 @@ const testimonials = (await getCollection('testimonials')).sort(
           }
         });
       }
+      
+      // Also update slider height on window resize
+      window.addEventListener('resize', () => {
+        updateSliderHeight();
+      });
     }
   });
 </script> 
