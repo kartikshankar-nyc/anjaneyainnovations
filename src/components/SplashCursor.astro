@@ -2,118 +2,143 @@
 // SplashCursor.astro - Lightweight cursor trail with two trailing dots
 ---
 
-<div class="cursor-trail-container">
-  <div id="cursor-halo" class="cursor-halo"></div>
-  <div id="cursor-triangle" class="cursor-triangle"></div>
+<div id="splash-cursor" class="splash-cursor">
+  <div class="cursor-triangle"></div>
+  <div class="cursor-halo"></div>
 </div>
 
 <style>
-  .cursor-trail-container {
+  .splash-cursor {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     pointer-events: none;
     z-index: 9999;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease;
   }
 
   .cursor-triangle {
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
     width: 0;
     height: 0;
-    border-left: 12px solid transparent;
-    border-right: 12px solid transparent;
-    border-bottom: 20px solid var(--cursor-triangle-color, #EAB308);
-    transform: translate(-50%, -50%) rotate(-45deg);
-    transition: opacity 0.1s ease, transform 0.2s ease;
-    opacity: 0;
-    z-index: 10002;
+    /* Better proportions: 25px height, 18px base width for proper triangle shape */
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 25px solid var(--cursor-color);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                border-bottom-width 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
   }
 
   .cursor-halo {
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 40px;
     height: 40px;
+    background: radial-gradient(circle, 
+      rgba(var(--cursor-color-rgb), 0.3) 0%, 
+      rgba(var(--cursor-color-rgb), 0.1) 50%, 
+      transparent 70%);
     border-radius: 50%;
-    background: radial-gradient(circle, var(--cursor-halo-color, rgba(251, 191, 36, 0.3)) 0%, transparent 70%);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.8;
+  }
+
+  /* Hover effects */
+  .splash-cursor.hovering .cursor-triangle {
+    transform: translate(-50%, -50%) rotate(0deg);
+    border-bottom-width: 25px;
+  }
+
+  .splash-cursor.hovering .cursor-halo {
     transform: translate(-50%, -50%);
-    transition: opacity 0.2s ease, transform 0.3s ease, background 0.2s ease;
-    opacity: 0;
-    z-index: 10001;
-    pointer-events: none;
+    opacity: 1;
   }
 
-  /* Color scheme - Yellow for dark mode, blue for light mode */
-  :root {
-    --cursor-triangle-color: #EAB308; /* Bright yellow for dark mode */
-    --cursor-halo-color: rgba(234, 179, 8, 0.3); /* Yellow halo */
-    --cursor-hover-triangle-color: #F59E0B; /* Amber on hover */
-    --cursor-hover-halo-color: rgba(245, 158, 11, 0.5); /* Stronger amber halo on hover */
-  }
-
-  /* Light theme adjustments */
+  /* Theme-aware colors */
   html.light-theme {
-    --cursor-triangle-color: #1E3A8A; /* Blue for light theme */
-    --cursor-halo-color: rgba(59, 130, 246, 0.4); /* Blue halo in light theme */
-    --cursor-hover-triangle-color: #1E40AF; /* Medium blue on hover */
-    --cursor-hover-halo-color: rgba(59, 130, 246, 0.6); /* Stronger blue halo */
+    --cursor-color: #1E3A8A;
+    --cursor-color-rgb: 30, 58, 138;
   }
 
-  /* Hide on touch devices */
+  html:not(.light-theme) {
+    --cursor-color: #EAB308;
+    --cursor-color-rgb: 234, 179, 8;
+  }
+
+  /* Hide on touch devices and when reduced motion is preferred */
   @media (hover: none) and (pointer: coarse) {
-    .cursor-trail-container {
+    .splash-cursor {
       display: none;
     }
   }
 
-  /* Respect reduced motion preferences */
   @media (prefers-reduced-motion: reduce) {
-    .cursor-trail-container {
-      display: none;
+    .cursor-triangle,
+    .cursor-halo {
+      transition: none;
     }
   }
 
-  /* Hide default cursor on desktop */
-  @media (hover: hover) and (pointer: fine) {
-    html {
-      cursor: none !important;
-    }
-    
-    /* Hide cursor for all elements - use custom cursor only */
-    body, body *, body *::before, body *::after {
-      cursor: none !important;
-    }
-    
-    /* Force hide cursor on interactive elements with maximum specificity */
-    a, a:hover, a:focus, a:active,
-    button, button:hover, button:focus, button:active,
-    input, input:hover, input:focus, input:active,
-    textarea, textarea:hover, textarea:focus, textarea:active,
-    select, select:hover, select:focus, select:active,
-    [role="button"], [role="button"]:hover, [role="button"]:focus, [role="button"]:active,
-    [tabindex], [tabindex]:hover, [tabindex]:focus, [tabindex]:active,
-    .btn, .btn:hover, .btn:focus, .btn:active,
-    .theme-toggle, .theme-toggle:hover, .theme-toggle:focus, .theme-toggle:active {
-      cursor: none !important;
-    }
+  /* Aggressive cursor hiding - maximum specificity */
+  html * {
+    cursor: none !important;
+  }
+
+  html *:hover,
+  html *:focus,
+  html *:active,
+  html *:visited {
+    cursor: none !important;
+  }
+
+  html a,
+  html button,
+  html input,
+  html textarea,
+  html select,
+  html [role="button"],
+  html [tabindex]:not([tabindex="-1"]) {
+    cursor: none !important;
+  }
+
+  html a:hover,
+  html button:hover,
+  html input:hover,
+  html textarea:hover,
+  html select:hover,
+  html [role="button"]:hover,
+  html [tabindex]:not([tabindex="-1"]):hover {
+    cursor: none !important;
   }
 </style>
 
 <script>
-  // Check if user prefers reduced motion
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    console.log('Cursor trail disabled due to reduced motion preference');
-  } else {
-    initCursorTrail();
-  }
-
-  function initCursorTrail() {
-    const cursorTriangle = document.getElementById('cursor-triangle');
-    const cursorHalo = document.getElementById('cursor-halo');
+  document.addEventListener('DOMContentLoaded', function() {
+    // Check if user prefers reduced motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      console.log('Cursor trail disabled due to reduced motion preference');
+      return;
+    }
     
-    if (!cursorTriangle || !cursorHalo) return;
-
+    const splashCursor = document.getElementById('splash-cursor');
+    const triangle = splashCursor?.querySelector('.cursor-triangle');
+    const halo = splashCursor?.querySelector('.cursor-halo');
+    
+    if (!splashCursor || !triangle || !halo) return;
+    
+    let mouseX = 0;
+    let mouseY = 0;
+    let haloX = 0;
+    let haloY = 0;
+    let isVisible = false;
+    
     // Force hide native cursor with JavaScript
     const forceHideCursor = () => {
       document.body.style.cursor = 'none';
@@ -129,69 +154,69 @@
     // Initial hide
     forceHideCursor();
     
-    // Re-apply when DOM changes
-    const observer = new MutationObserver(forceHideCursor);
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    let mouseX = 0;
-    let mouseY = 0;
-    let haloX = 0;
-    let haloY = 0;
-
-    // Track mouse movement
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      
-      // Show cursor elements
-      cursorTriangle.style.opacity = '1';
-      cursorHalo.style.opacity = '1';
-      
-      // Update triangle position immediately
-      cursorTriangle.style.left = mouseX + 'px';
-      cursorTriangle.style.top = mouseY + 'px';
-    });
-
-    // Hide cursor when leaving window
-    document.addEventListener('mouseleave', () => {
-      cursorTriangle.style.opacity = '0';
-      cursorHalo.style.opacity = '0';
-    });
-
-    // Smooth halo following animation
+    // Smooth halo following with easing
     function animateHalo() {
-      // Smooth follow animation for halo
-      haloX += (mouseX - haloX) * 0.15;
-      haloY += (mouseY - haloY) * 0.15;
+      const ease = 0.15;
+      haloX += (mouseX - haloX) * ease;
+      haloY += (mouseY - haloY) * ease;
       
-      cursorHalo.style.left = haloX + 'px';
-      cursorHalo.style.top = haloY + 'px';
-      
+      halo.style.left = haloX + 'px';
+      halo.style.top = haloY + 'px';
       requestAnimationFrame(animateHalo);
     }
     
-    // Start the halo animation loop
-    animateHalo();
-
-    // Enhanced hover effects for interactive elements
-    const interactiveElements = document.querySelectorAll('a, button, [role="button"], input, textarea, select');
-    
-    interactiveElements.forEach(element => {
-      element.addEventListener('mouseenter', () => {
-        // Enhanced hover: bigger scale, slight rotation, dramatic color change
-        cursorTriangle.style.transform = 'translate(-50%, -50%) rotate(-30deg) scale(1.6)';
-        cursorTriangle.style.borderBottomColor = 'var(--cursor-hover-triangle-color)';
-        cursorHalo.style.background = 'radial-gradient(circle, var(--cursor-hover-halo-color) 0%, transparent 70%)';
-        cursorHalo.style.transform = 'translate(-50%, -50%) scale(1.2)';
-      });
+    // Mouse move handler
+    function handleMouseMove(e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
       
-      element.addEventListener('mouseleave', () => {
-        // Return to normal state
-        cursorTriangle.style.transform = 'translate(-50%, -50%) rotate(-45deg) scale(1)';
-        cursorTriangle.style.borderBottomColor = 'var(--cursor-triangle-color)';
-        cursorHalo.style.background = 'radial-gradient(circle, var(--cursor-halo-color) 0%, transparent 70%)';
-        cursorHalo.style.transform = 'translate(-50%, -50%) scale(1)';
-      });
+      // Update triangle position immediately
+      triangle.style.left = mouseX + 'px';
+      triangle.style.top = mouseY + 'px';
+      
+      // Show cursor if hidden
+      if (!isVisible) {
+        splashCursor.style.opacity = '1';
+        isVisible = true;
+      }
+    }
+    
+    // Mouse enter/leave handlers for hover effects
+    function handleMouseEnter() {
+      splashCursor.classList.add('hovering');
+    }
+    
+    function handleMouseLeave() {
+      splashCursor.classList.remove('hovering');
+    }
+    
+    // Hide cursor when mouse leaves window
+    function handleMouseOut(e) {
+      if (!e.relatedTarget || e.relatedTarget.nodeName === 'HTML') {
+        splashCursor.style.opacity = '0';
+        isVisible = false;
+      }
+    }
+    
+    // Event listeners
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseout', handleMouseOut);
+    
+    // Add hover effects for interactive elements
+    const interactiveElements = document.querySelectorAll('a, button, input, textarea, select, [role="button"], [tabindex]:not([tabindex="-1"])');
+    interactiveElements.forEach(element => {
+      element.addEventListener('mouseenter', handleMouseEnter);
+      element.addEventListener('mouseleave', handleMouseLeave);
     });
-  }
+    
+    // Start halo animation
+    animateHalo();
+    
+    // Ensure cursor is hidden initially
+    splashCursor.style.opacity = '0';
+    
+    // Re-apply cursor hiding when DOM changes
+    const observer = new MutationObserver(forceHideCursor);
+    observer.observe(document.body, { childList: true, subtree: true });
+  });
 </script> 
