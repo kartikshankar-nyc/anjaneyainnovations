@@ -1,5 +1,6 @@
 ---
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import SplashCursor from '../components/SplashCursor.astro';
 const { title = 'Anjaneya Innovations', description = 'Professional consulting services by Anjaneya Innovations' } = Astro.props;
 // Get current path for active link
 const currentPath = Astro.url.pathname;
@@ -92,6 +93,9 @@ const currentPath = Astro.url.pathname;
   {currentPath !== '/' && (
     <Breadcrumbs currentPageTitle={title} />
   )}
+
+  <!-- Cursor Trail Effect -->
+  <SplashCursor />
 
   <main>
     <slot />
